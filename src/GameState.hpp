@@ -5,26 +5,28 @@
 #ifndef CPP_INDIE_STUDIO_GAMESTATE_HPP
 #define CPP_INDIE_STUDIO_GAMESTATE_HPP
 
+#include <memory>
 #include "IGameState.hpp"
 #include "irrlicht.h"
 
 namespace is {
   class GameState : public IGameState
   {
-   public:
+  public:
     GameState(void);
     virtual ~GameState(void);
 
-    virtual void 	Init(GameEngine *game);
+    virtual void 	Init(std::shared_ptr<GameEngine> engine);
     virtual void 	Cleanup(void);
     virtual void 	Pause(void);
     virtual void 	Resume(void);
-    virtual void 	HandleEvents(GameEngine *game);
-    virtual void 	Update(GameEngine *game);
-    virtual void 	Draw(GameEngine *game);
-    virtual void 	ChangeState(GameEngine *game, IGameState *state);
+    virtual void 	HandleEvents(void);
+    virtual void 	Update(void);
+    virtual void 	Draw(void);
+    virtual void 	ChangeState(std::shared_ptr<GameEngine> engine, std::shared_ptr<IGameState> state);
 
-   private:
+  private:
+    std::shared_ptr<GameEngine> _engine;
   };
 }
 

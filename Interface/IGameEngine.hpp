@@ -14,21 +14,21 @@ namespace is {
 	public:
 		virtual ~IGameEngine() {}
 
-		virtual void ChangeState(IGameState *) = 0;
+		virtual void ChangeState(std::shared_ptr<IGameState> state) = 0;
 
-		virtual void PushState(IGameState *) = 0;
+		virtual void PushState(std::shared_ptr<IGameState> state) = 0;
 
 		virtual void PopState(void) = 0;
 
-		virtual void HandleEvents() = 0;
+		virtual void HandleEvents(void) = 0;
 
-		virtual void Update() = 0;
+		virtual void Update(void) = 0;
 
-		virtual void Draw() = 0;
+		virtual void Draw(void) = 0;
 
-		virtual void Quit() = 0;
+		virtual void Quit(void) = 0;
 
-		virtual bool Running() = 0;
+		virtual bool Running(void) = 0;
 
 	 protected:
 	  virtual void Init(const char *title, int width = 640, int height = 480,

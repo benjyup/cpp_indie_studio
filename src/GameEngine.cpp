@@ -11,9 +11,23 @@ is::GameEngine::GameEngine(const std::string &title, int width, int height,
   this->Init(title.c_str(), width, height, bpp, fullscreen);
 }
 
+is::GameEngine::GameEngine(is::GameEngine const &engine)
+{
+  this->_device = engine.getDevice();
+  this->_driver = engine.getDriver();
+  this->_guienv = engine.getGuiEnv();
+  this->_smgr = engine.getSceneManager();
+  this->_states = engine.getState();
+}
+
 is::GameEngine::~GameEngine()
 {
+  _states.;
+}
 
+std::vector<std::shared_ptr<is::IGameState> > is::GameEngine::getState() const
+{
+  return (this->_states);
 }
 
 void is::GameEngine::Init(const char* title, int width, int height,
@@ -59,7 +73,7 @@ void is::GameEngine::Cleanup()
 
 }
 
-void is::GameEngine::ChangeState(IGameState* state)
+void is::GameEngine::ChangeState(std::shared_ptr<IGameState> state)
 {
   // cleanup the current state
   if ( !this->_states.empty() ) {
@@ -69,10 +83,10 @@ void is::GameEngine::ChangeState(IGameState* state)
 
   // store and init the new state
   this->_states.push_back(state);
-  this->_states.back()->Init(this);
+  this->_states.back()->Init((std::shared_ptr<is::GameEngine>)this);
 }
 
-void is::GameEngine::PushState(IGameState* state)
+void is::GameEngine::PushState(std::shared_ptr<IGameState> state)
 {
   // pause current state
   if ( !this->_states.empty() ) {
@@ -81,7 +95,7 @@ void is::GameEngine::PushState(IGameState* state)
 
   // store and init the new state
   this->_states.push_back(state);
-  this->_states.back()->Init(this);
+  this->_states.back()->Init((std::shared_ptr<is::GameEngine>)this);
 }
 
 void is::GameEngine::PopState()
@@ -103,21 +117,21 @@ void is::GameEngine::HandleEvents()
 {
   // let the state handle events
   if (!this->_states.empty())
-    this->_states.back()->HandleEvents(this);
+    this->_states.back()->HandleEvents();
 }
 
 void is::GameEngine::Update()
 {
   // let the state update the game
   if (!this->_states.empty())
-    this->_states.back()->Update(this);
+    this->_states.back()->Update();
 }
 
 void is::GameEngine::Draw()
 {
   // let the state draw the screen
   if (!this->_states.empty())
-    this->_states.back()->Draw(this);
+    this->_states.back()->Draw();
 }
 
 irr::IrrlichtDevice 		*is::GameEngine::getDevice(void) const
@@ -130,12 +144,12 @@ irr::video::IVideoDriver 	*is::GameEngine::getDriver(void) const
   return (this->_driver);
 }
 
-const std::shared_ptr<irr::gui::IGUIEnvironment> is::GameEngine::getGuiEnv(void) const
+irr::gui::IGUIEnvironment *is::GameEngine::getGuiEnv(void) const
 {
-  return (std::shared_ptr<irr::gui::IGUIEnvironment>(this->_guienv));
+  return (this->_guienv);
 }
 
-const std::shared_ptr<irr::scene::ISceneManager> is::GameEngine::getSceneManager(void) const
+irr::scene::ISceneManager *is::GameEngine::getSceneManager(void) const
 {
-  return (std::shared_ptr<irr::scene::ISceneManager>(this->_smgr));
+  return (this->_smgr);
 }

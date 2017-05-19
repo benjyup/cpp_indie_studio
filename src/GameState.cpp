@@ -14,9 +14,9 @@ is::GameState::~GameState(void)
 
 }
 
-void is::GameState::Init(GameEngine *game)
+void is::GameState::Init(std::shared_ptr<GameEngine> engine)
 {
-
+  _engine = engine;
 }
 
 void is::GameState::Cleanup(void)
@@ -34,23 +34,23 @@ void is::GameState::Resume(void)
 
 }
 
-void is::GameState::HandleEvents(is::GameEngine *game)
+void is::GameState::HandleEvents(void)
 {
 
 }
 
-void is::GameState::Update(is::GameEngine *game)
+void is::GameState::Update(void)
 {
 
 }
 
-void is::GameState::Draw(is::GameEngine *game)
+void is::GameState::Draw()
 {
-  game->getDriver()->beginScene(true, true, irr::video::SColor(255, 255, 0, 0));
-  game->getDriver()->endScene();
+  _engine->getDriver()->beginScene(true, true, irr::video::SColor(255, 255, 0, 0));
+  _engine->getDriver()->endScene();
 }
 
-void is::GameState::ChangeState(is::GameEngine *game, is::IGameState *state)
+void is::GameState::ChangeState(std::shared_ptr<is::GameEngine> game, std::shared_ptr<is::IGameState> state)
 {
 
 }

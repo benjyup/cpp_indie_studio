@@ -18,33 +18,33 @@ namespace is {
 	       int bpp = 0, bool fullscreen = false);
     ~GameEngine();
 
-    virtual void ChangeState(IGameState *);
+    virtual void ChangeState(std::shared_ptr<IGameState> state);
 
-    virtual void PushState(IGameState *);
+    virtual void PushState(std::shared_ptr<IGameState> state);
 
-    virtual void PopState();
+    virtual void PopState(void);
 
-    virtual void HandleEvents();
+    virtual void HandleEvents(void);
 
-    virtual void Update();
+    virtual void Update(void);
 
-    virtual void Draw();
+    virtual void Draw(void);
 
-    virtual void Quit(); //{m_running = false;}
+    virtual void Quit(void);
 
-    virtual bool Running();// {return (m_running);}
+    virtual bool Running(void);
 
-    irr::IrrlichtDevice					*getDevice(void) const;
-    irr::video::IVideoDriver				*getDriver(void) const;
-    const std::shared_ptr<irr::gui::IGUIEnvironment>	getGuiEnv(void) const;
-    const std::shared_ptr<irr::scene::ISceneManager>	getSceneManager(void) const;
-
+    irr::IrrlichtDevice					    *getDevice(void) const;
+    irr::video::IVideoDriver			  *getDriver(void) const;
+    irr::gui::IGUIEnvironment	      *getGuiEnv(void) const;
+    irr::scene::ISceneManager       *getSceneManager(void) const;
+    std::vector<std::shared_ptr<IGameState> > getState() const;
    private:
-    std::vector<IGameState *> 	_states;
-    irr::IrrlichtDevice 	*_device;
-    irr::video::IVideoDriver 	*_driver;
-    irr::gui::IGUIEnvironment	*_guienv;
-    irr::scene::ISceneManager	*_smgr;
+    std::vector<std::shared_ptr<IGameState> > 	          _states;
+    irr::IrrlichtDevice 	                *_device;
+    irr::video::IVideoDriver 	            *_driver;
+    irr::gui::IGUIEnvironment           	*_guienv;
+    irr::scene::ISceneManager	            *_smgr;
 
     bool 			_running;
     bool 			_fullscreen;

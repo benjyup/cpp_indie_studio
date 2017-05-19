@@ -6,19 +6,20 @@
 # include "GameState.hpp"
 
 int 		main(void) {
-  is::GameEngine game("Indie Studio");
-  is::IGameState *gameState = new is::GameState;
+  std::shared_ptr<is::GameEngine> engine = std::make_shared<is::GameEngine>("Indie Studio");
+  std::shared_ptr<is::IGameState> gameState = std::make_shared<is::GameState>();
 
   // load the intro
   // game.ChangeState( CIntroState::Instance() );
 
-  game.ChangeState(gameState);
+  engine->ChangeState(gameState);
 
   // main loop
-  while (game.Running()) {
-     game.HandleEvents();
-    game.Update();
-    game.Draw();
+  while (engine->Running())
+  {
+    engine->HandleEvents();
+    engine->Update();
+    engine->Draw();
   }
 
   // cleanup the engine
