@@ -1,0 +1,78 @@
+//
+// Created by vincent on 05/05/17.
+//
+
+# include <irrlicht.h>
+
+/*
+ * int 		main(void) {
+  is::GameEngine game("Indie Studio");
+  is::IGameState *gameState = new is::GameState;
+
+  // load the intro
+  // game.ChangeState( CIntroState::Instance() );
+
+  game.ChangeState(gameState);
+
+  // main loop
+  while (game.Running()) {
+     game.HandleEvents();
+    game.Update();
+    game.Draw();
+  }
+
+  // cleanup the engine
+  return 0;
+}
+ */
+
+#ifdef _IRR_WINDOWS_
+#pragma comment(lib, "Irrlicht.lib")
+#pragma comment(linker, "/subsystem:windows /ENTRY:mainCRTStartup")
+#endif
+
+using namespace irr;
+
+int 		main()
+{
+  IrrlichtDevice *device =
+	  createDevice( video::EDT_SOFTWARE, core::dimension2d<u32>(640, 480), 16,
+			false, false, false, 0);
+
+  if (!device)
+    return 1;
+  device->setWindowCaption(L"BenjonaBenjo");
+  video::IVideoDriver* driver = device->getVideoDriver();
+  scene::ISceneManager* smgr = device->getSceneManager();
+  gui::IGUIEnvironment* guienv = device->getGUIEnvironment();
+
+  scene::IAnimatedMesh* mesh = smgr->getMesh("./gfx/ground.obj");
+  scene::IAnimatedMeshSceneNode* node = smgr->addAnimatedMeshSceneNode( mesh );
+  if (node)
+    {
+      node->setMaterialFlag(video::EMF_LIGHTING, false);
+      node->setMD2Animation(scene::EMAT_STAND);
+      node->setMaterialTexture( 0, driver->getTexture("./gfx/groundGrass.png") );
+      node->setScale(core::vector3df(10,10,10));
+      node->setPosition(core::vector3df(0,0,0));
+    }
+  smgr->addCameraSceneNode(0, core::vector3df(30,50,-40), core::vector3df(0,5,0));
+
+  while(device->run())
+    {
+      /*
+      Anything can be drawn between a beginScene() and an endScene()
+      call. The beginScene() call clears the screen with a color and
+      the depth buffer, if desired. Then we let the Scene Manager and
+      the GUI Environment draw their content. With the endScene()
+      call everything is presented on the screen.
+      */
+      driver->beginScene(true, true, video::SColor(255,100,101,140));
+
+      smgr->drawAll();
+      guienv->drawAll();
+
+      driver->endScene();
+    }
+
+}

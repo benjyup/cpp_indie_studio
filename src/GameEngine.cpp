@@ -22,7 +22,6 @@ is::GameEngine::GameEngine(is::GameEngine const &engine)
 
 is::GameEngine::~GameEngine()
 {
-  _states.;
 }
 
 std::vector<std::shared_ptr<is::IGameState> > is::GameEngine::getState() const
