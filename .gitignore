@@ -1,0 +1,9 @@
+# IntelliJ project files
+.idea
+CMakeFiles
+CMakeCache.txt
+cmake-build-debug
+cpp_indie_studio.cbp
+cmake_install.cmake
+Makefile
+*.o
