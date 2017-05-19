@@ -34,9 +34,9 @@ namespace is
     const std::map<Options::MOVES, irr::EKEY_CODE>		&getP2Config() const;
     irr::u8							getVolume() const;
 
-    void							setVolume(irr::u8 pourcent);
-    void 							setP1config(irr::EKEY_CODE key, Options::MOVES move);
-    void 							setP2config(irr::EKEY_CODE key, Options::MOVES move);
+    void							setVolume(const irr::u8 pourcent);
+    void 							setP1config(const irr::EKEY_CODE key, const Options::MOVES move);
+    void 							setP2config(const irr::EKEY_CODE key, const Options::MOVES move);
 
    private:
     irr::u8							_volume;

@@ -48,17 +48,17 @@ irr::u8 is::Options::getVolume() const
   return (this->_volume);
 }
 
-void is::Options::setVolume(irr::u8 pourcent)
+void is::Options::setVolume(const irr::u8 pourcent)
 {
   this->_volume = pourcent;
 }
 
-void is::Options::setP1config(irr::EKEY_CODE key, is::Options::MOVES move)
+void is::Options::setP1config(const irr::EKEY_CODE key, const is::Options::MOVES move)
 {
   this->_p1Config[move] = key ;
 }
 
-void is::Options::setP2config(irr::EKEY_CODE key, is::Options::MOVES move)
+void is::Options::setP2config(const irr::EKEY_CODE key, const is::Options::MOVES move)
 {
   this->_p2Config[move] = key ;
 }
