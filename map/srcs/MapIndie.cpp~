@@ -1,0 +1,87 @@
+//
+// MapIndie.cpp for indie in /home/rodrigue.rene/TEST/DEPOT/cpp_indie_studio/map/srcs
+// 
+// Made by Rodrigue RENE
+// Login   <rodrigue.rene@epitech.net>
+// 
+// Started on  Sun May 21 00:51:11 2017 Rodrigue RENE
+// Last update Sun May 21 04:12:34 2017 Rodrigue RENE
+//
+
+#include <iostream>
+#include <fstream>
+#include "MapIndie.hpp"
+
+Indie::MapIndie::MapIndie(std::string const &mapFile)
+{
+  fillMap(mapFile);
+}
+
+Indie::MapIndie::~MapIndie()
+{
+
+}
+
+void	Indie::MapIndie::setGround(std::string &GroundFile)
+{
+
+}
+
+void	Indie::MapIndie::addObject(IObject *newObject)
+{
+  _allObject.push_back(newObject); 
+}
+
+void	Indie::MapIndie::moveObject(Indie::IObject *newObject, Vector3d const &position)
+{
+  auto it = std::find(_allObject.begin(), _allObject.end(), newObject);
+
+  if (it != _allObject.end())
+    newObject->setPosition(position);  
+}
+
+void	Indie::MapIndie::destroyObject(Indie::IObject *object)
+{
+  auto it = std::find(_allObject.begin(), _allObject.end(), object);
+  if (it != _allObject.end())
+    _allObject.erase(it);  
+}
+
+int		Indie::MapIndie::getWidth()//Largeur
+{
+  return (_width);
+}
+
+int		Indie::MapIndie::getLength() //Longueur
+{
+  return (_length);
+}
+
+int  Indie::MapIndie::fillMap(std::string const &mapFile)
+{
+  std::ifstream file;
+  std::string	buff;
+  int		i = 0;
+  file.open(mapFile);
+  if (!file.good())
+    return 4;
+
+  while (!file.eof())
+    {
+      getline(file, buff, '\n');
+      int max = fillMap2(i, buff);
+      i++;
+    }
+  
+}
+
+int  Indie::MapIndie::fillMap2(int numLine, std::string const &line)
+{
+  std::map<int, IObject *> tempo;
+  for (int i = 0;line[i];i++)
+    {
+      IObject *caseMap = new ObjectMap((int)line[i]+ '0');
+      tempo.emplace(std::make_pair(i, caseMap));
+    }
+  _mapObjs.emplace(std::make_pair(numLine, tempo));  
+}
