@@ -6,7 +6,8 @@
 #include "GameEngine.hpp"
 
 is::GameEngine::GameEngine(const std::string &title, int width, int height,
-			   int bpp, bool fullscreen)
+			   int bpp, bool fullscreen) :
+	_windowSize(width, height)
 {
   this->Init(title.c_str(), width, height, bpp, fullscreen);
 }
@@ -151,4 +152,9 @@ irr::gui::IGUIEnvironment *is::GameEngine::getGuiEnv(void) const
 irr::scene::ISceneManager *is::GameEngine::getSceneManager(void) const
 {
   return (this->_smgr);
+}
+
+const irr::core::vector2d<int> &is::GameEngine::getWindowSize() const
+{
+  return (this->_windowSize);
 }
