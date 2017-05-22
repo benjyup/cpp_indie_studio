@@ -16,18 +16,19 @@ namespace Indie
 {
 
   enum TYPEOBJECT
-    {
-      UNDEFINED,
-      BLOCK,
-      FIRE,
-      PERSO,
-      POWERUP,
-      BOMB,                                                                                       BREAKABLE
-    };
+  {
+    UNDEFINED,
+    BLOCK,
+    FIRE,
+    PERSO,
+    POWERUP,
+    BOMB,
+    BREAKABLE
+  };
   
   class IObject
   {
-  public:
+   public:
     virtual ~IObject(void) {};
 
     virtual void                        setName(std::string const &) = 0;

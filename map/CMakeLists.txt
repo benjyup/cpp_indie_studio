@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.5)
 project(map_TEST)
 
+
+set(CMAKE_CXX_STANDARD 11)
+
 set(SOURCE_FILES
 	        main.cpp)
 set(SRCS_LIB_MAP

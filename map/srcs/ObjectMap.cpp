@@ -20,10 +20,9 @@ Indie::TYPEOBJECT   determineType(int type)
 
 std::string   const determineType_str(int type)
 {
-  std::cout<<"GARASS\n"<<type;
   if (type == 1)
     return ("nothing.png");
-  if (type == 2)
+  if (type == 0)
     {
       std::cout<<"GARASS\n";
       return ("groundGrass.png");

@@ -18,23 +18,18 @@ int	main()
   irr::scene::ISceneManager* smgr = device->getSceneManager();
   irr::gui::IGUIEnvironment* guienv = device->getGUIEnvironment();
   
-
-
-  
   Indie::MapIndie	myMap("./map01.txt", smgr, driver);
   irr::scene::IAnimatedMesh *mesh = smgr->getMesh("cube.obj");
   Indie::IObject *caseMapSol = new Indie::ObjectMap((int) Indie::TYPEOBJECT::UNDEFINED, mesh, 10, smgr,driver);
 
-
-
-
   caseMapSol->setPosition(-10,-10,-10);
 
 
-    smgr->addCameraSceneNodeFPS();
-  
-  //  smgr->addCameraSceneNode(0, irr::core::vector3df(50,300,-100), irr::core::vector3df(0, 5,0));
-  device->getCursorControl()->setVisible(true);
+  smgr->addCameraSceneNodeFPS();
+  device->getCursorControl()->setVisible(false);
+
+  // smgr->addCameraSceneNode(0, irr::core::vector3df(50,300,0), irr::core::vector3df(0, 5,0));
+  //device->getCursorControl()->setVisible(true);
   int i =-10000000;
   while(device->run())
     {
