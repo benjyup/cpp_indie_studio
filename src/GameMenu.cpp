@@ -14,7 +14,8 @@ namespace is
     }
     void GameMenu::Init(std::shared_ptr<GameEngine> engine)
     {
-        _engine = engine;
+      _engine = engine;
+      
     }
     void GameMenu::Cleanup(void)
     {
@@ -24,7 +25,6 @@ namespace is
     }
     void GameMenu::Resume(void)
     {
-
     }
     void GameMenu::HandleEvents(void)
     {
