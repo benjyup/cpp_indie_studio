@@ -13,9 +13,9 @@ namespace is
   const irr::s32		MenuState::BUTTON_HEIGHT = 75;
 
   std::vector<is::Button> MenuState::BUTTONS = {
-	  { 15, 15, 15 + BUTTON_WIDTH, 15 + BUTTON_HEIGHT, 1, L"PLay", L"Launch the game" },
-	  { 15, 15 + BUTTON_HEIGHT, 15 + BUTTON_WIDTH, 15 + BUTTON_HEIGHT * 2, 1, L"Options", L"Configure the game" },
-	  { 15, 15 + BUTTON_HEIGHT * 2, 15 + BUTTON_WIDTH, 15 + BUTTON_HEIGHT * 3, 1, L"Quit", L"Quit the game" },
+	  { 15, 15, 15 + BUTTON_WIDTH, 15 + BUTTON_HEIGHT, (irr::s32)GUI_ID_BOUTON::GUI_ID_PLAY_BUTTON, L"PLay", L"Launch the game" },
+	  { 15, 15 + BUTTON_HEIGHT, 15 + BUTTON_WIDTH, 15 + BUTTON_HEIGHT * 2, (irr::s32)GUI_ID_BOUTON::GUI_ID_OPTIONS_BUTTON, L"Options", L"Configure the game" },
+	  { 15, 15 + BUTTON_HEIGHT * 2, 15 + BUTTON_WIDTH, 15 + BUTTON_HEIGHT * 3, (irr::s32)GUI_ID_BOUTON::GUI_ID_QUIT_BUTTON, L"Quit", L"Quit the game" },
   };
 
   MenuState::MenuState()
