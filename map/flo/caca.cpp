@@ -50,6 +50,8 @@ int 		main()
   gui::IGUIEnvironment* guienv = device->getGUIEnvironment();
   is::map(driver, smgr, map);
 
+  smgr->addSkyDomeSceneNode(driver->getTexture("./gfx/space3.jpg"),16,16,1.0f,1.0f)->setRotation(irr::core::vector3df(0, 0, -180));
+  smgr->addSkyDomeSceneNode(driver->getTexture("./gfx/space3.jpg"),16,16,1.0f,1.0f);
   while(device->run())
     {
       if (device->isWindowActive())
