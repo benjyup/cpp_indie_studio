@@ -16,17 +16,17 @@ namespace is {
     GameState(void);
     virtual ~GameState(void);
 
-    virtual void 	Init(std::shared_ptr<GameEngine> engine);
+    virtual void 	Init(GameEngine *engine);
     virtual void 	Cleanup(void);
     virtual void 	Pause(void);
     virtual void 	Resume(void);
     virtual void 	HandleEvents(void);
     virtual void 	Update(void);
     virtual void 	Draw(void);
-    virtual void 	ChangeState(std::shared_ptr<GameEngine> engine, std::shared_ptr<IGameState> state);
+    virtual void 	ChangeState(GameEngine *engine, IGameState *state);
 
   private:
-    std::shared_ptr<GameEngine> _engine;
+    GameEngine 		*_engine;
   };
 }
 

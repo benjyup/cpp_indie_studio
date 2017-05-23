@@ -14,9 +14,9 @@ namespace is {
 	public:
 		virtual ~IGameEngine() {}
 
-		virtual void ChangeState(std::shared_ptr<IGameState> state) = 0;
+		virtual void ChangeState(IGameState *state) = 0;
 
-		virtual void PushState(std::shared_ptr<IGameState> state) = 0;
+		virtual void PushState(IGameState *state) = 0;
 
 		virtual void PopState(void) = 0;
 

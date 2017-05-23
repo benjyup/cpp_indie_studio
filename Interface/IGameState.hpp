@@ -15,7 +15,7 @@ namespace is {
 	public:
 		virtual ~IGameState() {}
 
-		virtual void Init(std::shared_ptr<GameEngine> engine) = 0;
+		virtual void Init(GameEngine *engine) = 0;
 
 		virtual void Cleanup(void) = 0;
 
@@ -29,7 +29,7 @@ namespace is {
 
 		virtual void Draw(void) = 0;
 
-		virtual void ChangeState(std::shared_ptr<GameEngine> engine, std::shared_ptr<IGameState> state) = 0;
+		virtual void ChangeState(GameEngine *engine, IGameState *state) = 0;
 	};
 }
 

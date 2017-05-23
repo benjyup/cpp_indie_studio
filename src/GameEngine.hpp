@@ -18,9 +18,9 @@ namespace is {
 	       int bpp = 0, bool fullscreen = false);
     ~GameEngine();
 
-    virtual void ChangeState(std::shared_ptr<IGameState> state);
+    virtual void ChangeState(IGameState *state);
 
-    virtual void PushState(std::shared_ptr<IGameState> state);
+    virtual void PushState(IGameState *state);
 
     virtual void PopState(void);
 
@@ -38,11 +38,11 @@ namespace is {
     irr::video::IVideoDriver			*getDriver(void) const;
     irr::gui::IGUIEnvironment			*getGuiEnv(void) const;
     irr::scene::ISceneManager			*getSceneManager(void) const;
-    std::vector<std::shared_ptr<IGameState>> 	getState() const;
+    std::vector<IGameState*> 			getState() const;
     const irr::core::vector2d<int>		&getWindowSize() const;
 
     private:
-    std::vector<std::shared_ptr<IGameState> >	_states;
+    std::vector<IGameState*>			_states;
     irr::IrrlichtDevice				*_device;
     irr::video::IVideoDriver			*_driver;
     irr::gui::IGUIEnvironment           	*_guienv;

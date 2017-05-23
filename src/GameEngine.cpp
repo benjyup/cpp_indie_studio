@@ -25,7 +25,7 @@ is::GameEngine::~GameEngine()
 {
 }
 
-std::vector<std::shared_ptr<is::IGameState> > is::GameEngine::getState() const
+std::vector<is::IGameState*> is::GameEngine::getState() const
 {
   return (this->_states);
 }
@@ -73,7 +73,7 @@ void is::GameEngine::Cleanup()
 
 }
 
-void is::GameEngine::ChangeState(std::shared_ptr<IGameState> state)
+void is::GameEngine::ChangeState(IGameState *state)
 {
   // cleanup the current state
   if ( !this->_states.empty() ) {
@@ -83,10 +83,10 @@ void is::GameEngine::ChangeState(std::shared_ptr<IGameState> state)
 
   // store and init the new state
   this->_states.push_back(state);
-  this->_states.back()->Init((std::shared_ptr<is::GameEngine>)this);
+  this->_states.back()->Init(this);
 }
 
-void is::GameEngine::PushState(std::shared_ptr<IGameState> state)
+void is::GameEngine::PushState(IGameState *state)
 {
   // pause current state
   if ( !this->_states.empty() ) {
@@ -95,7 +95,7 @@ void is::GameEngine::PushState(std::shared_ptr<IGameState> state)
 
   // store and init the new state
   this->_states.push_back(state);
-  this->_states.back()->Init((std::shared_ptr<is::GameEngine>)this);
+  this->_states.back()->Init(this);
 }
 
 void is::GameEngine::PopState()

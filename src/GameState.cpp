@@ -14,7 +14,7 @@ is::GameState::~GameState(void)
 
 }
 
-void is::GameState::Init(std::shared_ptr<GameEngine> engine)
+void is::GameState::Init(GameEngine *engine)
 {
   _engine = engine;
 }
@@ -50,7 +50,8 @@ void is::GameState::Draw()
   _engine->getDriver()->endScene();
 }
 
-void is::GameState::ChangeState(std::shared_ptr<is::GameEngine> game, std::shared_ptr<is::IGameState> state)
+void is::GameState::ChangeState(is::GameEngine *game,
+				is::IGameState *state)
 {
 
 }
