@@ -36,12 +36,21 @@ namespace is
     static const irr::s32		 	BUTTON_HEIGHT;
     static std::vector<is::Button> 		BUTTONS;
 
+    enum class GUI_ID_BOUTON : irr::s32
+    {
+      GUI_ID_PLAY_BUTTON = 0,
+      GUI_ID_OPTIONS_BUTTON,
+      GUI_ID_QUIT_BUTTON,
+      GUI_ID_LENGTH
+    };
+
     std::shared_ptr<GameEngine> _engine;
     irr::video::IVideoDriver	*_driver;
     irr::scene::ISceneManager	*_sceneManager;
     irr::gui::IGUIEnvironment	*_gui;
 
     irr::video::ITexture* 	_wallpaper;
+    irr::video::ITexture* 	_buttonGfx;
 
     void					drawButtons();
   };
