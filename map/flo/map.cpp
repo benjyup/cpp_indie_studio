@@ -6,7 +6,7 @@
 #include "map.hpp"
 
 is::map::map(video::IVideoDriver *driver, scene::ISceneManager *smgr,
-	std::vector<int> &map) : _driver(driver), _smgr(smgr), _map(map)
+	     std::vector<int> &map) : _driver(driver), _smgr(smgr), _map(map)
 {
   _texture[0] = _driver->getTexture("./gfx/groundGrass.png");
   _texture[1] = _driver->getTexture("./gfx/wallBrick.png");
@@ -17,7 +17,7 @@ is::map::map(video::IVideoDriver *driver, scene::ISceneManager *smgr,
   for (int j = 0; j < map.size(); j++)
     {
       irr::scene::IAnimatedMeshSceneNode *node =
-	      smgr->addAnimatedMeshSceneNode(mesh);
+	smgr->addAnimatedMeshSceneNode(mesh);
       node->setMaterialFlag(irr::video::EMF_LIGHTING, false);
       if (map[j] == 0)
 	node->setPosition(irr::core::vector3df(j / size * SCALE, -SCALE,
@@ -30,8 +30,9 @@ is::map::map(video::IVideoDriver *driver, scene::ISceneManager *smgr,
       node->setRotation(irr::core::vector3df(0, 0, 0));
       _mapi.push_back(node);
     }
-  smgr->addCameraSceneNode(0, irr::core::vector3df(size / 2 * SCALE, 2000, size / 2 * 100),
-			   irr::core::vector3df(size / 2 * SCALE, -SCALE, size / 2 * 160));
+  // smgr->addCameraSceneNode(0, irr::core::vector3df(size / 2 * SCALE, 2000, size / 2 * 100),
+  // 			   irr::core::vector3df(size / 2 * SCALE, -SCALE, size / 2 * 160));
+  smgr->addCameraSceneNodeFPS();
   moveObject(_mapi[10], Vector3d(10, 2, 10));
   delObject(_mapi[11]);
 }

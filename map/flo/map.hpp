@@ -23,11 +23,11 @@ namespace is
     void		moveObject(scene::IAnimatedMeshSceneNode *object,
 				   	Vector3d const &pos);
     void		delObject(scene::IAnimatedMeshSceneNode *object);
-    int			find(scene::IAnimatedMeshSceneNode *object);
-    void		burn(Vector3d const &v, int level);
-    void		fire_up(Vector3d const &v, int level);
+    //   int			find(scene::IAnimatedMeshSceneNode *object);
+    //    void		burn(Vector3d const &v, int level);
+    // void		fire_up(Vector3d const &v, int level);
 
-   private:
+  private:
     scene::ISceneManager *_smgr;
     video::IVideoDriver *_driver;
     std::vector<scene::IAnimatedMeshSceneNode *> _mapi;
