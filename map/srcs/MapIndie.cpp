@@ -86,9 +86,7 @@ int  Indie::MapIndie::fillMap(std::string const &mapFile)
       getline(file, buff, '\n');
       int max = fillMap2(i, buff);
       if (i == 0)
-	{
 	  _X = max;
-	}
       i++;
     }
   _Y = i;
@@ -101,10 +99,6 @@ int  Indie::MapIndie::fillMap2(int numLine, std::string const &line)
   std::cout<<"line ="<<line<<std::endl;
   for (i = 0;line[i] != 0;i++)
     {
-      // std::cout<<"fm2 "<<r++<<"\n";
-      // irr::scene::IAnimatedMesh *m = _theMeshs.find("Ground")->second;
-      // if (_theMeshs.find("Ground") == _theMeshs.end())
-      // 	std::cout<<"lePRBLM\n";
       IObject *caseMap = new ObjectMap((int)line[i] - '0');
       std::cout<<"line ="<<line[i] - '0'<<std::endl;
       tempo.emplace(std::make_pair(i, caseMap));
