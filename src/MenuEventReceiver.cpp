@@ -5,6 +5,7 @@
 #include "MenuEventReceiver.hpp"
 #include "MenuState.hpp"
 #include "GameState.hpp"
+#include "OptionsState.hpp"
 
 is::MenuEventReceiver::MenuEventReceiver() : _device(NULL)
 {
@@ -25,10 +26,9 @@ bool 		is::MenuEventReceiver::OnEvent(const irr::SEvent &event)
 	{
 	  case ((irr::s32)MenuState::GUI_ID_BOUTON::GUI_ID_PLAY_BUTTON):
 	    this->_engine->ChangeState(new GameState);
-	  std::cout << "PLAY" << std::endl;
 	  break;
 	  case ((irr::s32)MenuState::GUI_ID_BOUTON::GUI_ID_OPTIONS_BUTTON):
-	    std::cout << "OPTIONS" << std::endl;
+	    this->_engine->ChangeState(new OptionsState);
 	  break;
 	  case ((irr::s32)MenuState::GUI_ID_BOUTON::GUI_ID_QUIT_BUTTON):
 	      this->_device->closeDevice();

@@ -17,8 +17,8 @@ namespace is
 	   const irr::s32 x2,
 	   const irr::s32 y2,
 	   const irr::s32 id,
-	   const wchar_t *text = 0,
-	   const wchar_t *hint = 0);
+	   const irr::core::stringw = "",
+	   const irr::core::stringw = "");
     Button(const Button &other);
     ~Button();
 
@@ -33,8 +33,8 @@ namespace is
     void 			set(irr::gui::IGUIButton *);
 
 
-    const wchar_t 		*getText() const;
-    const wchar_t 		*getHint() const;
+    const irr::core::stringw	getText() const;
+    const irr::core::stringw	getHint() const;
 
    private:
     irr::s32			_x;
@@ -42,8 +42,8 @@ namespace is
     irr::s32			_y;
     irr::s32			_y2;
     irr::s32			_id;
-    const wchar_t 		*_text;
-    const wchar_t 		*_hint;
+    irr::core::stringw 		_text;
+    irr::core::stringw 		_hint;
     irr::gui::IGUIButton	*_button;
   };
 

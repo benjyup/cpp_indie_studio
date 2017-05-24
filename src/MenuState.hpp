@@ -33,10 +33,9 @@ namespace is
       GUI_ID_PLAY_BUTTON = 0,
       GUI_ID_OPTIONS_BUTTON,
       GUI_ID_QUIT_BUTTON,
-      GUI_ID_LENGTH
     };
 
-   private:
+   protected:
     static const irr::io::path			WALLPAPER;
     static const irr::s32		 	BUTTON_WIDTH;
     static const irr::s32		 	BUTTON_HEIGHT;
@@ -49,6 +48,8 @@ namespace is
     irr::gui::IGUIEnvironment			*_gui;
 
     irr::video::ITexture* 			_wallpaper;
+    std::vector<is::Button> 			_buttons;
+    std::vector<irr::gui::IGUIStaticText*> 	_text;
 
     void					drawButtons();
   };
