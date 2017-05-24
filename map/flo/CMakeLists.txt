@@ -6,8 +6,9 @@ set(CMAKE_CXX_STANDARD 11)
 set(SOURCE_FILES
         caca.cpp
         map.cpp
-        ./Vector3d.cpp
-	../../src/GameEngine.cpp
+        Block.cpp
+        Vector3d.cpp
+    	../../src/GameEngine.cpp
         ../../src/GameEngine.hpp
         ../../Interface/IGameEngine.hpp
         ../../src/GameState.cpp

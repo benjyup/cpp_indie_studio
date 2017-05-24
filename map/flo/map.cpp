@@ -16,74 +16,95 @@ is::map::map(video::IVideoDriver *driver, scene::ISceneManager *smgr,
   size = sqrt(map.size());
   for (int j = 0; j < map.size(); j++)
     {
-      irr::scene::IAnimatedMeshSceneNode *node =
-	smgr->addAnimatedMeshSceneNode(mesh);
-      node->setMaterialFlag(irr::video::EMF_LIGHTING, false);
-      if (map[j] == 0)
-	node->setPosition(irr::core::vector3df(j / size * SCALE, -SCALE,
-					       (j % size) * SCALE));
-      else
-	node->setPosition(irr::core::vector3df((j / size) * SCALE, 0,
-					       (j % size) * SCALE));
-      node->setMaterialTexture(0, _texture[map[j]]);
-      node->setScale(irr::core::vector3df(SCALE, SCALE, SCALE));
-      node->setRotation(irr::core::vector3df(0, 0, 0));
-      _mapi.push_back(node);
+	Block  b = is::Block(Vector3d(j / size, j % size, 0));
+	b.node = smgr->addAnimatedMeshSceneNode(mesh);
+	b.init((Type)map[j], _texture[map[j]], size);
+      _mapi.push_back(b);
     }
   // smgr->addCameraSceneNode(0, irr::core::vector3df(size / 2 * SCALE, 2000, size / 2 * 100),
   // 			   irr::core::vector3df(size / 2 * SCALE, -SCALE, size / 2 * 160));
   smgr->addCameraSceneNodeFPS();
-  moveObject(_mapi[10], Vector3d(10, 2, 10));
-  delObject(_mapi[11]);
+//  moveObject(_mapi[10], Vector3d(10, 2, 10));
+//  delObject(_mapi[0]);
+//if (canIMoove(Vector3d(0, 0, 0)))
+//  printf("yes\n");
+//  addObject(BREAK, Vector3d(0, 0, 0));
+//  if (canIMoove(Vector3d(0, 0, 0)))
+//    printf("yes\n");
 }
 
-void is::map::moveObject(scene::IAnimatedMeshSceneNode *object, const Vector3d &v)
+void 	is::map::moveObject(Block &object, const Vector3d &v)
 {
   int i = -1;
    while (++i < _mapi.size())
-    if (_mapi[i] == object)
+    if (_mapi[i].node == object.node)
       {
-	_mapi[i]->setPosition(irr::core::vector3df(v.getX() * SCALE, v.getY() * SCALE,
+	_mapi[i].node->setPosition(irr::core::vector3df(v.getX() * SCALE, v.getY() * SCALE,
 						   v.getZ() * SCALE));
+	_mapi[i].pos.setX(v.getX());
+	_mapi[i].pos.setY(v.getY());
+	_mapi[i].pos.setZ(v.getZ());
 	break ;
       }
 }
 
-void is::map::delObject(scene::IAnimatedMeshSceneNode *object)
+void 	is::map::delObject(Block &object)
 {
-  auto i = _mapi.begin();
-  while (i != _mapi.end())
-    {
-      if (*i == object)
-	{
-	  _mapi.erase(i);
-	  object->remove();
-	  object->drop();
-	  break ;
-	}
-      i++;
-    }
+  int i = 0;
+  irr::core::vector3df v;
+  if ((i = find(object)) == -1)
+    return;
+  object.node->setMaterialTexture(0, _texture[GRASS]);
+  v = object.node->getPosition();
+  v.Y = -SCALE;
+  object.type = GRASS;
+  object.node->setPosition(v);
 }
 
-//int	is::map::find(scene::IAnimatedMeshSceneNode *object)
-//{
-//  int i = -1;
-//  while (++i < _mapi.size())
-//    if (_mapi[i] == object)
-//	return (i);
-//  return (-1);
-//}
-//
-//void	is::map::fire_up(Vector3d const &v, int level)
-//{
-//  int 	i = 0;
-//
-//  while (i < level || _mapi[v.Y * size + v.X] != 1)
-//    {
-//
-//    }
-//}
-//void	is::map::burn(Vector3d const &v, int level)
-//{
-//	fire_up(v, level);
-//}
+bool 	is::map::canIMoove(Vector3d const &pos) const
+{
+  int 		posi = 0;
+
+  if ((posi = find(pos)) == -1)
+    return (false);
+  printf("posi : %d\n",posi);
+  if (_mapi[posi].tyxpe == Type::GRASS)
+    return (true);
+  return (false);
+}
+
+int	is::map::find(Block const &b) const
+{
+  int i = -1;
+  while (++i < _mapi.size())
+    if (_mapi[i].node == b.node)
+	return (i);
+  return (-1);
+}
+
+int 	is::map::find(Vector3d const &v) const
+{
+  int 	posi = 0;
+
+  if ((posi = v.getY() * size + v.getX()) < 0 || posi > size * size)
+    return (-1);
+  return (posi);
+}
+
+void 	is::map::addObject(int t, Vector3d const &pos)
+{
+  int i = 0;
+  irr::core::vector3df v;
+
+  if ((i = find(pos)) == -1 || _mapi[i].type != Type::GRASS)
+    {
+      std::cout << "Can't add Block, Already something there" << std::endl;
+      return ;
+    }
+  _mapi[i].node->setMaterialTexture(0, _texture[t]);
+  v = _mapi[i].node->getPosition();
+  v.Y = 0;
+  _mapi[i].node->setPosition(v);
+  _mapi[i].type = (Type)t;
+  return;
+}
