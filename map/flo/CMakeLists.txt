@@ -8,6 +8,7 @@ set(SOURCE_FILES
         map.cpp
         Block.cpp
         Vector3d.cpp
+        Game.cpp
     	../../src/GameEngine.cpp
         ../../src/GameEngine.hpp
         ../../Interface/IGameEngine.hpp

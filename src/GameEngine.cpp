@@ -34,7 +34,7 @@ std::vector<is::IGameState*> is::GameEngine::getState() const
 void is::GameEngine::Init(const char* title, int width, int height,
 			  int bpp, bool fullscreen)
 {
-  this->_device = irr::createDevice(irr::video::EDT_SOFTWARE, irr::core::dimension2d<irr::u32>(width, height), bpp,
+  this->_device = irr::createDevice(irr::video::EDT_OPENGL, irr::core::dimension2d<irr::u32>(width, height), bpp,
 				    fullscreen, false, false, 0);
   this->_driver = this->_device->getVideoDriver();
   this->_smgr = this->_device->getSceneManager();

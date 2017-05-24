@@ -14,6 +14,9 @@ is::map::map(video::IVideoDriver *driver, scene::ISceneManager *smgr,
   _texture[3] = _driver->getTexture("./gfx/fire.png");
   scene::IAnimatedMesh *mesh = smgr->getMesh("./gfx/wallStone.obj");
   size = sqrt(map.size());
+  smgr->addSkyDomeSceneNode(driver->getTexture("./gfx/space3.jpg"), 16, 16, 1.0f, 1.0f)->setRotation(
+	  irr::core::vector3df(0, 0, -180));
+  smgr->addSkyDomeSceneNode(driver->getTexture("./gfx/space3.jpg"), 16, 16, 1.0f, 1.0f);
   for (int j = 0; j < map.size(); j++)
     {
 	Block  b = is::Block(Vector3d(j / size, j % size, 0));
@@ -68,7 +71,7 @@ bool 	is::map::canIMoove(Vector3d const &pos) const
   if ((posi = find(pos)) == -1)
     return (false);
   printf("posi : %d\n",posi);
-  if (_mapi[posi].tyxpe == Type::GRASS)
+  if (_mapi[posi].type == Type::GRASS)
     return (true);
   return (false);
 }

@@ -14,7 +14,7 @@ set(SOURCE_FILES
         src/MenuEventReceiver.cpp src/MenuEventReceiver.hpp
         src/IndieStudioException.cpp src/IndieStudioException.hpp
         src/OptionsState.cpp src/OptionsState.hpp
-        src/OptionsEventReceiver.cpp src/OptionsEventReceiver.hpp)
+        src/OptionsEventReceiver.cpp src/OptionsEventReceiver.hpp map/flo/Game.cpp map/flo/Game.hpp)
 
 include_directories(irrlicht-1.8.4/include Interface src/gameEngine)
 link_directories(irrlicht-1.8.4/lib/Linux irrlicht-1.8.4/lib/Linux/useful)
