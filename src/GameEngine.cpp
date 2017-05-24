@@ -3,6 +3,7 @@
 //
 
 # include <irrlicht.h>
+#include <iostream>
 #include "GameEngine.hpp"
 
 is::GameEngine::GameEngine(const std::string &title, int width, int height,
@@ -38,13 +39,12 @@ void is::GameEngine::Init(const char* title, int width, int height,
   this->_driver = this->_device->getVideoDriver();
   this->_smgr = this->_device->getSceneManager();
   this->_guienv = this->_device->getGUIEnvironment();
+
   irr::core::stringw wStr(title);
   this->_device->setWindowCaption(wStr.c_str());
 
   this->_fullscreen = fullscreen;
   this->_running = true;
-
-  printf("is::GameEngine Init\n");
 }
 
 void is::GameEngine::Quit()
@@ -70,7 +70,6 @@ void is::GameEngine::Cleanup()
   // programs won't get accidentally resized
   this->_device->drop();
   printf("is::GameEngine Cleanup\n");
-
 }
 
 void is::GameEngine::ChangeState(IGameState *state)
@@ -157,4 +156,9 @@ irr::scene::ISceneManager *is::GameEngine::getSceneManager(void) const
 const irr::core::vector2d<int> &is::GameEngine::getWindowSize() const
 {
   return (this->_windowSize);
+}
+
+is::Options &is::GameEngine::getOptions()
+{
+  return (this->_options);
 }

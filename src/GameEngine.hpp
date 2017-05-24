@@ -10,6 +10,7 @@
 # include <memory>
 # include "irrlicht.h"
 # include "IGameEngine.hpp"
+#include "Options.hpp"
 
 namespace is {
   class GameEngine : public IGameEngine {
@@ -40,21 +41,22 @@ namespace is {
     irr::scene::ISceneManager			*getSceneManager(void) const;
     std::vector<IGameState*> 			getState() const;
     const irr::core::vector2d<int>		&getWindowSize() const;
+    Options					&getOptions();
 
-    private:
+   private:
     std::vector<IGameState*>			_states;
     irr::IrrlichtDevice				*_device;
     irr::video::IVideoDriver			*_driver;
     irr::gui::IGUIEnvironment           	*_guienv;
     irr::scene::ISceneManager			*_smgr;
     irr::core::vector2d<int>			_windowSize;
+    bool 					_running;
+    bool 					_fullscreen;
+    Options					_options;
 
-    bool 			_running;
-    bool 			_fullscreen;
-
-    virtual void 		Init(const char *title, int width = 640, int height = 480,
-				     int bpp = 0, bool fullscreen = false);
-    virtual void 		Cleanup();
+    virtual void 				Init(const char *title, int width = 640, int height = 480,
+						     int bpp = 0, bool fullscreen = false);
+    virtual void 				Cleanup();
 
     GameEngine(const GameEngine &);
     GameEngine                        operator=(const GameEngine &);

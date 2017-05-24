@@ -14,11 +14,6 @@ namespace is
   const irr::s32		MenuState::BUTTON_WIDTH = 250;
   const irr::s32		MenuState::BUTTON_HEIGHT = 75;
 
-  std::vector<is::Button> MenuState::BUTTONS = {
-	  { 15, 15, 15 + BUTTON_WIDTH, 15 + BUTTON_HEIGHT, (irr::s32)GUI_ID_BOUTON::GUI_ID_PLAY_BUTTON, L"PLay", L"Launch the game" },
-	  { 15, 15 + BUTTON_HEIGHT, 15 + BUTTON_WIDTH, 15 + BUTTON_HEIGHT * 2, (irr::s32)GUI_ID_BOUTON::GUI_ID_OPTIONS_BUTTON, L"Options", L"Configure the game" },
-	  { 15, 15 + BUTTON_HEIGHT * 2, 15 + BUTTON_WIDTH, 15 + BUTTON_HEIGHT * 3, (irr::s32)GUI_ID_BOUTON::GUI_ID_QUIT_BUTTON, L"Quit", L"Quit the game" },
-  };
   MenuState::MenuState() :
 	  menuEventReceiver(),
 	  _wallpaper(NULL)
@@ -27,7 +22,7 @@ namespace is
 
   MenuState::~MenuState()
   {
-    //this->_wallpaper->drop();
+    this->_wallpaper->drop();
   }
 
   void MenuState::Init(GameEngine *engine)
@@ -41,6 +36,13 @@ namespace is
 
     if (!(this->_wallpaper = _engine->getDriver()->getTexture(WALLPAPER)))
       throw IndieStudioException();
+
+    this->_buttons = {
+	    { 15, 15, 15 + BUTTON_WIDTH, 15 + BUTTON_HEIGHT, (irr::s32)GUI_ID_BOUTON::GUI_ID_PLAY_BUTTON, L"PLay", L"Launch the game" },
+	    { 15, 15 + BUTTON_HEIGHT, 15 + BUTTON_WIDTH, 15 + BUTTON_HEIGHT * 2, (irr::s32)GUI_ID_BOUTON::GUI_ID_OPTIONS_BUTTON, L"Options", L"Configure the game" },
+	    { 15, 15 + BUTTON_HEIGHT * 2, 15 + BUTTON_WIDTH, 15 + BUTTON_HEIGHT * 3, (irr::s32)GUI_ID_BOUTON::GUI_ID_QUIT_BUTTON, L"Quit", L"Quit the game" },
+    };
+
 
 /*
     this->_gui->addButton(irr::core::rect<irr::s32>(this->_engine->getWindowSize().X / 2, this->_engine->getWindowSize().Y / 4, this->_engine->getWindowSize().X / 2 + 100, this->_engine->getWindowSize().Y / 4 + 50),
@@ -73,29 +75,35 @@ namespace is
 
   void MenuState::Draw(void)
   {
+    unsigned int i;
     this->_driver->beginScene();
     if (this->_wallpaper)
-    	this->_driver->draw2DImage(this->_wallpaper, irr::core::vector2d<irr::s32>(0, 0));
-    this->_gui->drawAll();
+      this->_driver->draw2DImage(this->_wallpaper, irr::core::vector2d<irr::s32>(0, 0));
+
+    for (auto &text : this->_text)
+      text->draw();
+    for (auto &button : this->_buttons)
+      button->draw();
+
     this->_driver->endScene();
   }
 
   void MenuState::ChangeState(GameEngine *engine,
 			      IGameState *state)
   {
-
+    this->_engine->ChangeState(state);
   }
 }
 
 void is::MenuState::drawButtons()
 {
-  for (auto &it : BUTTONS)
+  for (auto &it : this->_buttons)
     {
       it.set(this->_gui->addButton({it.getX(), it.getY(), it.getX2(), it.getY2()},
-			    0,
-			    it.getId(),
-			    it.getText(),
-			    it.getHint()));
+				   0,
+				   it.getId(),
+				   it.getText().c_str(),
+				   it.getHint().c_str()));
       it->setUseAlphaChannel(true);
     }
   for (irr::s32 i=0; i<irr::gui::EGDC_COUNT ; ++i)

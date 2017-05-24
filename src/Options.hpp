@@ -7,7 +7,7 @@
 #include <Keycodes.h>
 #include <vector>
 #include <regex>
-#include "irrTypes.h"
+#include "irrlicht.h"
 
 namespace is
 {
@@ -20,6 +20,7 @@ namespace is
       MOVE_DOWN,
       MOVE_RIGHT,
       MOVE_LEFT,
+      MOVE_ACTION,
       MOVE_LENGTH,
     };
     static const irr::u8					DEFAULT_VOLUME;
@@ -38,7 +39,11 @@ namespace is
     void 							setP1config(const irr::EKEY_CODE key, const Options::MOVES move);
     void 							setP2config(const irr::EKEY_CODE key, const Options::MOVES move);
 
+    irr::core::stringw 						keyToStringw(irr::EKEY_CODE key) const;
+
    private:
+    static const std::map<irr::EKEY_CODE, irr::core::stringw>	KEY_TO_WCHAR;
+
     irr::u8							_volume;
     bool 							_fullscreen;
     std::map<Options::MOVES, irr::EKEY_CODE> 			_p1Config;

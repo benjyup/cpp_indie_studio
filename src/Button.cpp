@@ -5,7 +5,7 @@
 #include "Button.hpp"
 
 is::Button::Button(const irr::s32 x, const irr::s32 y, const irr::s32 x2, const irr::s32 y2, const irr::s32 id,
-		   const wchar_t *text, const wchar_t *hint) :
+		   const irr::core::stringw text, const irr::core::stringw hint) :
 	_x(x),
 	_y(y),
 	_x2(x2),
@@ -69,12 +69,12 @@ irr::s32 is::Button::getY2() const
   return (this->_y2);
 }
 
-const wchar_t *is::Button::getText() const
+const irr::core::stringw is::Button::getText() const
 {
   return (this->_text);
 }
 
-const wchar_t *is::Button::getHint() const
+const irr::core::stringw is::Button::getHint() const
 {
   return (this->_hint);
 }
