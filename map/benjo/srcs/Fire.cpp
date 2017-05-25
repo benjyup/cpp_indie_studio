@@ -3,10 +3,10 @@
 //
 
 #include <iostream>
-#include "MapIndie.hpp"
-#include "ObjectMap.hpp"
+// #include "MapIndie.hpp"
+// #include "ObjectMap.hpp"
 #include "Fire.hpp"
-#include "IObject.hpp"
+// #include "IObject.hpp"
 #include <irrlicht.h>
 
 Fire::Fire(irr::scene::ISceneManager* smgr, irr::video::IVideoDriver* driver, irr::core::vector3df Position, FireDirection Direction)

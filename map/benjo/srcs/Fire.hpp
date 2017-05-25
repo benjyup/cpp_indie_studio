@@ -6,9 +6,10 @@
 #define CPP_INDIE_STUDIO_FIRE_HPP
 
 #include <iostream>
-#include "MapIndie.hpp"
-#include "ObjectMap.hpp"
-#include "IObject.hpp"
+//#include "MapIndie.hpp"
+//#include "ObjectMap.hpp"
+//#include "IObject.hpp"
+#include <map>
 #include <irrlicht.h>
 
 enum	FireDirection
