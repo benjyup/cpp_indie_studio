@@ -22,25 +22,6 @@ set(SOURCE_FILES
         ../../src/Options.cpp
         ../../src/Options.hpp)
 
-set(SOURCE_TEST
-        caca.cpp
-        map.cpp
-        Block.cpp
-        Vector3d.cpp
-        Game.cpp
-	ParseMap.cpp
-	Bombs.cpp
-    	../../src/GameEngine.cpp
-        ../../src/GameEngine.hpp
-        ../../Interface/IGameEngine.hpp
-        ../../src/GameState.cpp
-        ../../src/GameState.hpp
-        ../../src/Options.cpp
-        ../../src/Options.hpp
-	./include/Fire.hpp
-	./srcs/Fire.cpp)
-
-
 include_directories(../../irrlicht-1.8.4/include ../../Interface ../../src/gameEngine ./include/)
 link_directories(../../irrlicht-1.8.4/lib/Linux ../../irrlicht-1.8.4/lib/Linux/useful)
 
