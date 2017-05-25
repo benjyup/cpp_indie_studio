@@ -47,10 +47,12 @@ namespace is
     Fire                fire2(_sceneManager, _driver, irr::core::vector3df(-0.5 * SCALE, 0.5 * SCALE, 13.5 * SCALE), TOP);
     Fire	        fire3(_sceneManager, _driver, irr::core::vector3df(12.5 * SCALE, 0.5 * SCALE, 0.5 * SCALE), TOP);
     Fire	        fire4(_sceneManager, _driver, irr::core::vector3df(12.5 * SCALE, 0.5 * SCALE, 13.5 * SCALE), TOP);
-    PlanetSystem	PlanetR(_sceneManager, _driver, "./gfx/particlered.bmp", 800.0f, 0.001f);
-    PlanetSystem	PlanetW(_sceneManager, _driver, "./gfx/particlewhite.bmp", 600.0f, 0.0009f);
-    PlanetSystem	PlanetG(_sceneManager, _driver, "./gfx/particlegreen.jpg", 400.0f, 0.0008f);
-
+    PlanetSystem	PlanetR(_sceneManager, _driver, "./gfx/particlered.bmp", 800.0f, 0.001f,
+				irr::core::vector3df(6.0 * SCALE, 0.5 * SCALE, 7 * SCALE));
+    PlanetSystem	PlanetW(_sceneManager, _driver, "./gfx/particlewhite.bmp", 600.0f, 0.0009f,
+				irr::core::vector3df(6.0 * SCALE, 0.5 * SCALE, 7 * SCALE));
+    PlanetSystem	PlanetG(_sceneManager, _driver, "./gfx/particlegreen.jpg", 400.0f, 0.0008f,
+				    irr::core::vector3df(6.0 * SCALE, 0.5 * SCALE, 7 * SCALE));
   }
 
   void Game::Cleanup(void)

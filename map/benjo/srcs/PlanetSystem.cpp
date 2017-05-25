@@ -5,7 +5,7 @@
 #include "PlanetSystem.hpp"
 
 PlanetSystem::PlanetSystem(irr::scene::ISceneManager* smgr, irr::video::IVideoDriver* driver, const irr::io::path &filename,
-			   irr::f32 radius, irr::f32 speed)
+			   irr::f32 radius, irr::f32 speed, irr::core::vector3df position)
 {
   irr::scene::ISceneNode* node = 0;
 
@@ -15,10 +15,8 @@ PlanetSystem::PlanetSystem(irr::scene::ISceneManager* smgr, irr::video::IVideoDr
   anim = smgr->createFlyCircleAnimator(irr::core::vector3df(0,150,0), radius, speed);
   node->addAnimator(anim);
   anim->drop();
-
-  // attache le panneau à la lumière
   node = smgr->addBillboardSceneNode(node, irr::core::dimension2d<irr::f32>(50, 50));
-  node->setPosition(irr::core::vector3df(75, -100, 75));
+  node->setPosition(irr::core::vector3df(position));
   node->setMaterialFlag(irr::video::EMF_LIGHTING, false);
   node->setMaterialType(irr::video::EMT_TRANSPARENT_ADD_COLOR);
   node->setMaterialTexture(0, driver->getTexture(filename));
