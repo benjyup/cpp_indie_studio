@@ -12,11 +12,13 @@
 #include <iostream>
 #include "IGameState.hpp"
 #include "map.hpp"
+#include "ParseMap.hpp"
 
 namespace is
 {
   class Game : public IGameState
   {
+    ParseMap	    _parserMap;
    public:
     Game();
     virtual ~Game();

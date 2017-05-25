@@ -9,6 +9,7 @@ set(SOURCE_FILES
         Block.cpp
         Vector3d.cpp
         Game.cpp
+	ParseMap.cpp
     	../../src/GameEngine.cpp
         ../../src/GameEngine.hpp
         ../../Interface/IGameEngine.hpp
