@@ -18,7 +18,7 @@ PlanetSystem::PlanetSystem(irr::scene::ISceneManager* smgr, irr::video::IVideoDr
 
   // attache le panneau à la lumière
   node = smgr->addBillboardSceneNode(node, irr::core::dimension2d<irr::f32>(50, 50));
-  node->setPosition(irr::core::vector3df(0, -100, 0));
+  node->setPosition(irr::core::vector3df(75, -100, 75));
   node->setMaterialFlag(irr::video::EMF_LIGHTING, false);
   node->setMaterialType(irr::video::EMT_TRANSPARENT_ADD_COLOR);
   node->setMaterialTexture(0, driver->getTexture(filename));

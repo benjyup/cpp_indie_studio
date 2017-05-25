@@ -4,7 +4,7 @@
 
 #include "Vector3d.hpp"
 
-namespace Indie
+namespace is
 {
   Vector3d::Vector3d(int32_t x, int32_t y, int32_t z)
 	  : _x(x), _y(y), _z(z)
