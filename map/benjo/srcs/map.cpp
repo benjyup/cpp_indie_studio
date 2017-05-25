@@ -27,6 +27,7 @@ is::map::map(video::IVideoDriver *driver, scene::ISceneManager *smgr,
   // smgr->addCameraSceneNode(0, irr::core::vector3df(size / 2 * SCALE, 2000, size / 2 * 100),
   // 			   irr::core::vector3df(size / 2 * SCALE, -SCALE, size / 2 * 160));
   smgr->addCameraSceneNodeFPS();
+
 //  moveObject(_mapi[10], Vector3d(10, 2, 10));
 //  delObject(_mapi[0]);
 //if (canIMoove(Vector3d(0, 0, 0)))

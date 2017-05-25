@@ -4,6 +4,7 @@
 
 #include "Game.hpp"
 #include "Fire.hpp"
+#include "map.hpp"
 #include "PlanetSystem.hpp"
 
 static std::vector<int>        mapi; // =
@@ -41,7 +42,10 @@ namespace is
     this->_gui = this->_engine->getGuiEnv();
     mapi = _parserMap.getVector();
     _map = std::make_shared<is::map>(_driver, _sceneManager, mapi);
-    Fire		fire(_sceneManager, _driver, irr::core::vector3df(-5, 0, 5), TOP);
+    Fire                fire(_sceneManager, _driver, irr::core::vector3df(-0.5 * SCALE, 0.5 * SCALE, 0.5 * SCALE), TOP);
+    Fire                fire2(_sceneManager, _driver, irr::core::vector3df(-0.5 * SCALE, 0.5 * SCALE, 13.5 * SCALE), TOP);
+    Fire	        fire3(_sceneManager, _driver, irr::core::vector3df(12.5 * SCALE, 0.5 * SCALE, 0.5 * SCALE), TOP);
+    Fire	        fire4(_sceneManager, _driver, irr::core::vector3df(12.5 * SCALE, 0.5 * SCALE, 13.5 * SCALE), TOP);
     PlanetSystem	PlanetR(_sceneManager, _driver, "./gfx/particlered.bmp", 800.0f, 0.001f);
     PlanetSystem	PlanetW(_sceneManager, _driver, "./gfx/particlewhite.bmp", 600.0f, 0.0009f);
     PlanetSystem	PlanetG(_sceneManager, _driver, "./gfx/particlegreen.jpg", 400.0f, 0.0008f);

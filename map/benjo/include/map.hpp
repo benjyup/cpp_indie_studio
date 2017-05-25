@@ -10,7 +10,7 @@
 #include "Vector3d.hpp"
 #include "Block.hpp"
 
-# define SCALE 10
+# define SCALE 20
 
 using namespace irr;
 
