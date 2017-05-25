@@ -4,6 +4,8 @@
 
 #include <iostream>
 #include "map.hpp"
+#include "Fire.hpp"
+#include "PlanetSystem.hpp"
 
 is::map::map(video::IVideoDriver *driver, scene::ISceneManager *smgr,
 	     std::vector<int> &map) : _driver(driver), _smgr(smgr), _map(map)
@@ -24,6 +26,7 @@ is::map::map(video::IVideoDriver *driver, scene::ISceneManager *smgr,
 	b.init((Type)map[j], _texture[map[j]], size);
       _mapi.push_back(b);
     }
+  initEffects();
   // smgr->addCameraSceneNode(0, irr::core::vector3df(size / 2 * SCALE, 2000, size / 2 * 100),
   // 			   irr::core::vector3df(size / 2 * SCALE, -SCALE, size / 2 * 160));
   smgr->addCameraSceneNodeFPS();
@@ -35,6 +38,20 @@ is::map::map(video::IVideoDriver *driver, scene::ISceneManager *smgr,
 //  addObject(BREAK, Vector3d(0, 0, 0));
 //  if (canIMoove(Vector3d(0, 0, 0)))
 //    printf("yes\n");
+}
+
+void is::map::initEffects()
+{
+  Fire		fire(_smgr, _driver, irr::core::vector3df(-0.5 * SCALE, 0.5 * SCALE, 0.5 * SCALE), TOP);
+  Fire		fire2(_smgr, _driver, irr::core::vector3df(-0.5 * SCALE, 0.5 * SCALE, 13.5 * SCALE), TOP);
+  Fire 		fire3(_smgr, _driver, irr::core::vector3df(12.5 * SCALE, 0.5 * SCALE, 0.5 * SCALE), TOP);
+  Fire 		fire4(_smgr, _driver, irr::core::vector3df(12.5 * SCALE, 0.5 * SCALE, 13.5 * SCALE), TOP);
+  PlanetSystem 	PlanetR(_smgr, _driver, "./gfx/particlered.bmp", 800.0f, 0.001f,
+		       irr::core::vector3df(6.0 * SCALE, 0.5 * SCALE, 7 * SCALE));
+  PlanetSystem 	PlanetW(_smgr, _driver, "./gfx/particlewhite.bmp", 600.0f, 0.0009f,
+		       irr::core::vector3df(6.0 * SCALE, 0.5 * SCALE, 7 * SCALE));
+  PlanetSystem 	PlanetG(_smgr, _driver, "./gfx/particlegreen.jpg", 400.0f, 0.0008f,
+		       irr::core::vector3df(6.0 * SCALE, 0.5 * SCALE, 7 * SCALE));
 }
 
 void 	is::map::moveObject(Block &object, const Vector3d &v)
