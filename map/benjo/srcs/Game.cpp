@@ -40,6 +40,7 @@ namespace is
     this->_sceneManager = this->_engine->getSceneManager();
     this->_driver = this->_engine->getDriver();
     this->_gui = this->_engine->getGuiEnv();
+    this->_engine->getDevice()->getCursorControl()->setVisible(false);
     mapi = _parserMap.getVector();
     _map = std::make_shared<is::map>(_driver, _sceneManager, mapi);
     Fire                fire(_sceneManager, _driver, irr::core::vector3df(-0.5 * SCALE, 0.5 * SCALE, 0.5 * SCALE), TOP);
