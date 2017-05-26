@@ -15,7 +15,8 @@ namespace is
   enum Type : int{
     GRASS = 0,
     WALL,
-    BREAK
+    BREAK,
+    FIRE
   };
 
   class Block
@@ -25,6 +26,8 @@ namespace is
     ~Block();
     void   init(Type t, video::ITexture *text, int size);
     Block 	&operator=(Block const &);
+    is::Type 	getType() const;
+    void	setType(is::Type &t);
    private:
     friend class map;
     scene::IAnimatedMeshSceneNode	*node;

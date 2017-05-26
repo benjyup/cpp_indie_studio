@@ -29,7 +29,6 @@ namespace is
     int 		find(Vector3d const &v) const;
     int			find(Block const &b) const;
     void		initEffects();
-
   private:
     scene::ISceneManager *_smgr;
     video::IVideoDriver *_driver;

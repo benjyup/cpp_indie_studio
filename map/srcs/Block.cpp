@@ -36,4 +36,14 @@ namespace is
     node->setScale(irr::core::vector3df(SCALE, SCALE, SCALE));
     node->setRotation(irr::core::vector3df(0, 0, 0));
   }
+
+  is::Type 	Block::getType() const
+  {
+	return (type);
+  }
+
+  void	Block::setType(is::Type &t)
+  {
+	type = t;
+  }
 }
