@@ -23,11 +23,11 @@ class Fire
 {
  public:
   Fire(irr::scene::ISceneManager* smgr, irr::video::IVideoDriver* driver, irr::core::vector3df Position,
-       FireDirection Direction);
+       FireDirection Direction, float power);
   ~Fire();
 
   void						initMapDir();
-  void						createBox(FireDirection Direction);
+  void						createBox(FireDirection Direction, irr::f32 power);
   void						createFire(irr::scene::ISceneManager* smgr, irr::core::vector3df Position);
   void						setPosition(irr::core::vector3df position);
   void						setScale(irr::core::vector3df scale);
