@@ -15,7 +15,6 @@ int 		main(void) {
       engine->ChangeState(gameState.get());
 
       engine->getDevice()->setResizable(true);
-
       while (engine->Running())
 	{
 	  engine->HandleEvents();

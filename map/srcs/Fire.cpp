@@ -3,16 +3,16 @@
 //
 
 #include <iostream>
-#include "MapIndie.hpp"
-#include "ObjectMap.hpp"
+// #include "MapIndie.hpp"
+// #include "ObjectMap.hpp"
 #include "Fire.hpp"
-#include "IObject.hpp"
+// #include "IObject.hpp"
 #include <irrlicht.h>
 
 Fire::Fire(irr::scene::ISceneManager* smgr, irr::video::IVideoDriver* driver, irr::core::vector3df Position, FireDirection Direction)
 {
   initMapDir();
-  _fireText = driver->getTexture("../../media/fire.bmp");
+  _fireText = driver->getTexture("./gfx/fire.bmp");
   _ps = smgr->addParticleSystemSceneNode(false);
   createBox(Direction);
   createFire(smgr, Position);
@@ -21,7 +21,7 @@ Fire::Fire(irr::scene::ISceneManager* smgr, irr::video::IVideoDriver* driver, ir
 
 Fire::~Fire()
 {
-  _ps->setEmitter(0);
+  //_ps->setEmitter(0);
 }
 
 void	Fire::initMapDir()
