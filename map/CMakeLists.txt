@@ -26,9 +26,12 @@ set(SOURCE_FILES
         ../src/Options.cpp
         )
 
-include_directories(../irrlicht-1.8.4/include ../Interface ../src/gameEngine ./include)
-link_directories(../irrlicht-1.8.4/lib/Linux ../irrlicht-1.8.4/lib/Linux/useful)
+include_directories(../irrlicht-1.8.4/include ../Interface ../src/gameEngine
+                    ./include ../irrKlang-64bit-1.5.0/include)
+
+link_directories(../irrlicht-1.8.4/lib/Linux ../irrlicht-1.8.4/lib/Linux/useful
+                ../irrKlang-64bit-1.5.0/bin/linux-gcc-64/)
 
 add_executable(cpp_indie_studio ${SOURCE_FILES})
 
-target_link_libraries(cpp_indie_studio Irrlicht.a GL.so libXxf86vm.so libXext.so libX11.so libXcursor.so -lpthread)
+target_link_libraries(cpp_indie_studio Irrlicht.a GL.so libXxf86vm.so libIrrKlang.so libXext.so libX11.so libXcursor.so -lpthread)
