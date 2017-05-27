@@ -10,6 +10,7 @@
 #include "GameEngine.hpp"
 #include "Button.hpp"
 #include "MenuEventReceiver.hpp"
+#include "IndieStudioException.hpp"
 
 namespace is
 {
@@ -28,20 +29,12 @@ namespace is
     virtual void ChangeState(GameEngine *engine,
 			     IGameState *state);
 
-    enum class GUI_ID_BOUTON : irr::s32
-    {
-      GUI_ID_PLAY_BUTTON = 0,
-      GUI_ID_OPTIONS_BUTTON,
-      GUI_ID_QUIT_BUTTON,
-    };
-
    protected:
     static const irr::io::path			WALLPAPER;
     static const irr::s32		 	BUTTON_WIDTH;
     static const irr::s32		 	BUTTON_HEIGHT;
-    static std::vector<is::Button> 		BUTTONS;
 
-    MenuEventReceiver				menuEventReceiver;
+    MenuEventReceiver				_menuEventReceiver;
     GameEngine 					*_engine;
     irr::video::IVideoDriver			*_driver;
     irr::scene::ISceneManager			*_sceneManager;
@@ -50,6 +43,7 @@ namespace is
     irr::video::ITexture* 			_wallpaper;
     std::vector<is::Button> 			_buttons;
     std::vector<irr::gui::IGUIStaticText*> 	_text;
+    irr::gui::IGUIStaticText			*_errorMsg;
 
     void					drawButtons();
   };

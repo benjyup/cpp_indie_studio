@@ -16,11 +16,11 @@ namespace is
    public:
     enum class MOVES : irr::u8
     {
-      MOVE_UP = 0,
+      MOVE_ACTION = 0,
+      MOVE_UP,
       MOVE_DOWN,
       MOVE_RIGHT,
       MOVE_LEFT,
-      MOVE_ACTION,
       MOVE_LENGTH,
     };
     static const irr::u8					DEFAULT_VOLUME;
@@ -38,8 +38,12 @@ namespace is
     void							setVolume(const irr::u8 pourcent);
     void 							setP1config(const irr::EKEY_CODE key, const Options::MOVES move);
     void 							setP2config(const irr::EKEY_CODE key, const Options::MOVES move);
+    void 							setP1config(const std::map<Options::MOVES, irr::EKEY_CODE> &moves);
+    void 							setP2config(const std::map<Options::MOVES, irr::EKEY_CODE> &moves);
 
-    irr::core::stringw 						keyToStringw(irr::EKEY_CODE key) const;
+    template <typename T = std::string>
+    T 								keyToString(irr::EKEY_CODE key) const;
+
 
    private:
     static const std::map<irr::EKEY_CODE, irr::core::stringw>	KEY_TO_WCHAR;
@@ -48,5 +52,7 @@ namespace is
     bool 							_fullscreen;
     std::map<Options::MOVES, irr::EKEY_CODE> 			_p1Config;
     std::map<Options::MOVES, irr::EKEY_CODE> 			_p2Config;
+
+    bool 							isAlreadyBind(int player, const irr::EKEY_CODE, const Options::MOVES move) const;
   };
 }

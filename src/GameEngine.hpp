@@ -15,8 +15,8 @@
 namespace is {
   class GameEngine : public IGameEngine {
    public:
-    GameEngine(const std::string &title, int width = 640, int height = 480,
-	       int bpp = 0, bool fullscreen = false);
+    GameEngine(const std::string &title, int width = 1920, int height = 1080,
+	       int bpp = 0, bool fullscreen = true);
     ~GameEngine();
 
     virtual void ChangeState(IGameState *state);

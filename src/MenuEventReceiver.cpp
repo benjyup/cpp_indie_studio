@@ -24,19 +24,27 @@ bool 		is::MenuEventReceiver::OnEvent(const irr::SEvent &event)
       irr::s32	buttonID = event.GUIEvent.Caller->getID();
       switch (buttonID)
 	{
-	  case ((irr::s32)MenuState::GUI_ID_BOUTON::GUI_ID_PLAY_BUTTON):
-	    this->_engine->ChangeState(new GameState);
+	  case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_PLAY_BUTTON):
+	    {
+	      this->_states.push_back(std::make_shared<GameState>());
+	      this->_engine->PushState(std::make_shared<GameState>().get());
+	    }
 	  break;
-	  case ((irr::s32)MenuState::GUI_ID_BOUTON::GUI_ID_OPTIONS_BUTTON):
-	    this->_engine->ChangeState(new OptionsState);
+	  case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_OPTIONS_BUTTON):
+	    {
+	      this->_states.push_back(std::make_shared<OptionsState>());
+	      this->_engine->PushState(this->_states.back().get());
+	    }
 	  break;
-	  case ((irr::s32)MenuState::GUI_ID_BOUTON::GUI_ID_QUIT_BUTTON):
-	      this->_device->closeDevice();
+	  case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_QUIT_BUTTON):
+	      this->_engine->Quit();
 	  break;
 	  default:
 	    std::cout << "AUCUN" << std::endl;
 	}
     }
+  else if (event.EventType == irr::EET_KEY_INPUT_EVENT && event.KeyInput.Key == irr::KEY_ESCAPE)
+      this->_device->closeDevice();
   return (false);
 }
 

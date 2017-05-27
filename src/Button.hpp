@@ -5,13 +5,34 @@
 #ifndef CPP_INDIE_STUDIO_BUTTON_HPP
 #define CPP_INDIE_STUDIO_BUTTON_HPP
 
+#include <regex>
 #include "irrlicht.h"
+#include "Options.hpp"
 
 namespace is
 {
   class Button
   {
    public:
+
+    enum class GUI_ID_BOUTON : irr::s32
+    {
+      GUI_ID_MOVE_ACTION_BUTTON = 0,
+      GUI_ID_MOVE_FORWARD_BUTTON,
+      GUI_ID_MOVE_BACKWARD_BUTTON,
+      GUI_ID_MOVE_RIGHT_BUTTON,
+      GUI_ID_MOVE_LEFT_BUTTON,
+      GUI_ID_CHANGE_PLAYER_BUTTON,
+      GUI_ID_APPLY_BUTTON,
+      GUI_ID_CANCEL_BUTTON,
+      GUI_ID_PLAY_BUTTON,
+      GUI_ID_OPTIONS_BUTTON,
+      GUI_ID_QUIT_BUTTON,
+      GUI_ID_LENGTH
+    };
+
+    static const std::map<GUI_ID_BOUTON, Options::MOVES>	BUTTON_TO_MOVE;
+
     Button(const irr::s32 x,
 	   const irr::s32 y,
 	   const irr::s32 x2,

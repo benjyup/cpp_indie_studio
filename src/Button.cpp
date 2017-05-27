@@ -4,6 +4,15 @@
 
 #include "Button.hpp"
 
+const std::map<is::Button::GUI_ID_BOUTON, is::Options::MOVES>	is::Button::BUTTON_TO_MOVE = {
+	{GUI_ID_BOUTON::GUI_ID_MOVE_ACTION_BUTTON, Options::MOVES::MOVE_ACTION },
+	{GUI_ID_BOUTON::GUI_ID_MOVE_FORWARD_BUTTON, Options::MOVES::MOVE_UP },
+	{GUI_ID_BOUTON::GUI_ID_MOVE_BACKWARD_BUTTON, Options::MOVES::MOVE_DOWN },
+	{GUI_ID_BOUTON::GUI_ID_MOVE_RIGHT_BUTTON, Options::MOVES::MOVE_RIGHT },
+	{GUI_ID_BOUTON::GUI_ID_MOVE_LEFT_BUTTON, Options::MOVES::MOVE_LEFT },
+};
+
+
 is::Button::Button(const irr::s32 x, const irr::s32 y, const irr::s32 x2, const irr::s32 y2, const irr::s32 id,
 		   const irr::core::stringw text, const irr::core::stringw hint) :
 	_x(x),

@@ -24,6 +24,7 @@ is::GameEngine::GameEngine(is::GameEngine const &engine)
 
 is::GameEngine::~GameEngine()
 {
+
 }
 
 std::vector<is::IGameState*> is::GameEngine::getState() const
@@ -69,7 +70,6 @@ void is::GameEngine::Cleanup()
   // switch back to windowed mode so other
   // programs won't get accidentally resized
   this->_device->drop();
-  printf("is::GameEngine Cleanup\n");
 }
 
 void is::GameEngine::ChangeState(IGameState *state)
