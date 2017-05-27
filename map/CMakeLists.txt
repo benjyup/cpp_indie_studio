@@ -1,23 +1,37 @@
 cmake_minimum_required(VERSION 3.5)
-project(map_TEST)
-
+project(map)
 
 set(CMAKE_CXX_STANDARD 11)
 
 set(SOURCE_FILES
-	        main.cpp)
-set(SRCS_LIB_MAP
-		srcs/include/MapIndie.hpp srcs/include/ObjectMap.hpp IObject.hpp srcs/MapIndie.cpp srcs/ObjectMap.cpp Vector3d.hpp Vector3d.cpp )
-		
-include_directories(srcs/include .)
+        include/Block.hpp
+        include/Bombs.hpp
+        include/Fire.hpp
+        include/Game.hpp
+        include/map.hpp
+        include/ParseMap.hpp
+        include/PlanetSystem.hpp
+        include/Vector3d.hpp
+        srcs/Block.cpp
+        srcs/Bombs.cpp
+        srcs/Fire.cpp
+        srcs/Game.cpp
+        srcs/main.cpp
+        srcs/map.cpp
+        srcs/ParseMap.cpp
+        srcs/PlanetSystem.cpp
+        srcs/Vector3d.cpp
+        ../src/GameEngine.cpp
+        ../src/GameState.cpp
+        ../src/Options.cpp
+        )
 
-include_directories(../irrlicht-1.8.4/include ../Interface ../src/gameEngine)
-link_directories(../irrlicht-1.8.4/lib/Linux ../irrlicht-1.8.4/lib/Linux/useful)
+include_directories(../irrlicht-1.8.4/include ../Interface ../src/gameEngine
+                    ./include ../irrKlang-64bit-1.5.0/include)
 
+link_directories(../irrlicht-1.8.4/lib/Linux ../irrlicht-1.8.4/lib/Linux/useful
+                ../irrKlang-64bit-1.5.0/bin/linux-gcc-64/)
 
-ADD_LIBRARY(libmapindie ${SRCS_LIB_MAP})
-add_executable(map_TEST ${SOURCE_FILES})
+add_executable(cpp_indie_studio ${SOURCE_FILES})
 
-
-
-target_link_libraries(map_TEST libmapindie Irrlicht.a GL.so libXxf86vm.so libXext.so libX11.so libXcursor.so)
+target_link_libraries(cpp_indie_studio Irrlicht.a GL.so libXxf86vm.so libIrrKlang.so libXext.so libX11.so libXcursor.so -lpthread)

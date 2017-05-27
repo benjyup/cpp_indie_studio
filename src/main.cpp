@@ -12,12 +12,8 @@ int 		main(void) {
       std::shared_ptr<is::GameEngine> engine = std::make_shared<is::GameEngine>("Indie Studio", 1920, 1080);
       std::shared_ptr<is::IGameState> gameState = std::make_shared<is::MenuState>();
 
-      // load the intro
-      // game.ChangeState( CIntroState::Instance() );
-
       engine->ChangeState(gameState.get());
 
-      // main loop
       while (engine->Running())
 	{
 	  engine->HandleEvents();
