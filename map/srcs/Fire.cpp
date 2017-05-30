@@ -8,7 +8,7 @@
 #include <irrlicht.h>
 
 Fire::Fire(irr::scene::ISceneManager* smgr, irr::video::IVideoDriver* driver,
-	   irr::core::vector3df Position, FireDirection Direction, irr::f32 power)
+	   irr::core::vector3df Position, FireDirection Direction, float power)
 {
   initMapDir();
   _fireText = driver->getTexture("./gfx/fire.bmp");

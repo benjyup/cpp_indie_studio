@@ -7,6 +7,7 @@
 
 #include <vector>
 #include <irrlicht.h>
+#include "Character.hpp"
 #include "Vector3d.hpp"
 #include "Block.hpp"
 

@@ -158,13 +158,13 @@ int main()
 		*/
 		anms->setMaterialFlag(video::EMF_LIGHTING, false);
 
-		anms->setFrameLoop(0, 13);
-		anms->setAnimationSpeed(15);
-//		anms->setMD2Animation(scene::EMAT_RUN);
+//		anms->setFrameLoop(0, 13);
+//		anms->setAnimationSpeed(15);
+		anms->setMD3Animation(scene::EMAT_RUN);
 
-		anms->setScale(core::vector3df(2.f,2.f,2.f));
-		anms->setRotation(core::vector3df(0,-90,0));
-//		anms->setMaterialTexture(0, driver->getTexture("../../media/sydney.bmp"));
+//		anms->setScale(core::vector3df(2.f,2.f,2.f));
+//		anms->setRotation(core::vector3df(0,-90,0));
+		anms->setMaterialTexture(0, driver->getTexture("../../media/sydney.bmp"));
 
 	}
 

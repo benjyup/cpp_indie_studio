@@ -12,6 +12,7 @@ set(SOURCE_FILES
         include/ParseMap.hpp
         include/PlanetSystem.hpp
         include/Vector3d.hpp
+        srcs/Character.cpp
         srcs/Block.cpp
         srcs/Bombs.cpp
         srcs/Fire.cpp
@@ -24,9 +25,10 @@ set(SOURCE_FILES
         ../src/GameEngine.cpp
         ../src/GameState.cpp
         ../src/Options.cpp
+        ../src/IndieStudioException.cpp
         )
 
-include_directories(../irrlicht-1.8.4/include ../Interface ../src/gameEngine
+include_directories(../irrlicht-1.8.4/include ../Interface ../src/gameEngine ./
                     ./include ../irrKlang-64bit-1.5.0/include)
 
 link_directories(../irrlicht-1.8.4/lib/Linux ../irrlicht-1.8.4/lib/Linux/useful

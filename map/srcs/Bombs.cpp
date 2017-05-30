@@ -41,7 +41,7 @@ is::Bombs::Bombs(is::map *theMap, irr::video::IVideoDriver *driver, irr::scene::
 	    if ( goX != -1 && isOk)
 	      {
 		std::cout<<"here1111   0"<<std::endl;
-		Fire  *fire = new Fire(_smgr, _driver, irr::core::vector3df((x * _SCALE) - (_SCALE / 2), 0, posBis.getY()* _SCALE + (_SCALE / 2)), TOP);
+		Fire  *fire = new Fire(_smgr, _driver, irr::core::vector3df((x * _SCALE) - (_SCALE / 2), 0, posBis.getY()* _SCALE + (_SCALE / 2)), TOP,  power);
 		std::cout<<"here11111 APRES  "<<std::endl;
 	      }
 	    else
@@ -53,7 +53,7 @@ is::Bombs::Bombs(is::map *theMap, irr::video::IVideoDriver *driver, irr::scene::
 	    if ( goX2 != -1 && isOk2)
 	      {
 		std::cout<<"here2222222 APRES  0"<<std::endl;
-		Fire  *fire = new Fire(_smgr, _driver, irr::core::vector3df((x2 * _SCALE) - (_SCALE / 2), 0, posTer.getY()* _SCALE + (_SCALE / 2)), TOP);
+		Fire  *fire = new Fire(_smgr, _driver, irr::core::vector3df((x2 * _SCALE) - (_SCALE / 2), 0, posTer.getY()* _SCALE + (_SCALE / 2)), TOP, power);
 		std::cout<<"here2222222 APRES  1"<<std::endl;
 	      }
 	    else

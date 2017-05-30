@@ -28,7 +28,7 @@ int 		main()
   engine2->play2D("./gfx/music1.ogg", true);
   try
     {
-      std::shared_ptr<is::GameEngine> engine = std::make_shared<is::GameEngine>("Indie Studio", 1024, 768);
+      std::shared_ptr<is::GameEngine> engine = std::make_shared<is::GameEngine>("Indie Studio", 1024, 768, 0, false);
       std::shared_ptr<is::IGameState> gameState = std::make_shared<is::Game>();
 
       engine->ChangeState(gameState.get());

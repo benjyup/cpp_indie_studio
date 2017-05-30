@@ -44,7 +44,9 @@
          <Option type="1" />
          <Option compiler="gcc" />
          <Compiler>
+            <Add directory="/home/kyxo/rendu/cpp_indie_studio/map/." />
             <Add directory="/home/kyxo/rendu/cpp_indie_studio/map/../Interface" />
+            <Add directory="/home/kyxo/rendu/cpp_indie_studio/map/../irrKlang-64bit-1.5.0/include" />
             <Add directory="/home/kyxo/rendu/cpp_indie_studio/map/../irrlicht-1.8.4/include" />
             <Add directory="/home/kyxo/rendu/cpp_indie_studio/map/../src/gameEngine" />
             <Add directory="/home/kyxo/rendu/cpp_indie_studio/map/./include" />
@@ -71,7 +73,9 @@
          <Option type="1" />
          <Option compiler="gcc" />
          <Compiler>
+            <Add directory="/home/kyxo/rendu/cpp_indie_studio/map/." />
             <Add directory="/home/kyxo/rendu/cpp_indie_studio/map/../Interface" />
+            <Add directory="/home/kyxo/rendu/cpp_indie_studio/map/../irrKlang-64bit-1.5.0/include" />
             <Add directory="/home/kyxo/rendu/cpp_indie_studio/map/../irrlicht-1.8.4/include" />
             <Add directory="/home/kyxo/rendu/cpp_indie_studio/map/../src/gameEngine" />
             <Add directory="/home/kyxo/rendu/cpp_indie_studio/map/./include" />
@@ -122,6 +126,9 @@
       <Unit filename="/home/kyxo/rendu/cpp_indie_studio/map/srcs/Bombs.cpp">
          <Option target="cpp_indie_studio"/>
       </Unit>
+      <Unit filename="/home/kyxo/rendu/cpp_indie_studio/map/srcs/Character.cpp">
+         <Option target="cpp_indie_studio"/>
+      </Unit>
       <Unit filename="/home/kyxo/rendu/cpp_indie_studio/map/srcs/Fire.cpp">
          <Option target="cpp_indie_studio"/>
       </Unit>
@@ -153,6 +160,12 @@
          <Option target="cpp_indie_studio"/>
       </Unit>
       <Unit filename="/home/kyxo/rendu/cpp_indie_studio/src/GameState.hpp">
+         <Option target="cpp_indie_studio"/>
+      </Unit>
+      <Unit filename="/home/kyxo/rendu/cpp_indie_studio/src/IndieStudioException.cpp">
+         <Option target="cpp_indie_studio"/>
+      </Unit>
+      <Unit filename="/home/kyxo/rendu/cpp_indie_studio/src/IndieStudioException.hpp">
          <Option target="cpp_indie_studio"/>
       </Unit>
       <Unit filename="/home/kyxo/rendu/cpp_indie_studio/src/Options.cpp">

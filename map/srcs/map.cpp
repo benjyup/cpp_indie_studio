@@ -26,6 +26,7 @@ is::map::map(video::IVideoDriver *driver, scene::ISceneManager *smgr,
 	b.init((Type)map[j], _texture[map[j]], size);
       _mapi.push_back(b);
     }
+  Character toto((smgr->getMesh("./chef/tris.md2")), driver->getTexture("./chef/chef.pcx"), smgr, core::vector3df(0, 0, 0));
   initEffects();
   // smgr->addCameraSceneNode(0, irr::core::vector3df(size / 2 * SCALE, 2000, size / 2 * 100),
   // 			   irr::core::vector3df(size / 2 * SCALE, -SCALE, size / 2 * 160));
