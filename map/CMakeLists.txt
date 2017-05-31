@@ -22,6 +22,8 @@ set(SOURCE_FILES
         srcs/ParseMap.cpp
         srcs/PlanetSystem.cpp
         srcs/Vector3d.cpp
+        srcs/Sound.cpp
+        include/Sound.hpp
         ../src/GameEngine.cpp
         ../src/GameState.cpp
         ../src/Options.cpp

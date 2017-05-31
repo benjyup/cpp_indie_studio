@@ -8,6 +8,7 @@
 #include "irrKlang.h"
 #include  <vector>
 #include "Game.hpp"
+#include "Sound.hpp"
 
 #ifdef _IRR_WINDOWS_
 #pragma comment(lib, "Irrlicht.lib")
@@ -21,11 +22,11 @@ using namespace irr;
 
 int 		main()
 {
-  irrklang::ISoundEngine* engine2 = irrklang::createIrrKlangDevice();
+  Sound		music;
 
-  if (!engine2)
-    return 0;
-  engine2->play2D("./gfx/music1.ogg", true);
+  // Exemple d'utilisation de la music
+  music.setGameMusic();
+  music.setMenuMusic();
   try
     {
       std::shared_ptr<is::GameEngine> engine = std::make_shared<is::GameEngine>("Indie Studio", 1024, 768, 0, false);
@@ -45,6 +46,5 @@ int 		main()
     if (!std::string(e.what()).empty())
       std::cerr << "Error: " << e.what() << std::endl;
   }
-  engine2->drop();
   return 0;
 }
