@@ -6,6 +6,7 @@
 #include <thread>
 #include "BombsT.hpp"
 #include "Fire.hpp"
+#include "../../src/IndieStudioException.hpp"
 
 is::BombsT::BombsT(is::map &map, irr::video::IVideoDriver &videoDriver, irr::scene::ISceneManager &sceneManager) :
 	_map(map),
@@ -17,32 +18,22 @@ is::BombsT::BombsT(is::map &map, irr::video::IVideoDriver &videoDriver, irr::sce
     //auto *texture = this->_videoDriver.getTexture("./gfx/Bomb/bomb.png");
     irr::scene::IAnimatedMesh *bombMesh = this->_sceneManager.getMesh("./gfx/Bomb.obj");
     irr::scene::IAnimatedMeshSceneNode *msn = this->_sceneManager.addAnimatedMeshSceneNode(bombMesh);
-    if (bombMesh == NULL)
-      std::cout << "!bombMesh" <<std::endl;
-    if (bombMesh == NULL)
-      std::cout << "!msn" <<std::endl;
+    if (!bombMesh || !msn)
+      throw is::IndieStudioException("Error on loading bomb!");
 
-    irr::core::vector3df posSpace(pos.Y * SCALE - SCALE / 2, 10, pos.X * SCALE + SCALE / 2);
+    irr::core::vector3df posSpace(pos.Y * SCALE - SCALE / 2, 0, pos.X * SCALE + SCALE / 2);
     msn->setPosition(posSpace);
     msn->setScale({5, 5, 5});
 
-    //std::this_thread::sleep_for(std::chrono::operator""ms(2000));
 
     irr::core::vector3df posMap(pos.X, pos.Y, pos.Y);
-    std::cout << "ici" << std::endl;
 
-    std::cout << "Bomb posée" << std::endl;
     std::this_thread::sleep_for(std::chrono::operator""ms(5000));
     msn->remove();
     Fire fire_forward(&this->_sceneManager, &this->_videoDriver, posSpace, FireDirection::FORWARD,
 			      this->reducePower(posMap, power, [](irr::core::vector3df &pos) {pos.X += 1;}));
     Fire fire_backward(&this->_sceneManager, &this->_videoDriver, posSpace, FireDirection::BACKWARD,
 		      this->reducePower(posMap, power, [](irr::core::vector3df &pos) {pos.X -= 1;}));
-
-    std::cout << "ici" << std::endl;
-/*
-    //Fire fire_forwardd(&this->_sceneManager, &this->_videoDriver, p, FireDirection::RIGHT, 2);
-*/
 
     posMap = irr::core::vector3df(pos.X, pos.Y, pos.Y);
     Fire fire_right(&this->_sceneManager, &this->_videoDriver, posSpace, FireDirection::RIGHT,
