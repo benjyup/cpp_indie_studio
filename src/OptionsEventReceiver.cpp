@@ -24,11 +24,11 @@ bool is::OptionsEventReceiver::OnEvent(const irr::SEvent &event)
   switch(event.EventType)
     {
       case irr::EET_GUI_EVENT:
-	this->_guiEvent(event);
-      break;
+					this->_guiEvent(event);
+      		break;
       case irr::EET_KEY_INPUT_EVENT:
-	this->_keyEvent(event);
-      break;
+					this->_keyEvent(event);
+      		break;
     }
   return (false);
 }
@@ -43,7 +43,9 @@ void is::OptionsEventReceiver::_guiEvent(const irr::SEvent &event)
 	  case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_CHANGE_PLAYER_BUTTON):
 	    {
 	      this->_optionsContext->player = (this->_optionsContext->player == 1) ? (2) : (1);
-	      this->_refresh();
+				this->_optionsContext->name = std::string("Player " + std::to_string(this->_optionsContext->player));
+				this->_optionsContext->buttons->back()->setText(irr::core::stringw(this->_optionsContext->name.c_str()).c_str());
+				this->_refresh();
 	      this->_getKey = false;
 	    }
 	  break;

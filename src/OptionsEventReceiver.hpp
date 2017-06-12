@@ -21,6 +21,7 @@ namespace is
     {
       GameEngine 					*engine;
       irr::s8 						player;
+      std::string  name;
       std::map<Options::MOVES, irr::EKEY_CODE>		player1ConfigTmp;
       std::map<Options::MOVES, irr::EKEY_CODE>		player2ConfigTmp;
       std::vector<is::Button> 				*buttons;
