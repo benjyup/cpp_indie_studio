@@ -30,10 +30,10 @@ is::map::map(video::IVideoDriver *driver, scene::ISceneManager *smgr,
   Character toto((smgr->getMesh("./chef/tris.md2")), driver->getTexture("./chef/chef.pcx"), smgr, core::vector3df(0, 0, 0));
   initEffects();
 
-  Camera	cam(smgr, MENU);
-  cam.setMenuMode();
+  //Camera	cam(smgr, MENU);
   //cam.setMenuMode();
-  //smgr->addCameraSceneNodeFPS();
+  //cam.setMenuMode();
+  smgr->addCameraSceneNodeFPS();
 
 //  moveObject(_mapi[10], Vector3d(10, 2, 10));
 //  delObject(_mapi[0]);
