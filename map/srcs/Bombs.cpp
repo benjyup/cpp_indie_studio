@@ -25,7 +25,7 @@ is::Bombs::Bombs(is::map *theMap, irr::video::IVideoDriver *driver, irr::scene::
     std::cout<<"ATTEND 3                2  111111111111111111111100000000000\n";
     sleep(_seconds);
 
-    //    irr::scene::IAnimatedMesh *m = _theMeshs.find("Cube")->second;
+    //irr::scene::IAnimatedMesh *m = _theMeshs.find("Cube")->second;
     //    _theMap->addObject(Type::FIRE, pos);
     is::Vector3d posBis(x, y);
     is::Vector3d posTer(x, y);

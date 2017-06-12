@@ -1,4 +1,4 @@
-//
+	//
 // Created by vincent on 23/05/17.
 //
 
@@ -26,14 +26,12 @@ bool 		is::MenuEventReceiver::OnEvent(const irr::SEvent &event)
 	{
 	  case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_PLAY_BUTTON):
 	    {
-	      this->_states.push_back(std::make_shared<GameState>());
-	      this->_engine->PushState(std::make_shared<GameState>().get());
+	      this->_engine->PushState(new GameState);
 	    }
 	  break;
 	  case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_OPTIONS_BUTTON):
 	    {
-	      this->_states.push_back(std::make_shared<OptionsState>());
-	      this->_engine->PushState(this->_states.back().get());
+	      this->_engine->PushState(new OptionsState);
 	    }
 	  break;
 	  case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_QUIT_BUTTON):

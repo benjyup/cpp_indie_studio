@@ -10,6 +10,7 @@
 
 #include <vector>
 #include <iostream>
+#include <srcs/BombsT.hpp>
 #include "IGameState.hpp"
 #include "map.hpp"
 #include "ParseMap.hpp"
@@ -39,6 +40,7 @@ namespace is
     GameEngine 					*_engine;
     std::shared_ptr<map>			_map;
     std::shared_ptr<Bombs>			_bomb;
+    std::shared_ptr<BombsT>			_bombs;
   };
 }
 

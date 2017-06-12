@@ -39,12 +39,12 @@ namespace is {
     irr::video::IVideoDriver			*getDriver(void) const;
     irr::gui::IGUIEnvironment			*getGuiEnv(void) const;
     irr::scene::ISceneManager			*getSceneManager(void) const;
-    std::vector<IGameState*> 			getState() const;
+    std::vector<std::shared_ptr<IGameState>> 	getState() const;
     const irr::core::vector2d<int>		&getWindowSize() const;
     Options					&getOptions();
 
    private:
-    std::vector<IGameState*>			_states;
+    std::vector<std::shared_ptr<IGameState>>	_states;
     irr::IrrlichtDevice				*_device;
     irr::video::IVideoDriver			*_driver;
     irr::gui::IGUIEnvironment           	*_guienv;

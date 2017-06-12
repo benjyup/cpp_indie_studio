@@ -26,13 +26,13 @@ int 		main()
 
   // Exemple d'utilisation de la music
   music.setGameMusic();
-  music.setMenuMusic();
+  //music.setMenuMusic();
+  //music.setGameMusicWin();
   try
     {
       std::shared_ptr<is::GameEngine> engine = std::make_shared<is::GameEngine>("Indie Studio", 1024, 768, 0, false);
-      std::shared_ptr<is::IGameState> gameState = std::make_shared<is::Game>();
 
-      engine->ChangeState(gameState.get());
+      engine->ChangeState(new is::Game);
       engine->getDevice()->setResizable(true);
 
       while (engine->Running())
