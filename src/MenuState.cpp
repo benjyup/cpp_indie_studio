@@ -20,7 +20,6 @@ namespace is
 
   MenuState::~MenuState()
   {
-
   }
 
   void MenuState::Init(GameEngine *engine)

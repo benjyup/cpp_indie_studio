@@ -46,6 +46,11 @@ namespace is
     _bomb = std::make_shared<is::Bombs>(_map.get(), _driver, _sceneManager);
     _bombs = std::make_shared<is::BombsT>(*(_map.get()), *_driver, *_sceneManager);
     Vector3d	v(5 * SCALE + SCALE / 2 - SCALE, 0, 3 * SCALE + SCALE / 2 - SCALE);
+    _opt = _engine->getOptions();
+    _char[0] = std::make_shared<is::Character>(Character((_sceneManager->getMesh("./chef/tris.md2")), _driver->getTexture("./chef/chef.pcx"), _sceneManager, core::vector3df(0, 0, 0)));
+    _char[1] = std::make_shared<is::Character>(Character((_sceneManager->getMesh("./chef/tris.md2")), _driver->getTexture("./chef/chef.pcx"), _sceneManager, core::vector3df(10 * SCALE, 0, 10 * SCALE)));
+    //_bomb = std::make_shared<is::Bombs>(_map.get(), _driver, _sceneManager);
+//    Vector3d	v(3, 3, 1);
 //    _bomb->putBomb(v, 1);
     _bombs->putBomb({5, 3, 0}, 3);
   }

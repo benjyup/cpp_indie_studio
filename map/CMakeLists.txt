@@ -17,6 +17,7 @@ set(SOURCE_FILES
         srcs/Block.cpp
         srcs/Bombs.cpp
         srcs/Fire.cpp
+        srcs/GameEventReceiver.cpp
         srcs/Camera.cpp
         srcs/Game.cpp
         srcs/main.cpp
@@ -31,10 +32,11 @@ set(SOURCE_FILES
         ../src/GameEngine.cpp
         ../src/GameState.cpp
         ../src/Options.cpp
+        ../src/Options.hpp
         ../src/IndieStudioException.cpp
         )
 
-include_directories(../irrlicht-1.8.4/include ../Interface ../src/gameEngine ./
+include_directories(../irrlicht-1.8.4/include ../src/ ../Interface ./
                     ./include ../irrKlang-64bit-1.5.0/include)
 
 link_directories(../irrlicht-1.8.4/lib/Linux ../irrlicht-1.8.4/lib/Linux/useful

@@ -29,7 +29,6 @@ namespace is
     irr::IrrlichtDevice				*_device;
     GameEngine					*_engine;
     std::vector<std::shared_ptr<IGameState>> 	_states;
-
   };
 
 }

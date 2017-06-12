@@ -12,6 +12,7 @@
 #include <iostream>
 #include <srcs/BombsT.hpp>
 #include "IGameState.hpp"
+#include "GameEventReceiver.hpp"
 #include "map.hpp"
 #include "ParseMap.hpp"
 #include "Bombs.hpp"
@@ -20,7 +21,6 @@ namespace is
 {
   class Game : public IGameState
   {
-    ParseMap	    _parserMap;
    public:
     Game();
     virtual ~Game();
@@ -34,6 +34,7 @@ namespace is
     virtual void ChangeState(GameEngine *engine,
 			     IGameState *state);
    private:
+    ParseMap	    				_parserMap;
     irr::video::IVideoDriver			*_driver;
     irr::scene::ISceneManager			*_sceneManager;
     irr::gui::IGUIEnvironment			*_gui;
@@ -41,8 +42,10 @@ namespace is
     std::shared_ptr<map>			_map;
     std::shared_ptr<Bombs>			_bomb;
     std::shared_ptr<BombsT>			_bombs;
+    std::array<std::shared_ptr<Character>, 2>	_char;
+    Options					_opt;
+    GameEventReceiver				_receiver;
   };
 }
-
 
 #endif //CPP_INDIE_STUDIO_GAME_HPP

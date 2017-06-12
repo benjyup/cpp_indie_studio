@@ -24,7 +24,6 @@ is::map::map(video::IVideoDriver *driver, scene::ISceneManager *smgr,
       b.init((Type)map[j], _texture[map[j]], size);
       _mapi.push_back(b);
     }
-  Character toto((smgr->getMesh("./chef/tris.md2")), driver->getTexture("./chef/chef.pcx"), smgr, core::vector3df(0, 0, 0));
   initEffects();
 
   //Camera	cam(smgr, MENU);
