@@ -9,10 +9,9 @@
 int 		main(void) {
   try {
 
-      std::shared_ptr<is::GameEngine> engine = std::make_shared<is::GameEngine>("Indie Studio", 1920, 1080);
-      std::shared_ptr<is::IGameState> gameState = std::make_shared<is::MenuState>();
-
-      engine->ChangeState(gameState.get());
+      std::shared_ptr<is::GameEngine> engine = std::make_shared<is::GameEngine>("Indie Studio",
+										500, 500, 0, false);
+      engine->PushState(new is::MenuState);
 
       while (engine->Running())
 	{
