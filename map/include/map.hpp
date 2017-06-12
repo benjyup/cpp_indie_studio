@@ -11,7 +11,8 @@
 #include "Vector3d.hpp"
 #include "Block.hpp"
 
-# define SCALE 20
+# define SCALE	20
+# define BLOCK	15
 
 using namespace irr;
 

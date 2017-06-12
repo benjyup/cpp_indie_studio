@@ -44,9 +44,9 @@ is::map::map(video::IVideoDriver *driver, scene::ISceneManager *smgr,
 void is::map::initEffects()
 {
   Fire		fire(_smgr, _driver, irr::core::vector3df(-0.5 * SCALE, 0.5 * SCALE, 0.5 * SCALE), TOP, 3);
-  Fire		fire2(_smgr, _driver, irr::core::vector3df(-0.5 * SCALE, 0.5 * SCALE, 13.5 * SCALE), TOP, 3);
-  Fire 		fire3(_smgr, _driver, irr::core::vector3df(12.5 * SCALE, 0.5 * SCALE, 0.5 * SCALE), TOP, 3);
-  Fire 		fire4(_smgr, _driver, irr::core::vector3df(12.5 * SCALE, 0.5 * SCALE, 13.5 * SCALE), TOP, 3);
+  Fire		fire2(_smgr, _driver, irr::core::vector3df(-0.5 * SCALE, 0.5 * SCALE, (0.5 + (BLOCK - 1)) * SCALE), TOP, 3);
+  Fire 		fire3(_smgr, _driver, irr::core::vector3df((0.5 + (BLOCK - 2)) * SCALE, 0.5 * SCALE, 0.5 * SCALE), TOP, 3);
+  Fire 		fire4(_smgr, _driver, irr::core::vector3df((0.5 + (BLOCK - 2)) * SCALE, 0.5 * SCALE, (0.5 + (BLOCK - 1)) * SCALE), TOP, 3);
   PlanetSystem 	PlanetR(_smgr, _driver, "./gfx/particlered.bmp", 800.0f, 0.001f,
 		       irr::core::vector3df(6.0 * SCALE, 0.5 * SCALE, 7 * SCALE));
   PlanetSystem 	PlanetW(_smgr, _driver, "./gfx/particlewhite.bmp", 600.0f, 0.0009f,
