@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.5)
 project(map)
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 14)
 
 set(SOURCE_FILES
         include/Block.hpp
@@ -25,6 +25,8 @@ set(SOURCE_FILES
         srcs/PlanetSystem.cpp
         srcs/Vector3d.cpp
         srcs/Sound.cpp
+        srcs/BombsT.cpp
+        srcs/BombsT.hpp
         include/Sound.hpp
         ../src/GameEngine.cpp
         ../src/GameState.cpp

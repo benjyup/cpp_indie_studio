@@ -44,8 +44,10 @@ namespace is
     mapi = _parserMap.getVector();
     _map = std::make_shared<is::map>(_driver, _sceneManager, mapi);
     _bomb = std::make_shared<is::Bombs>(_map.get(), _driver, _sceneManager);
+    _bombs = std::make_shared<is::BombsT>(*(_map.get()), *_driver, *_sceneManager);
     Vector3d	v(3, 3, 1);
 //    _bomb->putBomb(v, 1);
+    _bombs->putBomb({3, 3, 1}, 1);
   }
 
   void Game::Cleanup(void)
