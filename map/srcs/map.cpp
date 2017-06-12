@@ -6,6 +6,7 @@
 #include "map.hpp"
 #include "Fire.hpp"
 #include "PlanetSystem.hpp"
+#include "Camera.hpp"
 
 is::map::map(video::IVideoDriver *driver, scene::ISceneManager *smgr,
 	     std::vector<int> &map) : _driver(driver), _smgr(smgr), _map(map)
@@ -29,12 +30,11 @@ is::map::map(video::IVideoDriver *driver, scene::ISceneManager *smgr,
   Character toto((smgr->getMesh("./chef/tris.md2")), driver->getTexture("./chef/chef.pcx"), smgr, core::vector3df(0, 0, 0));
   initEffects();
 
-  irr::scene::ISceneNodeAnimator* anim = 0;
-  anim = smgr->createFlyCircleAnimator(irr::core::vector3df(0,200,0), 400.0f, 0.0009f);
-   smgr->addCameraSceneNode(0, irr::core::vector3df(size / 2 * SCALE, 2000, size / 2 * 100),
-   			   irr::core::vector3df(((0.5 + (BLOCK - 2)) * SCALE) / 2, 0.0f, ((0.5 + (BLOCK - 1)) * SCALE)) / 2)->addAnimator(anim);
-  anim->drop();
+  Camera	cam(smgr, MENU);
+  cam.setInGameMode();
+  //cam.setMenuMode();
   //smgr->addCameraSceneNodeFPS();
+
 //  moveObject(_mapi[10], Vector3d(10, 2, 10));
 //  delObject(_mapi[0]);
 //if (canIMoove(Vector3d(0, 0, 0)))

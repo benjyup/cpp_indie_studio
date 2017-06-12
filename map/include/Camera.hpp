@@ -21,8 +21,20 @@ class Camera
   Camera(irr::scene::ISceneManager* smgr, CamMode cameraMode);
   virtual ~Camera();
 
+  void				setMenuMode();
+  void				setInGameMode();
+
+  irr::scene::ISceneManager *get_smgr() const;
+
+  CamMode get_currMode() const;
+
+  void set_smgr(irr::scene::ISceneManager *_smgr);
+
+  void set_currMode(CamMode _currMode);
+
  private:
-  irr::scene::ISceneManager* _smgr;
+  irr::scene::ISceneManager*	_smgr;
+  CamMode 			_currMode;
 };
 
 #endif //MAP_CAMERA_HPP
