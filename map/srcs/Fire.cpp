@@ -15,12 +15,17 @@ Fire::Fire(irr::scene::ISceneManager* smgr, irr::video::IVideoDriver* driver,
   _ps = smgr->addParticleSystemSceneNode(false);
   createBox(Direction, power);
   createFire(smgr, Position);
+  std::cout << "Fin Fire " << std::endl;
 }
 
 
 Fire::~Fire()
 {
+  std::cout << "~Fire()" << std::endl;
+
   _ps->setEmitter(0);
+  //
+  // _ps->remove();
 }
 
 void	Fire::initMapDir()
@@ -33,6 +38,7 @@ void	Fire::initMapDir()
        {TOP, irr::core::vector3df(0.00f, 0.015f, 0.0f)},
        {DOWN, irr::core::vector3df(0.00f, -0.015f, 0.0f)}};
   _direction = m;
+  std::cout << "fin initMapDir" << std::endl;
 }
 
 void	Fire::createBox(FireDirection Direction, irr::f32 power)
@@ -55,6 +61,7 @@ void	Fire::createBox(FireDirection Direction, irr::f32 power)
 	  break;
 	}
     }
+  std::cout << "fin" << std::endl;
 }
 
 void	Fire::createFire(irr::scene::ISceneManager* smgr, irr::core::vector3df Position)
@@ -70,9 +77,13 @@ void	Fire::createFire(irr::scene::ISceneManager* smgr, irr::core::vector3df Posi
   _ps->setMaterialFlag(irr::video::EMF_ZWRITE_ENABLE, false);
   _ps->setMaterialTexture(0, _fireText);
   _ps->setMaterialType(irr::video::EMT_TRANSPARENT_ADD_COLOR);
+  std::cout << "debut createFire" << std::endl;
+/*
   _n = smgr->addVolumeLightSceneNode(0, -1, 32, 32, irr::video::SColor(0, 255, 0, 0),
 				     irr::video::SColor(0, 255, 0, 0), irr::core::vector3df(0.0f, 0.0f, 0.0f),
 				     irr::core::vector3df(0.0f, 0.0f, 0.0f), irr::core::vector3df(1.0f, 1.0f, 1.0f));
+*/
+  std::cout << "fin createFire" << std::endl;
 }
 
 void	Fire::setPosition(irr::core::vector3df position)

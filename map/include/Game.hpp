@@ -44,5 +44,4 @@ namespace is
   };
 }
 
-
 #endif //CPP_INDIE_STUDIO_GAME_HPP
