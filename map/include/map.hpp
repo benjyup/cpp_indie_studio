@@ -28,6 +28,7 @@ namespace is
     void		addObject(int type, Vector3d const &);
     void		delObject(Block &object);
     bool 		canIMoove(Vector3d const &pos) const;
+    bool 		canIMoove2(Vector3d const &pos) const;
     int 		find(Vector3d const &v) const;
     int			find(Block const &b) const;
     void		initEffects();
