@@ -31,7 +31,7 @@ is::map::map(video::IVideoDriver *driver, scene::ISceneManager *smgr,
   initEffects();
 
   Camera	cam(smgr, MENU);
-  cam.setInGameMode();
+  cam.setMenuMode();
   //cam.setMenuMode();
   //smgr->addCameraSceneNodeFPS();
 
