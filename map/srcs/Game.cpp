@@ -47,7 +47,7 @@ namespace is
     _bombs = std::make_shared<is::BombsT>(*(_map.get()), *_driver, *_sceneManager);
     Vector3d	v(5 * SCALE + SCALE / 2 - SCALE, 0, 3 * SCALE + SCALE / 2 - SCALE);
 //    _bomb->putBomb(v, 1);
-    _bombs->putBomb({5, 3, 0}, 3);
+    _bombs->putBomb({5, 3, 0}, 10000);
   }
 
   void Game::Cleanup(void)

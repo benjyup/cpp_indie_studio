@@ -32,28 +32,22 @@ is::BombsT::BombsT(is::map &map, irr::video::IVideoDriver &videoDriver, irr::sce
     irr::core::vector3df posMap(pos.X, pos.Y, pos.Y);
     std::cout << "ici" << std::endl;
 
-/*
     Fire fire_forward(&this->_sceneManager, &this->_videoDriver, posSpace, FireDirection::FORWARD,
-		      this->reducePower(posMap, power, [](irr::core::vector3df &pos) {pos.Z += 1;}));
-*/
+		      this->reducePower(posMap, power, [](irr::core::vector3df &pos) {pos.X += 1;}));
+    Fire fire_backward(&this->_sceneManager, &this->_videoDriver, posSpace, FireDirection::BACKWARD,
+		      this->reducePower(posMap, power, [](irr::core::vector3df &pos) {pos.X -= 1;}));
 
     std::cout << "ici" << std::endl;
 /*
     //Fire fire_forwardd(&this->_sceneManager, &this->_videoDriver, p, FireDirection::RIGHT, 2);
 */
-    posMap = irr::core::vector3df(pos.X, pos.Y, pos.Y);
-    Fire fire_backward(&this->_sceneManager, &this->_videoDriver, posSpace, FireDirection::RIGHT,
-	    this->reducePower(posMap, power, [&](irr::core::vector3df &pos) {pos.Z += 1;}));
 
-/*
     posMap = irr::core::vector3df(pos.X, pos.Y, pos.Y);
     Fire fire_right(&this->_sceneManager, &this->_videoDriver, posSpace, FireDirection::RIGHT,
-	    this->reducePower(posMap, power, [&](irr::core::vector3df &pos) {pos.X -= 1;}));
-*/
-/*
-    Fire fire_left(&this->_sceneManager, &this->_videoDriver, p, FireDirection::LEFT,
-	    this->reducePower(p, 2, [&](irr::core::vector3df &pos) {pos.X -= 1;}));
-*/
+	    this->reducePower(posMap, power, [&](irr::core::vector3df &pos) {pos.Z += 1;}));
+
+    Fire fire_left(&this->_sceneManager, &this->_videoDriver, posSpace, FireDirection::LEFT,
+	    this->reducePower(posMap, power, [&](irr::core::vector3df &pos) {pos.Z -= 1;}));
 
     std::cout << "Bomb posée" << std::endl;
     std::this_thread::sleep_for(std::chrono::operator""ms(20000));
