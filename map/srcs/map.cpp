@@ -28,10 +28,13 @@ is::map::map(video::IVideoDriver *driver, scene::ISceneManager *smgr,
     }
   Character toto((smgr->getMesh("./chef/tris.md2")), driver->getTexture("./chef/chef.pcx"), smgr, core::vector3df(0, 0, 0));
   initEffects();
-  // smgr->addCameraSceneNode(0, irr::core::vector3df(size / 2 * SCALE, 2000, size / 2 * 100),
-  // 			   irr::core::vector3df(size / 2 * SCALE, -SCALE, size / 2 * 160));
-  smgr->addCameraSceneNodeFPS();
 
+  irr::scene::ISceneNodeAnimator* anim = 0;
+  anim = smgr->createFlyCircleAnimator(irr::core::vector3df(0,200,0), 400.0f, 0.0009f);
+   smgr->addCameraSceneNode(0, irr::core::vector3df(size / 2 * SCALE, 2000, size / 2 * 100),
+   			   irr::core::vector3df(((0.5 + (BLOCK - 2)) * SCALE) / 2, 0.0f, ((0.5 + (BLOCK - 1)) * SCALE)) / 2)->addAnimator(anim);
+  anim->drop();
+  //smgr->addCameraSceneNodeFPS();
 //  moveObject(_mapi[10], Vector3d(10, 2, 10));
 //  delObject(_mapi[0]);
 //if (canIMoove(Vector3d(0, 0, 0)))

@@ -7,6 +7,7 @@ set(SOURCE_FILES
         include/Block.hpp
         include/Bombs.hpp
         include/Fire.hpp
+        include/Camera.hpp
         include/Game.hpp
         include/map.hpp
         include/ParseMap.hpp
@@ -16,6 +17,7 @@ set(SOURCE_FILES
         srcs/Block.cpp
         srcs/Bombs.cpp
         srcs/Fire.cpp
+        srcs/Camera.cpp
         srcs/Game.cpp
         srcs/main.cpp
         srcs/map.cpp
