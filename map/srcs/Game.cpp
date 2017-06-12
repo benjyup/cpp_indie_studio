@@ -52,7 +52,7 @@ namespace is
     //_bomb = std::make_shared<is::Bombs>(_map.get(), _driver, _sceneManager);
 //    Vector3d	v(3, 3, 1);
 //    _bomb->putBomb(v, 1);
-    _bombs->putBomb({5, 3, 0}, 3);
+    _bombs->putBomb({5, 3, 0}, 10000);
   }
 
   void Game::Cleanup(void)
