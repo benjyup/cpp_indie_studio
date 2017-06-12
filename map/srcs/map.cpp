@@ -17,9 +17,6 @@ is::map::map(video::IVideoDriver *driver, scene::ISceneManager *smgr,
   _texture[3] = _driver->getTexture("./gfx/fire.png");
   scene::IAnimatedMesh *mesh = smgr->getMesh("./gfx/wallStone.obj");
   size = sqrt(map.size());
-  smgr->addSkyDomeSceneNode(driver->getTexture("./gfx/space3.jpg"), 16, 16, 1.0f, 1.0f)->setRotation(
-	  irr::core::vector3df(0, 0, -180));
-  smgr->addSkyDomeSceneNode(driver->getTexture("./gfx/space3.jpg"), 16, 16, 1.0f, 1.0f);
   for (int j = 0; j < map.size(); j++)
     {
 	Block  b = is::Block(Vector3d(j / size, j % size, 0));
@@ -56,6 +53,9 @@ void is::map::initEffects()
 		       irr::core::vector3df(6.0 * SCALE, 0.5 * SCALE, 7 * SCALE));
   PlanetSystem 	PlanetG(_smgr, _driver, "./gfx/particlegreen.jpg", 400.0f, 0.0008f,
 		       irr::core::vector3df(6.0 * SCALE, 0.5 * SCALE, 7 * SCALE));
+  _smgr->addSkyDomeSceneNode(_driver->getTexture("./gfx/space3.jpg"), 16, 16, 1.0f, 1.0f)->setRotation(
+	  irr::core::vector3df(0, 0, -180));
+  _smgr->addSkyDomeSceneNode(_driver->getTexture("./gfx/space3.jpg"), 16, 16, 1.0f, 1.0f);
 }
 
 void 	is::map::moveObject(Block &object, const Vector3d &v)
