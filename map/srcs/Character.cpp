@@ -21,6 +21,7 @@ is::Character::Character(scene::IAnimatedMesh *node, video::ITexture *texture, s
       _dir = Character::DIR::TOP;
       _mesh->setRotation(irr::core::vector3df(0, 270, 0));
       _mesh->getMaterial(0).Lighting = true;
+      _mesh->setScale({0.3f, 0.3f, 0.3f});
       _mesh->getMaterial(0).NormalizeNormals = true;
       t = smgr->createTriangleSelector(_mesh);
       _mesh->setTriangleSelector(t);

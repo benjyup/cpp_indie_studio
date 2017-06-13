@@ -21,10 +21,10 @@ is::BombsT::BombsT(is::map &map, irr::video::IVideoDriver &videoDriver, irr::sce
     if (!bombMesh || !msn)
       throw is::IndieStudioException("Error on loading bomb!");
 
-    irr::core::vector3df posSpace(pos.Y * SCALE - SCALE / 2, 0, pos.X * SCALE + SCALE / 2);
+    irr::core::vector3df posSpace(pos.Y * SCALE - SCALE / 2, 0.3 * SCALE, pos.X * SCALE + SCALE / 2);
     msn->setPosition(posSpace);
-    msn->setScale({5, 5, 5});
-
+    //msn->setScale({0.2 * SCALE, 0.2 * SCALE, 0.2 * SCALE});
+    msn->setScale({0.25f * SCALE, 0.25f * SCALE, 0.25f * SCALE});
 
     irr::core::vector3df posMap(pos.X, pos.Y, pos.Y);
 
