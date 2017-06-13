@@ -32,7 +32,7 @@ is::map::map(video::IVideoDriver *driver, scene::ISceneManager *smgr,
     }
   initEffects();
 
-  //Camera	cam(smgr, MENU);
+  //Camera	cam(smgr, MENU, );
   //cam.setMenuMode();
   //cam.setMenuMode();
 
