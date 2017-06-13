@@ -33,7 +33,7 @@ namespace is
     static const irr::io::path			WALLPAPER;
     static const irr::s32		 	BUTTON_WIDTH;
     static const irr::s32		 	BUTTON_HEIGHT;
-
+    
     MenuEventReceiver				_menuEventReceiver;
     GameEngine 					*_engine;
     irr::video::IVideoDriver			*_driver;
@@ -44,6 +44,7 @@ namespace is
     std::vector<is::Button> 			_buttons;
     std::vector<irr::gui::IGUIStaticText*> 	_text;
     irr::gui::IGUIStaticText			*_errorMsg;
+    irr::gui::IGUIFont            *_font;
 
     void					drawButtons();
   };

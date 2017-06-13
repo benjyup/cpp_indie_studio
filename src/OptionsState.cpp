@@ -28,26 +28,30 @@ is::OptionsState::~OptionsState()
 
 void is::OptionsState::Init(is::GameEngine *engine)
 {
+
   this->_engine = engine;
   this->_sceneManager = this->_engine->getSceneManager();
   this->_driver = this->_engine->getDriver();
   this->_gui = this->_engine->getGuiEnv();
   this->_options = this->_engine->getOptions();
   auto windowSize = this->_engine->getWindowSize();
-  engine->getDevice()->setEventReceiver(&this->_optionsEventReceiver);
+	 if (_gui != NULL)
+      this->_font = _gui->getFont("./gfx/font_space.bmp");
+	engine->getDevice()->setEventReceiver(&this->_optionsEventReceiver);
 
   if (!(this->_errorMsg = this->_gui->addStaticText(L"", irr::core::rect<irr::s32>(100, 300, 300, 400))))
     throw IndieStudioException("Not able to init the error message.");
 
-  if (!(this->_wallpaper = _engine->getDriver()->getTexture(WALLPAPER)))
-    throw IndieStudioException();
+  //if (!(this->_wallpaper = _engine->getDriver()->getTexture(WALLPAPER)))
+    //throw IndieStudioException();
 
   this->_optionsContext.engine = this->_engine;
   this->_optionsContext.player = 1;
   this->_optionsContext.buttons = &this->_buttons;
   this->_optionsContext.errorMsg = this->_errorMsg;
   this->_optionsEventReceiver.Init(&this->_optionsContext);
-
+	this->_optionsContext.name = std::string("Player " + std::to_string(this->_optionsContext.player));
+	
   this->_buttons = {
 	  {
 		  windowSize.X / 2 - MenuState::BUTTON_WIDTH / 2,
@@ -111,7 +115,7 @@ void is::OptionsState::Init(is::GameEngine *engine)
 		  20 + BUTTON_WIDTH,
 		  20 + BUTTON_HEIGHT,
 		  (irr::s32) Button::GUI_ID_BOUTON::GUI_ID_CHANGE_PLAYER_BUTTON,
-		  "Player 1"
+			irr::core::stringw(this->_optionsContext.name.c_str())
 	  }
   };
   this->drawButtons();
@@ -124,11 +128,13 @@ void is::OptionsState::Resume(void)
 }
 
 void 			is::OptionsState::drawNameActions()
-{
+{	
   for (std::size_t i = 0 ; i < 5 ; i += 1)
     {
-      this->_text.push_back(this->_gui->addStaticText(NAME_OF_ACTIONS.at(i).c_str(),
-						      {this->_buttons[i].getX() - 100, this->_buttons[i].getY(),this->_buttons[i].getX() + 20, this->_buttons[i].getY() + 20}));
+			irr::gui::IGUIStaticText *text = this->_gui->addStaticText(NAME_OF_ACTIONS.at(i).c_str(),
+						      {this->_buttons[i].getX() - 100, this->_buttons[i].getY() + 30,this->_buttons[i].getX() + 50, this->_buttons[i].getY() + 60});
+			text->setOverrideFont(this->_font);
+			this->_text.push_back(text);
     }
 }
 
