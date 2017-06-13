@@ -2,12 +2,16 @@
 // Created by peixot_b on 12/06/17.
 //
 
+#include <thread>
+#include <iostream>
 #include "Camera.hpp"
 #include "map.hpp"
+#include "IGameState.hpp"
 
-Camera::Camera(irr::scene::ISceneManager* smgr, CamMode cameraMode) : _smgr(smgr), _currMode(cameraMode)
+Camera::Camera(irr::scene::ISceneManager* smgr, CamMode cameraMode, is::GameEngine *engine)
+	: _smgr(smgr), _currMode(cameraMode), _engine(engine)
 {
-
+  _timer = _engine->getDevice()->getTimer();
 }
 
 Camera::~Camera()
@@ -32,6 +36,37 @@ void			Camera::setInGameMode()
 			    irr::core::vector3df(((0.5 + (BLOCK - 2)) * SCALE) / 2,
 						 0.0f,
 						 ((0.5 + (BLOCK - 1)) * SCALE) / 2));
+}
+
+void			Camera::setSplashScreen()
+{
+  irr::scene::ICameraSceneNode *camera;
+  irr::scene::ISceneNodeAnimator *anim = 0;
+
+  camera = _smgr->addCameraSceneNode(0,
+				     irr::core::vector3df(BLOCK / 2 * SCALE, 2000, BLOCK / 2 * 100),
+				     irr::core::vector3df(((0.5 + (BLOCK - 2)) * SCALE) / 2,
+							  0.0,
+							  ((0.5 + (BLOCK)) * SCALE) / 2));
+  anim = _smgr->createFlyStraightAnimator(irr::core::vector3df(0, 20, -2750),
+					  irr::core::vector3df(0, 3 * SCALE, 100),
+					  5000, false, false);
+  camera->addAnimator(anim);
+  while (_engine->Running())
+    {
+      std::cout << _timer->getTime() << std::endl;
+      _engine->HandleEvents();
+      _engine->Update();
+      _engine->Draw();
+    }
+
+//  anim = _smgr->createFlyStraightAnimator(irr::core::vector3df(0, 3 * SCALE, 100),
+//					  irr::core::vector3df(((0.5 + (BLOCK - 2)) * SCALE) / 2,
+//							       1000,
+//							       ((0.5 + (BLOCK)) * SCALE) / 2),
+//					  5000, false, false);
+//  camera->addAnimator(anim);
+  anim->drop();
 }
 
 scene::ISceneManager	*Camera::get_smgr() const

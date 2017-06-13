@@ -13,11 +13,11 @@ is::BombsT::BombsT(is::map &map, irr::video::IVideoDriver &videoDriver, irr::sce
 	_videoDriver(videoDriver),
 	_sceneManager(sceneManager)
 {
+  auto *texture = this->_videoDriver.getTexture("./gfx/bomb.png");
   this->_explosion = [&](const irr::core::vector3df &pos, int power) {
-
-    //auto *texture = this->_videoDriver.getTexture("./gfx/Bomb/bomb.png");
-    irr::scene::IAnimatedMesh *bombMesh = this->_sceneManager.getMesh("./gfx/Bomb.obj");
+    irr::scene::IAnimatedMesh *bombMesh = this->_sceneManager.getMesh("./gfx/bomb.obj");
     irr::scene::IAnimatedMeshSceneNode *msn = this->_sceneManager.addAnimatedMeshSceneNode(bombMesh);
+    //msn->setMaterialTexture(0, texture);
     if (!bombMesh || !msn)
       throw is::IndieStudioException("Error on loading bomb!");
 
