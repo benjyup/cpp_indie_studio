@@ -99,6 +99,9 @@
 		<Unit filename="/home/alice/rendu/cpp_indie_studio/map/include/Block.hpp">
 			<Option target="cpp_indie_studio"/>
 		</Unit>
+		<Unit filename="/home/alice/rendu/cpp_indie_studio/map/include/Bomb.hpp">
+			<Option target="cpp_indie_studio"/>
+		</Unit>
 		<Unit filename="/home/alice/rendu/cpp_indie_studio/map/include/Bombs.hpp">
 			<Option target="cpp_indie_studio"/>
 		</Unit>
@@ -135,13 +138,10 @@
 		<Unit filename="/home/alice/rendu/cpp_indie_studio/map/srcs/Block.cpp">
 			<Option target="cpp_indie_studio"/>
 		</Unit>
+		<Unit filename="/home/alice/rendu/cpp_indie_studio/map/srcs/Bomb.cpp">
+			<Option target="cpp_indie_studio"/>
+		</Unit>
 		<Unit filename="/home/alice/rendu/cpp_indie_studio/map/srcs/Bombs.cpp">
-			<Option target="cpp_indie_studio"/>
-		</Unit>
-		<Unit filename="/home/alice/rendu/cpp_indie_studio/map/srcs/BombsT.cpp">
-			<Option target="cpp_indie_studio"/>
-		</Unit>
-		<Unit filename="/home/alice/rendu/cpp_indie_studio/map/srcs/BombsT.hpp">
 			<Option target="cpp_indie_studio"/>
 		</Unit>
 		<Unit filename="/home/alice/rendu/cpp_indie_studio/map/srcs/Camera.cpp">

@@ -34,6 +34,8 @@ class Fire
 
  private:
   irr::scene::IParticleSystemSceneNode		*_ps;
+
+
   irr::scene::IParticleAffector			*_paf;
   irr::scene::IParticleEmitter			*_em;
   irr::video::ITexture				*_fireText;

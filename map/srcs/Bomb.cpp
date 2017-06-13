@@ -10,7 +10,7 @@
 is::Bomb::Bomb(is::map &map, irr::video::ITexture *texture, irr::scene::IAnimatedMesh *bombMesh, const irr::core::vector3df &posMap, int power,
 	   irr::video::IVideoDriver &videoDriver, irr::scene::ISceneManager &sceneManager) :
 	_posMap(posMap),
-	_posSpace(posMap.Y * SCALE - SCALE / 2, 0, posMap.X * SCALE + SCALE / 2),
+	_posSpace(posMap.Y * SCALE - SCALE / 2, 0.55 * SCALE, posMap.X * SCALE + SCALE / 2),
 	_power(power),
 	_map(map),
 	_videoDriver(videoDriver),
@@ -19,7 +19,7 @@ is::Bomb::Bomb(is::map &map, irr::video::ITexture *texture, irr::scene::IAnimate
   if (!(this->_node = this->_sceneManager.addAnimatedMeshSceneNode(bombMesh)))
     throw is::IndieStudioException("Error on loading bomb.");
   this->_node->setPosition(this->_posSpace);
-  this->_node->setScale({13, 13, 13});
+  this->_node->setScale({0.5f * SCALE, 0.5f * SCALE, 0.5f * SCALE});
 }
 
 is::Bomb::~Bomb()
