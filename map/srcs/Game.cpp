@@ -44,8 +44,7 @@ namespace is
     this->_engine->getDevice()->getCursorControl()->setVisible(false);
     mapi = _parserMap.getVector();
     _map = std::make_shared<is::map>(_driver, _sceneManager, mapi);
-    _bomb = std::make_shared<is::Bombs>(_map.get(), _driver, _sceneManager);
-    _bombs = std::make_shared<is::BombsT>(*(_map.get()), *_driver, *_sceneManager);
+    _bombs = std::make_shared<is::Bombs>(*(_map.get()), *_driver, *_sceneManager);
     _opt = _engine->getOptions();
     _char[0] = std::make_shared<is::Character>(Character((_sceneManager->getMesh("./chef/tris.md2")), _driver->getTexture("./chef/chef.pcx"), _sceneManager, core::vector3df(3 * SCALE - SCALE / 2, SCALE, 2 * SCALE)));
     _char[1] = std::make_shared<is::Character>(Character((_sceneManager->getMesh("./chef/tris.md2")), _driver->getTexture("./chef/chef.pcx"), _sceneManager, core::vector3df(10 * SCALE, SCALE, 10 * SCALE)));
@@ -56,7 +55,7 @@ namespace is
     //_bomb = std::make_shared<is::Bombs>(_map.get(), _driver, _sceneManager);
  //   Vector3d	v(3, 3, 1);
 //    _bomb->putBomb(v, 1);
-    _bombs->putBomb({5, 3, 0}, 10000);
+    _bombs->putBomb({6, 3, 0}, 10000);
     //Camera	cam(_sceneManager, MENU, _engine);
     //cam.setSplashScreen();
   }

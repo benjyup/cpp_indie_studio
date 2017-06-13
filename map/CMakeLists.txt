@@ -5,7 +5,6 @@ set(CMAKE_CXX_STANDARD 14)
 
 set(SOURCE_FILES
         include/Block.hpp
-        include/Bombs.hpp
         include/Fire.hpp
         include/Camera.hpp
         include/Game.hpp
@@ -13,9 +12,9 @@ set(SOURCE_FILES
         include/ParseMap.hpp
         include/PlanetSystem.hpp
         include/Vector3d.hpp
+        include/Bomb.hpp
         srcs/Character.cpp
         srcs/Block.cpp
-        srcs/Bombs.cpp
         srcs/Fire.cpp
         srcs/GameEventReceiver.cpp
         srcs/Camera.cpp
@@ -26,8 +25,9 @@ set(SOURCE_FILES
         srcs/PlanetSystem.cpp
         srcs/Vector3d.cpp
         srcs/Sound.cpp
-        srcs/BombsT.cpp
-        srcs/BombsT.hpp
+        srcs/Bombs.cpp
+        srcs/Bomb.cpp
+        include/Bombs.hpp
         include/Sound.hpp
         ../src/GameEngine.cpp
         ../src/GameState.cpp

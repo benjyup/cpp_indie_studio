@@ -10,12 +10,11 @@
 
 #include <vector>
 #include <iostream>
-#include <srcs/BombsT.hpp>
+#include <include/Bombs.hpp>
 #include "IGameState.hpp"
 #include "GameEventReceiver.hpp"
 #include "map.hpp"
 #include "ParseMap.hpp"
-#include "Bombs.hpp"
 #include "PowerUp.hpp"
 
 namespace is
@@ -41,8 +40,7 @@ namespace is
     irr::gui::IGUIEnvironment			        *_gui;
     GameEngine 					                *_engine;
     std::shared_ptr<map>			            _map;
-    std::shared_ptr<Bombs>			            _bomb;
-    std::shared_ptr<BombsT>			            _bombs;
+    std::shared_ptr<Bombs>			            _bombs;
     std::array<std::shared_ptr<Character>, 2>	_char;
     std::shared_ptr<PowerUp>                    _powerUp;
     Options					                    _opt;

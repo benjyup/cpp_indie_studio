@@ -1,29 +1,40 @@
 //
-// Bombs.hpp for Indie in /home/rodrigue.rene/Cours/Semestre_4/C++2/cpp_indie_studio/map/flo
-// 
-// Made by Rodrigue RENE
-// Login   <rodrigue.rene@epitech.net>
-// 
-// Started on  Thu May 25 00:29:34 2017 Rodrigue RENE
-// Last update Thu May 25 10:40:44 2017 Rodrigue RENE
+// Created by vincent on 12/06/17.
 //
 
+#ifndef MAP_BOMBST_HPP
+#define MAP_BOMBST_HPP
+
+#include <thread>
 #include <functional>
 #include "map.hpp"
+#include "Bomb.hpp"
 
 namespace is
 {
   class Bombs
   {
-    is::map					*_theMap;
-    std::function<void (int, int, int, int)>	_laLambadaX;
-    int						_seconds;
-    int						_SCALE;
-    scene::ISceneManager     *_smgr;
-    video::IVideoDriver *_driver;
-  public:
-    Bombs(is::map *theMap, irr::video::IVideoDriver *driver, irr::scene::ISceneManager *smgr);
+   public:
+    Bombs(is::map &map, irr::video::IVideoDriver &videoDriver, irr::scene::ISceneManager &sceneManager);
     ~Bombs();
-    void	putBomb(is::Vector3d &pos, int power);
+
+    void 			putBomb(const irr::core::vector3df &pos, int power);
+
+   private:
+    is::map					&_map;
+    irr::video::IVideoDriver			&_videoDriver;
+    irr::scene::ISceneManager			&_sceneManager;
+    irr::video::ITexture 			*_texture;
+    irr::scene::IAnimatedMesh 			*_mesh;
+    std::vector<std::thread>			_threads;
+    std::vector<is::Bomb>			_bombs;
+//    std::function<void(const irr::core::vector3df &, int)> 	_explosion;
+    std::function<void(is::Bomb &)> 		_explosion;
+
+    int 					reducePower(irr::core::vector3df pos,
+							   int power,
+							   const std::function<void(irr::core::vector3df &)> &callback);
   };
-};
+}
+
+#endif //MAP_BOMBST_HPP

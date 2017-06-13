@@ -1,86 +1,55 @@
 //
-// Bombs.cpp for Indie in /home/rodrigue.rene/Cours/Semestre_4/C++2/cpp_indie_studio/map/flo
-// 
-// Made by Rodrigue RENE
-// Login   <rodrigue.rene@epitech.net>
-// 
-// Started on  Thu May 25 00:34:31 2017 Rodrigue RENE
-// Last update Thu May 25 11:18:00 2017 Rodrigue RENE
+// Created by vincent on 12/06/17.
 //
 
 #include <iostream>
-#include <fstream>
-#include <functional>
-#include <algorithm>
 #include <thread>
-#include <unistd.h>
-#include "Fire.hpp"
 #include "Bombs.hpp"
+#include "Fire.hpp"
+#include "../../src/IndieStudioException.hpp"
 
-is::Bombs::Bombs(is::map *theMap, irr::video::IVideoDriver *driver, irr::scene::ISceneManager *smgr) : _theMap(theMap), _seconds(5), _SCALE(140)
+is::Bombs::Bombs(is::map &map, irr::video::IVideoDriver &videoDriver, irr::scene::ISceneManager &sceneManager) :
+	_map(map),
+	_videoDriver(videoDriver),
+	_sceneManager(sceneManager),
+	_texture(NULL),
+	_mesh(this->_sceneManager.getMesh("./gfx/bomb.obj"))
+
 {
-  _smgr = smgr;
-  _driver = driver;
-  _laLambadaX = [&](int x, int y,int z, int const power){
-    std::cout<<"ATTEND 3                2  111111111111111111111100000000000\n";
-    sleep(_seconds);
-
-    //irr::scene::IAnimatedMesh *m = _theMeshs.find("Cube")->second;
-    //    _theMap->addObject(Type::FIRE, pos);
-    is::Vector3d posBis(x, y);
-    is::Vector3d posTer(x, y);
-    int i = 0, x2 = x;
-    int goX = 0, goX2 = 0;
-    bool isOk, isOk2;
-    for (int i = 0; i <= (power * 2); i++)
-      {
-	std::cout<<"here   "<<i<<"   "<< posBis.getX()<<std::endl;
-	if ( isOk = _theMap->canIMoove(posBis))
-	  {
-	    		std::cout<<"here1111   -1"<<std::endl;
-	    if ( goX != -1 && isOk)
-	      {
-		std::cout<<"here1111   0"<<std::endl;
-		Fire  *fire = new Fire(_smgr, _driver, irr::core::vector3df((x * _SCALE) - (_SCALE / 2), 0, posBis.getY()* _SCALE + (_SCALE / 2)), TOP,  power);
-		std::cout<<"here11111 APRES  "<<std::endl;
-	      }
-	    else
-	      goX = -1;
-	  }
-	if (isOk2 = _theMap->canIMoove(posTer))
-	  {
-	    std::cout<<"here2222222 APRES  -1"<<std::endl;
-	    if ( goX2 != -1 && isOk2)
-	      {
-		std::cout<<"here2222222 APRES  0"<<std::endl;
-		Fire  *fire = new Fire(_smgr, _driver, irr::core::vector3df((x2 * _SCALE) - (_SCALE / 2), 0, posTer.getY()* _SCALE + (_SCALE / 2)), TOP, power);
-		std::cout<<"here2222222 APRES  1"<<std::endl;
-	      }
-	    else
-	      goX2 = -1;
-	  }
-
-	std::cout<<"APRES  "<<33<<"   "<<
-	  std::endl;
-	posBis.setX(posBis.getX() + 1);
-	posTer.setX(posTer.getX() - 1);
-	x++;
-	x2--;
-	usleep(300000);
-      }
+  this->_explosion = [&](is::Bomb &bomb) {
+    std::this_thread::sleep_for(std::chrono::operator""ms(5000));
+    bomb.blowUp();
   };
-
 }
 
 is::Bombs::~Bombs()
 {
-
+  for (auto &t : this->_threads)
+    t.join();
 }
 
-void	is::Bombs::putBomb(is::Vector3d &pos, int power)
+void is::Bombs::putBomb(const irr::core::vector3df &pos, int power)
 {
-  std::thread first(this->_laLambadaX, pos.getX(), pos.getY(), pos.getZ(), power);
-  first.detach();
+//  this->_threads.emplace_back(this->_explosion, pos, power);
 
-  std::cout<<"AFTER\n";
+  this->_bombs.emplace_back(this->_map, this->_texture, this->_mesh, pos, power, this->_videoDriver, this->_sceneManager);
+  this->_threads.emplace_back(this->_explosion, std::ref(this->_bombs.back()));
+}
+
+int 			is::Bombs::reducePower(irr::core::vector3df pos,
+						   int power,
+						   const std::function<void(irr::core::vector3df &)> &callback)
+{
+  int			ret = 0;
+
+  callback(pos);
+  while (this->_map.canIMoove2(is::Vector3d(pos.X, pos.Z, pos.Z)) && ret < power)
+    {
+      std::cout << "pos.x = " << pos.X << " pos.y = " << pos.Y << " pos.z = " << pos.Z<< std::endl;
+      callback(pos);
+      std::cout << "pos.x = " << pos.X << " pos.y = " << pos.Y << " pos.z = " << pos.Z<< std::endl;
+      ret += 1;
+    }
+  std::cout << "ret = " << ret << std::endl;
+  return ret;
 }

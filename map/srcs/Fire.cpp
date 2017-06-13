@@ -21,6 +21,7 @@ Fire::Fire(irr::scene::ISceneManager* smgr, irr::video::IVideoDriver* driver,
 Fire::~Fire()
 {
   _ps->setEmitter(0);
+  _ps->remove();
 }
 
 void	Fire::initMapDir()
