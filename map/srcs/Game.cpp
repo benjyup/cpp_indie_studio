@@ -2,6 +2,7 @@
 // Created by kyxo on 5/24/17.
 //
 
+#include <include/Camera.hpp>
 #include "Game.hpp"
 #include "Fire.hpp"
 #include "map.hpp"
@@ -56,6 +57,8 @@ namespace is
  //   Vector3d	v(3, 3, 1);
 //    _bomb->putBomb(v, 1);
     _bombs->putBomb({5, 3, 0}, 10000);
+    //Camera	cam(_sceneManager, MENU, _engine);
+    //cam.setSplashScreen();
   }
 
   void Game::Cleanup(void)
