@@ -7,6 +7,7 @@
 
 
 #include <irrlicht.h>
+#include "../../src/GameEngine.hpp"
 
 enum	CamMode
 {
@@ -18,11 +19,12 @@ enum	CamMode
 class Camera
 {
  public:
-  Camera(irr::scene::ISceneManager* smgr, CamMode cameraMode);
+  Camera(irr::scene::ISceneManager* smgr, CamMode cameraMode, is::GameEngine *engine);
   virtual ~Camera();
 
   void				setMenuMode();
   void				setInGameMode();
+  void				setSplashScreen();
 
   irr::scene::ISceneManager *get_smgr() const;
 
@@ -35,6 +37,8 @@ class Camera
  private:
   irr::scene::ISceneManager*	_smgr;
   CamMode 			_currMode;
+  is::GameEngine		*_engine;
+  irr::ITimer 			*_timer;
 };
 
 #endif //MAP_CAMERA_HPP

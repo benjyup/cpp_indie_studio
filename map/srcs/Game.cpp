@@ -53,9 +53,9 @@ namespace is
     _engine->getDevice()->setEventReceiver(&_receiver);
     Vector3d	v(5 * SCALE + SCALE / 2 - SCALE, 0, 3 * SCALE + SCALE / 2 - SCALE);
     //_bomb = std::make_shared<is::Bombs>(_map.get(), _driver, _sceneManager);
-//    Vector3d	v(3, 3, 1);
+ //   Vector3d	v(3, 3, 1);
 //    _bomb->putBomb(v, 1);
-//    _bombs->putBomb({5, 3, 0}, 10000);
+    _bombs->putBomb({5, 3, 0}, 10000);
   }
 
   void Game::Cleanup(void)

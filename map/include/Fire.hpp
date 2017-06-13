@@ -37,7 +37,6 @@ class Fire
   irr::scene::IParticleAffector			*_paf;
   irr::scene::IParticleEmitter			*_em;
   irr::video::ITexture				*_fireText;
-  irr::scene::IVolumeLightSceneNode		*_n;
   std::map<FireDirection, irr::core::vector3df>	_direction;
 };
 
