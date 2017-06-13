@@ -17,7 +17,7 @@ set(SOURCE_FILES
         src/OptionsEventReceiver.cpp src/OptionsEventReceiver.hpp map/srcs/Character.cpp map/include/Character.hpp map/srcs/GameEventReceiver.cpp map/srcs/GameEventReceiver.hpp)
 
 include_directories(irrlicht-1.8.4/include Interface src/gameEngine map/include)
-link_directories(irrlicht-1.8.4/lib/Linux irrlicht-1.8.4/lib/Linux/useful)
+link_directories(irrlicht-1.8.4/lib/Linux/deepinx86_64 irrlicht-1.8.4/lib/Linux/useful)
 
 add_executable(cpp_indie_studio ${SOURCE_FILES})
 

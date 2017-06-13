@@ -34,12 +34,12 @@ set(SOURCE_FILES
         ../src/Options.cpp
         ../src/Options.hpp
         ../src/IndieStudioException.cpp
-        )
+        include/PowerUp.hpp srcs/PowerUp.cpp)
 
 include_directories(../irrlicht-1.8.4/include ../src/ ../Interface ./
                     ./include ../irrKlang-64bit-1.5.0/include)
 
-link_directories(../irrlicht-1.8.4/lib/Linux ../irrlicht-1.8.4/lib/Linux/useful
+link_directories(../irrlicht-1.8.4/lib/Linux/deepinx86_64 ../irrlicht-1.8.4/lib/Linux/useful
                 ../irrKlang-64bit-1.5.0/bin/linux-gcc-64/)
 
 add_executable(cpp_indie_studio ${SOURCE_FILES})

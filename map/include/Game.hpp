@@ -16,6 +16,7 @@
 #include "map.hpp"
 #include "ParseMap.hpp"
 #include "Bombs.hpp"
+#include "PowerUp.hpp"
 
 namespace is
 {
@@ -34,17 +35,18 @@ namespace is
     virtual void ChangeState(GameEngine *engine,
 			     IGameState *state);
    private:
-    ParseMap	    				_parserMap;
-    irr::video::IVideoDriver			*_driver;
-    irr::scene::ISceneManager			*_sceneManager;
-    irr::gui::IGUIEnvironment			*_gui;
-    GameEngine 					*_engine;
-    std::shared_ptr<map>			_map;
-    std::shared_ptr<Bombs>			_bomb;
-    std::shared_ptr<BombsT>			_bombs;
+    ParseMap	    				            _parserMap;
+    irr::video::IVideoDriver			        *_driver;
+    irr::scene::ISceneManager			        *_sceneManager;
+    irr::gui::IGUIEnvironment			        *_gui;
+    GameEngine 					                *_engine;
+    std::shared_ptr<map>			            _map;
+    std::shared_ptr<Bombs>			            _bomb;
+    std::shared_ptr<BombsT>			            _bombs;
     std::array<std::shared_ptr<Character>, 2>	_char;
-    Options					_opt;
-    GameEventReceiver				_receiver;
+    std::shared_ptr<PowerUp>                    _powerUp;
+    Options					                    _opt;
+    GameEventReceiver				            _receiver;
   };
 }
 

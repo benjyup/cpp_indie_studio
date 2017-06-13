@@ -48,6 +48,7 @@ namespace is
     _opt = _engine->getOptions();
     _char[0] = std::make_shared<is::Character>(Character((_sceneManager->getMesh("./chef/tris.md2")), _driver->getTexture("./chef/chef.pcx"), _sceneManager, core::vector3df(3 * SCALE - SCALE / 2, SCALE, 2 * SCALE)));
     _char[1] = std::make_shared<is::Character>(Character((_sceneManager->getMesh("./chef/tris.md2")), _driver->getTexture("./chef/chef.pcx"), _sceneManager, core::vector3df(10 * SCALE, SCALE, 10 * SCALE)));
+    _powerUp = std::make_shared<is::PowerUp>(PowerUp((_sceneManager->getMesh("./powersUp/mushroom/supermushroom.obj")), _driver->getTexture("./powersUp/mushroom/t0081_0.png"), _sceneManager, core::vector3df(100, 0, 100)));
     _receiver.init(_opt, _char);
     _engine->getDevice()->setEventReceiver(&_receiver);
     Vector3d	v(5 * SCALE + SCALE / 2 - SCALE, 0, 3 * SCALE + SCALE / 2 - SCALE);
