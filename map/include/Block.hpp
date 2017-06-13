@@ -30,7 +30,7 @@ namespace is
     void	setType(is::Type &t);
    private:
     friend class map;
-    scene::IAnimatedMeshSceneNode	*node;
+    scene::IMeshSceneNode	*node;
     Vector3d				pos;
     Type 				type;
   };

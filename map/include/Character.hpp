@@ -10,7 +10,7 @@
 
 using namespace irr;
 
-#define DEFAULT_SPEED 30
+#define DEFAULT_SPEED 2
 #define DEFAULT_POWER 1
 #define DEFAULT_BOMB 1
 
@@ -18,11 +18,18 @@ namespace  is
 {
   class Character
   {
+    enum class DIR : irr::u8
+    {
+      LEFT = 0,
+      RIGHT,
+      TOP,
+      DOWN
+    };
    public:
     Character(scene::IAnimatedMesh *node, video::ITexture *texture, scene::ISceneManager *smgr,
 	      core::vector3df const &pos);
     ~Character() {}
-    void moove(Options::MOVES const &);
+    void 	moove(Options::MOVES const &);
 
    private:
     scene::IAnimatedMeshSceneNode *_mesh;
@@ -32,6 +39,7 @@ namespace  is
     int _speed;
     int _bomb;
     int _power;
+    DIR		_dir;
   };
 }
 

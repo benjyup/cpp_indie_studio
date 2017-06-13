@@ -11,17 +11,23 @@
 is::map::map(video::IVideoDriver *driver, scene::ISceneManager *smgr,
 	     std::vector<int> &map) : _driver(driver), _smgr(smgr), _map(map)
 {
+  irr::scene::ITriangleSelector *t;
+
   _texture[0] = _driver->getTexture("./gfx/groundGrass.png");
   _texture[1] = _driver->getTexture("./gfx/wallBrick.png");
   _texture[2] = _driver->getTexture("./gfx/wallStone.png");
   _texture[3] = _driver->getTexture("./gfx/fire.png");
   scene::IAnimatedMesh *mesh = smgr->getMesh("./gfx/wallStone.obj");
   size = sqrt(map.size());
+  //camera->setTarget(core::vector3df(-70,30,-60));
+  irr::scene::ICameraSceneNode *cam = smgr->addCameraSceneNodeFPS();
   for (int j = 0; j < map.size(); j++)
     {
-      Block  b = is::Block(Vector3d(j / size, j % size, 0));
-      b.node = smgr->addAnimatedMeshSceneNode(mesh);
-      b.init((Type)map[j], _texture[map[j]], size);
+      Block b = is::Block(Vector3d(j / size, j % size, 0));
+      b.node = smgr->addOctreeSceneNode(mesh->getMesh(0), 0, 1);
+      t = smgr->createOctreeTriangleSelector(b.node->getMesh(), b.node);
+      b.node->setTriangleSelector(t);
+      b.init((Type) map[j], _texture[map[j]], size);
       _mapi.push_back(b);
     }
   initEffects();
@@ -29,7 +35,6 @@ is::map::map(video::IVideoDriver *driver, scene::ISceneManager *smgr,
   //Camera	cam(smgr, MENU);
   //cam.setMenuMode();
   //cam.setMenuMode();
-  smgr->addCameraSceneNodeFPS();
 
 //  moveObject(_mapi[10], Vector3d(10, 2, 10));
 //  delObject(_mapi[0]);
