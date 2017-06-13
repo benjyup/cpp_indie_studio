@@ -49,7 +49,8 @@ namespace is
     _opt = _engine->getOptions();
     _char[0] = std::make_shared<is::Character>(Character((_sceneManager->getMesh("./chef/tris.md2")), _driver->getTexture("./chef/chef.pcx"), _sceneManager, core::vector3df(3 * SCALE - SCALE / 2, SCALE, 2 * SCALE)));
     _char[1] = std::make_shared<is::Character>(Character((_sceneManager->getMesh("./chef/tris.md2")), _driver->getTexture("./chef/chef.pcx"), _sceneManager, core::vector3df(10 * SCALE, SCALE, 10 * SCALE)));
-    _powerUp = std::make_shared<is::PowerUp>(PowerUp((_sceneManager->getMesh("./powersUp/mushroom/supermushroom.obj")), _driver->getTexture("./powersUp/mushroom/t0081_0.png"), _sceneManager, core::vector3df(100, 0, 100)));
+    _powManager = std::make_shared<is::PowerUpManager>(PowerUpManager(*_sceneManager, *_driver));
+    _powManager->newPow();
     _receiver.init(_opt, _char);
     _engine->getDevice()->setEventReceiver(&_receiver);
     Vector3d	v(5 * SCALE + SCALE / 2 - SCALE, 0, 3 * SCALE + SCALE / 2 - SCALE);
@@ -57,8 +58,8 @@ namespace is
  //   Vector3d	v(3, 3, 1);
 //    _bomb->putBomb(v, 1);
     _bombs->putBomb({5, 3, 0}, 10000);
-    //Camera	cam(_sceneManager, MENU, _engine);
-    //cam.setSplashScreen();
+//      Camera	cam(_sceneManager, MENU, _engine);
+//    cam.setSplashScreen();
   }
 
   void Game::Cleanup(void)
@@ -80,7 +81,6 @@ namespace is
 
   void Game::Update(void)
   {
-      _powerUp->update();
   }
 
   void Game::Draw(void)

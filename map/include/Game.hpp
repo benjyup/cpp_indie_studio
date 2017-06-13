@@ -16,7 +16,7 @@
 #include "map.hpp"
 #include "ParseMap.hpp"
 #include "Bombs.hpp"
-#include "PowerUp.hpp"
+#include "PowerUpManager.hpp"
 
 namespace is
 {
@@ -44,7 +44,7 @@ namespace is
     std::shared_ptr<Bombs>			            _bomb;
     std::shared_ptr<BombsT>			            _bombs;
     std::array<std::shared_ptr<Character>, 2>	_char;
-    std::shared_ptr<PowerUp>                    _powerUp;
+      std::shared_ptr<is::PowerUpManager>       _powManager;
     Options					                    _opt;
     GameEventReceiver				            _receiver;
   };

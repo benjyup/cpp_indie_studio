@@ -18,7 +18,7 @@ namespace is
     public:
         PowerUp(irr::scene::IAnimatedMesh *,
                  irr::video::ITexture *,
-                 irr::scene::ISceneManager *,
+                 irr::scene::ISceneManager &,
                  irr::core::vector3df const &);
         ~PowerUp() {};
         void    update();
@@ -26,7 +26,7 @@ namespace is
 
         irr::scene::IAnimatedMeshSceneNode  *_mesh;
         irr::video::ITexture                *_text;
-        irr::scene::ISceneManager           *_smgr;
+        irr::scene::ISceneManager           &_smgr;
         irr::core::vector3df                _pos;
         irr::scene::IAnimatedMesh           *_node;
       //  std::vector<std::thread>            _pool;

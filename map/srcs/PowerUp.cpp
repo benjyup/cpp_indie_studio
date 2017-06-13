@@ -8,8 +8,8 @@
 
 is::PowerUp::PowerUp(irr::scene::IAnimatedMesh *node,
                     irr::video::ITexture *texture,
-                    irr::scene::ISceneManager *smgr,
-                    irr::core::vector3df const &pos) : _mesh(smgr->addAnimatedMeshSceneNode(node)),
+                    irr::scene::ISceneManager &smgr,
+                    irr::core::vector3df const &pos) : _mesh(smgr.addAnimatedMeshSceneNode(node)),
                                                        _text(texture),
                                                        _smgr(smgr),
                                                        _pos(pos)
@@ -27,21 +27,22 @@ is::PowerUp::PowerUp(irr::scene::IAnimatedMesh *node,
         _mesh->setRotation(irr::core::vector3df(0, 270, 0));
         _mesh->getMaterial(0).Lighting = true;
         _mesh->getMaterial(0).NormalizeNormals = true;
-        t = smgr->createTriangleSelector(_mesh);
+        t = smgr.createTriangleSelector(_mesh);
         _mesh->setTriangleSelector(t);
         t->drop();
     }
+  //  smgr->drop();
 }
 
 void is::PowerUp::update() {
     static int i;
 
-    if (i == 10)
-        _node->drop();
-    else
-    {
-        std::cout << "PowerUpManager Updated()" << std::endl;
-     //   sleep(1000);
-        i += 1;
-    }
+//    if (i == 10)
+//        //_node->remove();
+//    else
+//    {
+//        std::cout << "PowerUpManager Updated()" << std::endl;
+//       // sleep(1000);
+//        i += 1;
+//    }
 }
