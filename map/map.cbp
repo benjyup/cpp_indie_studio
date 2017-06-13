@@ -120,6 +120,9 @@
 		<Unit filename="/home/alice/rendu/cpp_indie_studio/map/include/PowerUp.hpp">
 			<Option target="cpp_indie_studio"/>
 		</Unit>
+		<Unit filename="/home/alice/rendu/cpp_indie_studio/map/include/PowerUpManager.hpp">
+			<Option target="cpp_indie_studio"/>
+		</Unit>
 		<Unit filename="/home/alice/rendu/cpp_indie_studio/map/include/Sound.hpp">
 			<Option target="cpp_indie_studio"/>
 		</Unit>
@@ -163,6 +166,9 @@
 			<Option target="cpp_indie_studio"/>
 		</Unit>
 		<Unit filename="/home/alice/rendu/cpp_indie_studio/map/srcs/PowerUp.cpp">
+			<Option target="cpp_indie_studio"/>
+		</Unit>
+		<Unit filename="/home/alice/rendu/cpp_indie_studio/map/srcs/PowerUpManager.cpp">
 			<Option target="cpp_indie_studio"/>
 		</Unit>
 		<Unit filename="/home/alice/rendu/cpp_indie_studio/map/srcs/Sound.cpp">

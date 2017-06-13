@@ -77,6 +77,7 @@ namespace is
 
   void Game::Update(void)
   {
+      _powerUp->update();
   }
 
   void Game::Draw(void)

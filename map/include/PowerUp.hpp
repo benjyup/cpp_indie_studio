@@ -8,6 +8,8 @@
 #include "Options.hpp"
 #include <string>
 #include <dirent.h>
+//#include <thread>
+//#include <vector>
 
 namespace is
 {
@@ -19,11 +21,15 @@ namespace is
                  irr::scene::ISceneManager *,
                  irr::core::vector3df const &);
         ~PowerUp() {};
+        void    update();
     private:
+
         irr::scene::IAnimatedMeshSceneNode  *_mesh;
         irr::video::ITexture                *_text;
         irr::scene::ISceneManager           *_smgr;
         irr::core::vector3df                _pos;
+        irr::scene::IAnimatedMesh           *_node;
+      //  std::vector<std::thread>            _pool;
     };
 }
 
