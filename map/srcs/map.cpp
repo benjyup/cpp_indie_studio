@@ -90,6 +90,19 @@ void 	is::map::delObject(Block &object)
   object.node->setPosition(v);
 }
 
+void 	is::map::delObject(Vector3d const &pos)
+{
+  int i = 0;
+  irr::core::vector3df v;
+  if ((i = find(pos)) == -1)
+    return ;
+  _mapi[i].node->setMaterialTexture(0, _texture[GRASS]);
+  v = _mapi[i].node->getPosition();
+  v.Y = -SCALE;
+  _mapi[i].type = GRASS;
+  _mapi[i].node->setPosition(v);
+}
+
 bool 	is::map::canIMoove2(Vector3d const &pos) const
 {
   int 		posi = 0;
