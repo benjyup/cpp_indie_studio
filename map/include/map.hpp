@@ -33,6 +33,7 @@ namespace is
     int 		find(Vector3d const &v) const;
     int			find(Block const &b) const;
     void		initEffects();
+    void		addCollision(scene::ISceneNode *);
   private:
     scene::ISceneManager *_smgr;
     video::IVideoDriver *_driver;
@@ -40,6 +41,7 @@ namespace is
     std::vector<int>						&_map;
     video::ITexture 						*_texture[4];
     int 							size;
+    std::vector<irr::scene::ITriangleSelector *>		_t;
   };
 }
 

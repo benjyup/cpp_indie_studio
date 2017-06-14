@@ -31,8 +31,8 @@ namespace  is
     ~Character() {}
     void 	moove(Options::MOVES const &);
     irr::core::vector3df    &getPos(){return _pos;}
-   private:
     scene::IAnimatedMeshSceneNode *_mesh;
+   private:
     video::ITexture *_text;
     scene::ISceneManager *_smgr;
     core::vector3df _pos;

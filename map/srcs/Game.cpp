@@ -49,8 +49,10 @@ namespace is
     _map = std::make_shared<is::map>(_driver, _sceneManager, mapi);
     _bombs = std::make_shared<is::Bombs>(*(_map.get()), *_driver, *_sceneManager);
     _opt = _engine->getOptions();
-    _char[0] = std::make_shared<is::Character>(Character((_sceneManager->getMesh("./chef/tris.md2")), _driver->getTexture("./chef/chef.pcx"), _sceneManager, core::vector3df(3 * SCALE - SCALE / 2, SCALE, 2 * SCALE)));
-    _char[1] = std::make_shared<is::Character>(Character((_sceneManager->getMesh("./chef/tris.md2")), _driver->getTexture("./chef/chef.pcx"), _sceneManager, core::vector3df(10 * SCALE, SCALE, 10 * SCALE)));
+    _char[0] = std::make_shared<is::Character>(Character((_sceneManager->getMesh("./chef/tris.md2")), _driver->getTexture("./chef/chef.pcx"), _sceneManager, core::vector3df(10 * SCALE + 7, 5, 10 * SCALE + 7)));
+    _map->addCollision(_char[0].get()->_mesh);
+    _char[1] = std::make_shared<is::Character>(Character((_sceneManager->getMesh("./chef/tris.md2")), _driver->getTexture("./chef/chef.pcx"), _sceneManager, core::vector3df(3 * SCALE - SCALE / 2, 5, 2 * SCALE)));
+    _map->addCollision(_char[1].get()->_mesh);
     _powManager = std::make_shared<is::PowerUpManager>(PowerUpManager(*_sceneManager, *_driver));
     _powManager->newPow();
     _receiver.init(_opt, _char);

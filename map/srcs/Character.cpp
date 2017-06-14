@@ -14,7 +14,7 @@ is::Character::Character(scene::IAnimatedMesh *node, video::ITexture *texture, s
   if (_mesh)
     {
       _mesh->setMaterialFlag(video::EMF_LIGHTING, false);
-     _mesh->setMD2Animation(scene::EMAT_RUN);
+      _mesh->setMD2Animation(scene::EMAT_RUN);
       _mesh->setScale(irr::core::vector3df(1, 1, 1));
       _mesh->setMaterialTexture(0, _text);
       _mesh->setPosition(pos);
