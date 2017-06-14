@@ -24,11 +24,14 @@ Camera::~Camera()
 void			Camera::setMenuMode()
 {
   irr::scene::ISceneNodeAnimator* anim = 0;
+  //setTextMenu();
   anim = _smgr->createFlyCircleAnimator(irr::core::vector3df(0,200,0), 400.0f, 0.0009f);
   _smgr->addCameraSceneNode(0, irr::core::vector3df(BLOCK / 2 * SCALE, 2000, BLOCK / 2 * 100),
 			   irr::core::vector3df(((0.5 + (BLOCK - 2)) * SCALE) / 2,
 						0.0f,
 						((0.5 + (BLOCK - 1)) * SCALE)) / 2)->addAnimator(anim);
+  //anim = _smgr->createFlyCircleAnimator(irr::core::vector3df(0,200,0), 300.0f, 0.0009f);
+  //_node->addAnimator(anim);
   anim->drop();
 }
 
@@ -70,6 +73,23 @@ void Camera::setAnimation3()
 					   _anim3Time, false, false);
   _camera->addAnimator(_anim);
 }
+
+void Camera::setTextMenu()
+{
+  _mesh = _smgr->getMesh("./gfx/bomberman3D.obj");
+  _node = _smgr->addAnimatedMeshSceneNode(_mesh);
+  if (_node)
+    {
+      _node->setMaterialFlag(irr::video::EMF_LIGHTING, false);
+      _node->setMD2Animation(scene::EMAT_STAND);
+      _node->setScale({10.0f, 10.0f, 10.0f});
+      _node->setRotation({0, 180, 0});
+      _node->setMaterialTexture( 0, _driver->getTexture("./gfx/fire.jpg"));
+      _node->setPosition(irr::core::vector3df(BLOCK / 2 * SCALE, 2000, BLOCK / 2 * 100));
+    }
+  _node->setVisible(1);
+}
+
 void Camera::setTextIntro()
 {
   _mesh = _smgr->getMesh("./gfx/indiestudio2.obj");

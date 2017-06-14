@@ -28,6 +28,7 @@ class Camera
   void					setSplashScreen();
 
   void 					setTextIntro();
+  void 					setTextMenu();
   void 					setAnimation1();
   void 					setAnimation2();
   void 					setAnimation3();
