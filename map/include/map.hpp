@@ -32,6 +32,7 @@ namespace is
     bool 		canIMoove(Vector3d const &pos) const;
     bool 		canIMoove2(Vector3d const &pos) const;
     int 		find(Vector3d const &v) const;
+    Block const		*findBlock(Vector3d const &v) const;
     int			find(Block const &b) const;
     void		initEffects();
     void		addCollision(scene::ISceneNode *);

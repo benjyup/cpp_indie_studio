@@ -59,6 +59,15 @@ void is::map::initEffects()
   _smgr->addSkyDomeSceneNode(_driver->getTexture("./gfx/space3.jpg"), 16, 16, 1.0f, 1.0f);
 }
 
+is::Block const	*is::map::findBlock(Vector3d const &v) const
+{
+  int 		i = 0;
+
+  if ((i = find(v) != -1))
+    return (&_mapi[i]);
+  return (NULL);
+}
+
 void	is::map::addCollision(irr::scene::ISceneNode *node)
 {
   for (auto const & i : _t)
