@@ -10,6 +10,7 @@
 #include "Character.hpp"
 #include "Vector3d.hpp"
 #include "Block.hpp"
+#include "Fire.hpp"
 
 # define SCALE	15
 # define BLOCK	15
@@ -40,6 +41,11 @@ namespace is
     std::vector<int>						&_map;
     video::ITexture 						*_texture[4];
     int 							size;
+
+    std::shared_ptr<Fire>			            _fire1;
+    std::shared_ptr<Fire>			            _fire2;
+    std::shared_ptr<Fire>			            _fire3;
+    std::shared_ptr<Fire>			            _fire4;
   };
 }
 
