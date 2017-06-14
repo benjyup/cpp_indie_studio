@@ -19,17 +19,18 @@ enum	CamMode
 class Camera
 {
  public:
-  Camera(irr::scene::ISceneManager* smgr, CamMode cameraMode, is::GameEngine *engine);
+  Camera(irr::scene::ISceneManager* smgr, irr::video::IVideoDriver *driver,
+	 CamMode cameraMode, is::GameEngine *engine);
   virtual ~Camera();
 
   void					setMenuMode();
   void					setInGameMode();
   void					setSplashScreen();
 
+  void 					setTextIntro();
   void 					setAnimation1();
   void 					setAnimation2();
   void 					setAnimation3();
-  void 					setAnimation4();
 
   irr::scene::ISceneManager 		*get_smgr() const;
 
@@ -41,6 +42,7 @@ class Camera
 
  private:
   irr::scene::ISceneManager*		_smgr;
+  irr::video::IVideoDriver		*_driver;
   CamMode 				_currMode;
   is::GameEngine			*_engine;
   irr::ITimer 				*_timer;
@@ -50,6 +52,8 @@ class Camera
   irr::u32 				_anim2Time;
   irr::u32 				_anim3Time;
   irr::u32 				_anim4Time;
+  irr::scene::IAnimatedMeshSceneNode*	_node;
+  irr::scene::IAnimatedMesh* 		_mesh;
 };
 
 #endif //MAP_CAMERA_HPP
