@@ -4,9 +4,16 @@
 
 #include <map.hpp>
 #include <iostream>
+#include <include/GameEventReceiver.hpp>
 
-is::Character::Character(scene::IAnimatedMesh *node, video::ITexture *texture, scene::ISceneManager * smgr, core::vector3df const & pos)
-		: _mesh(smgr->addAnimatedMeshSceneNode(node)), _text(texture), _smgr(smgr), _pos(pos), _speed(DEFAULT_SPEED), _bomb(DEFAULT_BOMB), _power(DEFAULT_POWER)
+is::Character::Character(scene::IAnimatedMesh *node, video::ITexture *texture,
+			 scene::ISceneManager * smgr,
+			 core::vector3df const & pos,
+			 const GameEventReceiver &receiver,
+			 const Options &opt)
+	: _mesh(smgr->addAnimatedMeshSceneNode(node)), _text(texture), _smgr(smgr), _pos(pos), _speed(DEFAULT_SPEED), _bomb(DEFAULT_BOMB), _power(DEFAULT_POWER),
+	  _receiver(receiver),
+	  _opt(opt)
 {
   irr::scene::ITriangleSelector	*t;
   video::SMaterial material;
@@ -30,54 +37,45 @@ is::Character::Character(scene::IAnimatedMesh *node, video::ITexture *texture, s
 
 }
 
-void		is::Character::moove(is::Options::MOVES const &moove)
+void		is::Character::moove()
 {
   irr::core::vector3df v;
 
   v = _mesh->getPosition();
-  switch (moove)
+  if (_receiver.isKeyDown(this->_opt.getP1Config().at(Options::MOVES::MOVE_UP)))
     {
-      case (Options::MOVES::MOVE_UP) :
+      if (_dir != is::Character::DIR::TOP)
 	{
-	  if (_dir != is::Character::DIR::TOP)
-	    {
-	      _mesh->setRotation(irr::core::vector3df(0, 270, 0));
-	      _dir = is::Character::DIR::TOP;
-	    }
-	  _mesh->setPosition(irr::core::vector3df(v.X, v.Y, v.Z + DEFAULT_SPEED));
+	  _mesh->setRotation(irr::core::vector3df(0, 270, 0));
+	  _dir = is::Character::DIR::TOP;
 	}
-      break;
-      case (Options::MOVES::MOVE_DOWN) :
+      _mesh->setPosition(irr::core::vector3df(v.X, v.Y, v.Z + DEFAULT_SPEED));
+    }
+  if (_receiver.isKeyDown(this->_opt.getP1Config().at(Options::MOVES::MOVE_DOWN)))
+    {
+      if (_dir != is::Character::DIR::DOWN)
 	{
-	  if (_dir != is::Character::DIR::DOWN)
-	    {
-	      _mesh->setRotation(irr::core::vector3df(0, 90, 0));
-	      _dir = is::Character::DIR::DOWN;
-	    }
-	  _mesh->setPosition(irr::core::vector3df(v.X, v.Y, v.Z - DEFAULT_SPEED));
+	  _mesh->setRotation(irr::core::vector3df(0, 90, 0));
+	  _dir = is::Character::DIR::DOWN;
 	}
-      break;
-      case (Options::MOVES::MOVE_RIGHT) :
+      _mesh->setPosition(irr::core::vector3df(v.X, v.Y, v.Z - DEFAULT_SPEED));
+    }
+  if (_receiver.isKeyDown(this->_opt.getP1Config().at(Options::MOVES::MOVE_RIGHT)))
+    {
+      if (_dir != is::Character::DIR::RIGHT)
 	{
-	  if (_dir != is::Character::DIR::RIGHT)
-	    {
-	      _mesh->setRotation(irr::core::vector3df(0, 0, 0));
-	      _dir = is::Character::DIR::RIGHT;
-	    }
-	  _mesh->setPosition(irr::core::vector3df(v.X + DEFAULT_SPEED, v.Y, v.Z));
+	  _mesh->setRotation(irr::core::vector3df(0, 0, 0));
+	  _dir = is::Character::DIR::RIGHT;
 	}
-      break;
-      case (Options::MOVES::MOVE_LEFT):
+      _mesh->setPosition(irr::core::vector3df(v.X + DEFAULT_SPEED, v.Y, v.Z));
+    }
+  if (_receiver.isKeyDown(this->_opt.getP1Config().at(Options::MOVES::MOVE_LEFT)))
+    {
+      if (_dir != is::Character::DIR::LEFT)
 	{
-	  if (_dir != is::Character::DIR::LEFT)
-	    {
-	      _mesh->setRotation(irr::core::vector3df(0, 180, 0));
-	      _dir = is::Character::DIR::LEFT;
-	    }
-	  _mesh->setPosition(irr::core::vector3df(v.X - DEFAULT_SPEED, v.Y, v.Z));
+	  _mesh->setRotation(irr::core::vector3df(0, 180, 0));
+	  _dir = is::Character::DIR::LEFT;
 	}
-      break;
-      default:
-	std::cout << "AUCUN" << std::endl;
+      _mesh->setPosition(irr::core::vector3df(v.X - DEFAULT_SPEED, v.Y, v.Z));
     }
 }

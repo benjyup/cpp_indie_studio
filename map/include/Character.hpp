@@ -7,6 +7,7 @@
 
 #include <string>
 #include "Options.hpp"
+#include "GameEventReceiver.hpp"
 
 using namespace irr;
 
@@ -27,9 +28,9 @@ namespace  is
     };
    public:
     Character(scene::IAnimatedMesh *node, video::ITexture *texture, scene::ISceneManager *smgr,
-	      core::vector3df const &pos);
+	      core::vector3df const &pos, const GameEventReceiver &receiver, const Options &opt);
     ~Character() {}
-    void 	moove(Options::MOVES const &);
+    void 	moove();
     irr::core::vector3df    &getPos(){return _pos;}
     scene::IAnimatedMeshSceneNode *_mesh;
    private:
@@ -39,6 +40,8 @@ namespace  is
     int _speed;
     int _bomb;
     int _power;
+    const GameEventReceiver &_receiver;
+    const Options	&_opt;
     DIR		_dir;
   };
 }

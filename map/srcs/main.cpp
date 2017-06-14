@@ -32,7 +32,7 @@ int 		main()
     {
       std::shared_ptr<is::GameEngine> engine = std::make_shared<is::GameEngine>("Indie Studio", 1024, 768, 0, false);
 
-      engine->ChangeState(new is::Game);
+      engine->PushState(new is::Game);
       engine->getDevice()->setResizable(true);
 
       while (engine->Running())

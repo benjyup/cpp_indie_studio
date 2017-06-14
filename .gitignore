@@ -8,3 +8,4 @@ cpp_indie_studio
 cmake_install.cmake
 Makefile
 *.o
+map.cbp

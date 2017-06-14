@@ -7,10 +7,10 @@
 
 #include <vector>
 #include <irrlicht.h>
-#include "Character.hpp"
 #include "Vector3d.hpp"
 #include "Block.hpp"
 #include "Fire.hpp"
+#include "Character.hpp"
 
 # define SCALE	15
 # define BLOCK	15

@@ -10,7 +10,6 @@
 
 #include <vector>
 #include <IGameState.hpp>
-#include <Character.hpp>
 #include "irrlicht.h"
 
 #ifdef _IRR_WINDOWS_
@@ -28,16 +27,14 @@ namespace is
     virtual bool 				OnEvent(const irr::SEvent& event);
     void					setDevice(irr::IrrlichtDevice *device);
     void					setEngine(GameEngine *engine);
-    void 	init(Options const & opt, std::array<std::shared_ptr<Character>, 2> const &Char);
+
+    virtual bool 					isKeyDown(irr::EKEY_CODE keyCode) const;
 
    private:
     irr::IrrlichtDevice					*_device;
     GameEngine						*_engine;
     std::vector<std::shared_ptr<IGameState>> 		_states;
-    Options						_opt;
-    std::map<Options::MOVES, irr::EKEY_CODE>	_p1_conf;
-    std::map<Options::MOVES, irr::EKEY_CODE>	_p2_conf;
-    std::array<std::shared_ptr<Character>, 2>		_char;
+    std::array<bool, irr::KEY_KEY_CODES_COUNT>		_keys;
   };
 }
 
