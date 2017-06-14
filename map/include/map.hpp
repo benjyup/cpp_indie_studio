@@ -10,6 +10,7 @@
 #include "Character.hpp"
 #include "Vector3d.hpp"
 #include "Block.hpp"
+#include "Fire.hpp"
 
 # define SCALE	15
 # define BLOCK	15
@@ -42,6 +43,11 @@ namespace is
     video::ITexture 						*_texture[4];
     int 							size;
     std::vector<irr::scene::ITriangleSelector *>		_t;
+
+    std::shared_ptr<Fire>			            _fire1;
+    std::shared_ptr<Fire>			            _fire2;
+    std::shared_ptr<Fire>			            _fire3;
+    std::shared_ptr<Fire>			            _fire4;
   };
 }
 
