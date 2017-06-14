@@ -21,7 +21,7 @@ namespace is
                  irr::scene::ISceneManager &,
                  irr::core::vector3df const &);
         ~PowerUp() {};
-        void    update();
+        void    update(irr::core::vector3df &vec);
     private:
 
         irr::scene::IAnimatedMeshSceneNode  *_mesh;

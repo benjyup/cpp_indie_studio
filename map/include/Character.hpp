@@ -30,7 +30,7 @@ namespace  is
 	      core::vector3df const &pos);
     ~Character() {}
     void 	moove(Options::MOVES const &);
-
+    irr::core::vector3df    &getPos(){return _pos;}
    private:
     scene::IAnimatedMeshSceneNode *_mesh;
     video::ITexture *_text;

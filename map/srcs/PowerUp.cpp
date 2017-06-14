@@ -4,6 +4,7 @@
 
 #include <unistd.h>
 #include <iostream>
+#include <include/Character.hpp>
 #include "PowerUp.hpp"
 
 is::PowerUp::PowerUp(irr::scene::IAnimatedMesh *node,
@@ -31,18 +32,10 @@ is::PowerUp::PowerUp(irr::scene::IAnimatedMesh *node,
         _mesh->setTriangleSelector(t);
         t->drop();
     }
-  //  smgr->drop();
 }
 
-void is::PowerUp::update() {
-    static int i;
-
-//    if (i == 10)
-//        //_node->remove();
-//    else
-//    {
-//        std::cout << "PowerUpManager Updated()" << std::endl;
-//       // sleep(1000);
-//        i += 1;
-//    }
+void is::PowerUp::update(irr::core::vector3df &vec) {
+    if ((vec.X > _pos.X - 10 && vec.X < _pos.X + 10) &&
+            (vec.Y > _pos.Y - 10 && vec.Y < _pos.Y + 10))
+        _mesh->remove();
 }

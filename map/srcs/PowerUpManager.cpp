@@ -17,3 +17,7 @@ void is::PowerUpManager::newPow() {
                                                            _driver.getTexture("./powersUp/mushroom/t0081_0.png"),
                                                            _sceneManager, irr::core::vector3df(100, 0, 100))));
 }
+
+void is::PowerUpManager::update(irr::core::vector3df &pos) {
+    _powUp[0]->update(pos);
+}
