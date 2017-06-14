@@ -10,13 +10,13 @@
 
 #include <vector>
 #include <iostream>
-#include <include/Bombs.hpp>
+#include <include/BombsManager.hpp>
 #include <mutex>
 #include "IGameState.hpp"
 #include "GameEventReceiver.hpp"
 #include "map.hpp"
 #include "ParseMap.hpp"
-#include "Bombs.hpp"
+#include "BombsManager.hpp"
 #include "PowerUpManager.hpp"
 
 
@@ -46,7 +46,7 @@ namespace is
     irr::gui::IGUIEnvironment			        *_gui;
     GameEngine 					                *_engine;
     std::shared_ptr<map>			            _map;
-    std::shared_ptr<Bombs>			            _bombs;
+    std::shared_ptr<BombsManager>			            _bombs;
     std::array<std::shared_ptr<Character>, 2>	_char;
       std::shared_ptr<is::PowerUpManager>       _powManager;
     Options					                    _opt;

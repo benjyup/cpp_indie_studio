@@ -12,11 +12,11 @@
 
 namespace is
 {
-  class Bombs
+  class BombsManager
   {
    public:
-    Bombs(is::map &map, irr::video::IVideoDriver &videoDriver, irr::scene::ISceneManager &sceneManager);
-    ~Bombs();
+    BombsManager(is::map &map, irr::video::IVideoDriver &videoDriver, irr::scene::ISceneManager &sceneManager);
+    ~BombsManager();
 
     void 			putBomb(const irr::core::vector3df &pos, int power);
 
@@ -28,12 +28,10 @@ namespace is
     irr::scene::IAnimatedMesh 			*_mesh;
     std::vector<std::thread>			_threads;
     std::vector<is::Bomb>			_bombs;
-//    std::function<void(const irr::core::vector3df &, int)> 	_explosion;
-    std::function<void(is::Bomb &)> 		_explosion;
-
-    int 					reducePower(irr::core::vector3df pos,
-							   int power,
-							   const std::function<void(irr::core::vector3df &)> &callback);
+    std::function<void(is::Bomb &,
+		       std::vector<std::thread> &,
+		       std::vector<is::Bomb> &)> 		_explosion;
+    std::mutex					_bomb_mutex;
   };
 }
 

@@ -25,9 +25,9 @@ set(SOURCE_FILES
         srcs/PlanetSystem.cpp
         srcs/Vector3d.cpp
         srcs/Sound.cpp
-        srcs/Bombs.cpp
+        srcs/BombsManager.cpp
         srcs/Bomb.cpp
-        include/Bombs.hpp
+        include/BombsManager.hpp
         include/Sound.hpp
         ../src/GameEngine.cpp
         ../src/GameState.cpp

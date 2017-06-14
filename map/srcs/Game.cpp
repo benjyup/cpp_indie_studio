@@ -47,7 +47,7 @@ namespace is
     this->_engine->getDevice()->getCursorControl()->setVisible(false);
     mapi = _parserMap.getVector();
     _map = std::make_shared<is::map>(_driver, _sceneManager, mapi);
-    _bombs = std::make_shared<is::Bombs>(*(_map.get()), *_driver, *_sceneManager);
+    _bombs = std::make_shared<is::BombsManager>(*(_map.get()), *_driver, *_sceneManager);
     _opt = _engine->getOptions();
     _char[0] = std::make_shared<is::Character>(Character((_sceneManager->getMesh("./chef/tris.md2")), _driver->getTexture("./chef/chef.pcx"), _sceneManager, core::vector3df(10 * SCALE + 7, 5, 10 * SCALE + 7)));
     _map->addCollision(_char[0].get()->_mesh);

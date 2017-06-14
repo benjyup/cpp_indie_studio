@@ -20,6 +20,9 @@ namespace is
   class Bomb
   {
    public:
+
+    static unsigned int			ID;
+
     Bomb(map &map, irr::video::ITexture *texture, irr::scene::IAnimatedMesh *bombMesh,
 	 const irr::core::vector3df &posMap, int power,
 	 irr::video::IVideoDriver &videoDriver, irr::scene::ISceneManager &sceneManager);
@@ -32,19 +35,29 @@ namespace is
 
     void blowUp();
 
-    int reducePower(irr::core::vector3df pos,
-		    int power,
-		    const std::function<void(irr::core::vector3df &)> &callback);
+    bool operator==(const Bomb &rhs) const;
+
+    bool operator!=(const Bomb &rhs) const;
+    Bomb				&operator=(const Bomb &o);
 
 
    private:
-    irr::core::vector3df _posMap;
-    irr::core::vector3df _posSpace;
-    int _power;
-    is::map &_map;
-    irr::video::IVideoDriver &_videoDriver;
-    irr::scene::ISceneManager &_sceneManager;
-    irr::scene::IAnimatedMeshSceneNode *_node;
+    unsigned int			_id;
+    irr::core::vector3df 		_posMap;
+    irr::core::vector3df 		_posSpace;
+    int 				_power;
+    is::map 				&_map;
+    irr::video::IVideoDriver 		&_videoDriver;
+    irr::scene::ISceneManager 		&_sceneManager;
+    irr::scene::IAnimatedMeshSceneNode 	*_node;
+    bool 				_alreadyBlowUp;
+
+
+    void 				_makeFire();
+    int 				_reducePower(irr::core::vector3df pos,
+						    int power,
+						    const std::function<void(irr::core::vector3df &)> &callback);
+
   };
 }
 
