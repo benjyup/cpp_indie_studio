@@ -7,6 +7,10 @@
 
 
 #include <ITexture.h>
+#include <thread>
+#include <mutex>
+#include "map.hpp"
+#include "IndieStudioException.hpp"
 #include "Fire.hpp"
 #include "map.hpp"
 

@@ -2,9 +2,7 @@
 // Created by vincent on 13/06/17.
 //
 
-#include <map.hpp>
-#include <IndieStudioException.hpp>
-#include <thread>
+#include <include/Game.hpp>
 #include "Bomb.hpp"
 
 is::Bomb::Bomb(is::map &map, irr::video::ITexture *texture, irr::scene::IAnimatedMesh *bombMesh, const irr::core::vector3df &posMap, int power,
@@ -53,6 +51,7 @@ void is::Bomb::blowUp()
   Fire fire_left(&this->_sceneManager, &this->_videoDriver, this->_posSpace, FireDirection::LEFT,
 		 this->reducePower(posMap, this->_power, [&](irr::core::vector3df &pos) {pos.Z -= 1;}));
   std::this_thread::sleep_for(std::chrono::operator""ms(2000));
+  std::unique_lock<std::mutex> lock(Game::DRAW_MUTEX);
   this->_node->remove();
 }
 
