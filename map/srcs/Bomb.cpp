@@ -43,7 +43,6 @@ void is::Bomb::remove()
 void is::Bomb::blowUp()
 {
   this->_makeFire();
-
   std::unique_lock<std::mutex> lock(Game::DRAW_MUTEX);
   this->_node->remove();
 }
@@ -66,6 +65,7 @@ void is::Bomb::_makeFire()
   Fire fire_left(&this->_sceneManager, &this->_videoDriver, this->_posSpace, FireDirection::LEFT,
 		 this->_reducePower(posMap, this->_power, [&](irr::core::vector3df &pos) { pos.Z -= 1; }));
   std::this_thread::sleep_for(std::chrono::operator""ms(2000));
+  std::unique_lock<std::mutex> lock(Game::DRAW_MUTEX);
 }
 
 int 			is::Bomb::_reducePower(irr::core::vector3df pos,
@@ -82,7 +82,6 @@ int 			is::Bomb::_reducePower(irr::core::vector3df pos,
       //std::cout << "pos.x = " << pos.X << " pos.y = " << pos.Y << " pos.z = " << pos.Z<< std::endl;
       ret += 1;
     }
-
   //std::cout << "ret = " << ret << std::endl;
   return ret;
 }

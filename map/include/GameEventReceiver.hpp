@@ -28,7 +28,7 @@ namespace is
     void					setDevice(irr::IrrlichtDevice *device);
     void					setEngine(GameEngine *engine);
 
-    virtual bool 					isKeyDown(irr::EKEY_CODE keyCode) const;
+    bool 					isKeyDown(irr::EKEY_CODE keyCode) const;
 
    private:
     irr::IrrlichtDevice					*_device;

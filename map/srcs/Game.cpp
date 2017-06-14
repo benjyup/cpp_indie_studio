@@ -9,23 +9,23 @@
 #include "PlanetSystem.hpp"
 
 static std::vector<int>        mapi; // =
-	// {
-	// 	1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-	// 	1, 0, 0, 2, 2, 0, 0, 0, 0, 0, 2, 2, 0, 0, 1,
-	// 	1, 0, 1, 0, 1, 0, 1, 2, 1, 0, 1, 0, 1, 0, 1,
-	// 	1, 2, 1, 2, 1, 0, 0, 2, 0, 0, 0, 0, 1, 2, 1,
-	// 	1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1,
-	// 	1, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 1,
-	// 	1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1,
-	// 	1, 2, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 2, 1,
-	// 	1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1,
-	// 	1, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 1,
-	// 	1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1,
-	// 	1, 2, 1, 0, 2, 0, 0, 2, 0, 0, 0, 0, 1, 2, 1,
-	// 	1, 0, 1, 0, 1, 0, 1, 2, 1, 0, 0, 0, 1, 0, 1,
-	// 	1, 0, 0, 2, 2, 0, 0, 2, 0, 0, 2, 2, 0, 0, 1,
-	// 	1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
-	// };
+// {
+// 	1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+// 	1, 0, 0, 2, 2, 0, 0, 0, 0, 0, 2, 2, 0, 0, 1,
+// 	1, 0, 1, 0, 1, 0, 1, 2, 1, 0, 1, 0, 1, 0, 1,
+// 	1, 2, 1, 2, 1, 0, 0, 2, 0, 0, 0, 0, 1, 2, 1,
+// 	1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1,
+// 	1, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 1,
+// 	1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1,
+// 	1, 2, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 2, 1,
+// 	1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1,
+// 	1, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 1,
+// 	1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1,
+// 	1, 2, 1, 0, 2, 0, 0, 2, 0, 0, 0, 0, 1, 2, 1,
+// 	1, 0, 1, 0, 1, 0, 1, 2, 1, 0, 0, 0, 1, 0, 1,
+// 	1, 0, 0, 2, 2, 0, 0, 2, 0, 0, 2, 2, 0, 0, 1,
+// 	1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
+// };
 
 namespace is
 {
@@ -58,9 +58,9 @@ namespace is
     _engine->getDevice()->setEventReceiver(&_receiver);
     Vector3d	v(5 * SCALE + SCALE / 2 - SCALE, 0, 3 * SCALE + SCALE / 2 - SCALE);
     //_bomb = std::make_shared<is::Bombs>(_map.get(), _driver, _sceneManager);
- //   Vector3d	v(3, 3, 1);
+    //   Vector3d	v(3, 3, 1);
     //_bomb->putBomb(v, 1);
-      //_bombs->putBomb({6, 3, 0}, 10000);
+    _bombs->putBomb({6, 3, 0}, 10000);
     //Camera	cam(_sceneManager, MENU, _engine);
     //cam.setSplashScreen();
   }
@@ -84,19 +84,16 @@ namespace is
 
   void Game::Update(void)
   {
-      _powManager->update(_char[0]->getPos());
-      _powManager->update(_char[1]->getPos());
+    _powManager->update(_char[0]->getPos());
+    _powManager->update(_char[1]->getPos());
   }
 
   void Game::Draw(void)
   {
-    unsigned int i;
+    std::unique_lock<std::mutex> lock(DRAW_MUTEX);
     this->_driver->beginScene();
     this->_char[0]->moove();
-    {
-      std::unique_lock<std::mutex> lock(DRAW_MUTEX);
-      _sceneManager->drawAll();
-    }
+    _sceneManager->drawAll();
     this->_driver->endScene();
   }
 
