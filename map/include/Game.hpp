@@ -18,7 +18,7 @@
 #include "ParseMap.hpp"
 #include "BombsManager.hpp"
 #include "PowerUpManager.hpp"
-
+#include "Character.hpp"
 
 namespace is
 {

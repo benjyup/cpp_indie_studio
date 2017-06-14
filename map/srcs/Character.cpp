@@ -2,18 +2,17 @@
 // Created by kyxo on 5/30/17.
 //
 
-#include <map.hpp>
-#include <iostream>
-#include "GameEventReceiver.hpp"
+#include "Character.hpp"
 
 is::Character::Character(scene::IAnimatedMesh *node, video::ITexture *texture,
 			 scene::ISceneManager * smgr,
 			 core::vector3df const & pos,
 			 const GameEventReceiver &receiver,
-			 const Options &opt)
+			 const Options &opt,
+			 BombsManager &bombsManager)
 	: _mesh(smgr->addAnimatedMeshSceneNode(node)), _text(texture), _smgr(smgr), _pos(pos), _speed(DEFAULT_SPEED), _bomb(DEFAULT_BOMB), _power(DEFAULT_POWER),
 	  _receiver(receiver),
-	  _opt(opt)
+	  _opt(opt), _bombsManager(bombsManager)
 {
   irr::scene::ITriangleSelector	*t;
   video::SMaterial material;
@@ -78,4 +77,6 @@ void		is::Character::moove()
 	}
       _mesh->setPosition(irr::core::vector3df(v.X - DEFAULT_SPEED, v.Y, v.Z));
     }
+  if (_receiver.isKeyDown(this->_opt.getP1Config().at(Options::MOVES::MOVE_ACTION)))
+      _bombsManager.putBomb({6, 3, 0}, 2);
 }

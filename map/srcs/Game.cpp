@@ -2,11 +2,7 @@
 // Created by kyxo on 5/24/17.
 //
 
-#include "Camera.hpp"
 #include "Game.hpp"
-#include "Fire.hpp"
-#include "map.hpp"
-#include "PlanetSystem.hpp"
 
 static std::vector<int>        mapi; // =
 // {
@@ -49,9 +45,11 @@ namespace is
     _map = std::make_shared<is::map>(_driver, _sceneManager, mapi);
     _bombs = std::make_shared<is::BombsManager>(*(_map.get()), *_driver, *_sceneManager);
     _opt = _engine->getOptions();
-    _char[0] = std::make_shared<is::Character>(_sceneManager->getMesh("./chef/tris.md2"), _driver->getTexture("./chef/chef.pcx"), _sceneManager, core::vector3df(10 * SCALE + 7, 5, 10 * SCALE + 7), _receiver, _opt);
+    _char[0] = std::make_shared<is::Character>(_sceneManager->getMesh("./chef/tris.md2"), _driver->getTexture("./chef/chef.pcx"), _sceneManager, core::vector3df(10 * SCALE + 7, 5, 10 * SCALE + 7), _receiver, _opt,
+    *_bombs.get());
     _map->addCollision(_char[0].get()->_mesh);
-    _char[1] = std::make_shared<is::Character>(_sceneManager->getMesh("./chef/tris.md2"), _driver->getTexture("./chef/chef.pcx"), _sceneManager, core::vector3df(3 * SCALE - SCALE / 2, 5, 2 * SCALE), _receiver, _opt);
+    _char[1] = std::make_shared<is::Character>(_sceneManager->getMesh("./chef/tris.md2"), _driver->getTexture("./chef/chef.pcx"), _sceneManager, core::vector3df(3 * SCALE - SCALE / 2, 5, 2 * SCALE), _receiver, _opt,
+    *_bombs.get());
     _map->addCollision(_char[1].get()->_mesh);
     _powManager = std::make_shared<is::PowerUpManager>(PowerUpManager(*_sceneManager, *_driver));
     _powManager->newPow();
