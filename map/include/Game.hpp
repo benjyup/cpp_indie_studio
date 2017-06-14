@@ -11,6 +11,7 @@
 #include <vector>
 #include <iostream>
 #include <include/Bombs.hpp>
+#include <mutex>
 #include "IGameState.hpp"
 #include "GameEventReceiver.hpp"
 #include "map.hpp"
@@ -24,6 +25,9 @@ namespace is
   class Game : public IGameState
   {
    public:
+
+    static std::mutex					DRAW_MUTEX;
+
     Game();
     virtual ~Game();
     virtual void Init(GameEngine *engine);

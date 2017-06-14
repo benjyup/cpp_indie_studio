@@ -29,6 +29,9 @@ static std::vector<int>        mapi; // =
 
 namespace is
 {
+
+  std::mutex					Game::DRAW_MUTEX;
+
   Game::Game(): _parserMap("map01.txt")
   {}
 
@@ -88,7 +91,10 @@ namespace is
   {
     unsigned int i;
     this->_driver->beginScene();
-    _sceneManager->drawAll();
+    {
+      std::unique_lock<std::mutex> lock(DRAW_MUTEX);
+      _sceneManager->drawAll();
+    }
     this->_driver->endScene();
   }
 
