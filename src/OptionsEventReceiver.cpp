@@ -62,6 +62,8 @@ void is::OptionsEventReceiver::_guiEvent(const irr::SEvent &event)
 		  this->_optionsContext->engine->getOptions().setP1config(this->_optionsContext->player1ConfigTmp);
 		  this->_optionsContext->engine->getOptions().setP2config(this->_optionsContext->player2ConfigTmp);
 		} catch (const is::IndieStudioException &e) {
+			irr::gui::IGUIFont            *font = this->_optionsContext->engine->getGuiEnv()->getFont("./gfx/font_space.bmp");
+			this->_optionsContext->errorMsg->setOverrideFont(font);
 		  this->_optionsContext->errorMsg->setText(irr::core::stringw(e.what()).c_str());
 		  return ;
 		}

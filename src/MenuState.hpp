@@ -1,5 +1,5 @@
 //
-// greg
+// vincent mesquita
 //
 
 #pragma once
@@ -11,13 +11,23 @@
 #include "Button.hpp"
 #include "MenuEventReceiver.hpp"
 #include "IndieStudioException.hpp"
+#include "ParseMap.hpp"
+
+#include <mutex>
+#include "BombsManager.hpp"
+#include "map.hpp"
+#include "ParseMap.hpp"
+#include "PowerUpManager.hpp"
+#include "GameEventReceiver.hpp"
+
 
 namespace is
 {
-  class MenuState : public IGameState
+  class                       MenuState : public IGameState
   {
    public:
-	    MenuState();
+   static std::mutex					DRAW_MUTEX;
+	  MenuState();
     virtual ~MenuState();
     virtual void Init(GameEngine *engine);
     virtual void Cleanup(void);
@@ -46,6 +56,13 @@ namespace is
     irr::gui::IGUIStaticText			*_errorMsg;
     irr::gui::IGUIFont            *_font;
 
+    ParseMap	    				        _parserMap;
+    std::shared_ptr<map>			            _map;
+    std::shared_ptr<BombsManager>			            _bombs;
+    std::array<std::shared_ptr<Character>, 2>	_char;
+    std::shared_ptr<is::PowerUpManager>       _powManager;
+    Options					                    _opt;
+    GameEventReceiver				            _receiver;
     void					drawButtons();
   };
 }

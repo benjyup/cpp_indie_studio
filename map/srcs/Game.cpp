@@ -2,7 +2,7 @@
 // Created by kyxo on 5/24/17.
 //
 
-#include <include/Camera.hpp>
+#include "Camera.hpp"
 #include "Game.hpp"
 #include "Fire.hpp"
 #include "map.hpp"

@@ -4,7 +4,7 @@
 
 #include <unistd.h>
 #include <iostream>
-#include <include/Character.hpp>
+#include "Character.hpp"
 #include "PowerUp.hpp"
 
 is::PowerUp::PowerUp(irr::scene::IAnimatedMesh *node,

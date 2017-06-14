@@ -4,7 +4,7 @@
 
 #include <map.hpp>
 #include <iostream>
-#include <include/GameEventReceiver.hpp>
+#include "GameEventReceiver.hpp"
 
 is::Character::Character(scene::IAnimatedMesh *node, video::ITexture *texture,
 			 scene::ISceneManager * smgr,

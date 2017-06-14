@@ -10,8 +10,8 @@
 
 #include <vector>
 #include <iostream>
-#include <include/BombsManager.hpp>
 #include <mutex>
+#include "BombsManager.hpp"
 #include "IGameState.hpp"
 #include "GameEventReceiver.hpp"
 #include "map.hpp"

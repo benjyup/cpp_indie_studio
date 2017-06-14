@@ -6,6 +6,7 @@
 #include "MenuState.hpp"
 #include "GameState.hpp"
 #include "OptionsState.hpp"
+#include "ScoreEnd.hpp"
 
 is::MenuEventReceiver::MenuEventReceiver() : _device(NULL)
 {
@@ -26,7 +27,7 @@ bool 		is::MenuEventReceiver::OnEvent(const irr::SEvent &event)
 	{
 	  case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_PLAY_BUTTON):
 	    {
-	      this->_engine->PushState(new GameState);
+	      this->_engine->PushState(new ScoreEnd);
 	    }
 	  break;
 	  case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_OPTIONS_BUTTON):
