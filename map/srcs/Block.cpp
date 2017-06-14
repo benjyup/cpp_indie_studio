@@ -26,10 +26,11 @@ namespace is
     node->setMaterialFlag(irr::video::EMF_LIGHTING, false);
 //    printf("pos : %d\nvector : %d\n", pos % size, this->pos.getY());
     type = t;
-    if (type == Type::GRASS)
-      node->setPosition(irr::core::vector3df(this->pos.getX() * SCALE, -SCALE,
-					       (this->pos.getY()) * SCALE));
-    else
+    if (type == Type::GRASS) {
+      node->remove();
+      return;
+    }
+      else
       node->setPosition(irr::core::vector3df((this->pos.getX()) * SCALE, 0,
 					       (this->pos.getY()) * SCALE));
     node->setMaterialTexture(0, text);

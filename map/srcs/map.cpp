@@ -18,6 +18,7 @@ is::map::map(video::IVideoDriver *driver, scene::ISceneManager *smgr,
   _texture[2] = _driver->getTexture("./gfx/wallStone.png");
   _texture[3] = _driver->getTexture("./gfx/fire.png");
   scene::IAnimatedMesh *mesh = smgr->getMesh("./gfx/wallStone.obj");
+  irr::scene::IAnimatedMesh *ground = smgr->getMesh("./gfx/blocks1.obj");
   size = sqrt(map.size());
   //camera->setTarget(core::vector3df(-70,30,-60));
   irr::scene::ICameraSceneNode *cam = smgr->addCameraSceneNodeFPS();
