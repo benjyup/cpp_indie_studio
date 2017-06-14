@@ -8,8 +8,6 @@
 #include "map.hpp"
 #include "PlanetSystem.hpp"
 
-static std::vector<int>        mapi;
-
 namespace is
 {
   std::mutex					MenuState::DRAW_MUTEX;
@@ -50,23 +48,8 @@ namespace is
 	    { engine->getWindowSize().X / 2 - BUTTON_WIDTH / 2, 15 + BUTTON_HEIGHT * 2, engine->getWindowSize().X / 2 + BUTTON_WIDTH / 2, 15 + BUTTON_HEIGHT * 3, (irr::s32)Button::GUI_ID_BOUTON::GUI_ID_QUIT_BUTTON, L"Quit", L"Quit the game" },
      };
 
-    mapi = _parserMap.getVector();
-    _map = std::make_shared<is::map>(_driver, _sceneManager, mapi);
-    _bombs = std::make_shared<is::BombsManager>(*(_map.get()), *_driver, *_sceneManager);
-    _opt = _engine->getOptions();
-    //_char[0] = std::make_shared<is::Character>(Character((_sceneManager->getMesh("./chef/tris.md2")), _driver->getTexture("./chef/chef.pcx"), _sceneManager, core::vector3df(10 * SCALE + 7, 5, 10 * SCALE + 7)));
-    //_map->addCollision(_char[0].get()->_mesh);
-    //_char[1] = std::make_shared<is::Character>(Character((_sceneManager->getMesh("./chef/tris.md2")), _driver->getTexture("./chef/chef.pcx"), _sceneManager, core::vector3df(3 * SCALE - SCALE / 2, 5, 2 * SCALE)));
-    //_map->addCollision(_char[1].get()->_mesh);
-    //_powManager = std::make_shared<is::PowerUpManager>(PowerUpManager(*_sceneManager, *_driver));
-    //_powManager->newPow();
-    //_receiver.init(_opt, _char);
-    //_engine->getDevice()->setEventReceiver(&_receiver);
-    //Vector3d	v(5 * SCALE + SCALE / 2 - SCALE, 0, 3 * SCALE + SCALE / 2 - SCALE);
-    //_bomb = std::make_shared<is::BombsManager>(_map.get(), _driver, _sceneManager);
-    //Vector3d	v(3, 3, 1);
-    //_bomb->putBomb(v, 1);
-    //_bombs->putBomb({6, 3, 0}, 10000);
+    _mapi = _parserMap.getVector();
+    _map = std::make_shared<is::map>(_driver, _sceneManager, _mapi);
     Camera	cam(_sceneManager, this->_driver, MENU, _engine);
     cam.setMenuMode();
 

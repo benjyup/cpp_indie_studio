@@ -38,5 +38,6 @@ namespace           is // tester le vite !
     void            PauseState::Resume()
     {
         this->_engine->getDevice()->setEventReceiver(&this->_PauseEventReceiver);
+        this->drawButtons();
     }
 }
