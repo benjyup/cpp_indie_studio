@@ -26,6 +26,8 @@ namespace is
     node->setMaterialFlag(irr::video::EMF_LIGHTING, false);
 //    printf("pos : %d\nvector : %d\n", pos % size, this->pos.getY());
     type = t;
+    if (type == Type::BREAK)
+      std::cerr << "JE RAJOUTES UN BREAK " << std::endl;
     if (type == Type::GRASS)
       node->setPosition(irr::core::vector3df(this->pos.getX() * SCALE, -SCALE,
 					       (this->pos.getY()) * SCALE));

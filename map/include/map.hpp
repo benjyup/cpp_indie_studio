@@ -43,7 +43,7 @@ namespace is
    private:
     scene::ISceneManager *_smgr;
     video::IVideoDriver *_driver;
-    std::vector<Block> 	_mapi;
+    std::vector<Block> 						_mapi;
     std::vector<int>						&_map;
     video::ITexture 						*_texture[4];
     int 							size;

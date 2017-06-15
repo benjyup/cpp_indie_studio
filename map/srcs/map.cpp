@@ -18,6 +18,7 @@ is::map::map(video::IVideoDriver *driver, scene::ISceneManager *smgr,
   scene::IAnimatedMesh *mesh = smgr->getMesh("./gfx/wallStone.obj");
   size = sqrt(map.size());
   irr::scene::ICameraSceneNode *cam = smgr->addCameraSceneNodeFPS();
+  int i  = 0;
   for (int j = 0; j < map.size(); j++)
     {
       Block b = is::Block(Vector3d(j / size, j % size, 0));
@@ -26,6 +27,8 @@ is::map::map(video::IVideoDriver *driver, scene::ISceneManager *smgr,
       b.node->setTriangleSelector(_t.back());
       b.init((Type) map[j], _texture[map[j]], size);
       _mapi.push_back(b);
+      std::cout << "map[" << i << "] = " << map[j] << std::endl;
+      i++;
     }
   initEffects();
 
@@ -70,7 +73,7 @@ is::Block const	*is::map::findBlock(Vector3d const &v) const
 {
   int 		i = 0;
 
-  if ((i = find(v) != -1))
+  if ((i = find(v)) != -1)
     return (&_mapi[i]);
   return (NULL);
 }
@@ -192,7 +195,7 @@ void 	is::map::addObject(int t, Vector3d const &pos)
   int i = 0;
   irr::core::vector3df v;
 
-  if ((i = find(pos)) == -1 || _mapi[i].type != Type::GRASS)
+  if ((i = find(pos)) == -1)
     {
       std::cout << "Can't add Block, Already something there" << std::endl;
       return ;
@@ -217,6 +220,6 @@ void	is::map::draw()
   _planetR->draw();
   _planetW->draw();
   for (auto it = _mapi.begin(); it != _mapi.end(); it++){
-      	it->draw();
+      it->draw();
     }
 }

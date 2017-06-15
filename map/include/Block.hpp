@@ -31,8 +31,8 @@ namespace is
     void 	draw();
 
    private:
-    friend class map;
-    scene::IMeshSceneNode	*node;
+    friend class 			map;
+    scene::IMeshSceneNode		*node;
     Vector3d				pos;
     Type 				type;
   };

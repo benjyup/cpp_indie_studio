@@ -9,7 +9,7 @@ unsigned int			is::Bomb::ID = 0;
 
 
 is::Bomb::Bomb(is::map &map, irr::video::ITexture *texture, irr::scene::IAnimatedMesh *bombMesh, const irr::core::vector3df &posMap, int power,
-	   irr::video::IVideoDriver &videoDriver, irr::scene::ISceneManager &sceneManager) :
+	       irr::video::IVideoDriver &videoDriver, irr::scene::ISceneManager &sceneManager) :
 	_id(ID++),
 	_posMap(posMap),
 	_posSpace(posMap.Y * SCALE - SCALE / 2, 0.55 * SCALE, posMap.X * SCALE + SCALE / 2),
@@ -20,16 +20,7 @@ is::Bomb::Bomb(is::map &map, irr::video::ITexture *texture, irr::scene::IAnimate
 	_alreadyBlowUp(false),
 	_start_clock(std::clock()),
 	_state(BOMB_PLANTED),
-	fire_forward(&this->_sceneManager, &this->_videoDriver, this->_posSpace, FireDirection::FORWARD,
-		     this->_reducePower(posMap, this->_power, [&](irr::core::vector3df &pos) { pos.X += 1; })),
-	fire_backward(&this->_sceneManager, &this->_videoDriver, this->_posSpace, FireDirection::BACKWARD,
-		     this->_reducePower(posMap, this->_power, [&](irr::core::vector3df &pos) { pos.X -= 1; })),
-	fire_right(&this->_sceneManager, &this->_videoDriver, this->_posSpace, FireDirection::RIGHT,
-		     this->_reducePower(posMap, this->_power, [&](irr::core::vector3df &pos) { pos.Y += 1; })),
-	fire_left(&this->_sceneManager, &this->_videoDriver, this->_posSpace, FireDirection::LEFT,
-		     this->_reducePower(posMap, this->_power, [&](irr::core::vector3df &pos) { pos.Y -= 1; }))
-
-
+	_fires()
 {
   if (!(this->_node = this->_sceneManager.addAnimatedMeshSceneNode(bombMesh)))
     throw is::IndieStudioException("Error on loading bomb.");
@@ -37,7 +28,6 @@ is::Bomb::Bomb(is::map &map, irr::video::ITexture *texture, irr::scene::IAnimate
   this->_node->setScale({0.5f * SCALE, 0.5f * SCALE, 0.5f * SCALE});
   std::cerr << "Bomb() id = " << this->_id << std::endl;
   std::cout << "Bomb pos.x = " << posMap.X << " pos.y = " << posMap.Y << " pos.Z = " << posMap.Z << std::endl;
-
 }
 
 is::Bomb::~Bomb()
@@ -63,24 +53,14 @@ bool is::Bomb::blowUp()
 
   if (this->_state == BOMB_PLANTED && duration == ((_id == 0) ? (2) : (5)))
     {
-      std::cout << "BOOOOOOOM" << std::endl;
-      //this->_makeFire();
-      //this->_node->remove();
       this->_state = FIRE;
-      this->fire_forward.startFire();
-      this->fire_backward.startFire();
-      this->fire_right.startFire();
-      this->fire_left.startFire();
+      this->_startFires();
+      this->_node->remove();
       this->_start_clock = std::clock();
-      return (false);
     }
   else if (this->_state == FIRE && duration == 2)
       {
-	std::cout << "FEU ETEINT" << std::endl;
-	this->fire_forward.stopFire();
-	this->fire_backward.stopFire();
-	this->fire_right.stopFire();
-	this->fire_left.stopFire();
+	this->_stopFires();
 	return (true);
       }
   return (false);
@@ -97,11 +77,13 @@ int 			is::Bomb::_reducePower(irr::core::vector3df pos,
   std::cout << "pos.x = " << pos.X << " pos.y = " << pos.Y << " pos.z = " << pos.Z<< std::endl;
   while (this->_map.canIMoove(is::Vector3d(pos.X, pos.Y, pos.Z)) && ret < power)
     {
-      //std::cout << "pos.x = " << pos.X << " pos.y = " << pos.Y << " pos.z = " << pos.Z<< std::endl;
       callback(pos);
-      //std::cout << "pos.x = " << pos.X << " pos.y = " << pos.Y << " pos.z = " << pos.Z<< std::endl;
       ret += 1;
     }
+  const Block *b;
+  if ((b = this->_map.findBlock({pos.X, pos.Y, pos.Z}))->getType() == is::Type::BREAK)
+    this->_blocksToDelete.emplace_back(pos.X, pos.Y, pos.Z);
+
   std::cout << "ret = " << ret << std::endl;
   std::cerr << "_reducPower" << std::endl;
   return ret;
@@ -126,3 +108,27 @@ bool is::Bomb::operator!=(const is::Bomb &rhs) const
   return !(rhs == *this);
 }
 
+void is::Bomb::_startFires()
+{
+  this->_fires.emplace_back(&this->_sceneManager, &this->_videoDriver, this->_posSpace, FireDirection::FORWARD,
+			    this->_reducePower(this->_posMap, this->_power, [&](irr::core::vector3df &pos) { pos.X += 1; }));
+  this->_fires.emplace_back(&this->_sceneManager, &this->_videoDriver, this->_posSpace, FireDirection::BACKWARD,
+			    this->_reducePower(this->_posMap, this->_power, [&](irr::core::vector3df &pos) { pos.X -= 1; }));
+  this->_fires.emplace_back(&this->_sceneManager, &this->_videoDriver, this->_posSpace, FireDirection::RIGHT,
+			    this->_reducePower(this->_posMap, this->_power, [&](irr::core::vector3df &pos) { pos.Y += 1; }));
+  this->_fires.emplace_back(&this->_sceneManager, &this->_videoDriver, this->_posSpace, FireDirection::LEFT,
+			    this->_reducePower(this->_posMap, this->_power, [&](irr::core::vector3df &pos) { pos.Y -= 1; }));
+  std::for_each(this->_fires.begin(), this->_fires.end(), [](Fire &fire) {
+    fire.startFire();
+  });
+  std::for_each(this->_blocksToDelete.begin(), this->_blocksToDelete.end(), [&](auto pos) {
+    this->_map.delObject(pos);
+  });
+}
+
+void is::Bomb::_stopFires()
+{
+  std::for_each(this->_fires.begin(), this->_fires.end(), [](Fire &fire) {
+    fire.stopFire();
+  });
+}

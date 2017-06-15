@@ -57,16 +57,14 @@ namespace is
     bool 				_alreadyBlowUp;
     std::clock_t			_start_clock;
     t_state 				_state;
+    std::list<Fire>			_fires;
+    std::list<Vector3d>			_blocksToDelete;
 
-    Fire fire_forward;
-    Fire fire_backward;
-    Fire fire_right;
-    Fire fire_left;
-    void 				_makeFire();
     int 				_reducePower(irr::core::vector3df pos,
 						    int power,
 						    const std::function<void(irr::core::vector3df &)> &callback);
-
+    void				_startFires();
+    void				_stopFires();
   };
 }
 
