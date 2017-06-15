@@ -35,15 +35,15 @@ namespace is
     void 			Init(SOptionsContext *optionsContext);
 
    private:
-    SOptionsContext					*_optionsContext;
-    bool 						_getKey;
-    Button::GUI_ID_BOUTON 				_keyToChange;
-
+    SOptionsContext					  *_optionsContext;
+    bool 						          _getKey;
+    Button::GUI_ID_BOUTON 	  _keyToChange;
 
     std::map<is::Options::MOVES, irr::EKEY_CODE> 	&_getPlayerConfig(irr::s8 player);
     void 						_refresh();
     void 						_guiEvent(const irr::SEvent &event);
     void 						_keyEvent(const irr::SEvent &event);
     void 						_initConfig(void);
+    void            _initTexture();
   };
 }

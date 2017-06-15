@@ -3,6 +3,7 @@
 //
 
 #include <iostream>
+#include <unistd.h>
 #include "OptionsEventReceiver.hpp"
 #include "IndieStudioException.hpp"
 
@@ -62,9 +63,7 @@ void is::OptionsEventReceiver::_guiEvent(const irr::SEvent &event)
 		  this->_optionsContext->engine->getOptions().setP1config(this->_optionsContext->player1ConfigTmp);
 		  this->_optionsContext->engine->getOptions().setP2config(this->_optionsContext->player2ConfigTmp);
 		} catch (const is::IndieStudioException &e) {
-			irr::gui::IGUIFont            *font = this->_optionsContext->engine->getGuiEnv()->getFont("./gfx/font_space.bmp");
-			this->_optionsContext->errorMsg->setOverrideFont(font);
-		  this->_optionsContext->errorMsg->setText(irr::core::stringw(e.what()).c_str());
+			this->_optionsContext->errorMsg->setText(irr::core::stringw(e.what()).c_str());
 		  return ;
 		}
 	      this->_optionsContext->engine->PopState();
@@ -72,10 +71,10 @@ void is::OptionsEventReceiver::_guiEvent(const irr::SEvent &event)
 	  break;
 	  default:
 	    {
-	      event.GUIEvent.Caller->setText(PRESS_KEY.c_str());
-	      this->_getKey = true;
+				event.GUIEvent.Caller->setID((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_PRESS_BUTTON);
+				this->_getKey = true;
 	      this->_keyToChange = Button::GUI_ID_BOUTON(buttonID);
-	    }
+				}
 	}
     }
 }

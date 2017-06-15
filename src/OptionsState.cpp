@@ -5,25 +5,14 @@
 #include "OptionsState.hpp"
 #include "IndieStudioException.hpp"
 
-
-const std::vector<irr::core::stringw>		is::OptionsState::NAME_OF_ACTIONS = {
-	"Put a bomb",
-	"Move forward",
-	"Move backward",
-	"Move right",
-	"Move left",
-};
-
 is::OptionsState::OptionsState() :
 	MenuState(),
 	_optionsEventReceiver()
 {
-
 }
 
 is::OptionsState::~OptionsState()
 {
-  std::cout << "DESTRUCTEUR DE OPTION STATE" << std::endl;
 }
 
 void is::OptionsState::Init(is::GameEngine *engine)
@@ -53,53 +42,105 @@ void is::OptionsState::Init(is::GameEngine *engine)
 	this->_optionsContext.name = std::string("Player " + std::to_string(this->_optionsContext.player));
 	
   this->_buttons = {
-	  {
-		  windowSize.X / 2 - MenuState::BUTTON_WIDTH / 2,
+		//---------------CORRESPONDANCE
+		  {
+		  windowSize.X / 2 - MenuState::BUTTON_WIDTH / 2 + 130,
 		  15,
-		  windowSize.X / 2 + BUTTON_WIDTH / 2,
+		  windowSize.X / 2 + BUTTON_WIDTH / 2 + 130,
 		  15 + BUTTON_HEIGHT,
 		  (irr::s32) Button::GUI_ID_BOUTON::GUI_ID_MOVE_ACTION_BUTTON,
-		  this->_options.keyToString<irr::core::stringw>(getPlayerConfig(this->_optionsContext.player).at(Options::MOVES::MOVE_ACTION)).c_str()//
+			""
+		  //this->_options.keyToString<irr::core::stringw>(getPlayerConfig(this->_optionsContext.player).at(Options::MOVES::MOVE_ACTION)).c_str()//
 	  },
 	  {
-		  windowSize.X / 2 - MenuState::BUTTON_WIDTH / 2,
+		  windowSize.X / 2 - MenuState::BUTTON_WIDTH / 2 + 130,
 		  15 + BUTTON_HEIGHT,
-		  windowSize.X / 2 + BUTTON_WIDTH / 2,
+		  windowSize.X / 2 + BUTTON_WIDTH / 2 + 130,
 		  15 + BUTTON_HEIGHT * 2,
 		  (irr::s32) Button::GUI_ID_BOUTON::GUI_ID_MOVE_FORWARD_BUTTON,
-		  this->_options.keyToString<irr::core::stringw>(getPlayerConfig(this->_optionsContext.player).at(Options::MOVES::MOVE_UP)).c_str()
+			""
+		  //this->_options.keyToString<irr::core::stringw>(getPlayerConfig(this->_optionsContext.player).at(Options::MOVES::MOVE_UP)).c_str()
 	  },
 	  {
-		  windowSize.X / 2 - MenuState::BUTTON_WIDTH / 2,
+		  windowSize.X / 2 - MenuState::BUTTON_WIDTH / 2 + 130,
 		  15 + BUTTON_HEIGHT * 2,
-		  windowSize.X / 2 + BUTTON_WIDTH / 2,
+		  windowSize.X / 2 + BUTTON_WIDTH / 2 + 130,
 		  15 + BUTTON_HEIGHT * 3,
 		  (irr::s32) Button::GUI_ID_BOUTON::GUI_ID_MOVE_BACKWARD_BUTTON,
-		  this->_options.keyToString<irr::core::stringw>(getPlayerConfig(this->_optionsContext.player).at(Options::MOVES::MOVE_DOWN)).c_str()
+			""
+		  //this->_options.keyToString<irr::core::stringw>(getPlayerConfig(this->_optionsContext.player).at(Options::MOVES::MOVE_DOWN)).c_str()
 	  },
 	  {
-		  windowSize.X / 2 - MenuState::BUTTON_WIDTH / 2,
+		  windowSize.X / 2 - MenuState::BUTTON_WIDTH / 2 + 130,
 		  15 + BUTTON_HEIGHT * 3,
-		  windowSize.X / 2 + BUTTON_WIDTH / 2,
+		  windowSize.X / 2 + BUTTON_WIDTH / 2 + 130,
 		  15 + BUTTON_HEIGHT * 4,
 		  (irr::s32) Button::GUI_ID_BOUTON::GUI_ID_MOVE_RIGHT_BUTTON,
-		  this->_options.keyToString<irr::core::stringw>(getPlayerConfig(this->_optionsContext.player).at(Options::MOVES::MOVE_RIGHT)).c_str()
+			""
+		  //this->_options.keyToString<irr::core::stringw>(getPlayerConfig(this->_optionsContext.player).at(Options::MOVES::MOVE_RIGHT)).c_str()
 	  },
 	  {
-		  windowSize.X / 2 - MenuState::BUTTON_WIDTH / 2,
+		  windowSize.X / 2 - MenuState::BUTTON_WIDTH / 2 + 130,
 		  15 + BUTTON_HEIGHT * 4,
-		  windowSize.X / 2 + BUTTON_WIDTH / 2,
+		  windowSize.X / 2 + BUTTON_WIDTH / 2 + 130,
 		  15 + BUTTON_HEIGHT * 5,
 		  (irr::s32) Button::GUI_ID_BOUTON::GUI_ID_MOVE_LEFT_BUTTON,
-		  this->_options.keyToString<irr::core::stringw>(getPlayerConfig(this->_optionsContext.player).at(Options::MOVES::MOVE_LEFT)).c_str()
+			""
+		  //this->_options.keyToString<irr::core::stringw>(getPlayerConfig(this->_optionsContext.player).at(Options::MOVES::MOVE_LEFT)).c_str()
+	  },
+		//------------FIN
+	  {
+		  windowSize.X / 2 - MenuState::BUTTON_WIDTH / 2 - 130,
+		  15,
+		  windowSize.X / 2 + BUTTON_WIDTH / 2 - 130,
+		  15 + BUTTON_HEIGHT,
+		  (irr::s32) Button::GUI_ID_BOUTON::GUI_ID_MOVE_ACTION_BUTTON,
+			""
+		  //this->_options.keyToString<irr::core::stringw>(getPlayerConfig(this->_optionsContext.player).at(Options::MOVES::MOVE_ACTION)).c_str()//
 	  },
 	  {
+		  windowSize.X / 2 - MenuState::BUTTON_WIDTH / 2 - 130,
+		  15 + BUTTON_HEIGHT,
+		  windowSize.X / 2 + BUTTON_WIDTH / 2 - 130,
+		  15 + BUTTON_HEIGHT * 2,
+		  (irr::s32) Button::GUI_ID_BOUTON::GUI_ID_MOVE_FORWARD_BUTTON,
+			""
+		  //this->_options.keyToString<irr::core::stringw>(getPlayerConfig(this->_optionsContext.player).at(Options::MOVES::MOVE_UP)).c_str()
+	  },
+	  {
+		  windowSize.X / 2 - MenuState::BUTTON_WIDTH / 2 - 130,
+		  15 + BUTTON_HEIGHT * 2,
+		  windowSize.X / 2 + BUTTON_WIDTH / 2 - 130,
+		  15 + BUTTON_HEIGHT * 3,
+		  (irr::s32) Button::GUI_ID_BOUTON::GUI_ID_MOVE_BACKWARD_BUTTON,
+			""
+		  //this->_options.keyToString<irr::core::stringw>(getPlayerConfig(this->_optionsContext.player).at(Options::MOVES::MOVE_DOWN)).c_str()
+	  },
+	  {
+		  windowSize.X / 2 - MenuState::BUTTON_WIDTH / 2 - 130,
+		  15 + BUTTON_HEIGHT * 3,
+		  windowSize.X / 2 + BUTTON_WIDTH / 2 - 130,
+		  15 + BUTTON_HEIGHT * 4,
+		  (irr::s32) Button::GUI_ID_BOUTON::GUI_ID_MOVE_RIGHT_BUTTON,
+			""
+		  //this->_options.keyToString<irr::core::stringw>(getPlayerConfig(this->_optionsContext.player).at(Options::MOVES::MOVE_RIGHT)).c_str()
+	  },
+	  {
+		  windowSize.X / 2 - MenuState::BUTTON_WIDTH / 2 - 130,
+		  15 + BUTTON_HEIGHT * 4,
+		  windowSize.X / 2 + BUTTON_WIDTH / 2 - 130,
+		  15 + BUTTON_HEIGHT * 5,
+		  (irr::s32) Button::GUI_ID_BOUTON::GUI_ID_MOVE_LEFT_BUTTON,
+			""
+		  //this->_options.keyToString<irr::core::stringw>(getPlayerConfig(this->_optionsContext.player).at(Options::MOVES::MOVE_LEFT)).c_str()
+	  },
+		{
 		  windowSize.X - 20 - MenuState::BUTTON_WIDTH,
 		  windowSize.Y - BUTTON_HEIGHT - 20,
 		  windowSize.X - 20,
 		  windowSize.Y - 20,
 		  (irr::s32) Button::GUI_ID_BOUTON::GUI_ID_APPLY_BUTTON,
-		  ""
+			""
 	  },
 	  {
 		  windowSize.X - 20 - MenuState::BUTTON_WIDTH * 2,
@@ -120,23 +161,11 @@ void is::OptionsState::Init(is::GameEngine *engine)
   };
 	this->initTexture();
   this->drawButtons();
-  this->drawNameActions();
 }
 
 void is::OptionsState::Resume(void)
 {
   this->_engine->getDevice()->setEventReceiver(&this->_optionsEventReceiver);
-}
-
-void 			is::OptionsState::drawNameActions()
-{	
-  for (std::size_t i = 0 ; i < 5 ; i += 1)
-    {
-			irr::gui::IGUIStaticText *text = this->_gui->addStaticText(NAME_OF_ACTIONS.at(i).c_str(),
-						      {this->_buttons[i].getX() - 100, this->_buttons[i].getY() + 30,this->_buttons[i].getX() + 50, this->_buttons[i].getY() + 60});
-			text->setOverrideFont(this->_font);
-			this->_text.push_back(text);
-    }
 }
 
 std::map<is::Options::MOVES, irr::EKEY_CODE> is::OptionsState::getPlayerConfig(irr::s8 player)

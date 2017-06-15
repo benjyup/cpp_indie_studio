@@ -23,12 +23,9 @@ namespace is
     virtual void 					Resume(void);
 
    private:
-    static const std::vector<irr::core::stringw>	NAME_OF_ACTIONS;
     Options						_options;
     OptionsEventReceiver				_optionsEventReceiver;
     OptionsEventReceiver::SOptionsContext		_optionsContext;
-
-    void 						drawNameActions();
     std::map<Options::MOVES, irr::EKEY_CODE>		getPlayerConfig(irr::s8 player);
   };
 }

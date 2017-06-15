@@ -32,6 +32,7 @@ namespace is
       GUI_ID_MENU_BUTTON,
       GUI_ID_RESUME_BUTTON,
       GUI_ID_WALLPAPER_BUTTON,
+      GUI_ID_PRESS_BUTTON,
       GUI_ID_LENGTH,
     };
 
@@ -60,7 +61,6 @@ namespace is
 
     const irr::core::stringw	getText() const;
     const irr::core::stringw	getHint() const;
-
    private:
     irr::s32			_x;
     irr::s32			_x2;
