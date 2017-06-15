@@ -83,3 +83,8 @@ void	Fire::setScale(irr::core::vector3df scale)
 {
   _ps->setScale(scale);
 }
+
+void Fire::draw()
+{
+  _ps->render();
+}
