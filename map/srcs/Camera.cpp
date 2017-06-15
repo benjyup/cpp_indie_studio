@@ -25,7 +25,7 @@ void			Camera::setMenuMode()
 {
   irr::scene::ISceneNodeAnimator* anim = 0;
   //setTextMenu();
-  anim = _smgr->createFlyCircleAnimator(irr::core::vector3df(0,200,0), 400.0f, 0.0009f);
+  anim = _smgr->createFlyCircleAnimator(irr::core::vector3df(0,200,0), 400.0f, 0.0003f);
   _smgr->addCameraSceneNode(0, irr::core::vector3df(BLOCK / 2 * SCALE, 2000, BLOCK / 2 * 100),
 			   irr::core::vector3df(((0.5 + (BLOCK - 2)) * SCALE) / 2,
 						0.0f,
