@@ -99,7 +99,7 @@ void is::OptionsState::Init(is::GameEngine *engine)
 		  windowSize.X - 20,
 		  windowSize.Y - 20,
 		  (irr::s32) Button::GUI_ID_BOUTON::GUI_ID_APPLY_BUTTON,
-		  "Apply"
+		  ""
 	  },
 	  {
 		  windowSize.X - 20 - MenuState::BUTTON_WIDTH * 2,
@@ -107,7 +107,7 @@ void is::OptionsState::Init(is::GameEngine *engine)
 		  windowSize.X - 30 - MenuState::BUTTON_WIDTH,
 		  windowSize.Y - 20,
 		  (irr::s32) Button::GUI_ID_BOUTON::GUI_ID_CANCEL_BUTTON,
-		  "Cancel"
+		  ""
 	  },
 	  {
 		  20,
@@ -118,6 +118,7 @@ void is::OptionsState::Init(is::GameEngine *engine)
 			irr::core::stringw(this->_optionsContext.name.c_str())
 	  }
   };
+	this->initTexture();
   this->drawButtons();
   this->drawNameActions();
 }

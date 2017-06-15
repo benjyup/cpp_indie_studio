@@ -11,7 +11,7 @@
 namespace is
 {
   std::mutex					MenuState::DRAW_MUTEX;
-  const irr::io::path		MenuState::WALLPAPER = "./gfx/menuWallpaper.png";
+  const irr::io::path		MenuState::WALLPAPER = "./ButtonGFX/bomberman3dtitle.png";
   const irr::s32		MenuState::BUTTON_WIDTH = 250;
   const irr::s32		MenuState::BUTTON_HEIGHT = 75;
   
@@ -36,26 +36,47 @@ namespace is
     this->_menuEventReceiver.setEngine(this->_engine);
     this->_engine->getDevice()->setEventReceiver(&this->_menuEventReceiver);
 
-    if (!(this->_wallpaper = _engine->getDriver()->getTexture(WALLPAPER)))
-      throw IndieStudioException();
+    //if (!(this->_wallpaper = _engine->getDriver()->getTexture(WALLPAPER)))
+      //throw IndieStudioException();
     if (!(this->_errorMsg = this->_gui->addStaticText(L"", irr::core::rect<irr::s32>(100, 300, 300, 400))))
       throw IndieStudioException("Not able to init the error message.");
     if (_gui != NULL)
      this->_font = _gui->getFont("./gfx/font_space.bmp");
     this->_buttons = {
-	    { engine->getWindowSize().X / 2 - BUTTON_WIDTH / 2, 15, engine->getWindowSize().X / 2 + BUTTON_WIDTH / 2, 15 + BUTTON_HEIGHT, (irr::s32)Button::GUI_ID_BOUTON::GUI_ID_PLAY_BUTTON, L"PLay", L"Launch the game" },
-	    { engine->getWindowSize().X / 2 - BUTTON_WIDTH / 2, 15 + BUTTON_HEIGHT, engine->getWindowSize().X / 2 + BUTTON_WIDTH / 2, 15 + BUTTON_HEIGHT * 2, (irr::s32)Button::GUI_ID_BOUTON::GUI_ID_OPTIONS_BUTTON, L"Options", L"Configure the game" },
-	    { engine->getWindowSize().X / 2 - BUTTON_WIDTH / 2, 15 + BUTTON_HEIGHT * 2, engine->getWindowSize().X / 2 + BUTTON_WIDTH / 2, 15 + BUTTON_HEIGHT * 3, (irr::s32)Button::GUI_ID_BOUTON::GUI_ID_QUIT_BUTTON, L"Quit", L"Quit the game" },
+	    { engine->getWindowSize().X / 2 - BUTTON_WIDTH / 2, engine->getWindowSize().Y - BUTTON_HEIGHT * 4 - 45, engine->getWindowSize().X / 2 + BUTTON_WIDTH / 2, engine->getWindowSize().Y - BUTTON_HEIGHT * 3 - 30, (irr::s32)Button::GUI_ID_BOUTON::GUI_ID_PLAY_BUTTON, L"", L"Launch the game" },
+	    { engine->getWindowSize().X / 2 - BUTTON_WIDTH / 2, engine->getWindowSize().Y - BUTTON_HEIGHT * 3 - 30, engine->getWindowSize().X / 2 + BUTTON_WIDTH / 2, engine->getWindowSize().Y - BUTTON_HEIGHT * 2 - 15, (irr::s32)Button::GUI_ID_BOUTON::GUI_ID_OPTIONS_BUTTON, L"", L"Configure the game" },
+	    { engine->getWindowSize().X / 2 - BUTTON_WIDTH / 2, engine->getWindowSize().Y - BUTTON_HEIGHT * 2 - 15, engine->getWindowSize().X / 2 + BUTTON_WIDTH / 2, engine->getWindowSize().Y - BUTTON_HEIGHT, (irr::s32)Button::GUI_ID_BOUTON::GUI_ID_QUIT_BUTTON, L"", L"Quit the game"},
+      { engine->getWindowSize().X / 2 - 545 / 2, 30, engine->getWindowSize().X / 2 + 575 / 2, 375, (irr::s32)Button::GUI_ID_BOUTON::GUI_ID_WALLPAPER_BUTTON, L"", L"WALLPAPER"},
      };
-
     _mapi = _parserMap.getVector();
     _map = std::make_shared<is::map>(_driver, _sceneManager, _mapi);
     Camera	cam(_sceneManager, this->_driver, MENU, _engine);
     cam.setMenuMode();
-
+    this->initTexture();
     this->drawButtons();
   }
 
+  void MenuState::initTexture()
+  {
+    if (this->_driver)
+     {
+      this->_pathButton[Button::GUI_ID_BOUTON::GUI_ID_PLAY_BUTTON] = this->_driver->getTexture("./ButtonGFX/playbutton.png");
+      this->_pathButton[Button::GUI_ID_BOUTON::GUI_ID_OPTIONS_BUTTON] = this->_driver->getTexture("./ButtonGFX/optionsbutton.png");
+      this->_pathButton[Button::GUI_ID_BOUTON::GUI_ID_QUIT_BUTTON] = this->_driver->getTexture("./ButtonGFX/quitbutton.png");
+      this->_pathButton[Button::GUI_ID_BOUTON::GUI_ID_APPLY_BUTTON] = this->_driver->getTexture("./ButtonGFX/applybutton.png");
+      this->_pathButton[Button::GUI_ID_BOUTON::GUI_ID_CANCEL_BUTTON] = this->_driver->getTexture("./ButtonGFX/cancelbutton.png");
+      this->_pathButton[Button::GUI_ID_BOUTON::GUI_ID_MOVE_ACTION_BUTTON] = this->_driver->getTexture("./ButtonGFX/putabombbutton.png");//manque
+      this->_pathButton[Button::GUI_ID_BOUTON::GUI_ID_MOVE_FORWARD_BUTTON] = this->_driver->getTexture("./ButtonGFX/moveforwardbutton.png");
+      this->_pathButton[Button::GUI_ID_BOUTON::GUI_ID_MOVE_BACKWARD_BUTTON] = this->_driver->getTexture("./ButtonGFX/movebackwardbutton.png");
+      this->_pathButton[Button::GUI_ID_BOUTON::GUI_ID_MOVE_RIGHT_BUTTON] = this->_driver->getTexture("./ButtonGFX/moverightbutton.png");
+      this->_pathButton[Button::GUI_ID_BOUTON::GUI_ID_MOVE_LEFT_BUTTON] = this->_driver->getTexture("./ButtonGFX/moveleftbutton.png");
+      this->_pathButton[Button::GUI_ID_BOUTON::GUI_ID_CHANGE_PLAYER_BUTTON] = this->_driver->getTexture("./ButtonGFX/p1button.png");
+      this->_pathButton[Button::GUI_ID_BOUTON::GUI_ID_REPLAY_BUTTON] = this->_driver->getTexture("./ButtonGFX/playbutton.png");// manque
+      this->_pathButton[Button::GUI_ID_BOUTON::GUI_ID_MENU_BUTTON] = this->_driver->getTexture("./ButtonGFX/menubutton.png");
+      this->_pathButton[Button::GUI_ID_BOUTON::GUI_ID_RESUME_BUTTON] = this->_driver->getTexture("./ButtonGFX/resumebutton.png");
+      this->_pathButton[Button::GUI_ID_BOUTON::GUI_ID_WALLPAPER_BUTTON] = this->_driver->getTexture("./ButtonGFX/bomberman3dtitle.png"); 
+     }
+  }
   void MenuState::Cleanup(void)
   {
   }
@@ -81,9 +102,6 @@ namespace is
   void MenuState::Draw(void)
   {
     this->_driver->beginScene();
-    if (this->_wallpaper)
-      this->_driver->draw2DImage(this->_wallpaper, irr::core::vector2d<irr::s32>(0, 0));
-
     {
       std::unique_lock<std::mutex> lock(DRAW_MUTEX);
       _sceneManager->drawAll();
@@ -95,6 +113,8 @@ namespace is
     for (auto &button : this->_buttons)
       {
         button->setOverrideFont(this->_font);
+        button->setImage(this->_pathButton[(Button::GUI_ID_BOUTON)button.getId()]);
+        button->setScaleImage(true);
         button->draw();
       }
     this->_errorMsg->draw();
@@ -124,7 +144,7 @@ void is::MenuState::drawButtons()
       if (i != irr::gui::EGDC_BUTTON_TEXT)
       {
         irr::video::SColor col = _gui->getSkin()->getColor((irr::gui::EGUI_DEFAULT_COLOR)i);
-        col.set(50, 43, 50, 251);
+        col.set(0, 43, 50, 251);
         _gui->getSkin()->setColor((irr::gui::EGUI_DEFAULT_COLOR)i, col);
       }
       else

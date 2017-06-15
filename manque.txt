@@ -1,0 +1,3 @@
+move action button
+player two
+replay

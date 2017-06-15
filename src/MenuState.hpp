@@ -6,6 +6,7 @@
 
 #include <vector>
 #include <iostream>
+#include <map>
 #include "IGameState.hpp"
 #include "GameEngine.hpp"
 #include "Button.hpp"
@@ -54,6 +55,8 @@ namespace                                       is
     std::vector<int>                            _mapi;
     ParseMap	    				                      _parserMap;
     std::shared_ptr<map>			                  _map;
+    std::map<Button::GUI_ID_BOUTON, irr::video::ITexture*> _pathButton;
     void					                              drawButtons();
+    void                                        initTexture();
   };
 }

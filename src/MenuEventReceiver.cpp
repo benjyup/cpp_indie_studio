@@ -40,8 +40,8 @@ bool 		is::MenuEventReceiver::OnEvent(const irr::SEvent &event)
 	      this->_engine->Quit();
 	  break;
 	  default:
-	    std::cout << "AUCUN" << std::endl;
-	}
+		break;
+		}
     }
   else if (event.EventType == irr::EET_KEY_INPUT_EVENT && event.KeyInput.Key == irr::KEY_ESCAPE)
       this->_device->closeDevice();

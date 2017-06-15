@@ -28,10 +28,11 @@ namespace is
       GUI_ID_PLAY_BUTTON,
       GUI_ID_OPTIONS_BUTTON,
       GUI_ID_QUIT_BUTTON,
-      GUI_ID_LENGTH,
       GUI_ID_REPLAY_BUTTON,
       GUI_ID_MENU_BUTTON,
-      GUI_ID_RESUME_BUTTON
+      GUI_ID_RESUME_BUTTON,
+      GUI_ID_WALLPAPER_BUTTON,
+      GUI_ID_LENGTH,
     };
 
     static const std::map<GUI_ID_BOUTON, Options::MOVES>	BUTTON_TO_MOVE;
