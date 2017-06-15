@@ -15,6 +15,7 @@ const std::map<is::Button::GUI_ID_BOUTON, is::Options::MOVES>	is::Button::BUTTON
 
 is::Button::Button(const irr::s32 x, const irr::s32 y, const irr::s32 x2, const irr::s32 y2, const irr::s32 id,
 		   const irr::core::stringw text, const irr::core::stringw hint) :
+	_press(0),
 	_x(x),
 	_y(y),
 	_x2(x2),
@@ -28,6 +29,7 @@ is::Button::Button(const irr::s32 x, const irr::s32 y, const irr::s32 x2, const 
 }
 
 is::Button::Button(const is::Button &other) :
+	_press(0),
 	_x(other._x),
 	_y(other._y),
 	_x2(other._x2),
@@ -47,6 +49,7 @@ is::Button::~Button()
 
 is::Button &is::Button::operator=(const is::Button &other)
 {
+	this->_press = 0;
   this->_x = other._x;
   this->_y = other._y;
   this->_x2 = other._x2;
@@ -101,4 +104,19 @@ void is::Button::set(irr::gui::IGUIButton *button)
 irr::gui::IGUIButton *is::Button::operator->() const
 {
   return (this->_button);
+}
+
+int 										is::Button::getPress() const 
+{
+	return (this->_press);
+}
+
+void 										is::Button::setPress(int press)
+{
+	_press = press;
+}
+
+irr::gui::IGUIButton			*is::Button::getButton() const
+{
+	return (this->_button);
 }

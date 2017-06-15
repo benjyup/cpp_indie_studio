@@ -3,7 +3,6 @@
 //
 
 #include <iostream>
-#include <unistd.h>
 #include "OptionsEventReceiver.hpp"
 #include "IndieStudioException.hpp"
 
@@ -41,11 +40,22 @@ void is::OptionsEventReceiver::_guiEvent(const irr::SEvent &event)
       irr::s32	buttonID = event.GUIEvent.Caller->getID();
       switch (buttonID)
 	{
-	  case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_CHANGE_PLAYER_BUTTON):
+	  case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_CHANGE_PLAYER1_BUTTON):
 	    {
 	      this->_optionsContext->player = (this->_optionsContext->player == 1) ? (2) : (1);
 				this->_optionsContext->name = std::string("Player " + std::to_string(this->_optionsContext->player));
 				this->_optionsContext->buttons->back()->setText(irr::core::stringw(this->_optionsContext->name.c_str()).c_str());
+				event.GUIEvent.Caller->setID((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_CHANGE_PLAYER2_BUTTON);
+				this->_refresh();
+	      this->_getKey = false;
+	    }
+	  break;
+		case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_CHANGE_PLAYER2_BUTTON):
+	    {
+	      this->_optionsContext->player = (this->_optionsContext->player == 1) ? (2) : (1);
+				this->_optionsContext->name = std::string("Player " + std::to_string(this->_optionsContext->player));
+				this->_optionsContext->buttons->back()->setText(irr::core::stringw(this->_optionsContext->name.c_str()).c_str());
+				event.GUIEvent.Caller->setID((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_CHANGE_PLAYER1_BUTTON);
 				this->_refresh();
 	      this->_getKey = false;
 	    }
@@ -81,7 +91,16 @@ void is::OptionsEventReceiver::_guiEvent(const irr::SEvent &event)
 	  break;
 	  default:
 	    {
-				event.GUIEvent.Caller->setID((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_PRESS_BUTTON);
+				for (auto &button : *(this->_button))
+				{
+					if (static_cast<irr::gui::IGUIButton *>(event.GUIEvent.Caller) == button.getButton())
+					{
+						button.setPress(1);
+					}
+					else
+						button.setPress(0);
+				}
+				//event.GUIEvent.Caller->setID((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_PRESS_BUTTON);
 				this->_getKey = true;
 	      this->_keyToChange = Button::GUI_ID_BOUTON(buttonID);
 				}
@@ -95,17 +114,20 @@ void is::OptionsEventReceiver::_keyEvent(const irr::SEvent &event)
     this->_optionsContext->engine->Quit();
   try {
       if (this->_getKey)
-	{
-	  this->_getPlayerConfig(this->_optionsContext->player)[Button::BUTTON_TO_MOVE.at(this->_keyToChange)] = event.KeyInput.Key;
-	  this->_refresh();
-	  this->_getKey = false;
-	}
+			{
+				for (auto &button : *(this->_button))
+					button.setPress(0);
+				this->_getPlayerConfig(this->_optionsContext->player)[Button::BUTTON_TO_MOVE.at(this->_keyToChange)] = event.KeyInput.Key;
+				this->_refresh();
+				this->_getKey = false;
+			}
     } catch (...) { }
 }
 
-void is::OptionsEventReceiver::Init(SOptionsContext *optionsContext)
+void is::OptionsEventReceiver::Init(SOptionsContext *optionsContext, std::vector<is::Button> *button)
 {
   this->_optionsContext = optionsContext;
+	this->_button = button;
   this->_initConfig();
 }
 

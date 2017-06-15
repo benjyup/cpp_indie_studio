@@ -7,14 +7,14 @@
 #include <vector>
 #include <iostream>
 #include <map>
+#include <mutex>
 #include "IGameState.hpp"
 #include "GameEngine.hpp"
 #include "Button.hpp"
 #include "MenuEventReceiver.hpp"
 #include "IndieStudioException.hpp"
 #include "ParseMap.hpp"
-
-#include <mutex>
+#include "Options.hpp"
 #include "BombsManager.hpp"
 #include "map.hpp"
 #include "ParseMap.hpp"
@@ -56,7 +56,9 @@ namespace                                       is
     ParseMap	    				                      _parserMap;
     std::shared_ptr<map>			                  _map;
     std::map<Button::GUI_ID_BOUTON, irr::video::ITexture*> _pathButton;
+    std::map<irr::EKEY_CODE, irr::video::ITexture*>        _pathKey;
     void					                              drawButtons();
     void                                        initTexture();
+    void                                        initKeyTexture();
   };
 }

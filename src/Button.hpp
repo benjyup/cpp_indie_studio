@@ -27,7 +27,8 @@ namespace is
       GUI_ID_TMP_MOVE_BACKWARD_BUTTON,
       GUI_ID_TMP_MOVE_RIGHT_BUTTON,
       GUI_ID_TMP_MOVE_LEFT_BUTTON,
-      GUI_ID_CHANGE_PLAYER_BUTTON,
+      GUI_ID_CHANGE_PLAYER1_BUTTON,
+      GUI_ID_CHANGE_PLAYER2_BUTTON,
       GUI_ID_APPLY_BUTTON,
       GUI_ID_CANCEL_BUTTON,
       GUI_ID_PLAY_BUTTON,
@@ -66,7 +67,11 @@ namespace is
 
     const irr::core::stringw	getText() const;
     const irr::core::stringw	getHint() const;
+    irr::gui::IGUIButton      *getButton() const;
+    int                       getPress() const;
+    void                      setPress(int press);
    private:
+    int           _press;
     irr::s32			_x;
     irr::s32			_x2;
     irr::s32			_y;

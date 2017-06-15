@@ -38,7 +38,7 @@ void is::OptionsState::Init(is::GameEngine *engine)
   this->_optionsContext.player = 1;
   this->_optionsContext.buttons = &this->_buttons;
   this->_optionsContext.errorMsg = this->_errorMsg;
-  this->_optionsEventReceiver.Init(&this->_optionsContext);
+  this->_optionsEventReceiver.Init(&this->_optionsContext, &this->_buttons);
 	this->_optionsContext.name = std::string("Player " + std::to_string(this->_optionsContext.player));
 	
   this->_buttons = {
@@ -147,7 +147,7 @@ void is::OptionsState::Init(is::GameEngine *engine)
 		  20,
 		  20 + BUTTON_WIDTH,
 		  20 + BUTTON_HEIGHT,
-		  (irr::s32) Button::GUI_ID_BOUTON::GUI_ID_CHANGE_PLAYER_BUTTON,
+		  (irr::s32) Button::GUI_ID_BOUTON::GUI_ID_CHANGE_PLAYER1_BUTTON,
 			irr::core::stringw(this->_optionsContext.name.c_str())
 	  }
   };

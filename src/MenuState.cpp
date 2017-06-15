@@ -60,13 +60,6 @@ namespace is
   {
     if (this->_driver)
      {
-        //char            a;
-        //int             cpt;
-        //std::string     button = "button.png";
-        //std::string     tmp;
-
-        //a = 97;
-        //cpt = 16;
         this->_pathButton[Button::GUI_ID_BOUTON::GUI_ID_PLAY_BUTTON] = this->_driver->getTexture("./ButtonGFX/playbutton.png");
         this->_pathButton[Button::GUI_ID_BOUTON::GUI_ID_OPTIONS_BUTTON] = this->_driver->getTexture("./ButtonGFX/optionsbutton.png");
         this->_pathButton[Button::GUI_ID_BOUTON::GUI_ID_QUIT_BUTTON] = this->_driver->getTexture("./ButtonGFX/quitbutton.png");
@@ -82,20 +75,19 @@ namespace is
         this->_pathButton[Button::GUI_ID_BOUTON::GUI_ID_TMP_MOVE_BACKWARD_BUTTON] = this->_driver->getTexture("./ButtonGFX/movebackwardbutton.png");
         this->_pathButton[Button::GUI_ID_BOUTON::GUI_ID_TMP_MOVE_RIGHT_BUTTON] = this->_driver->getTexture("./ButtonGFX/moverightbutton.png");
         this->_pathButton[Button::GUI_ID_BOUTON::GUI_ID_TMP_MOVE_LEFT_BUTTON] = this->_driver->getTexture("./ButtonGFX/moveleftbutton.png");
-        this->_pathButton[Button::GUI_ID_BOUTON::GUI_ID_CHANGE_PLAYER_BUTTON] = this->_driver->getTexture("./ButtonGFX/p1button.png");
+        this->_pathButton[Button::GUI_ID_BOUTON::GUI_ID_CHANGE_PLAYER1_BUTTON] = this->_driver->getTexture("./ButtonGFX/p1button.png");
+        this->_pathButton[Button::GUI_ID_BOUTON::GUI_ID_CHANGE_PLAYER2_BUTTON] = this->_driver->getTexture("./ButtonGFX/p2button.png");
         this->_pathButton[Button::GUI_ID_BOUTON::GUI_ID_REPLAY_BUTTON] = this->_driver->getTexture("./ButtonGFX/playbutton.png");// manque
         this->_pathButton[Button::GUI_ID_BOUTON::GUI_ID_MENU_BUTTON] = this->_driver->getTexture("./ButtonGFX/menubutton.png");
         this->_pathButton[Button::GUI_ID_BOUTON::GUI_ID_RESUME_BUTTON] = this->_driver->getTexture("./ButtonGFX/resumebutton.png");
         this->_pathButton[Button::GUI_ID_BOUTON::GUI_ID_WALLPAPER_BUTTON] = this->_driver->getTexture("./ButtonGFX/bomberman3dtitle.png");
         this->_pathButton[Button::GUI_ID_BOUTON::GUI_ID_PRESS_BUTTON] = this->_driver->getTexture("./ButtonGFX/pressakeybutton.png");
-        //while (a <= 122)
-        //{
-          //tmp = a;
-          //this->_pathButton[(Button::GUI_ID_BOUTON)((irr::s32)cpt)] = this->_driver->getTexture(tmp + button); 
-          //a++;
-          //cpt++;
-        //}
+        this->initKeyTexture();
      }
+  }
+  void MenuState::initKeyTexture()
+  {
+      //ajouter les texture key
   }
   void MenuState::Cleanup(void)
   {
@@ -133,7 +125,32 @@ namespace is
     for (auto &button : this->_buttons)
       {
         button->setOverrideFont(this->_font);
-        button->setImage(this->_pathButton[(Button::GUI_ID_BOUTON)button->getID()]);
+        if (button.getPress() == 1)
+          button->setImage(this->_pathButton[Button::GUI_ID_BOUTON::GUI_ID_PRESS_BUTTON]);
+        else
+        {
+          switch ((Button::GUI_ID_BOUTON)button->getID())
+          {
+          case  Button::GUI_ID_BOUTON::GUI_ID_MOVE_ACTION_BUTTON: //ici faire correspondre les lettres avec les touche du joueur
+            button->setImage(this->_pathButton[(Button::GUI_ID_BOUTON)button->getID()]);
+            break;
+          case  Button::GUI_ID_BOUTON::GUI_ID_MOVE_FORWARD_BUTTON:
+            button->setImage(this->_pathButton[(Button::GUI_ID_BOUTON)button->getID()]);
+            break;
+          case  Button::GUI_ID_BOUTON::GUI_ID_MOVE_BACKWARD_BUTTON:
+            button->setImage(this->_pathButton[(Button::GUI_ID_BOUTON)button->getID()]);
+            break;
+          case  Button::GUI_ID_BOUTON::GUI_ID_MOVE_RIGHT_BUTTON:
+            button->setImage(this->_pathButton[(Button::GUI_ID_BOUTON)button->getID()]);
+            break;
+          case  Button::GUI_ID_BOUTON::GUI_ID_MOVE_LEFT_BUTTON:
+            button->setImage(this->_pathButton[(Button::GUI_ID_BOUTON)button->getID()]);
+            break;
+          default:
+            button->setImage(this->_pathButton[(Button::GUI_ID_BOUTON)button->getID()]);
+            break;
+          }
+        }
         button->setScaleImage(true);
         button->draw();
       }

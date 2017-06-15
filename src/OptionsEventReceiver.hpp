@@ -32,12 +32,14 @@ namespace is
     virtual ~OptionsEventReceiver();
 
     virtual bool 		OnEvent(const irr::SEvent& event);
-    void 			Init(SOptionsContext *optionsContext);
+    void 			Init(SOptionsContext *optionsContext, std::vector<is::Button> *button);
 
    private:
     SOptionsContext					  *_optionsContext;
     bool 						          _getKey;
     Button::GUI_ID_BOUTON 	  _keyToChange;
+    std::vector<is::Button>   *_button;
+
 
     std::map<is::Options::MOVES, irr::EKEY_CODE> 	&_getPlayerConfig(irr::s8 player);
     void 						_refresh();

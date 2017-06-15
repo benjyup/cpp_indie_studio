@@ -31,6 +31,7 @@ set(SOURCE_FILES
 	map/include/Character.hpp
         map/include/Bomb.hpp
 	map/include/BombsManager.hpp
+	map/include/GenerateMap.hpp
 	map/srcs/BombsManager.cpp
         map/srcs/Block.cpp
         map/srcs/Fire.cpp
@@ -44,6 +45,7 @@ set(SOURCE_FILES
         map/srcs/Vector3d.cpp
         map/srcs/Sound.cpp
         map/srcs/Bomb.cpp
+	map/srcs/GenerateMap.cpp
         map/include/Sound.hpp
         map/include/PowerUp.hpp map/srcs/PowerUp.cpp map/srcs/PowerUpManager.cpp map/include/PowerUpManager.hpp
 	)
