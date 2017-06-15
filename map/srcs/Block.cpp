@@ -46,4 +46,9 @@ namespace is
   {
 	type = t;
   }
+
+  void	Block::draw()
+  {
+    node->render();
+  }
 }

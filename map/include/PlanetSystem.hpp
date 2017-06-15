@@ -15,7 +15,9 @@ class PlanetSystem
 	       irr::f32 radius, irr::f32 speed, irr::core::vector3df position);
   ~PlanetSystem();
 
+  void	draw();
  private:
+  irr::scene::ISceneNode* _node;
 };
 
 

@@ -42,21 +42,28 @@ is::map::map(video::IVideoDriver *driver, scene::ISceneManager *smgr,
 //    printf("yes\n");
 }
 
+is::map::~map()
+{
+  _skyDown->remove();
+  _skyUp->remove();
+}
+
 void is::map::initEffects()
 {
   _fire1 = std::make_shared<Fire>(_smgr, _driver, irr::core::vector3df(-0.5 * SCALE, 0.5 * SCALE, 0.5 * SCALE), TOP, 3);
   _fire2 = std::make_shared<Fire>(_smgr, _driver, irr::core::vector3df(-0.5 * SCALE, 0.5 * SCALE, (0.5 + (BLOCK - 1)) * SCALE), TOP, 3);
   _fire3 = std::make_shared<Fire>(_smgr, _driver, irr::core::vector3df((0.5 + (BLOCK - 2)) * SCALE, 0.5 * SCALE, 0.5 * SCALE), TOP, 3);
   _fire4 = std::make_shared<Fire>(_smgr, _driver, irr::core::vector3df((0.5 + (BLOCK - 2)) * SCALE, 0.5 * SCALE, (0.5 + (BLOCK - 1)) * SCALE), TOP, 3);
-  PlanetSystem 	PlanetR(_smgr, _driver, "./gfx/particlered.bmp", 800.0f, 0.001f,
-			      irr::core::vector3df(6.0 * SCALE, 0.5 * SCALE, 7 * SCALE));
-  PlanetSystem 	PlanetW(_smgr, _driver, "./gfx/particlewhite.bmp", 600.0f, 0.0009f,
-			      irr::core::vector3df(6.0 * SCALE, 0.5 * SCALE, 7 * SCALE));
-  PlanetSystem 	PlanetG(_smgr, _driver, "./gfx/particlegreen.jpg", 400.0f, 0.0008f,
-			      irr::core::vector3df(6.0 * SCALE, 0.5 * SCALE, 7 * SCALE));
-  _smgr->addSkyDomeSceneNode(_driver->getTexture("./gfx/space3.jpg"), 16, 16, 1.0f, 1.0f)->setRotation(
-	  irr::core::vector3df(0, 0, -180));
-  _smgr->addSkyDomeSceneNode(_driver->getTexture("./gfx/space3.jpg"), 16, 16, 1.0f, 1.0f);
+  _planetR = std::make_shared<PlanetSystem>(_smgr, _driver, "./gfx/particlered.bmp", 800.0f, 0.001f,
+					    irr::core::vector3df(6.0 * SCALE, 0.5 * SCALE, 7 * SCALE));
+  _planetW = std::make_shared<PlanetSystem>(_smgr, _driver, "./gfx/particlewhite.bmp", 600.0f, 0.0009f,
+					    irr::core::vector3df(6.0 * SCALE, 0.5 * SCALE, 7 * SCALE));
+  _planetG = std::make_shared<PlanetSystem>(_smgr, _driver, "./gfx/particlegreen.jpg", 400.0f, 0.0008f,
+					    irr::core::vector3df(6.0 * SCALE, 0.5 * SCALE, 7 * SCALE));
+
+  _skyDown = _smgr->addSkyDomeSceneNode(_driver->getTexture("./gfx/space3.jpg"), 16, 16, 1.0f, 1.0f);
+  _skyDown->setRotation(irr::core::vector3df(0, 0, -180));
+  _skyUp = _smgr->addSkyDomeSceneNode(_driver->getTexture("./gfx/space3.jpg"), 16, 16, 1.0f, 1.0f);
 }
 
 is::Block const	*is::map::findBlock(Vector3d const &v) const
@@ -196,4 +203,20 @@ void 	is::map::addObject(int t, Vector3d const &pos)
   _mapi[i].node->setPosition(v);
   _mapi[i].type = (Type)t;
   return;
+}
+
+void	is::map::draw()
+{
+  _skyUp->render();
+  _skyDown->render();
+  _fire1->draw();
+  _fire2->draw();
+  _fire3->draw();
+  _fire4->draw();
+  _planetG->draw();
+  _planetR->draw();
+  _planetW->draw();
+  for (auto it = _mapi.begin(); it != _mapi.end(); it++){
+      	it->draw();
+    }
 }

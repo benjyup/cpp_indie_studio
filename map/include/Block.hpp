@@ -28,6 +28,8 @@ namespace is
     Block 	&operator=(Block const &);
     is::Type 	getType() const;
     void	setType(is::Type &t);
+    void 	draw();
+
    private:
     friend class map;
     scene::IMeshSceneNode	*node;

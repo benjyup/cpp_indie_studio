@@ -11,6 +11,7 @@
 #include "Vector3d.hpp"
 #include "Fire.hpp"
 #include "Block.hpp"
+#include "PlanetSystem.hpp"
 
 # define SCALE	15
 # define BLOCK	15
@@ -24,7 +25,7 @@ namespace is
   {
    public:
     map(video::IVideoDriver *driver, scene::ISceneManager *smgr, std::vector<int> &map);
-    ~map() {}
+    virtual ~map();
     void		moveObject(Block &object, Vector3d const &pos);
     void		addObject(int type, Vector3d const &);
     void		delObject(Block &object);
@@ -36,7 +37,9 @@ namespace is
     int			find(Block const &b) const;
     void		initEffects();
     void		addCollision(scene::ISceneNode *);
-  private:
+    void		draw();
+
+   private:
     scene::ISceneManager *_smgr;
     video::IVideoDriver *_driver;
     std::vector<Block> 	_mapi;
@@ -45,12 +48,16 @@ namespace is
     int 							size;
     std::vector<irr::scene::ITriangleSelector *>		_t;
 
-    std::shared_ptr<Fire>			            _fire1;
-    std::shared_ptr<Fire>			            _fire2;
-    std::shared_ptr<Fire>			            _fire3;
-    std::shared_ptr<Fire>			            _fire4;
+    std::shared_ptr<Fire>			            	_fire1;
+    std::shared_ptr<Fire>			            	_fire2;
+    std::shared_ptr<Fire>			            	_fire3;
+    std::shared_ptr<Fire>			            	_fire4;
+    std::shared_ptr<PlanetSystem>				_planetR;
+    std::shared_ptr<PlanetSystem>				_planetW;
+    std::shared_ptr<PlanetSystem>				_planetG;
+    irr::scene::ISceneNode					*_skyUp;
+    irr::scene::ISceneNode					*_skyDown;
   };
 }
-
 
 #endif //CPP_INDIE_STUDIO_MAP_HPP

@@ -61,7 +61,7 @@ namespace is
     //_bomb->putBomb(v, 1);
     _bombs->putBomb({6, 3, 0}, 10000);
     _cam = std::make_shared<Camera>(_sceneManager, _driver, MENU, _engine);
-    _cam->setSplashScreen();
+    _cam->setMenuMode();
   }
 
   void Game::Cleanup(void)
@@ -92,8 +92,9 @@ namespace is
     std::unique_lock<std::mutex> lock(DRAW_MUTEX);
     this->_driver->beginScene();
     this->_char[0]->moove();
-    //_cam->draw();
     _sceneManager->drawAll();
+    //_cam->draw();
+    //_map->draw();
     this->_driver->endScene();
   }
 
