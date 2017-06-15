@@ -42,7 +42,7 @@ void is::OptionsState::Init(is::GameEngine *engine)
 	this->_optionsContext.name = std::string("Player " + std::to_string(this->_optionsContext.player));
 	
   this->_buttons = {
-		//---------------CORRESPONDANCE
+		//---------------DROITE
 		  {
 		  windowSize.X / 2 - MenuState::BUTTON_WIDTH / 2 + 130,
 		  15,
@@ -50,8 +50,7 @@ void is::OptionsState::Init(is::GameEngine *engine)
 		  15 + BUTTON_HEIGHT,
 		  (irr::s32) Button::GUI_ID_BOUTON::GUI_ID_MOVE_ACTION_BUTTON,
 			""
-		  //this->_options.keyToString<irr::core::stringw>(getPlayerConfig(this->_optionsContext.player).at(Options::MOVES::MOVE_ACTION)).c_str()//
-	  },
+		  },
 	  {
 		  windowSize.X / 2 - MenuState::BUTTON_WIDTH / 2 + 130,
 		  15 + BUTTON_HEIGHT,
@@ -59,7 +58,6 @@ void is::OptionsState::Init(is::GameEngine *engine)
 		  15 + BUTTON_HEIGHT * 2,
 		  (irr::s32) Button::GUI_ID_BOUTON::GUI_ID_MOVE_FORWARD_BUTTON,
 			""
-		  //this->_options.keyToString<irr::core::stringw>(getPlayerConfig(this->_optionsContext.player).at(Options::MOVES::MOVE_UP)).c_str()
 	  },
 	  {
 		  windowSize.X / 2 - MenuState::BUTTON_WIDTH / 2 + 130,
@@ -68,7 +66,6 @@ void is::OptionsState::Init(is::GameEngine *engine)
 		  15 + BUTTON_HEIGHT * 3,
 		  (irr::s32) Button::GUI_ID_BOUTON::GUI_ID_MOVE_BACKWARD_BUTTON,
 			""
-		  //this->_options.keyToString<irr::core::stringw>(getPlayerConfig(this->_optionsContext.player).at(Options::MOVES::MOVE_DOWN)).c_str()
 	  },
 	  {
 		  windowSize.X / 2 - MenuState::BUTTON_WIDTH / 2 + 130,
@@ -77,7 +74,6 @@ void is::OptionsState::Init(is::GameEngine *engine)
 		  15 + BUTTON_HEIGHT * 4,
 		  (irr::s32) Button::GUI_ID_BOUTON::GUI_ID_MOVE_RIGHT_BUTTON,
 			""
-		  //this->_options.keyToString<irr::core::stringw>(getPlayerConfig(this->_optionsContext.player).at(Options::MOVES::MOVE_RIGHT)).c_str()
 	  },
 	  {
 		  windowSize.X / 2 - MenuState::BUTTON_WIDTH / 2 + 130,
@@ -86,54 +82,50 @@ void is::OptionsState::Init(is::GameEngine *engine)
 		  15 + BUTTON_HEIGHT * 5,
 		  (irr::s32) Button::GUI_ID_BOUTON::GUI_ID_MOVE_LEFT_BUTTON,
 			""
-		  //this->_options.keyToString<irr::core::stringw>(getPlayerConfig(this->_optionsContext.player).at(Options::MOVES::MOVE_LEFT)).c_str()
 	  },
 		//------------FIN
+		//------------GAUCHE
 	  {
 		  windowSize.X / 2 - MenuState::BUTTON_WIDTH / 2 - 130,
 		  15,
 		  windowSize.X / 2 + BUTTON_WIDTH / 2 - 130,
 		  15 + BUTTON_HEIGHT,
-		  (irr::s32) Button::GUI_ID_BOUTON::GUI_ID_MOVE_ACTION_BUTTON,
+		  (irr::s32) Button::GUI_ID_BOUTON::GUI_ID_TMP_MOVE_ACTION_BUTTON,
 			""
-		  //this->_options.keyToString<irr::core::stringw>(getPlayerConfig(this->_optionsContext.player).at(Options::MOVES::MOVE_ACTION)).c_str()//
 	  },
 	  {
 		  windowSize.X / 2 - MenuState::BUTTON_WIDTH / 2 - 130,
 		  15 + BUTTON_HEIGHT,
 		  windowSize.X / 2 + BUTTON_WIDTH / 2 - 130,
 		  15 + BUTTON_HEIGHT * 2,
-		  (irr::s32) Button::GUI_ID_BOUTON::GUI_ID_MOVE_FORWARD_BUTTON,
+		  (irr::s32) Button::GUI_ID_BOUTON::GUI_ID_TMP_MOVE_FORWARD_BUTTON,
 			""
-		  //this->_options.keyToString<irr::core::stringw>(getPlayerConfig(this->_optionsContext.player).at(Options::MOVES::MOVE_UP)).c_str()
 	  },
 	  {
 		  windowSize.X / 2 - MenuState::BUTTON_WIDTH / 2 - 130,
 		  15 + BUTTON_HEIGHT * 2,
 		  windowSize.X / 2 + BUTTON_WIDTH / 2 - 130,
 		  15 + BUTTON_HEIGHT * 3,
-		  (irr::s32) Button::GUI_ID_BOUTON::GUI_ID_MOVE_BACKWARD_BUTTON,
+		  (irr::s32) Button::GUI_ID_BOUTON::GUI_ID_TMP_MOVE_BACKWARD_BUTTON,
 			""
-		  //this->_options.keyToString<irr::core::stringw>(getPlayerConfig(this->_optionsContext.player).at(Options::MOVES::MOVE_DOWN)).c_str()
 	  },
 	  {
 		  windowSize.X / 2 - MenuState::BUTTON_WIDTH / 2 - 130,
 		  15 + BUTTON_HEIGHT * 3,
 		  windowSize.X / 2 + BUTTON_WIDTH / 2 - 130,
 		  15 + BUTTON_HEIGHT * 4,
-		  (irr::s32) Button::GUI_ID_BOUTON::GUI_ID_MOVE_RIGHT_BUTTON,
+		  (irr::s32) Button::GUI_ID_BOUTON::GUI_ID_TMP_MOVE_RIGHT_BUTTON,
 			""
-		  //this->_options.keyToString<irr::core::stringw>(getPlayerConfig(this->_optionsContext.player).at(Options::MOVES::MOVE_RIGHT)).c_str()
 	  },
 	  {
 		  windowSize.X / 2 - MenuState::BUTTON_WIDTH / 2 - 130,
 		  15 + BUTTON_HEIGHT * 4,
 		  windowSize.X / 2 + BUTTON_WIDTH / 2 - 130,
 		  15 + BUTTON_HEIGHT * 5,
-		  (irr::s32) Button::GUI_ID_BOUTON::GUI_ID_MOVE_LEFT_BUTTON,
+		  (irr::s32) Button::GUI_ID_BOUTON::GUI_ID_TMP_MOVE_LEFT_BUTTON,
 			""
-		  //this->_options.keyToString<irr::core::stringw>(getPlayerConfig(this->_optionsContext.player).at(Options::MOVES::MOVE_LEFT)).c_str()
 	  },
+		//-------------FIN
 		{
 		  windowSize.X - 20 - MenuState::BUTTON_WIDTH,
 		  windowSize.Y - BUTTON_HEIGHT - 20,

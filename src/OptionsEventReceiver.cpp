@@ -60,14 +60,24 @@ void is::OptionsEventReceiver::_guiEvent(const irr::SEvent &event)
 	    {
 	      this->_getKey = false;
 	      try {
-		  this->_optionsContext->engine->getOptions().setP1config(this->_optionsContext->player1ConfigTmp);
-		  this->_optionsContext->engine->getOptions().setP2config(this->_optionsContext->player2ConfigTmp);
-		} catch (const is::IndieStudioException &e) {
-			this->_optionsContext->errorMsg->setText(irr::core::stringw(e.what()).c_str());
-		  return ;
-		}
-	      this->_optionsContext->engine->PopState();
-	    }
+		  	this->_optionsContext->engine->getOptions().setP1config(this->_optionsContext->player1ConfigTmp);
+		  	this->_optionsContext->engine->getOptions().setP2config(this->_optionsContext->player2ConfigTmp);
+						} catch (const is::IndieStudioException &e) {
+								this->_optionsContext->errorMsg->setText(irr::core::stringw(e.what()).c_str());
+		  					return ;
+								}
+	    	this->_optionsContext->engine->PopState();
+	    	}
+	  break;
+		case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_TMP_MOVE_ACTION_BUTTON):
+	  break;
+		case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_TMP_MOVE_FORWARD_BUTTON):
+	  break;
+	  case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_TMP_MOVE_BACKWARD_BUTTON):
+	  break;
+	  case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_TMP_MOVE_RIGHT_BUTTON):
+	  break;
+	  case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_TMP_MOVE_LEFT_BUTTON):
 	  break;
 	  default:
 	    {
