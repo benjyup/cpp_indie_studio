@@ -19,6 +19,7 @@
 #include "BombsManager.hpp"
 #include "PowerUpManager.hpp"
 #include "Character.hpp"
+#include "Camera.hpp"
 
 namespace is
 {
@@ -51,6 +52,7 @@ namespace is
       std::shared_ptr<is::PowerUpManager>       _powManager;
     Options					                    _opt;
     GameEventReceiver				            _receiver;
+    std::shared_ptr<Camera>					_cam;
   };
 }
 
