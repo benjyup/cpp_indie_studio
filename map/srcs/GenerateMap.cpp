@@ -7,9 +7,13 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
+#include <zconf.h>
+#include <fstream>
 
-GenerateMap::GenerateMap(unsigned nbBlock) : _nbBlock(nbBlock)
+GenerateMap::GenerateMap(std::string const &fileName)
+	: _mapFile(fileName)
 {
+  _nbBlock = nbOfBlock();
   initMap();
   generate();
 }
@@ -24,93 +28,98 @@ std::vector<int> &GenerateMap::getMap()
   return _map;
 }
 
-void GenerateMap::initMap()
+unsigned int GenerateMap::nbOfBlock()
 {
-  unsigned int	i;
-  unsigned int	j;
+  std::ifstream file;
+  std::string   buff;
+  unsigned int           i;
 
-  i = 1;
-  j = 1;
-  while (i <= _nbBlock * _nbBlock)
+  file.open(_mapFile);
+  if (!file.good())
+    return 1;
+  while (!file.eof())
     {
-      if (i == 1 || i == (_nbBlock * _nbBlock) - _nbBlock + 1)
-	{
-	  while (j <= _nbBlock)
-	    {
-	      _map.push_back(1);
-	      j++;
-	      i++;
-	    }
-	}
-      else
-	{
-	  _map.push_back(1);
-	  while (j <= _nbBlock - 2)
-	    {
-	      _map.push_back(0);
-	      j++;
-	      i++;
-	    }
-	  _map.push_back(1);
-	  i+= 2;
-	}
-      j = 1;
+      getline(file, buff, '\n');
+      for (i = 0; buff[i]!=0; i++)
+	{}
+      return (i);
     }
-  std::cout << "NOMBRE PUSH VECT" << i << std::endl;
 }
 
+void GenerateMap::initMap()
+{
+  std::ifstream file;
+  std::string   buff;
+  int           i = 0;
 
+  file.open(_mapFile);
+  if (!file.good())
+    return ;
+  int x = 0;
+  while (!file.eof())
+    {
+      getline(file, buff, '\n');
+      int max = fillMap(buff);
+      if (i == 0)
+	_X = max;
+      i++;
+    }
+  _Y = i;
+}
+
+int GenerateMap::fillMap(std::string const &line)
+{
+  int i;
+  for ( i=0; line[i]!=0; i++)
+    _map.push_back(line[i] - '0');
+  return (i);
+}
 
 unsigned int GenerateMap::genRandNumber(unsigned int min, unsigned int max)
 {
-  unsigned int randNbr = min + static_cast <unsigned int> (rand()) / (static_cast <unsigned > (RAND_MAX / max));
+  unsigned int randNbr = min + static_cast <unsigned int> (rand()) / (static_cast <unsigned int> (RAND_MAX / max));
   return (randNbr);
 }
 
 void GenerateMap::genRandBorder(unsigned int pos)
 {
-//  unsigned int	nbrRand;
-//  unsigned int	i;
-//
-//  i = 1;
-//  std::cout << pos << std::endl;
-//  for (int &j : _map)
-//    {
-//      if (i == pos)
-//	j = 1;
-//      i++;
-//    }
+  unsigned int	i;
+
+  i = 1;
+  std::cout << pos << std::endl;
+  for (int &j : _map)
+    {
+      if (i == pos)
+	j = 1;
+      i++;
+    }
+}
+
+void GenerateMap::startGeneration()
+{
+  unsigned int	nbrRand;
+  unsigned int	i;
+
+  i = 3;
+  nbrRand = genRandNumber(4, _nbBlock - 6);
+  genRandBorder(_nbBlock + nbrRand);
+  nbrRand = genRandNumber(4, _nbBlock - 6);
+  genRandBorder(((_nbBlock * _nbBlock) - (_nbBlock * 2)) + nbrRand);
+  nbrRand = genRandNumber(4, (_nbBlock - 6));
+  genRandBorder((_nbBlock *  nbrRand) + 2);
+  nbrRand = genRandNumber(4, (_nbBlock - 6));
+  genRandBorder((_nbBlock *  nbrRand) - 1);
+  while (i <= 11)
+    {
+      nbrRand = genRandNumber(4, (_nbBlock - 6));
+      genRandBorder((_nbBlock * i) + nbrRand);
+      i++;
+    }
 }
 
 void GenerateMap::generate()
 {
-  //srand(static_cast <unsigned> (time(0)));
-
-//  unsigned int	nbrRand;
-//  nbrRand = genRandNumber(4, _nbBlock - 5);
-//  genRandBorder(_nbBlock + nbrRand);
-//  nbrRand = genRandNumber(4, _nbBlock - 5);
-//  genRandBorder(((_nbBlock * _nbBlock) - (_nbBlock * 2)) + nbrRand);
-
-
-//  unsigned int	nbrRand;
-//  unsigned int	i;
-//  i = 1;
-//  nbrRand = genRandNumber(3, _nbBlock - 5);
-//  for (int &j : _map)
-//    {
-//      if (i == _nbBlock + nbrRand)
-//	j = 1;
-//      i++;
-//    }
-//  i = 1;
-//  nbrRand = genRandNumber(3, _nbBlock - 5);
-//  for (int &k : _map)
-//    {
-//      if (i == (((_nbBlock * _nbBlock) - (_nbBlock * 2)) + nbrRand))
-//	{
-//	  k = 1;
-//	}
-//      i++;
-//    }
+  srand(static_cast <unsigned> (time(0)));
+  startGeneration();
+  startGeneration();
 }

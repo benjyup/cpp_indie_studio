@@ -30,7 +30,7 @@ namespace is
 
   std::mutex					Game::DRAW_MUTEX;
 
-  Game::Game(): _parserMap("map01.txt")
+  Game::Game(): _parserMap("map01.txt"), _genMap("map02.txt")
   {}
 
   Game::~Game()
@@ -43,9 +43,8 @@ namespace is
     this->_driver = this->_engine->getDriver();
     this->_gui = this->_engine->getGuiEnv();
     this->_engine->getDevice()->getCursorControl()->setVisible(false);
-    mapi = _parserMap.getVector();
-    //GenerateMap	p(15);
-    //mapi = p.getMap();
+    //mapi = _parserMap.getVector();
+    mapi = _genMap.getMap();
     _map = std::make_shared<is::map>(_driver, _sceneManager, mapi);
     _bombs = std::make_shared<is::BombsManager>(*(_map.get()), *_driver, *_sceneManager);
     _opt = _engine->getOptions();

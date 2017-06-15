@@ -10,6 +10,7 @@
 
 #include <fstream>
 #include <functional>
+#include <iostream>
 #include "ParseMap.hpp"
 
 is::ParseMap::ParseMap(std::string const &fileName) : _mapFile(fileName)

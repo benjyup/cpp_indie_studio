@@ -20,6 +20,7 @@
 #include "PowerUpManager.hpp"
 #include "Character.hpp"
 #include "Camera.hpp"
+#include "GenerateMap.hpp"
 
 namespace is
 {
@@ -41,18 +42,19 @@ namespace is
     virtual void ChangeState(GameEngine *engine,
 			     IGameState *state);
    private:
-    ParseMap	    				            _parserMap;
-    irr::video::IVideoDriver			        *_driver;
-    irr::scene::ISceneManager			        *_sceneManager;
-    irr::gui::IGUIEnvironment			        *_gui;
-    GameEngine 					                *_engine;
-    std::shared_ptr<map>			            _map;
-    std::shared_ptr<BombsManager>			            _bombs;
+    ParseMap	    				_parserMap;
+    GenerateMap					_genMap;
+    irr::video::IVideoDriver			*_driver;
+    irr::scene::ISceneManager			*_sceneManager;
+    irr::gui::IGUIEnvironment			*_gui;
+    GameEngine 					*_engine;
+    std::shared_ptr<map>			_map;
+    std::shared_ptr<BombsManager>		_bombs;
     std::array<std::shared_ptr<Character>, 2>	_char;
       std::shared_ptr<is::PowerUpManager>       _powManager;
-    Options					                    _opt;
-    GameEventReceiver				            _receiver;
-    std::shared_ptr<Camera>					_cam;
+    Options					_opt;
+    GameEventReceiver				_receiver;
+    std::shared_ptr<Camera>			_cam;
   };
 }
 
