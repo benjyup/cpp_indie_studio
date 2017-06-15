@@ -37,7 +37,7 @@ void			Camera::setMenuMode()
 
 void			Camera::setInGameMode()
 {
-  _smgr->addCameraSceneNode(0, irr::core::vector3df(((0.5 + (BLOCK - 2)) * SCALE) / 2, 220, -80),
+  _smgr->addCameraSceneNode(0, irr::core::vector3df(((0.5 + (BLOCK - 2)) * SCALE) / 2, 180, -80),
 			    irr::core::vector3df(((0.5 + (BLOCK - 2)) * SCALE) / 2,
 						 0.0f,
 						 ((0.5 + (BLOCK - 1)) * SCALE) / 2));
