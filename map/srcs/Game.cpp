@@ -2,7 +2,7 @@
 // Created by kyxo on 5/24/17.
 //
 
-#include <include/Camera.hpp>
+#include <Camera.hpp>
 #include "Game.hpp"
 
 static std::vector<int>        mapi; // =
@@ -61,7 +61,7 @@ namespace is
     //_bomb->putBomb(v, 1);
     _bombs->putBomb({6, 3, 0}, 10000);
     _cam = std::make_shared<Camera>(_sceneManager, _driver, MENU, _engine);
-    _cam->setMenuMode();
+   // _cam->setMenuMode();
   }
 
   void Game::Cleanup(void)

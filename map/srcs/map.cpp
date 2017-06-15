@@ -11,9 +11,9 @@
 is::map::map(video::IVideoDriver *driver, scene::ISceneManager *smgr,
 	     std::vector<int> &map) : _driver(driver), _smgr(smgr), _map(map)
 {
-  _texture[0] = _driver->getTexture("./gfx/groundGrass.png");
-  _texture[1] = _driver->getTexture("./gfx/wallBrick.png");
-  _texture[2] = _driver->getTexture("./gfx/wallStone.png");
+  _texture[0] = _driver->getTexture("./gfx/tile_aqua.png");
+  _texture[1] = _driver->getTexture("./gfx/wallStone.png");
+  _texture[2] = _driver->getTexture("./gfx/wallBrick.png");
   _texture[3] = _driver->getTexture("./gfx/fire.png");
   scene::IAnimatedMesh *mesh = smgr->getMesh("./gfx/wallStone.obj");
   size = sqrt(map.size());
