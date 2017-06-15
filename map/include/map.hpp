@@ -39,6 +39,7 @@ namespace is
     void		addCollision(scene::ISceneNode *);
     void		draw();
 
+
    private:
     scene::ISceneManager *_smgr;
     video::IVideoDriver *_driver;

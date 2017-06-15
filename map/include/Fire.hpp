@@ -32,6 +32,8 @@ class Fire
   void						setPosition(irr::core::vector3df position);
   void						setScale(irr::core::vector3df scale);
 
+  void						startFire();
+  void 						stopFire();
   void 						draw();
  private:
   irr::scene::IParticleSystemSceneNode		*_ps;

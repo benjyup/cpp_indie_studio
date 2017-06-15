@@ -20,6 +20,15 @@ Fire::Fire(irr::scene::ISceneManager* smgr, irr::video::IVideoDriver* driver,
 
 Fire::~Fire()
 {
+}
+
+void Fire::startFire()
+{
+  _ps->setEmitter(_em);
+}
+
+void Fire::stopFire()
+{
   _ps->setEmitter(0);
   _ps->remove();
 }
