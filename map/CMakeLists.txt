@@ -34,7 +34,9 @@ set(SOURCE_FILES
         ../src/Options.cpp
         ../src/Options.hpp
         ../src/IndieStudioException.cpp
-        include/PowerUp.hpp srcs/PowerUp.cpp srcs/PowerUpManager.cpp include/PowerUpManager.hpp)
+        include/PowerUp.hpp srcs/PowerUp.cpp srcs/PowerUpManager.cpp include/PowerUpManager.hpp
+        srcs/GenerateMap.cpp
+        include/GenerateMap.hpp)
 
 include_directories(../irrlicht-1.8.4/include ../src/ ../Interface ./
                     ./include ../irrKlang-64bit-1.5.0/include)
