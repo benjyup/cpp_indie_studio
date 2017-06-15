@@ -12,7 +12,9 @@ is::Character::Character(scene::IAnimatedMesh *node, video::ITexture *texture,
 			 BombsManager &bombsManager)
 	: _mesh(smgr->addAnimatedMeshSceneNode(node)), _text(texture), _smgr(smgr), _pos(pos), _speed(DEFAULT_SPEED), _bomb(DEFAULT_BOMB), _power(DEFAULT_POWER),
 	  _receiver(receiver),
-	  _opt(opt), _bombsManager(bombsManager)
+	  _opt(opt),
+	  _bombsManager(bombsManager),
+	  _keySlow(false)
 {
   irr::scene::ITriangleSelector	*t;
   video::SMaterial material;
@@ -49,6 +51,7 @@ void		is::Character::moove()
 	  _dir = is::Character::DIR::TOP;
 	}
       _mesh->setPosition(irr::core::vector3df(v.X, v.Y, v.Z + DEFAULT_SPEED));
+      std::cout << "Je suis en : pos.x " << _mesh->getPosition().X << " pos.y = " << _mesh->getPosition().Y << " pos.z = " << _mesh->getPosition().Z << std::endl;
     }
   if (_receiver.isKeyDown(this->_opt.getP1Config().at(Options::MOVES::MOVE_DOWN)))
     {
@@ -58,6 +61,7 @@ void		is::Character::moove()
 	  _dir = is::Character::DIR::DOWN;
 	}
       _mesh->setPosition(irr::core::vector3df(v.X, v.Y, v.Z - DEFAULT_SPEED));
+      std::cout << "Je suis en : pos.x " << _mesh->getPosition().X << " pos.y = " << _mesh->getPosition().Y << " pos.z = " << _mesh->getPosition().Z << std::endl;
     }
   if (_receiver.isKeyDown(this->_opt.getP1Config().at(Options::MOVES::MOVE_RIGHT)))
     {
@@ -67,6 +71,7 @@ void		is::Character::moove()
 	  _dir = is::Character::DIR::RIGHT;
 	}
       _mesh->setPosition(irr::core::vector3df(v.X + DEFAULT_SPEED, v.Y, v.Z));
+      std::cout << "Je suis en : pos.x " << _mesh->getPosition().X << " pos.y = " << _mesh->getPosition().Y << " pos.z = " << _mesh->getPosition().Z << std::endl;
     }
   if (_receiver.isKeyDown(this->_opt.getP1Config().at(Options::MOVES::MOVE_LEFT)))
     {
@@ -76,7 +81,15 @@ void		is::Character::moove()
 	  _dir = is::Character::DIR::LEFT;
 	}
       _mesh->setPosition(irr::core::vector3df(v.X - DEFAULT_SPEED, v.Y, v.Z));
+      std::cout << "Je suis en : pos.x " << _mesh->getPosition().X << " pos.y = " << _mesh->getPosition().Y << " pos.z = " << _mesh->getPosition().Z << std::endl;
     }
   if (_receiver.isKeyDown(this->_opt.getP1Config().at(Options::MOVES::MOVE_ACTION)))
-      _bombsManager.putBomb({6, 3, 0}, 2);
+    {
+      if (_keySlow)
+ 	     	_bombsManager.putBomb({ceil(floor(_mesh->getPosition().Z) / (float)SCALE), ceil(floor(_mesh->getPosition().X) / (float)SCALE), 0}, 2);
+      _keySlow = false;
+      std::cout << "Je suis en : pos.x " << _mesh->getPosition().X << " pos.y = " << _mesh->getPosition().Y << " pos.z = " << _mesh->getPosition().Z << std::endl;
+    }
+  else
+    _keySlow = true;
 }

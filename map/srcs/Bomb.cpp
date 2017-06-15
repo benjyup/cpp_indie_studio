@@ -71,6 +71,7 @@ int 			is::Bomb::_reducePower(std::list<std::shared_ptr<is::Bomb>> bombs,
 						  const std::function<void(irr::core::vector3df &)> &callback)
 {
   int			ret = 0;
+  const 		Block *b;
 
   //std::cerr << "_reducPower" << std::endl;
   callback(pos);
@@ -80,10 +81,12 @@ int 			is::Bomb::_reducePower(std::list<std::shared_ptr<is::Bomb>> bombs,
       callback(pos);
       ret += 1;
     }
-  const Block *b;
 
   if ((b = this->_map.findBlock({(int)pos.X, (int)pos.Y, (int)pos.Z}))->getType() == is::Type::BREAK)
-    this->_blocksToDelete.emplace_back(pos.X, pos.Y, pos.Z);
+    {
+      this->_blocksToDelete.emplace_back(pos.X, pos.Y, pos.Z);
+      ret += 1;
+    }
   else if (b->getType() == Type::BOMB)
       {
 	auto it = std::find_if(bombs.begin(), bombs.end(), [pos](auto bomb) { return pos == bomb->getPos(); });
@@ -91,12 +94,12 @@ int 			is::Bomb::_reducePower(std::list<std::shared_ptr<is::Bomb>> bombs,
 	std::cout << std::boolalpha << _alreadyBlowUp << std::endl;
 	if ((*it)->_alreadyBlowUp == false)
 	  (*it)->_explosion(bombs);
-
+	ret += 1;
 	//std::cout << "DESTRUIT UNE AUTRE BOMBE" << std::endl;
       }
   //std::cout << "ret = " << ret << std::endl;
   //std::cerr << "_reducPower" << std::endl;
-  return ret;
+  return (ret);
 }
 
 is::Bomb		&is::Bomb::operator=(const Bomb &o)
