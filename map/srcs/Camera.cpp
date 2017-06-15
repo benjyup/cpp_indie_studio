@@ -90,6 +90,12 @@ void Camera::setTextMenu()
   _node->setVisible(1);
 }
 
+void Camera::draw()
+{
+  _camera->render();
+  _node->render();
+}
+
 void Camera::setTextIntro()
 {
   _mesh = _smgr->getMesh("./gfx/indiestudio2.obj");

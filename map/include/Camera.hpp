@@ -27,6 +27,7 @@ class Camera
   void					setInGameMode();
   void					setSplashScreen();
 
+  void 					draw();
   void 					setTextIntro();
   void 					setTextMenu();
   void 					setAnimation1();
