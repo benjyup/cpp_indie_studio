@@ -15,6 +15,7 @@ Fire::Fire(irr::scene::ISceneManager* smgr, irr::video::IVideoDriver* driver,
   _ps = smgr->addParticleSystemSceneNode(false);
   createBox(Direction, power);
   createFire(smgr, Position);
+  _ps->setEmitter(0);
 }
 
 
