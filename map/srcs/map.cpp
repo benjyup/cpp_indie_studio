@@ -14,7 +14,7 @@ is::map::map(video::IVideoDriver *driver, scene::ISceneManager *smgr,
   _texture[0] = _driver->getTexture("./gfx/tile_aqua.png");
   _texture[1] = _driver->getTexture("./gfx/wallStone.png");
   _texture[2] = _driver->getTexture("./gfx/wallBrick.png");
-  _texture[3] = _driver->getTexture("./gfx/fire.png");
+  _texture[3] = _driver->getTexture("./gfx/tile_aqua.png");
   scene::IAnimatedMesh *mesh = smgr->getMesh("./gfx/wallStone.obj");
   size = sqrt(map.size());
   irr::scene::ICameraSceneNode *cam = smgr->addCameraSceneNodeFPS();
@@ -190,7 +190,7 @@ int 	is::map::find(Vector3d const &v) const
   return (posi);
 }
 
-void 	is::map::addObject(int t, Vector3d const &pos)
+void 	is::map::addObject(Type t, Vector3d const &pos)
 {
   int i = 0;
   irr::core::vector3df v;
@@ -204,7 +204,7 @@ void 	is::map::addObject(int t, Vector3d const &pos)
   v = _mapi[i].node->getPosition();
   v.Y = 0;
   _mapi[i].node->setPosition(v);
-  _mapi[i].type = (Type)t;
+  _mapi[i].type = t;
   return;
 }
 

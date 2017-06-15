@@ -18,6 +18,8 @@
 
 using namespace irr;
 
+enum Type : int;
+
 namespace is
 {
   class Block;
@@ -27,7 +29,7 @@ namespace is
     map(video::IVideoDriver *driver, scene::ISceneManager *smgr, std::vector<int> &map);
     virtual ~map();
     void		moveObject(Block &object, Vector3d const &pos);
-    void		addObject(int type, Vector3d const &);
+    void		addObject(Type type, Vector3d const &);
     void		delObject(Block &object);
     void 		delObject(Vector3d const &pos);
     bool 		canIMoove(Vector3d const &pos) const;
