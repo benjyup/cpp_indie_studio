@@ -122,7 +122,6 @@ void			Camera::setSplashScreen()
   setAnimation1();
   while (_engine->Running())
     {
-      std::cout << _timer->getTime() << std::endl;
       if (_timer->getTime() >= _anim1Time - 30 && _timer->getTime() <= (_anim1Time))
 	setAnimation2();
       if (_timer->getTime() >= (_anim1Time + _anim2Time - 30) && _timer->getTime() <= (_anim1Time + _anim2Time))
