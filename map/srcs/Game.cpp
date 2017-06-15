@@ -3,6 +3,7 @@
 //
 
 #include <Camera.hpp>
+#include <GenerateMap.hpp>
 #include "Game.hpp"
 
 static std::vector<int>        mapi; // =
@@ -43,6 +44,8 @@ namespace is
     this->_gui = this->_engine->getGuiEnv();
     this->_engine->getDevice()->getCursorControl()->setVisible(false);
     mapi = _parserMap.getVector();
+    //GenerateMap	p(15);
+    //mapi = p.getMap();
     _map = std::make_shared<is::map>(_driver, _sceneManager, mapi);
     _bombs = std::make_shared<is::BombsManager>(*(_map.get()), *_driver, *_sceneManager);
     _opt = _engine->getOptions();
