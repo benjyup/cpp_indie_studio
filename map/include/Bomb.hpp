@@ -29,20 +29,24 @@ namespace is
 
     ~Bomb();
 
-    void draw();
+    void 				draw();
+    void 				remove();
+    bool 				blowUp();
 
-    void remove();
-
-    void blowUp();
-
-    bool operator==(const Bomb &rhs) const;
-
-    bool operator!=(const Bomb &rhs) const;
+    bool 				operator==(const Bomb &rhs) const;
+    bool 				operator!=(const Bomb &rhs) const;
     Bomb				&operator=(const Bomb &o);
 
 
-   private:
     unsigned int			_id;
+   private:
+
+    enum t_state
+    {
+      BOMB_PLANTED = 0,
+      FIRE
+    };
+
     irr::core::vector3df 		_posMap;
     irr::core::vector3df 		_posSpace;
     int 				_power;
@@ -51,8 +55,13 @@ namespace is
     irr::scene::ISceneManager 		&_sceneManager;
     irr::scene::IAnimatedMeshSceneNode 	*_node;
     bool 				_alreadyBlowUp;
+    std::clock_t			_start_clock;
+    t_state 				_state;
 
-
+    Fire fire_forward;
+    Fire fire_backward;
+    Fire fire_right;
+    Fire fire_left;
     void 				_makeFire();
     int 				_reducePower(irr::core::vector3df pos,
 						    int power,

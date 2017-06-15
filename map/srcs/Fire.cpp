@@ -11,6 +11,7 @@ Fire::Fire(irr::scene::ISceneManager* smgr, irr::video::IVideoDriver* driver,
 	   irr::core::vector3df Position, FireDirection Direction, float power)
 {
   initMapDir();
+  std::cout << "power = " << power << std::endl;
   _fireText = driver->getTexture("./gfx/fire.bmp");
   _ps = smgr->addParticleSystemSceneNode(false);
   createBox(Direction, power);
@@ -31,6 +32,7 @@ void Fire::startFire()
 void Fire::stopFire()
 {
   _ps->setEmitter(0);
+  _em->drop();
   _ps->remove();
 }
 
@@ -71,7 +73,6 @@ void	Fire::createBox(FireDirection Direction, irr::f32 power)
 void	Fire::createFire(irr::scene::ISceneManager* smgr, irr::core::vector3df Position)
 {
   _ps->setEmitter(_em);
-  _em->drop();
   _paf = _ps->createFadeOutParticleAffector();
   _ps->addAffector(_paf);
   _paf->drop();

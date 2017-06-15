@@ -7,6 +7,7 @@
 
 #include <thread>
 #include <functional>
+#include <list>
 #include "map.hpp"
 #include "Bomb.hpp"
 
@@ -19,6 +20,7 @@ namespace is
     ~BombsManager();
 
     void 			putBomb(const irr::core::vector3df &pos, int power);
+    bool 			checkBombsStatus();
 
    private:
     is::map					&_map;
@@ -26,8 +28,7 @@ namespace is
     irr::scene::ISceneManager			&_sceneManager;
     irr::video::ITexture 			*_texture;
     irr::scene::IAnimatedMesh 			*_mesh;
-    std::vector<std::thread>			_threads;
-    std::vector<is::Bomb>			_bombs;
+    std::list<std::shared_ptr<is::Bomb>>	_bombs;
     std::function<void(is::Bomb &,
 		       std::vector<std::thread> &,
 		       std::vector<is::Bomb> &)> 		_explosion;

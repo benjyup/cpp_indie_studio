@@ -92,6 +92,7 @@ namespace is
     std::unique_lock<std::mutex> lock(DRAW_MUTEX);
     this->_driver->beginScene();
     this->_char[0]->moove();
+    this->_bombs->checkBombsStatus();
     _sceneManager->drawAll();
     //_cam->draw();
     //_map->draw();
