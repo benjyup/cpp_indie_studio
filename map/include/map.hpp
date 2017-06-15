@@ -22,6 +22,17 @@ enum Type : int;
 
 namespace is
 {
+
+  enum Type : int{
+    GRASS = 0,
+    WALL,
+    BREAK,
+    FIRE,
+    BOMB,
+    POWERUP,
+    NBR_OF_TYPE
+  };
+
   class Block;
   class map
   {
@@ -47,7 +58,7 @@ namespace is
     video::IVideoDriver *_driver;
     std::vector<Block> 						_mapi;
     std::vector<int>						&_map;
-    video::ITexture 						*_texture[4];
+    video::ITexture 						*_texture[Type::NBR_OF_TYPE];
     int 							size;
     std::vector<irr::scene::ITriangleSelector *>		_t;
 

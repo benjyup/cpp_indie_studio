@@ -11,10 +11,12 @@
 is::map::map(video::IVideoDriver *driver, scene::ISceneManager *smgr,
 	     std::vector<int> &map) : _driver(driver), _smgr(smgr), _map(map)
 {
-  _texture[0] = _driver->getTexture("./gfx/tile_aqua.png");
-  _texture[1] = _driver->getTexture("./gfx/wallStone.png");
-  _texture[2] = _driver->getTexture("./gfx/wallBrick.png");
-  _texture[3] = _driver->getTexture("./gfx/tile_aqua.png");
+  _texture[Type::GRASS] = _driver->getTexture("./gfx/tile_aqua.png");
+  _texture[Type::WALL] = _driver->getTexture("./gfx/wallStone.png");
+  _texture[Type::BREAK] = _driver->getTexture("./gfx/wallBrick.png");
+  _texture[Type::FIRE] = _texture[Type::GRASS];
+  _texture[Type::BOMB] = _texture[Type::GRASS];
+  _texture[Type::POWERUP] = _texture[Type::GRASS];
   scene::IAnimatedMesh *mesh = smgr->getMesh("./gfx/wallStone.obj");
   size = sqrt(map.size());
   irr::scene::ICameraSceneNode *cam = smgr->addCameraSceneNodeFPS();
@@ -166,9 +168,7 @@ bool 	is::map::canIMoove(Vector3d const &pos) const
   if ((posi = find(pos)) == -1)
     return (false);
   printf("posi : %d\n",posi);
-  if (_mapi[posi].type == Type::GRASS)
-    return (true);
-  return (false);
+  return (_mapi[posi].type == Type::GRASS);
 }
 
 
@@ -202,9 +202,9 @@ void 	is::map::addObject(Type t, Vector3d const &pos)
     }
   _mapi[i].node->setMaterialTexture(0, _texture[t]);
   v = _mapi[i].node->getPosition();
-  v.Y = 0;
-  _mapi[i].node->setPosition(v);
   _mapi[i].type = t;
+  v.Y = _mapi[i].setY();
+  _mapi[i].node->setPosition(v);
   return;
 }
 

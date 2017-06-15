@@ -60,7 +60,7 @@ namespace is
     //   Vector3d	v(3, 3, 1);
     //_bomb->putBomb(v, 1);
     _bombs->putBomb({6, 3, 0}, 10000);
-    _bombs->putBomb({2, 1, 0}, 10000);
+    _bombs->putBomb({7, 3, 0}, 10000);
     _cam = std::make_shared<Camera>(_sceneManager, _driver, MENU, _engine);
    // _cam->setMenuMode();
   }

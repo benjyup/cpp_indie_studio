@@ -31,7 +31,8 @@ namespace is
 
     void 				draw();
     void 				remove();
-    bool 				blowUp();
+    bool 				blowUp(std::list<std::shared_ptr<is::Bomb>> bombs);
+    const irr::core::vector3df		&getPos() const;
 
     bool 				operator==(const Bomb &rhs) const;
     bool 				operator!=(const Bomb &rhs) const;
@@ -60,11 +61,13 @@ namespace is
     std::list<Fire>			_fires;
     std::list<Vector3d>			_blocksToDelete;
 
-    int 				_reducePower(irr::core::vector3df pos,
+    int 				_reducePower(std::list<std::shared_ptr<is::Bomb>> bombs,
+						    irr::core::vector3df pos,
 						    int power,
 						    const std::function<void(irr::core::vector3df &)> &callback);
-    void				_startFires();
+    void				_startFires(std::list<std::shared_ptr<is::Bomb>> bombs);
     void				_stopFires();
+    void				_explosion(std::list<std::shared_ptr<is::Bomb>> bombs);
   };
 }
 

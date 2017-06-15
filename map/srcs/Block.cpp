@@ -26,25 +26,29 @@ namespace is
     node->setMaterialFlag(irr::video::EMF_LIGHTING, false);
 //    printf("pos : %d\nvector : %d\n", pos % size, this->pos.getY());
     type = t;
-    if (type == Type::GRASS || type == Type::FIRE)
-      node->setPosition(irr::core::vector3df(this->pos.getX() * SCALE, -SCALE,
-					       (this->pos.getY()) * SCALE));
-    else
-      node->setPosition(irr::core::vector3df((this->pos.getX()) * SCALE, 0,
-					       (this->pos.getY()) * SCALE));
+    std::cout << "TYPE = " << type << std::endl;
+    node->setPosition(irr::core::vector3df(this->pos.getX() * SCALE, setY(),
+					   (this->pos.getY()) * SCALE));
     node->setMaterialTexture(0, text);
     node->setScale(irr::core::vector3df(SCALE, SCALE, SCALE));
     node->setRotation(irr::core::vector3df(0, 0, 0));
   }
 
+  float Block::setY()
+  {
+    if (type == Type::GRASS || type == Type::FIRE || type == Type::BOMB || type == Type::POWERUP)
+      return (-SCALE);
+    return (0);
+  }
+
   is::Type 	Block::getType() const
   {
-	return (type);
+    return (type);
   }
 
   void	Block::setType(is::Type &t)
   {
-	type = t;
+    type = t;
   }
 
   void	Block::draw()

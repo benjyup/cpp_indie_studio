@@ -34,9 +34,9 @@ bool is::BombsManager::checkBombsStatus()
   bool 		ret = false;
 
   this->_bombs.erase(std::remove_if(this->_bombs.begin(), this->_bombs.end(),
-				    [&ret](auto bomb) {
+				    [&](auto bomb) {
 				      ret = true;
-				      return bomb->blowUp();
+				      return bomb->blowUp(this->_bombs);
 				    }),
 		     this->_bombs.end());
   return (ret);

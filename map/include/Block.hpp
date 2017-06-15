@@ -12,12 +12,8 @@ using namespace irr;
 
 namespace is
 {
-  enum Type : int{
-    GRASS = 0,
-    WALL,
-    BREAK,
-    FIRE
-  };
+
+  enum Type : int;
 
   class Block
   {
@@ -29,6 +25,7 @@ namespace is
     is::Type 	getType() const;
     void	setType(is::Type &t);
     void 	draw();
+    float 	setY();
 
    private:
     friend class 			map;
