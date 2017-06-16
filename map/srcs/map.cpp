@@ -30,6 +30,11 @@ is::map::map(video::IVideoDriver *driver, scene::ISceneManager *smgr,
       b.init((Type) map[j], _texture[map[j]], size);
       _mapi.push_back(b);
       std::cout << "map[" << i << "] = " << map[j] << std::endl;
+      if (map[j] != GRASS)
+	{
+	  b.node = smgr->addOctreeSceneNode(mesh->getMesh(0), 0, 1);
+	  b.init(GRASS, _texture[GRASS], size);
+	}
       i++;
     }
   initEffects();
