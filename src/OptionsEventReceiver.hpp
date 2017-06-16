@@ -42,7 +42,6 @@ namespace is
 
 
     std::map<is::Options::MOVES, irr::EKEY_CODE> 	&_getPlayerConfig(irr::s8 player);
-    void 						_refresh();
     void 						_guiEvent(const irr::SEvent &event);
     void 						_keyEvent(const irr::SEvent &event);
     void 						_initConfig(void);

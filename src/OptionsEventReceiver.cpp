@@ -44,20 +44,16 @@ void is::OptionsEventReceiver::_guiEvent(const irr::SEvent &event)
 	    {
 	      this->_optionsContext->player = (this->_optionsContext->player == 1) ? (2) : (1);
 				this->_optionsContext->name = std::string("Player " + std::to_string(this->_optionsContext->player));
-				this->_optionsContext->buttons->back()->setText(irr::core::stringw(this->_optionsContext->name.c_str()).c_str());
 				event.GUIEvent.Caller->setID((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_CHANGE_PLAYER2_BUTTON);
-				this->_refresh();
-	      this->_getKey = false;
+				this->_getKey = false;
 	    }
 	  break;
 		case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_CHANGE_PLAYER2_BUTTON):
 	    {
 	      this->_optionsContext->player = (this->_optionsContext->player == 1) ? (2) : (1);
 				this->_optionsContext->name = std::string("Player " + std::to_string(this->_optionsContext->player));
-				this->_optionsContext->buttons->back()->setText(irr::core::stringw(this->_optionsContext->name.c_str()).c_str());
 				event.GUIEvent.Caller->setID((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_CHANGE_PLAYER1_BUTTON);
-				this->_refresh();
-	      this->_getKey = false;
+				this->_getKey = false;
 	    }
 	  break;
 	  case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_CANCEL_BUTTON):
@@ -100,7 +96,6 @@ void is::OptionsEventReceiver::_guiEvent(const irr::SEvent &event)
 					else
 						button.setPress(0);
 				}
-				//event.GUIEvent.Caller->setID((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_PRESS_BUTTON);
 				this->_getKey = true;
 	      this->_keyToChange = Button::GUI_ID_BOUTON(buttonID);
 				}
@@ -118,7 +113,6 @@ void is::OptionsEventReceiver::_keyEvent(const irr::SEvent &event)
 				for (auto &button : *(this->_button))
 					button.setPress(0);
 				this->_getPlayerConfig(this->_optionsContext->player)[Button::BUTTON_TO_MOVE.at(this->_keyToChange)] = event.KeyInput.Key;
-				this->_refresh();
 				this->_getKey = false;
 			}
     } catch (...) { }
@@ -143,16 +137,4 @@ std::map<is::Options::MOVES, irr::EKEY_CODE> &is::OptionsEventReceiver::_getPlay
     return (this->_optionsContext->player1ConfigTmp);
   else
     return (this->_optionsContext->player2ConfigTmp);
-}
-
-void is::OptionsEventReceiver::_refresh()
-{
-  auto &playerConfig = this->_getPlayerConfig(this->_optionsContext->player);
-  auto it = playerConfig.begin();
-
-  for (auto i = 0 ; i < 5 ; i++)
-    {
-      (*(this->_optionsContext->buttons))[i]->setText(this->_optionsContext->engine->getOptions().keyToString<irr::core::stringw>(it->second).c_str());
-      ++it;
-    }
 }

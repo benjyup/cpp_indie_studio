@@ -148,7 +148,7 @@ void is::OptionsState::Init(is::GameEngine *engine)
 		  20 + BUTTON_WIDTH,
 		  20 + BUTTON_HEIGHT,
 		  (irr::s32) Button::GUI_ID_BOUTON::GUI_ID_CHANGE_PLAYER1_BUTTON,
-			irr::core::stringw(this->_optionsContext.name.c_str())
+			""
 	  }
   };
 	this->initTexture();
@@ -158,12 +158,4 @@ void is::OptionsState::Init(is::GameEngine *engine)
 void is::OptionsState::Resume(void)
 {
   this->_engine->getDevice()->setEventReceiver(&this->_optionsEventReceiver);
-}
-
-std::map<is::Options::MOVES, irr::EKEY_CODE> is::OptionsState::getPlayerConfig(irr::s8 player)
-{
-  if (player == 1)
-    return (this->_options.getP1Config());
-  else
-    return (this->_options.getP2Config());
 }

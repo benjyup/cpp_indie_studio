@@ -21,11 +21,7 @@ namespace is
     virtual ~OptionsState();
     virtual void 					Init(is::GameEngine *engine);
     virtual void 					Resume(void);
-
-   private:
-    Options						_options;
-    OptionsEventReceiver				_optionsEventReceiver;
-    OptionsEventReceiver::SOptionsContext		_optionsContext;
-    std::map<Options::MOVES, irr::EKEY_CODE>		getPlayerConfig(irr::s8 player);
+    private:
+    OptionsEventReceiver				                _optionsEventReceiver;
   };
 }

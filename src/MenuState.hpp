@@ -20,6 +20,8 @@
 #include "ParseMap.hpp"
 #include "PowerUpManager.hpp"
 #include "GameEventReceiver.hpp"
+#include "OptionsEventReceiver.hpp"
+
 
 
 namespace                                       is
@@ -57,6 +59,9 @@ namespace                                       is
     std::shared_ptr<map>			                  _map;
     std::map<Button::GUI_ID_BOUTON, irr::video::ITexture*> _pathButton;
     std::map<irr::EKEY_CODE, irr::video::ITexture*>        _pathKey;
+    OptionsEventReceiver::SOptionsContext		    _optionsContext;
+    Options						                          _options;
+    std::map<Options::MOVES, irr::EKEY_CODE>		getPlayerConfig(irr::s8 player);
     void					                              drawButtons();
     void                                        initTexture();
     void                                        initKeyTexture();
