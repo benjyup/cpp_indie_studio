@@ -34,6 +34,7 @@ namespace  is
 	      BombsManager &bombsManager);
     ~Character() {}
     void 	moove();
+      void  incLive() {_live += 1;}
     irr::core::vector3df    			&getPos(){return _pos;}
     scene::IAnimatedMeshSceneNode 		*_mesh;
    private:
@@ -43,6 +44,7 @@ namespace  is
     int _speed;
     int _bomb;
     int _power;
+    int _live;
     const GameEventReceiver 			&_receiver;
     const Options				&_opt;
     DIR						_dir;

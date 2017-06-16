@@ -12,7 +12,7 @@
 
 namespace is
 {
-    enum class POWERIS : int8_t {
+    enum class poweris : int {
         POWERLIVE = 0,
         POWERBOMB,
         POWERPOWER
@@ -37,6 +37,7 @@ namespace is
         irr::core::vector3df                _posSpace;
         irr::scene::IAnimatedMesh           *_node;
         is::map                             *_map;
+        is::poweris                         _power;
     };
 }
 

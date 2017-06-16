@@ -10,7 +10,7 @@ is::Character::Character(scene::IAnimatedMesh *node, video::ITexture *texture,
 			 const GameEventReceiver &receiver,
 			 const Options &opt,
 			 BombsManager &bombsManager)
-	: _mesh(smgr->addAnimatedMeshSceneNode(node)), _text(texture), _smgr(smgr), _pos(pos), _speed(DEFAULT_SPEED), _bomb(DEFAULT_BOMB), _power(DEFAULT_POWER),
+	: _mesh(smgr->addAnimatedMeshSceneNode(node)), _text(texture), _smgr(smgr), _pos(pos), _speed(DEFAULT_SPEED), _bomb(DEFAULT_BOMB), _power(DEFAULT_POWER), _live(0),
 	  _receiver(receiver),
 	  _opt(opt),
 	  _bombsManager(bombsManager),

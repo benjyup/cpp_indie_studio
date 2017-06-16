@@ -15,23 +15,23 @@ is::PowerUp::PowerUp(irr::scene::IAnimatedMesh *node,
                                                        _text(texture),
                                                        _smgr(smgr),
                                                        _posMap(pos),
-                                                       _posSpace(_posMap.Y * SCALE - SCALE / 2, 0.55 * SCALE, _posMap.X * SCALE + SCALE / 2),
+                                                       _posSpace(_posMap.Y * SCALE - SCALE / 2, 0.15 * SCALE, _posMap.X * SCALE + SCALE / 2),
                                                        _map(map)
 {
     irr::video::SMaterial material;
     _node = node;
-    if (_mesh)
-    {
-        _mesh->setMaterialFlag(irr::video::EMF_LIGHTING, false);
-        _mesh->setMD2Animation(irr::scene::EMAT_RUN);
-        _mesh->setScale(irr::core::vector3df(1, 1, 1));
-        _mesh->setMaterialTexture(0, _text);
-        _mesh->setPosition(_posSpace);
-        _mesh->setRotation(irr::core::vector3df(0, 270, 0));
-        _mesh->getMaterial(0).Lighting = true;
-        _mesh->getMaterial(0).NormalizeNormals = true;
-        _map->addObject(Type::POWERUP, {(int)_posMap.X, (int)_posMap.Y, (int)_posMap.Z});
-    }
+    _power = static_cast<is::poweris>(std::rand() % 3);
+    if (!_mesh)
+        throw is::IndieStudioException("Error while loading mesh");
+    _mesh->setMaterialFlag(irr::video::EMF_LIGHTING, false);
+    _mesh->setMD2Animation(irr::scene::EMAT_RUN);
+    _mesh->setScale(irr::core::vector3df(1, 1, 1));
+    _mesh->setMaterialTexture(0, _text);
+    _mesh->setPosition(_posSpace);
+    _mesh->setRotation(irr::core::vector3df(0, 270, 0));
+    _mesh->getMaterial(0).Lighting = false;
+    _mesh->getMaterial(0).NormalizeNormals = true;
+    _map->addObject(Type::POWERUP, {(int)_posMap.X, (int)_posMap.Y, (int)_posMap.Z});
 }
 
 is::PowerUp::~PowerUp() {
@@ -39,5 +39,9 @@ is::PowerUp::~PowerUp() {
 }
 
 void is::PowerUp::getPower(is::Character *c) {
-
+    switch (_power) {
+        case is::poweris::POWERLIVE:
+            c->incLive();
+            break;
+    };
 }
