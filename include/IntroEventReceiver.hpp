@@ -8,7 +8,6 @@
 #include "irrlicht.h"
 #include "GameEngine.hpp"
 
-
 #ifdef _IRR_WINDOWS_
 #pragma comment(lib, "Irrlicht.lib")
 #endif

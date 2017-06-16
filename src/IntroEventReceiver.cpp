@@ -16,18 +16,13 @@ namespace is
     }
     bool 		is::IntroEventReceiver::OnEvent(const irr::SEvent &event)
     {
-    if (event.EventType == irr::EET_GUI_EVENT && event.GUIEvent.EventType == irr::gui::EGET_BUTTON_CLICKED)
+    if (event.EventType == irr::EET_KEY_INPUT_EVENT)
         {
-            irr::s32	buttonID = event.GUIEvent.Caller->getID();
-            switch (buttonID)
-            {
-            default:
-            this->_engine->ChangeState(new MenuState);
-            break;
-            }
+            if (event.KeyInput.Key == irr::KEY_ESCAPE)
+                this->_device->closeDevice();
+            else
+                this->_engine->ChangeState(new MenuState);
         }
-    else if (event.EventType == irr::EET_KEY_INPUT_EVENT && event.KeyInput.Key == irr::KEY_ESCAPE)
-        this->_device->closeDevice();
     return (false);
     }
 
