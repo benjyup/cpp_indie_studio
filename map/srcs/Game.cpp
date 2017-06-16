@@ -65,7 +65,8 @@ namespace is
     _bombs->putBomb({7, 3, 0}, 10000);
     _bombs->putBomb({1, 12, 0}, 2);
     _cam = std::make_shared<Camera>(_sceneManager, _driver, MENU, _engine);
-   // _cam->setMenuMode();
+    //_cam->setMenuMode();
+    _cam->setInGameMode();
   }
 
   void Game::Cleanup(void)

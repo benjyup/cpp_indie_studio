@@ -86,7 +86,7 @@ void		is::Character::moove()
   if (_receiver.isKeyDown(this->_opt.getP1Config().at(Options::MOVES::MOVE_ACTION)))
     {
       if (_keySlow)
- 	     	_bombsManager.putBomb({ceil(floor(_mesh->getPosition().Z) / (float)SCALE), ceil(floor(_mesh->getPosition().X) / (float)SCALE), 0}, 2);
+ 	     	_bombsManager.putBomb({ceil(floor(_mesh->getPosition().Z) / (float)SCALE) - 1, ceil(floor(_mesh->getPosition().X) / (float)SCALE), 0}, 2);
       _keySlow = false;
       std::cout << "Je suis en : pos.x " << _mesh->getPosition().X << " pos.y = " << _mesh->getPosition().Y << " pos.z = " << _mesh->getPosition().Z << std::endl;
     }
