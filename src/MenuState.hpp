@@ -49,11 +49,9 @@ namespace                                       is
     irr::video::IVideoDriver			              *_driver;
     irr::scene::ISceneManager			              *_sceneManager;
     irr::gui::IGUIEnvironment			              *_gui;
-    irr::video::ITexture                        *_wallpaper;
     std::vector<is::Button> 			              _buttons;
     std::vector<irr::gui::IGUIStaticText*> 	    _text;
     irr::gui::IGUIStaticText			              *_errorMsg;
-    irr::gui::IGUIFont                          *_font;
     std::vector<int>                            _mapi;
     ParseMap	    				                      _parserMap;
     std::shared_ptr<map>			                  _map;

@@ -24,17 +24,11 @@ void is::OptionsState::Init(is::GameEngine *engine)
   this->_gui = this->_engine->getGuiEnv();
   this->_options = this->_engine->getOptions();
   auto windowSize = this->_engine->getWindowSize();
-	 if (_gui != NULL)
-      this->_font = _gui->getFont("./gfx/font_space.bmp");
 	engine->getDevice()->setEventReceiver(&this->_optionsEventReceiver);
 
   if (!(this->_errorMsg = this->_gui->addStaticText(L"", irr::core::rect<irr::s32>(100, 300, 300, 400))))
     throw IndieStudioException("Not able to init the error message.");
-
-  //if (!(this->_wallpaper = _engine->getDriver()->getTexture(WALLPAPER)))
-    //throw IndieStudioException();
-
-  this->_optionsContext.engine = this->_engine;
+	this->_optionsContext.engine = this->_engine;
   this->_optionsContext.player = 1;
   this->_optionsContext.buttons = &this->_buttons;
   this->_optionsContext.errorMsg = this->_errorMsg;

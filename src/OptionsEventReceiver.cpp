@@ -90,15 +90,13 @@ void is::OptionsEventReceiver::_guiEvent(const irr::SEvent &event)
 				for (auto &button : *(this->_optionsContext->buttons))
 				{
 					if (static_cast<irr::gui::IGUIButton *>(event.GUIEvent.Caller) == button.getButton())
-					{
 						button.setPress(1);
-					}
 					else
 						button.setPress(0);
 				}
 				this->_getKey = true;
 	      this->_keyToChange = Button::GUI_ID_BOUTON(buttonID);
-				}
+			}
 	}
     }
 }

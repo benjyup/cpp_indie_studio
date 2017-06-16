@@ -17,7 +17,6 @@ namespace is
   
   MenuState::MenuState() :
 	  _menuEventReceiver(),
-	  _wallpaper(NULL),
 	  _errorMsg(NULL),
     _parserMap("map01.txt")
   {
@@ -36,12 +35,8 @@ namespace is
     this->_menuEventReceiver.setEngine(this->_engine);
     this->_engine->getDevice()->setEventReceiver(&this->_menuEventReceiver);
 
-    //if (!(this->_wallpaper = _engine->getDriver()->getTexture(WALLPAPER)))
-      //throw IndieStudioException();
     if (!(this->_errorMsg = this->_gui->addStaticText(L"", irr::core::rect<irr::s32>(100, 300, 300, 400))))
       throw IndieStudioException("Not able to init the error message.");
-    if (_gui != NULL)
-     this->_font = _gui->getFont("./gfx/font_space.bmp");
     this->_buttons = {
 	    { engine->getWindowSize().X / 2 - BUTTON_WIDTH / 2, engine->getWindowSize().Y - BUTTON_HEIGHT * 4 - 45, engine->getWindowSize().X / 2 + BUTTON_WIDTH / 2, engine->getWindowSize().Y - BUTTON_HEIGHT * 3 - 30, (irr::s32)Button::GUI_ID_BOUTON::GUI_ID_PLAY_BUTTON, L"", L"Launch the game" },
 	    { engine->getWindowSize().X / 2 - BUTTON_WIDTH / 2, engine->getWindowSize().Y - BUTTON_HEIGHT * 3 - 30, engine->getWindowSize().X / 2 + BUTTON_WIDTH / 2, engine->getWindowSize().Y - BUTTON_HEIGHT * 2 - 15, (irr::s32)Button::GUI_ID_BOUTON::GUI_ID_OPTIONS_BUTTON, L"", L"Configure the game" },
@@ -155,7 +150,6 @@ namespace is
     }
     for (auto &button : this->_buttons)
       {
-        button->setOverrideFont(this->_font);
         if (button.getPress() == 1)
           button->setImage(this->_pathButton[Button::GUI_ID_BOUTON::GUI_ID_PRESS_BUTTON]);
         else
@@ -200,7 +194,8 @@ namespace is
         button->setScaleImage(true);
         button->draw();
       }
-    this->_errorMsg->draw();
+    if (_errorMsg != NULL)
+      this->_errorMsg->draw();
     this->_driver->endScene();
   }
 
