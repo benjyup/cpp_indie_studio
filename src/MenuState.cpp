@@ -163,20 +163,34 @@ namespace is
           switch ((Button::GUI_ID_BOUTON)button->getID())
           {
           case  Button::GUI_ID_BOUTON::GUI_ID_MOVE_ACTION_BUTTON:
-          if (this->_optionsContext.player == 1)
-            button->setImage(this->_pathKey[this->getPlayerConfig(this->_optionsContext.player)[Options::MOVES::MOVE_ACTION]]);
+            if (this->_optionsContext.player == 1)
+              button->setImage(this->_pathKey[this->_optionsContext.player1ConfigTmp[Options::MOVES::MOVE_ACTION]]);
+            else
+              button->setImage(this->_pathKey[this->_optionsContext.player2ConfigTmp[Options::MOVES::MOVE_ACTION]]);
           break;
           case  Button::GUI_ID_BOUTON::GUI_ID_MOVE_FORWARD_BUTTON:
-            button->setImage(this->_pathKey[this->getPlayerConfig(this->_optionsContext.player)[Options::MOVES::MOVE_UP]]);
+            if (this->_optionsContext.player == 1)
+              button->setImage(this->_pathKey[this->_optionsContext.player1ConfigTmp[Options::MOVES::MOVE_UP]]);
+            else
+              button->setImage(this->_pathKey[this->_optionsContext.player2ConfigTmp[Options::MOVES::MOVE_UP]]);
             break;
           case  Button::GUI_ID_BOUTON::GUI_ID_MOVE_BACKWARD_BUTTON:
-            button->setImage(this->_pathKey[this->getPlayerConfig(this->_optionsContext.player)[Options::MOVES::MOVE_DOWN]]);
+            if (this->_optionsContext.player == 1)
+              button->setImage(this->_pathKey[this->_optionsContext.player1ConfigTmp[Options::MOVES::MOVE_DOWN]]);
+            else
+              button->setImage(this->_pathKey[this->_optionsContext.player2ConfigTmp[Options::MOVES::MOVE_DOWN]]);
             break;
           case  Button::GUI_ID_BOUTON::GUI_ID_MOVE_RIGHT_BUTTON:
-            button->setImage(this->_pathKey[this->getPlayerConfig(this->_optionsContext.player)[Options::MOVES::MOVE_RIGHT]]);
+            if (this->_optionsContext.player == 1)
+              button->setImage(this->_pathKey[this->_optionsContext.player1ConfigTmp[Options::MOVES::MOVE_RIGHT]]);
+            else
+              button->setImage(this->_pathKey[this->_optionsContext.player2ConfigTmp[Options::MOVES::MOVE_RIGHT]]);
             break;
           case  Button::GUI_ID_BOUTON::GUI_ID_MOVE_LEFT_BUTTON:
-            button->setImage(this->_pathKey[this->getPlayerConfig(this->_optionsContext.player)[Options::MOVES::MOVE_LEFT]]);
+            if (this->_optionsContext.player == 1)
+              button->setImage(this->_pathKey[this->_optionsContext.player1ConfigTmp[Options::MOVES::MOVE_LEFT]]);
+            else
+              button->setImage(this->_pathKey[this->_optionsContext.player2ConfigTmp[Options::MOVES::MOVE_LEFT]]);  
             break;
           default:
             button->setImage(this->_pathButton[(Button::GUI_ID_BOUTON)button->getID()]);
