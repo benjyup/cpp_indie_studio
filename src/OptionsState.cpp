@@ -38,7 +38,7 @@ void is::OptionsState::Init(is::GameEngine *engine)
   this->_optionsContext.player = 1;
   this->_optionsContext.buttons = &this->_buttons;
   this->_optionsContext.errorMsg = this->_errorMsg;
-  this->_optionsEventReceiver.Init(&this->_optionsContext, &this->_buttons);
+  this->_optionsEventReceiver.Init(&this->_optionsContext);
 	this->_optionsContext.name = std::string("Player " + std::to_string(this->_optionsContext.player));
 	
   this->_buttons = {

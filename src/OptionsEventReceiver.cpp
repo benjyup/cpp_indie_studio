@@ -87,7 +87,7 @@ void is::OptionsEventReceiver::_guiEvent(const irr::SEvent &event)
 	  break;
 	  default:
 	    {
-				for (auto &button : *(this->_button))
+				for (auto &button : *(this->_optionsContext->buttons))
 				{
 					if (static_cast<irr::gui::IGUIButton *>(event.GUIEvent.Caller) == button.getButton())
 					{
@@ -110,7 +110,7 @@ void is::OptionsEventReceiver::_keyEvent(const irr::SEvent &event)
   try {
       if (this->_getKey)
 			{
-				for (auto &button : *(this->_button))
+				for (auto &button : *(this->_optionsContext->buttons))
 					button.setPress(0);
 				this->_getPlayerConfig(this->_optionsContext->player)[Button::BUTTON_TO_MOVE.at(this->_keyToChange)] = event.KeyInput.Key;
 				this->_getKey = false;
@@ -118,11 +118,10 @@ void is::OptionsEventReceiver::_keyEvent(const irr::SEvent &event)
     } catch (...) { }
 }
 
-void is::OptionsEventReceiver::Init(SOptionsContext *optionsContext, std::vector<is::Button> *button)
+void is::OptionsEventReceiver::Init(SOptionsContext *optionsContext)
 {
   this->_optionsContext = optionsContext;
-	this->_button = button;
-  this->_initConfig();
+	this->_initConfig();
 }
 
 void is::OptionsEventReceiver::_initConfig(void)

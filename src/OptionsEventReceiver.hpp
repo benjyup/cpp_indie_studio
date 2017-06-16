@@ -32,7 +32,7 @@ namespace is
     virtual ~OptionsEventReceiver();
 
     virtual bool 		OnEvent(const irr::SEvent& event);
-    void 			Init(SOptionsContext *optionsContext, std::vector<is::Button> *button);
+    void 			Init(SOptionsContext *optionsContext);
 
    private:
     SOptionsContext					  *_optionsContext;
