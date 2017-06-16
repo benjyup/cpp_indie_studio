@@ -17,20 +17,16 @@
 #include "Options.hpp"
 #include "BombsManager.hpp"
 #include "map.hpp"
-#include "ParseMap.hpp"
 #include "PowerUpManager.hpp"
 #include "GameEventReceiver.hpp"
 #include "OptionsEventReceiver.hpp"
-
-
 
 namespace                                       is
 {
   class                                         MenuState : public IGameState
   {
    public:
-   static std::mutex					                  DRAW_MUTEX;
-	  MenuState();
+    MenuState();
     virtual                                     ~MenuState();
     virtual void                                Init(GameEngine *engine);
     virtual void                                Cleanup(void);

@@ -10,7 +10,6 @@
 
 namespace is
 {
-  std::mutex					MenuState::DRAW_MUTEX;
   const irr::io::path		MenuState::WALLPAPER = "./ButtonGFX/bomberman3dtitle.png";
   const irr::s32		MenuState::BUTTON_WIDTH = 250;
   const irr::s32		MenuState::BUTTON_HEIGHT = 75;
@@ -140,10 +139,7 @@ namespace is
   void MenuState::Draw(void)
   {
     this->_driver->beginScene();
-    {
-      std::unique_lock<std::mutex> lock(DRAW_MUTEX);
-      _sceneManager->drawAll();
-    }
+    _sceneManager->drawAll();
     for (auto &text : this->_text)
     {
       text->draw();

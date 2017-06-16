@@ -4,14 +4,15 @@
 
 # include "GameEngine.hpp"
 # include "GameState.hpp"
-#include "MenuState.hpp"
+# include "MenuState.hpp"
+# include "IntroState.hpp" 
 
 int 		main(void) {
   try {
 
       std::shared_ptr<is::GameEngine> engine = std::make_shared<is::GameEngine>("Indie Studio",
 										1900, 1000, 0, false);
-      engine->PushState(new is::MenuState);
+      engine->PushState(new is::IntroState);
 
       while (engine->Running())
 	{

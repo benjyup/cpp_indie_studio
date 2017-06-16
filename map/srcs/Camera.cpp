@@ -7,6 +7,7 @@
 #include "Camera.hpp"
 #include "map.hpp"
 #include "IGameState.hpp"
+#include "MenuState.hpp"
 
 is::Camera::Camera(irr::scene::ISceneManager* smgr, irr::video::IVideoDriver *driver,
 	       CamMode cameraMode, is::GameEngine *engine)
@@ -128,7 +129,7 @@ void			is::Camera::setSplashScreen()
       _engine->Draw();
       if (_timer->getTime() >= (_anim1Time + _anim2Time + _anim3Time) - 30)
 	{
-	  setMenuMode();
+    _engine->ChangeState(new is::MenuState);
 	  break;
 	}
     }
