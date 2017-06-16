@@ -82,33 +82,20 @@ namespace is
   }
   void MenuState::initKeyTexture()
   {
-    this->_pathKey[irr::KEY_KEY_A] = this->_driver->getTexture("./ButtonGFX/abutton.png");
-    this->_pathKey[irr::KEY_KEY_B] = this->_driver->getTexture("./ButtonGFX/bbutton.png");
-    this->_pathKey[irr::KEY_KEY_C] = this->_driver->getTexture("./ButtonGFX/cbutton.png");
-    this->_pathKey[irr::KEY_KEY_D] = this->_driver->getTexture("./ButtonGFX/dbutton.png");
-    this->_pathKey[irr::KEY_KEY_E] = this->_driver->getTexture("./ButtonGFX/ebutton.png");
-    this->_pathKey[irr::KEY_KEY_F] = this->_driver->getTexture("./ButtonGFX/fbutton.png");
-    this->_pathKey[irr::KEY_KEY_G] = this->_driver->getTexture("./ButtonGFX/gbutton.png");
-    this->_pathKey[irr::KEY_KEY_H] = this->_driver->getTexture("./ButtonGFX/hbutton.png");
-    this->_pathKey[irr::KEY_KEY_I] = this->_driver->getTexture("./ButtonGFX/ibutton.png");
-    this->_pathKey[irr::KEY_KEY_J] = this->_driver->getTexture("./ButtonGFX/jbutton.png");
-    this->_pathKey[irr::KEY_KEY_K] = this->_driver->getTexture("./ButtonGFX/kbutton.png");
-    this->_pathKey[irr::KEY_KEY_L] = this->_driver->getTexture("./ButtonGFX/lbutton.png");
-    this->_pathKey[irr::KEY_KEY_M] = this->_driver->getTexture("./ButtonGFX/mbutton.png");
-    this->_pathKey[irr::KEY_KEY_N] = this->_driver->getTexture("./ButtonGFX/nbutton.png");
-    this->_pathKey[irr::KEY_KEY_O] = this->_driver->getTexture("./ButtonGFX/obutton.png");
-    this->_pathKey[irr::KEY_KEY_P] = this->_driver->getTexture("./ButtonGFX/pbutton.png");
-    this->_pathKey[irr::KEY_KEY_Q] = this->_driver->getTexture("./ButtonGFX/qbutton.png");
-    this->_pathKey[irr::KEY_KEY_R] = this->_driver->getTexture("./ButtonGFX/rbutton.png");
-    this->_pathKey[irr::KEY_KEY_S] = this->_driver->getTexture("./ButtonGFX/sbutton.png");
-    this->_pathKey[irr::KEY_KEY_T] = this->_driver->getTexture("./ButtonGFX/tbutton.png");
-    this->_pathKey[irr::KEY_KEY_U] = this->_driver->getTexture("./ButtonGFX/ubutton.png");
-    this->_pathKey[irr::KEY_KEY_V] = this->_driver->getTexture("./ButtonGFX/vbutton.png");
-    this->_pathKey[irr::KEY_KEY_W] = this->_driver->getTexture("./ButtonGFX/wbutton.png");
-    this->_pathKey[irr::KEY_KEY_X] = this->_driver->getTexture("./ButtonGFX/xbutton.png");
-    this->_pathKey[irr::KEY_KEY_Y] = this->_driver->getTexture("./ButtonGFX/ybutton.png");
-    this->_pathKey[irr::KEY_KEY_Z] = this->_driver->getTexture("./ButtonGFX/zbutton.png");
+    int              letter;
+    std::string       doss = "./ButtonGFX/";
+    std::string       buttonpng = "button.png";
+    std::string       tmp;
 
+    letter = (int)irr::KEY_KEY_A;
+    while (letter <= (int)irr::KEY_KEY_Z)
+    {
+      letter = letter + 32;
+      tmp = doss + (char)letter + buttonpng;
+      letter = letter - 32;
+      this->_pathKey[(irr::EKEY_CODE)letter] = this->_driver->getTexture(irr::io::path(tmp.c_str()));
+      letter++;
+    }
     this->_pathKey[irr::KEY_LEFT] = this->_driver->getTexture("./ButtonGFX/leftarrowbutton.png");
     this->_pathKey[irr::KEY_RIGHT] = this->_driver->getTexture("./ButtonGFX/rightarrowbutton.png");
     this->_pathKey[irr::KEY_UP] = this->_driver->getTexture("./ButtonGFX/uparrowbutton.png");

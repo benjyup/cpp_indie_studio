@@ -21,7 +21,7 @@ namespace is
             if (event.KeyInput.Key == irr::KEY_ESCAPE)
                 this->_device->closeDevice();
             else
-                this->_engine->ChangeState(new MenuState);
+                this->_engine->PushState(new MenuState);
         }
     return (false);
     }
