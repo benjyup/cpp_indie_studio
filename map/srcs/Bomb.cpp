@@ -89,12 +89,16 @@ int 			is::Bomb::_reducePower(std::list<std::shared_ptr<is::Bomb>> bombs,
     }
   else if (b->getType() == Type::BOMB)
       {
-	auto it = std::find_if(bombs.begin(), bombs.end(), [pos](auto bomb) { return pos == bomb->getPos(); });
+	ret += 1;
+	auto it = std::find_if(bombs.begin(),
+			       bombs.end(),
+			       [pos](auto bomb) { return pos.X == bomb->getPos().X && pos.Y == bomb->getPos().Y && pos.Z == bomb->getPos().Z; });
+	if (it == bombs.end())
+	  return (ret);
 
 	std::cout << std::boolalpha << _alreadyBlowUp << std::endl;
 	if ((*it)->_alreadyBlowUp == false)
 	  (*it)->_explosion(bombs);
-	ret += 1;
 	//std::cout << "DESTRUIT UNE AUTRE BOMBE" << std::endl;
       }
   //std::cout << "ret = " << ret << std::endl;
