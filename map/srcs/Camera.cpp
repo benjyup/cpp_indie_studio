@@ -8,7 +8,7 @@
 #include "map.hpp"
 #include "IGameState.hpp"
 
-Camera::Camera(irr::scene::ISceneManager* smgr, irr::video::IVideoDriver *driver,
+is::Camera::Camera(irr::scene::ISceneManager* smgr, irr::video::IVideoDriver *driver,
 	       CamMode cameraMode, is::GameEngine *engine)
 	: _smgr(smgr), _driver(driver), _currMode(cameraMode), _engine(engine), _anim(0),
 	  _anim1Time(10000), _anim2Time(5000), _anim3Time(5000), _anim4Time(5000)
@@ -16,12 +16,12 @@ Camera::Camera(irr::scene::ISceneManager* smgr, irr::video::IVideoDriver *driver
   _timer = _engine->getDevice()->getTimer();
 }
 
-Camera::~Camera()
+is::Camera::~Camera()
 {
 
 }
 
-void			Camera::setMenuMode()
+void			is::Camera::setMenuMode()
 {
   irr::scene::ISceneNodeAnimator* anim = 0;
   //setTextMenu();
@@ -30,12 +30,10 @@ void			Camera::setMenuMode()
 			   irr::core::vector3df(((0.5 + (BLOCK - 2)) * SCALE) / 2,
 						0.0f,
 						((0.5 + (BLOCK - 1)) * SCALE)) / 2)->addAnimator(anim);
-  //anim = _smgr->createFlyCircleAnimator(irr::core::vector3df(0,200,0), 300.0f, 0.0009f);
-  //_node->addAnimator(anim);
   anim->drop();
 }
 
-void			Camera::setInGameMode()
+void			is::Camera::setInGameMode()
 {
   _smgr->addCameraSceneNode(0, irr::core::vector3df((((0.5 + (BLOCK - 2)) * SCALE) / 2) - 2, 150, 30),
 			    irr::core::vector3df((((0.5 + (BLOCK - 2)) * SCALE) / 2) - 2,
@@ -43,7 +41,7 @@ void			Camera::setInGameMode()
 						 (((0.5 + (BLOCK - 1)) * SCALE) / 2)));
 }
 
-void Camera::setAnimation1()
+void			is::Camera::setAnimation1()
 {
   _anim = _smgr->createFlyStraightAnimator(irr::core::vector3df(0, 3 * SCALE, -2750),
 					  irr::core::vector3df(0, 3 * SCALE, 100),
@@ -51,7 +49,7 @@ void Camera::setAnimation1()
   _camera->addAnimator(_anim);
 }
 
-void Camera::setAnimation2()
+void			is::Camera::setAnimation2()
 {
   _node->setVisible(0);
   _anim = _smgr->createFlyStraightAnimator(irr::core::vector3df(0, 3 * SCALE, 100),
@@ -62,7 +60,7 @@ void Camera::setAnimation2()
   _camera->addAnimator(_anim);
 }
 
-void Camera::setAnimation3()
+void			is::Camera::setAnimation3()
 {
   _anim = _smgr->createFlyStraightAnimator(irr::core::vector3df(((0.4 + (BLOCK - 2)) * SCALE),
 								1000,
@@ -74,7 +72,7 @@ void Camera::setAnimation3()
   _camera->addAnimator(_anim);
 }
 
-void Camera::setTextMenu()
+void			is::Camera::setTextMenu()
 {
   _mesh = _smgr->getMesh("./gfx/bomberman3D.obj");
   _node = _smgr->addAnimatedMeshSceneNode(_mesh);
@@ -90,13 +88,13 @@ void Camera::setTextMenu()
   _node->setVisible(1);
 }
 
-void Camera::draw()
+void			is::Camera::draw()
 {
   _camera->render();
   _node->render();
 }
 
-void Camera::setTextIntro()
+void 			is::Camera::setTextIntro()
 {
   _mesh = _smgr->getMesh("./gfx/indiestudio2.obj");
   _node = _smgr->addAnimatedMeshSceneNode(_mesh);
@@ -111,7 +109,7 @@ void Camera::setTextIntro()
     }
 }
 
-void			Camera::setSplashScreen()
+void			is::Camera::setSplashScreen()
 {
   _camera = _smgr->addCameraSceneNode(0,
 				     irr::core::vector3df(BLOCK / 2 * SCALE, 2000, BLOCK / 2 * 100),
@@ -138,22 +136,22 @@ void			Camera::setSplashScreen()
   _anim->drop();
 }
 
-scene::ISceneManager	*Camera::get_smgr() const
+scene::ISceneManager	*is::Camera::get_smgr() const
 {
   return _smgr;
 }
 
-CamMode			Camera::get_currMode() const
+is::CamMode			is::Camera::get_currMode() const
 {
   return _currMode;
 }
 
-void			Camera::set_smgr(scene::ISceneManager *_smgr)
+void			is::Camera::set_smgr(scene::ISceneManager *_smgr)
 {
   Camera::_smgr = _smgr;
 }
 
-void			Camera::set_currMode(CamMode _currMode)
+void			is::Camera::set_currMode(CamMode _currMode)
 {
   Camera::_currMode = _currMode;
 }

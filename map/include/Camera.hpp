@@ -9,53 +9,64 @@
 #include <irrlicht.h>
 #include "../../src/GameEngine.hpp"
 
-enum	CamMode
+namespace is
 {
-  MENU = 0,
-  INGAME,
-  SPLASHSCREEN
-};
+  enum CamMode
+  {
+    MENU = 0,
+    INGAME,
+    SPLASHSCREEN
+  };
 
-class Camera
-{
- public:
-  Camera(irr::scene::ISceneManager* smgr, irr::video::IVideoDriver *driver,
-	 CamMode cameraMode, is::GameEngine *engine);
-  virtual ~Camera();
+  class Camera
+  {
+   public:
+    Camera(irr::scene::ISceneManager *smgr, irr::video::IVideoDriver *driver,
+	   CamMode cameraMode, is::GameEngine *engine);
 
-  void					setMenuMode();
-  void					setInGameMode();
-  void					setSplashScreen();
+    virtual ~Camera();
 
-  void 					draw();
-  void 					setTextIntro();
-  void 					setTextMenu();
-  void 					setAnimation1();
-  void 					setAnimation2();
-  void 					setAnimation3();
+    void setMenuMode();
 
-  irr::scene::ISceneManager 		*get_smgr() const;
+    void setInGameMode();
 
-  CamMode 				get_currMode() const;
+    void setSplashScreen();
 
-  void 					set_smgr(irr::scene::ISceneManager *_smgr);
+    void draw();
 
-  void 					set_currMode(CamMode _currMode);
+    void setTextIntro();
 
- private:
-  irr::scene::ISceneManager*		_smgr;
-  irr::video::IVideoDriver		*_driver;
-  CamMode 				_currMode;
-  is::GameEngine			*_engine;
-  irr::ITimer 				*_timer;
-  irr::scene::ICameraSceneNode		*_camera;
-  irr::scene::ISceneNodeAnimator	*_anim = 0;
-  irr::u32 				_anim1Time;
-  irr::u32 				_anim2Time;
-  irr::u32 				_anim3Time;
-  irr::u32 				_anim4Time;
-  irr::scene::IAnimatedMeshSceneNode*	_node;
-  irr::scene::IAnimatedMesh* 		_mesh;
-};
+    void setTextMenu();
+
+    void setAnimation1();
+
+    void setAnimation2();
+
+    void setAnimation3();
+
+    irr::scene::ISceneManager *get_smgr() const;
+
+    CamMode get_currMode() const;
+
+    void set_smgr(irr::scene::ISceneManager *_smgr);
+
+    void set_currMode(CamMode _currMode);
+
+   private:
+    irr::scene::ISceneManager *_smgr;
+    irr::video::IVideoDriver *_driver;
+    CamMode _currMode;
+    is::GameEngine *_engine;
+    irr::ITimer *_timer;
+    irr::scene::ICameraSceneNode *_camera;
+    irr::scene::ISceneNodeAnimator *_anim = 0;
+    irr::u32 _anim1Time;
+    irr::u32 _anim2Time;
+    irr::u32 _anim3Time;
+    irr::u32 _anim4Time;
+    irr::scene::IAnimatedMeshSceneNode *_node;
+    irr::scene::IAnimatedMesh *_mesh;
+  };
+}
 
 #endif //MAP_CAMERA_HPP
