@@ -6,7 +6,7 @@
 # define CPP_INDIE_STUDIO_IGAMESTATE_HPP
 
 #include <memory>
-#include "../src/GameEngine.hpp"
+#include <GameEngine.hpp>
 
 namespace is {
 	class GameEngine;
