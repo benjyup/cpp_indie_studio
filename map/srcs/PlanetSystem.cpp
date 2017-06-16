@@ -4,7 +4,7 @@
 
 #include "PlanetSystem.hpp"
 
-PlanetSystem::PlanetSystem(irr::scene::ISceneManager* smgr, irr::video::IVideoDriver* driver, const irr::io::path &filename,
+is::PlanetSystem::PlanetSystem(irr::scene::ISceneManager* smgr, irr::video::IVideoDriver* driver, const irr::io::path &filename,
 			   irr::f32 radius, irr::f32 speed, irr::core::vector3df position)
 {
   _node = smgr->addLightSceneNode(0, irr::core::vector3df(50,50,50),
@@ -20,12 +20,12 @@ PlanetSystem::PlanetSystem(irr::scene::ISceneManager* smgr, irr::video::IVideoDr
   _node->setMaterialTexture(0, driver->getTexture(filename));
 }
 
-PlanetSystem::~PlanetSystem()
+is::PlanetSystem::~PlanetSystem()
 {
 
 }
 
-void PlanetSystem::draw()
+void is::PlanetSystem::draw()
 {
   _node->render();
 }
