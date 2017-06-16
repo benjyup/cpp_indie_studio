@@ -20,6 +20,8 @@ using namespace irr;
 
 enum Type : int;
 
+class Fire;
+
 namespace is
 {
 

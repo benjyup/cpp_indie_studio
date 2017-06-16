@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <map>
+#include "map.hpp"
 #include <irrlicht.h>
 
 enum	FireDirection
@@ -19,10 +20,15 @@ enum	FireDirection
   DOWN
 };
 
+namespace is
+{
+  class map;
+}
+
 class Fire
 {
  public:
-  Fire(irr::scene::ISceneManager* smgr, irr::video::IVideoDriver* driver, irr::core::vector3df Position,
+  Fire(is::map &map, irr::scene::ISceneManager* smgr, irr::video::IVideoDriver* driver, irr::core::vector3df Position, irr::core::vector3df posMap,
        FireDirection Direction, float power);
   ~Fire();
 
@@ -36,6 +42,7 @@ class Fire
   void 						stopFire();
   void 						draw();
  private:
+  static const std::map<FireDirection, std::function<void(irr::core::vector3di &pos)>>	_DIRECTIONS_ACTION;
   irr::scene::IParticleSystemSceneNode		*_ps;
 
 
@@ -43,6 +50,11 @@ class Fire
   irr::scene::IParticleEmitter			*_em;
   irr::video::ITexture				*_fireText;
   std::map<FireDirection, irr::core::vector3df>	_direction;
+  float 					_power;
+  is::map					&_map;
+  irr::core::vector3di				_pos;
+  FireDirection 				_dir;
+
 };
 
 #endif //CPP_INDIE_STUDIO_FIRE_HPP

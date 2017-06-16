@@ -7,7 +7,6 @@
 
 unsigned int			is::Bomb::ID = 0;
 
-
 is::Bomb::Bomb(is::map &map, irr::video::ITexture *texture, irr::scene::IAnimatedMesh *bombMesh, const irr::core::vector3df &posMap, int power,
 	       irr::video::IVideoDriver &videoDriver, irr::scene::ISceneManager &sceneManager) :
 	_id(ID++),
@@ -126,13 +125,13 @@ bool is::Bomb::operator!=(const is::Bomb &rhs) const
 
 void is::Bomb::_startFires(std::list<std::shared_ptr<is::Bomb>> bombs)
 {
-  this->_fires.emplace_back(&this->_sceneManager, &this->_videoDriver, this->_posSpace, FireDirection::FORWARD,
+  this->_fires.emplace_back(this->_map, &this->_sceneManager, &this->_videoDriver, this->_posSpace, this->_posMap, FireDirection::FORWARD,
 			    this->_reducePower(bombs, this->_posMap, this->_power, [&](irr::core::vector3df &pos) { pos.X += 1; }));
-  this->_fires.emplace_back(&this->_sceneManager, &this->_videoDriver, this->_posSpace, FireDirection::BACKWARD,
+  this->_fires.emplace_back(this->_map, &this->_sceneManager, &this->_videoDriver, this->_posSpace, this->_posMap, FireDirection::BACKWARD,
 			    this->_reducePower(bombs, this->_posMap, this->_power, [&](irr::core::vector3df &pos) { pos.X -= 1; }));
-  this->_fires.emplace_back(&this->_sceneManager, &this->_videoDriver, this->_posSpace, FireDirection::RIGHT,
+  this->_fires.emplace_back(this->_map, &this->_sceneManager, &this->_videoDriver, this->_posSpace, this->_posMap, FireDirection::RIGHT,
 			    this->_reducePower(bombs, this->_posMap, this->_power, [&](irr::core::vector3df &pos) { pos.Y += 1; }));
-  this->_fires.emplace_back(&this->_sceneManager, &this->_videoDriver, this->_posSpace, FireDirection::LEFT,
+  this->_fires.emplace_back(this->_map, &this->_sceneManager, &this->_videoDriver, this->_posSpace, this->_posMap, FireDirection::LEFT,
 			    this->_reducePower(bombs, this->_posMap, this->_power, [&](irr::core::vector3df &pos) { pos.Y -= 1; }));
   std::for_each(this->_fires.begin(), this->_fires.end(), [](Fire &fire) {
     fire.startFire();

@@ -7,8 +7,19 @@
 #include "map.hpp"
 #include <irrlicht.h>
 
-Fire::Fire(irr::scene::ISceneManager* smgr, irr::video::IVideoDriver* driver,
-	   irr::core::vector3df Position, FireDirection Direction, float power)
+const std::map<FireDirection, std::function<void(irr::core::vector3di &pos)>> Fire::_DIRECTIONS_ACTION = {
+	{FORWARD,  [](irr::core::vector3di &pos) { pos.X += 1; }},
+	{BACKWARD, [](irr::core::vector3di &pos) { pos.X -= 1; }},
+	{RIGHT,    [](irr::core::vector3di &pos) { pos.Y += 1; }},
+	{LEFT,     [](irr::core::vector3di &pos) { pos.Y -= 1; }}
+};
+
+Fire::Fire(is:: map &map, irr::scene::ISceneManager* smgr, irr::video::IVideoDriver* driver,
+	   irr::core::vector3df Position, irr::core::vector3df posMap, FireDirection Direction, float power) :
+	_power(power),
+	_map(map),
+	_pos({posMap.X, posMap.Y, posMap.Z}),
+	_dir(Direction)
 {
   initMapDir();
   std::cout << "power = " << power << std::endl;
@@ -26,12 +37,31 @@ Fire::~Fire()
 
 void Fire::startFire()
 {
+  irr::core::vector3di  pos(this->_pos);
+
   _ps->setEmitter(_em);
+  std::cerr << "START FIRE" << std::endl;
+  for (float i = 0.0f ; i < _power ; i += 1)
+    {
+      std::cout << "START FIRE pos.x = " << pos.X << " pos.y = " << pos.Y << " pos.z = " << pos.Z<< std::endl;
+      this->_map.addObject(is::Type::FIRE, {pos.X, pos.Y, pos.Z});
+      _DIRECTIONS_ACTION.at(this->_dir)(pos);
+    }
+  std::cerr << "START FIRE" << std::endl;
 }
 
 void Fire::stopFire()
 {
   _ps->setEmitter(0);
+  std::cerr << "DELETE FIRE" << std::endl;
+  irr::core::vector3di  pos(this->_pos);
+  for (float i = 0.0f ; i <= _power ; i += 1)
+    {
+      std::cout << "DELETE FIRE pos.x = " << pos.X << " pos.y = " << pos.Y << " pos.z = " << pos.Z<< std::endl;
+      this->_map.delObject({pos.X, pos.Y, pos.Z});
+      _DIRECTIONS_ACTION.at(this->_dir)(pos);
+    }
+  std::cerr << "DELETE FIRE" << std::endl;
   _em->drop();
   _ps->remove();
 }
