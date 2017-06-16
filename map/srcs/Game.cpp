@@ -43,8 +43,8 @@ namespace is
     this->_driver = this->_engine->getDriver();
     this->_gui = this->_engine->getGuiEnv();
     this->_engine->getDevice()->getCursorControl()->setVisible(false);
-    mapi = _parserMap.getVector();
-    //mapi = _genMap.getMap();
+    //mapi = _parserMap.getVector();
+    mapi = _genMap.getMap();
     _map = std::make_shared<is::map>(_driver, _sceneManager, mapi);
     _bombs = std::make_shared<is::BombsManager>(*(_map.get()), *_driver, *_sceneManager);
     _opt = _engine->getOptions();
@@ -66,7 +66,7 @@ namespace is
     _bombs->putBomb({1, 12, 0}, 2);
     _cam = std::make_shared<Camera>(_sceneManager, _driver, MENU, _engine);
     //_cam->setMenuMode();
-    _cam->setInGameMode();
+    //_cam->setInGameMode();
   }
 
   void Game::Cleanup(void)

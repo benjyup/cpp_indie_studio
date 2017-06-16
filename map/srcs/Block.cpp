@@ -32,6 +32,8 @@ namespace is
     node->setMaterialTexture(0, text);
     node->setScale(irr::core::vector3df(SCALE, SCALE, SCALE));
     node->setRotation(irr::core::vector3df(0, 0, 0));
+    if (type == BREAK)
+      node->setScale({SCALE - 2, SCALE - 2, SCALE - 2});
   }
 
   float Block::setY()
