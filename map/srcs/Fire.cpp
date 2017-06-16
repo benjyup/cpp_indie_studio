@@ -41,7 +41,7 @@ void Fire::startFire()
 
   _ps->setEmitter(_em);
   std::cerr << "START FIRE" << std::endl;
-  for (float i = 0.0f ; i < _power ; i += 1)
+  for (float i = 0.0f ; i <= _power ; i += 1)
     {
       std::cout << "START FIRE pos.x = " << pos.X << " pos.y = " << pos.Y << " pos.z = " << pos.Z<< std::endl;
       this->_map.addObject(is::Type::FIRE, {pos.X, pos.Y, pos.Z});
@@ -53,6 +53,8 @@ void Fire::startFire()
 void Fire::stopFire()
 {
   _ps->setEmitter(0);
+  _em->drop();
+  _ps->remove();
   std::cerr << "DELETE FIRE" << std::endl;
   irr::core::vector3di  pos(this->_pos);
   for (float i = 0.0f ; i <= _power ; i += 1)
@@ -62,8 +64,6 @@ void Fire::stopFire()
       _DIRECTIONS_ACTION.at(this->_dir)(pos);
     }
   std::cerr << "DELETE FIRE" << std::endl;
-  _em->drop();
-  _ps->remove();
 }
 
 void	Fire::initMapDir()
