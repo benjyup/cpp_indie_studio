@@ -9,28 +9,38 @@
 #include <vector>
 #include <string>
 
-class GenerateMap
+namespace is
 {
- public:
-  GenerateMap(std::string const &fileName);
-  virtual ~GenerateMap();
+  class GenerateMap
+  {
+   public:
+    GenerateMap(std::string const &fileName);
 
-  void			generate();
-  void			initMap();
-  int			fillMap(std::string const &line);
-  unsigned int		genRandNumber(unsigned int min, unsigned int max);
-  void			startGeneration();
-  void			genRandBorder(unsigned int col);
-  unsigned int		nbOfBlock();
-  std::vector<int>	&getMap();
+    virtual ~GenerateMap();
 
- private:
-  unsigned int 		_nbBlock;
-  std::vector<int>	_map;
-  std::string           _mapFile;
-  int			_X;
-  int			_Y;
-};
+    void generate();
 
+    void initMap();
+
+    int fillMap(std::string const &line);
+
+    unsigned int genRandNumber(unsigned int min, unsigned int max);
+
+    void startGeneration();
+
+    void genRandBorder(unsigned int col);
+
+    unsigned int nbOfBlock();
+
+    std::vector<int> &getMap();
+
+   private:
+    unsigned int _nbBlock;
+    std::vector<int> _map;
+    std::string _mapFile;
+    int _X;
+    int _Y;
+  };
+}
 
 #endif //MAP_GENERATEMAP_HPP

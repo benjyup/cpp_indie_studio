@@ -10,7 +10,7 @@
 #include <zconf.h>
 #include <fstream>
 
-GenerateMap::GenerateMap(std::string const &fileName)
+is::GenerateMap::GenerateMap(std::string const &fileName)
 	: _mapFile(fileName)
 {
   _nbBlock = nbOfBlock();
@@ -18,17 +18,17 @@ GenerateMap::GenerateMap(std::string const &fileName)
   generate();
 }
 
-GenerateMap::~GenerateMap()
+is::GenerateMap::~GenerateMap()
 {
   _map.clear();
 }
 
-std::vector<int> &GenerateMap::getMap()
+std::vector<int>	&is::GenerateMap::getMap()
 {
   return _map;
 }
 
-unsigned int GenerateMap::nbOfBlock()
+unsigned int		is::GenerateMap::nbOfBlock()
 {
   std::ifstream file;
   std::string   buff;
@@ -46,7 +46,7 @@ unsigned int GenerateMap::nbOfBlock()
     }
 }
 
-void GenerateMap::initMap()
+void 			is::GenerateMap::initMap()
 {
   std::ifstream file;
   std::string   buff;
@@ -67,7 +67,7 @@ void GenerateMap::initMap()
   _Y = i;
 }
 
-int GenerateMap::fillMap(std::string const &line)
+int			is::GenerateMap::fillMap(std::string const &line)
 {
   int i;
   for ( i=0; line[i]!=0; i++)
@@ -75,13 +75,13 @@ int GenerateMap::fillMap(std::string const &line)
   return (i);
 }
 
-unsigned int GenerateMap::genRandNumber(unsigned int min, unsigned int max)
+unsigned int		is::GenerateMap::genRandNumber(unsigned int min, unsigned int max)
 {
   unsigned int randNbr = min + static_cast <unsigned int> (rand()) / (static_cast <unsigned int> (RAND_MAX / max));
   return (randNbr);
 }
 
-void GenerateMap::genRandBorder(unsigned int pos)
+void			is::GenerateMap::genRandBorder(unsigned int pos)
 {
   unsigned int	i;
 
@@ -95,7 +95,7 @@ void GenerateMap::genRandBorder(unsigned int pos)
     }
 }
 
-void GenerateMap::startGeneration()
+void			is::GenerateMap::startGeneration()
 {
   unsigned int	nbrRand;
   unsigned int	i;
@@ -117,7 +117,7 @@ void GenerateMap::startGeneration()
     }
 }
 
-void GenerateMap::generate()
+void			is::GenerateMap::generate()
 {
   srand(static_cast <unsigned> (time(0)));
   startGeneration();
