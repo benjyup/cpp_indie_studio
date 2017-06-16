@@ -29,6 +29,7 @@ namespace is
   {
     this->_engine = engine;
     this->_sceneManager = this->_engine->getSceneManager();
+    _sceneManager->clear();
     this->_driver = this->_engine->getDriver();
     this->_gui = this->_engine->getGuiEnv();
     this->_menuEventReceiver.setEngine(this->_engine);

@@ -10,6 +10,7 @@
 #include "map.hpp"
 #include <irrlicht.h>
 
+
 enum	FireDirection
 {
   FORWARD = 0,

@@ -1,3 +1,7 @@
-move action button
-player two
-replay
+The winner is
+IA 1
+IA 2
+IA 3
+IA 4
+all Key in option.cpp
+retirer le fond des touches
