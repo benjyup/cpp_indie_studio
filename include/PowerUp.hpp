@@ -5,14 +5,19 @@
 #ifndef MAP_POWERUP_HPP
 #define MAP_POWERUP_HPP
 
-#include "Options.hpp"
 #include <string>
 #include <dirent.h>
-//#include <thread>
-//#include <vector>
+#include "Options.hpp"
+#include "Character.hpp"
 
 namespace is
 {
+    enum class POWERIS : int8_t {
+        POWERLIVE = 0,
+        POWERBOMB,
+        POWERPOWER
+    };
+
     class PowerUp
     {
     public:
@@ -22,6 +27,7 @@ namespace is
                  irr::core::vector3df const &,
                 is::map                     *);
         ~PowerUp();
+        void    getPower(is::Character *);
     private:
 
         irr::scene::IAnimatedMeshSceneNode  *_mesh;

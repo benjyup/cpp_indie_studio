@@ -15,8 +15,8 @@ is::PowerUpManager::PowerUpManager(irr::scene::ISceneManager &sceneManager,
     std::cout << "Indie_studio: PowerUpManager _initializated" << std::endl;
 }
 
-void is::PowerUpManager::newPow() {
+void is::PowerUpManager::newPow(irr::core::vector3df const &map) {
     _powUp.push_back(std::make_shared<is::PowerUp>(PowerUp((_sceneManager.getMesh("./powersUp/mushroom/supermushroom.obj")),
                                                            _driver.getTexture("./powersUp/mushroom/t0081_0.png"),
-                                                           _sceneManager, irr::core::vector3df(7, 7, 0), _map)));
+                                                           _sceneManager, map, _map)));
 }

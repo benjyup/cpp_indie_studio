@@ -37,3 +37,7 @@ is::PowerUp::PowerUp(irr::scene::IAnimatedMesh *node,
 is::PowerUp::~PowerUp() {
     _map->delObject({(int)_posMap.X, (int)_posMap.Y, (int)_posMap.Z});
 }
+
+void is::PowerUp::getPower(is::Character *c) {
+
+}

@@ -15,7 +15,7 @@ namespace is {
         PowerUpManager(irr::scene::ISceneManager &, irr::video::IVideoDriver &, is::map *);
         ~PowerUpManager() {};
 
-        void    newPow(void);
+        void    newPow(irr::core::vector3df const &);
     private:
         irr::scene::ISceneManager                   &_sceneManager;
         irr::video::IVideoDriver                    &_driver;
