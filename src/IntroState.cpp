@@ -6,7 +6,7 @@
 
 namespace is
 {
-    IntroState::IntroState() : _parserMap("map01.txt")
+    IntroState::IntroState() : _parserMap("map01.txt"), _introEventReceiver()
     {
     }
     IntroState::~IntroState()
@@ -17,6 +17,8 @@ namespace is
         this->_engine = engine;
         this->_driver = this->_engine->getDriver();
         this->_sceneManager = this->_engine->getSceneManager();
+        this->_introEventReceiver.setEngine(this->_engine);
+        this->_engine->getDevice()->setEventReceiver(&this->_introEventReceiver);
         _mapi = _parserMap.getVector();
         _map = std::make_shared<is::map>(_driver, _sceneManager, _mapi);
         Camera	cam(_sceneManager, this->_driver, MENU, _engine);

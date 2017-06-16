@@ -10,3 +10,5 @@ Makefile
 *.o
 map.cbp
 .vs*
+peda*
+.gdb*

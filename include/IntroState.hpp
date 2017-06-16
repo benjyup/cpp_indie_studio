@@ -2,6 +2,8 @@
 // greg
 //
 
+#pragma once
+
 #include <iostream>
 #include "IGameState.hpp"
 #include "GameEngine.hpp"
@@ -12,6 +14,7 @@
 #include "Camera.hpp"
 #include "Fire.hpp"
 #include "PlanetSystem.hpp"
+#include "IntroEventReceiver.hpp"
 
 namespace is 
 {
@@ -35,5 +38,6 @@ namespace is
         std::vector<int>                                  _mapi;
         ParseMap	    				                  _parserMap;
         std::shared_ptr<map>			                  _map;
+        IntroEventReceiver                                _introEventReceiver;
     };
 }
