@@ -19,6 +19,7 @@ set(SOURCE_FILES
         src/IndieStudioException.cpp include/IndieStudioException.hpp
         src/OptionsState.cpp include/OptionsState.hpp
         src/OptionsEventReceiver.cpp include/OptionsEventReceiver.hpp
+	src/IntroEventReceiver.cpp include/IntroEventReceiver.hpp
 	src/IntroState.cpp include/IntroState.hpp
 	
 	include/Block.hpp

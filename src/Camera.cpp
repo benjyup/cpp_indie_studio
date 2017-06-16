@@ -129,6 +129,7 @@ void			is::Camera::setSplashScreen()
       _engine->Draw();
       if (_timer->getTime() >= (_anim1Time + _anim2Time + _anim3Time) - 30)
 	{
+	  //_smgr->clear();
     _engine->ChangeState(new is::MenuState);
 	  break;
 	}
