@@ -54,7 +54,7 @@ namespace is
     _char[1] = std::make_shared<is::Character>(_sceneManager->getMesh("./chef/tris.md2"), _driver->getTexture("./chef/chef.pcx"), _sceneManager, core::vector3df(3 * SCALE - SCALE / 2, 5, 2 * SCALE), _receiver, _opt,
     *_bombs.get());
     _map->addCollision(_char[1].get()->_mesh);
-    _powManager = std::make_shared<is::PowerUpManager>(PowerUpManager(*_sceneManager, *_driver));
+    _powManager = std::make_shared<is::PowerUpManager>(PowerUpManager(*_sceneManager, *_driver, _map.get()));
     _powManager->newPow();
     _engine->getDevice()->setEventReceiver(&_receiver);
     Vector3d	v(5 * SCALE + SCALE / 2 - SCALE, 0, 3 * SCALE + SCALE / 2 - SCALE);
@@ -88,8 +88,6 @@ namespace is
 
   void Game::Update(void)
   {
-    _powManager->update(_char[0]->getPos());
-    _powManager->update(_char[1]->getPos());
   }
 
   void Game::Draw(void)

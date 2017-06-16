@@ -12,15 +12,15 @@
 namespace is {
     class PowerUpManager {
     public:
-        PowerUpManager(irr::scene::ISceneManager &, irr::video::IVideoDriver &);
+        PowerUpManager(irr::scene::ISceneManager &, irr::video::IVideoDriver &, is::map *);
         ~PowerUpManager() {};
 
         void    newPow(void);
-        void    update(irr::core::vector3df &pos);
     private:
         irr::scene::ISceneManager                   &_sceneManager;
         irr::video::IVideoDriver                    &_driver;
         std::vector<std::shared_ptr<is::PowerUp>>   _powUp;
+        is::map                                     *_map;
     };
 }
 

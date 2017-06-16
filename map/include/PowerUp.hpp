@@ -19,17 +19,18 @@ namespace is
         PowerUp(irr::scene::IAnimatedMesh *,
                  irr::video::ITexture *,
                  irr::scene::ISceneManager &,
-                 irr::core::vector3df const &);
-        ~PowerUp() {};
-        void    update(irr::core::vector3df &vec);
+                 irr::core::vector3df const &,
+                is::map                     *);
+        ~PowerUp();
     private:
 
         irr::scene::IAnimatedMeshSceneNode  *_mesh;
         irr::video::ITexture                *_text;
         irr::scene::ISceneManager           &_smgr;
-        irr::core::vector3df                _pos;
+        irr::core::vector3df                _posMap;
+        irr::core::vector3df                _posSpace;
         irr::scene::IAnimatedMesh           *_node;
-      //  std::vector<std::thread>            _pool;
+        is::map                             *_map;
     };
 }
 

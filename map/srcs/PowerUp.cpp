@@ -10,12 +10,14 @@
 is::PowerUp::PowerUp(irr::scene::IAnimatedMesh *node,
                     irr::video::ITexture *texture,
                     irr::scene::ISceneManager &smgr,
-                    irr::core::vector3df const &pos) : _mesh(smgr.addAnimatedMeshSceneNode(node)),
+                    irr::core::vector3df const &pos,
+                    is::map                     *map) : _mesh(smgr.addAnimatedMeshSceneNode(node)),
                                                        _text(texture),
                                                        _smgr(smgr),
-                                                       _pos(pos)
+                                                       _posMap(pos),
+                                                       _posSpace(_posMap.Y * SCALE - SCALE / 2, 0.55 * SCALE, _posMap.X * SCALE + SCALE / 2),
+                                                       _map(map)
 {
-    irr::scene::ITriangleSelector	*t;
     irr::video::SMaterial material;
     _node = node;
     if (_mesh)
@@ -24,18 +26,14 @@ is::PowerUp::PowerUp(irr::scene::IAnimatedMesh *node,
         _mesh->setMD2Animation(irr::scene::EMAT_RUN);
         _mesh->setScale(irr::core::vector3df(1, 1, 1));
         _mesh->setMaterialTexture(0, _text);
-        _mesh->setPosition(pos);
+        _mesh->setPosition(_posSpace);
         _mesh->setRotation(irr::core::vector3df(0, 270, 0));
         _mesh->getMaterial(0).Lighting = true;
         _mesh->getMaterial(0).NormalizeNormals = true;
-        t = smgr.createTriangleSelector(_mesh);
-        _mesh->setTriangleSelector(t);
-        t->drop();
+        _map->addObject(Type::POWERUP, {(int)_posMap.X, (int)_posMap.Y, (int)_posMap.Z});
     }
 }
 
-void is::PowerUp::update(irr::core::vector3df &vec) {
-    if ((vec.X > _pos.X - 10 && vec.X < _pos.X + 10) &&
-            (vec.Y > _pos.Y - 10 && vec.Y < _pos.Y + 10))
-        _mesh->remove();
+is::PowerUp::~PowerUp() {
+    _map->delObject({(int)_posMap.X, (int)_posMap.Y, (int)_posMap.Z});
 }
