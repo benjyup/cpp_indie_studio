@@ -49,6 +49,7 @@ namespace is
     mapi = _genMap.getMap();
     _map = std::make_shared<is::map>(_driver, _sceneManager, mapi);
     _powManager = std::make_shared<is::PowerUpManager>(PowerUpManager(*_sceneManager, *_driver, _map.get()));
+    _map.get()->set_pm(_powManager.get());
     _bombs = std::make_shared<is::BombsManager>(*(_map.get()), *_driver, *_sceneManager, *_powManager);
     _opt = &_engine->getOptions();
     _char.push_back(std::make_shared<is::Character>(_sceneManager->getMesh("./chef/tris.md2"), _driver->getTexture("./chef/chef.pcx"), _sceneManager, core::vector3df(1 * SCALE + 7, 5, 1 * SCALE + 7), _receiver, _opt->getP1Config(),
@@ -102,6 +103,7 @@ namespace is
 	i->update(_powManager.get(), _map.get());
 	i->moove();
       }
+    _powManager->update();
 //      _char[0]->update(_powManager.get(), _map.get());
 //      _char[1]->update(_powManager.get(), _map.get());
   }

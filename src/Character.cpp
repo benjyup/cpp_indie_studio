@@ -58,7 +58,7 @@ void		is::Character::moove()
 	  _mesh->setRotation(irr::core::vector3df(0, 270, 0));
 	  _dir = is::Character::DIR::TOP;
 	}
-      _mesh->setPosition(irr::core::vector3df(v.X, v.Y, v.Z + DEFAULT_SPEED));
+      _mesh->setPosition(irr::core::vector3df(v.X, v.Y, v.Z + DEFAULT_SPEED + _speed));
       t = true;
     }
   if (_receiver.isKeyDown(_Config.at(Options::MOVES::MOVE_DOWN)))
@@ -69,7 +69,7 @@ void		is::Character::moove()
 	  _mesh->setRotation(irr::core::vector3df(0, 90, 0));
 	  _dir = is::Character::DIR::DOWN;
 	}
-      _mesh->setPosition(irr::core::vector3df(v.X, v.Y, v.Z - DEFAULT_SPEED));
+      _mesh->setPosition(irr::core::vector3df(v.X, v.Y, v.Z - DEFAULT_SPEED - _speed));
       t = true;
     }
   if (_receiver.isKeyDown(_Config.at(Options::MOVES::MOVE_RIGHT)))
@@ -80,7 +80,7 @@ void		is::Character::moove()
 	  _mesh->setRotation(irr::core::vector3df(0, 0, 0));
 	  _dir = is::Character::DIR::RIGHT;
 	}
-      _mesh->setPosition(irr::core::vector3df(v.X + DEFAULT_SPEED, v.Y, v.Z));
+      _mesh->setPosition(irr::core::vector3df(v.X + DEFAULT_SPEED + _speed, v.Y, v.Z));
       t = true;
     }
   if (_receiver.isKeyDown(_Config.at(Options::MOVES::MOVE_LEFT)))
@@ -91,7 +91,7 @@ void		is::Character::moove()
 	  _mesh->setRotation(irr::core::vector3df(0, 180, 0));
 	  _dir = is::Character::DIR::LEFT;
 	}
-      _mesh->setPosition(irr::core::vector3df(v.X - DEFAULT_SPEED, v.Y, v.Z));
+      _mesh->setPosition(irr::core::vector3df(v.X - DEFAULT_SPEED - _speed, v.Y, v.Z));
       t = true;
     }
   if (_receiver.isKeyDown(_Config.at(Options::MOVES::MOVE_ACTION)))
@@ -150,8 +150,8 @@ bool 					is::Character::getAlive()
   return !(_state == STATE::DEAD);
 }
 
-void is::Character::incLive() {
-    _live += 1;
+void is::Character::incSpeed() {
+    _speed += 0.1;
 }
 
 void is::Character::incbomb() {

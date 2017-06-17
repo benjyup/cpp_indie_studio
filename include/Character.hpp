@@ -46,7 +46,7 @@ namespace  is
 	      BombsManager &bombsManager);
     ~Character() {}
     void 	moove();
-    void  incLive();
+    void  incSpeed();
     void    incbomb();
     void    incPower();
     void   update(is::PowerUpManager *, is::map *);
