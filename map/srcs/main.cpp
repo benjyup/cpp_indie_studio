@@ -7,7 +7,7 @@
 # include <irrlicht.h>
 #include "irrKlang.h"
 #include  <vector>
-#include "Game.hpp"
+#include "GameState.hpp"
 #include "Sound.hpp"
 
 #ifdef _IRR_WINDOWS_

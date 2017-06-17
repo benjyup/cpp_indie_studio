@@ -34,6 +34,12 @@ is::Character::Character(scene::IAnimatedMesh *node, video::ITexture *texture,
       _mesh->setTriangleSelector(t);
       t->drop();
     }
+  _alive = true;
+}
+
+void		is::Character::die()
+{
+  _mesh->remove();
 }
 
 void		is::Character::moove()
@@ -95,9 +101,25 @@ void		is::Character::moove()
 void is::Character::update(is::PowerUpManager *pm, is::map *map) {
     irr::core::vector3df pos = {ceil(floor(_mesh->getPosition().Z) / (float)SCALE) - 1, ceil(floor(_mesh->getPosition().X) / (float)SCALE), 0};
     int ret = map->getLocalType({ceil(floor(_mesh->getPosition().Z) / (float)SCALE) - 1, ceil(floor(_mesh->getPosition().X) / (float)SCALE), 0});
+  std::cerr << "Type :" << ret << std::endl;
     if (ret == is::POWERUP)
     {
         pm->getPowerUp(pos);
         std::cerr << "HIT WITH A  POWERUP !" << std::endl;
     }
+  if (ret == is::FIRE)
+    {
+      std::cerr << "Need to die" << std::endl;
+      _alive = false;
+    }
+}
+
+irr::scene::IAnimatedMeshSceneNode 		*is::Character::getMesh()
+{
+  return (_mesh);
+}
+
+bool 					is::Character::getAlive()
+{
+  return (_alive);
 }

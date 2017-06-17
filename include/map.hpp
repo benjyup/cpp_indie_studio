@@ -54,7 +54,7 @@ namespace is
     void		initEffects();
     void		addCollision(scene::ISceneNode *);
     void		draw();
-
+    void 		printMap();
 
    private:
     scene::ISceneManager *_smgr;

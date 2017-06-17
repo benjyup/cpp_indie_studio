@@ -2,7 +2,7 @@
 // Created by vincent on 13/06/17.
 //
 
-#include "Game.hpp"
+#include "GameState.hpp"
 #include "Bomb.hpp"
 
 unsigned int			is::Bomb::ID = 0;
