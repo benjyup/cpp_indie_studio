@@ -70,3 +70,58 @@ Program not restarted.
 #18 0x0000000000408201 in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::~__shared_count (
     this=0x339c408, __in_chrg=<optimized out>)
     at /usr/include/c++/5/bits/shared_ptr_base.h:659
+
+
+// EN ME BALADANT DANS OPTIONS PUIS PLAY
+Program received signal SIGSEGV, Segmentation fault.
+0x000000000047f093 in irr::gui::CGUISkin::draw3DSunkenPane (this=0x150a240, element=0x0,
+    bgcolor=..., flat=false, fillBackGround=192, r=..., clip=0x150a560) at CGUISkin.cpp:423
+423     CGUISkin.cpp: No such file or directory.
+(gdb) where
+#0  0x000000000047f093 in irr::gui::CGUISkin::draw3DSunkenPane (this=0x150a240, element=0x0,
+    bgcolor=..., flat=false, fillBackGround=192, r=..., clip=0x150a560) at CGUISkin.cpp:423
+#1  0x00000000006da535 in irr::scene::COctreeSceneNode::createTree (this=0x34484e0,
+    mesh=0x150a560) at COctreeSceneNode.cpp:361
+#2  0x00000000006db925 in irr::scene::COctreeSceneNode::setMesh (this=0x34484e0,
+    mesh=0x150a560) at COctreeSceneNode.cpp:615
+#3  0x00000000004a4a5f in irr::scene::CSceneManager::addOctreeSceneNode (this=0x2fffb70,
+    mesh=0x150a560, parent=0x2fffb78, id=1, minimalPolysPerNode=256,
+    alsoAddIfMeshPointerZero=false) at CSceneManager.cpp:680
+#4  0x00000000004319c0 in is::map::map (this=0x3073120, driver=0xcce7f0, smgr=0x2fffb70,
+    map=std::vector of length 225, capacity 225 = {...})
+    at /home/peixot_b/Epitech/Tek2/CPP/cpp_indie_studio/src/map.cpp:27
+#5  0x00000000004194fc in __gnu_cxx::new_allocator<is::map>::construct<is::map, irr::video::IVideoDriver*&, irr::scene::ISceneManager*&, std::vector<int, std::allocator<int> >&> (
+    this=0x7fffffffd527, __p=0x3073120) at /usr/include/c++/5/ext/new_allocator.h:120
+#6  0x00000000004190ec in std::allocator_traits<std::allocator<is::map> >::construct<is::map, irr::video::IVideoDriver*&, irr::scene::ISceneManager*&, std::vector<int, std::allocator<int> >&> (__a=..., __p=0x3073120) at /usr/include/c++/5/bits/alloc_traits.h:530
+#7  0x0000000000418889 in std::_Sp_counted_ptr_inplace<is::map, std::allocator<is::map>, (__gnu_cxx::_Lock_policy)2>::_Sp_counted_ptr_inplace<irr::video::IVideoDriver*&, irr::scene::ISceneManager*&, std::vector<int, std::allocator<int> >&> (this=0x3073110, __a=...)
+    at /usr/include/c++/5/bits/shared_ptr_base.h:522
+#8  0x0000000000418081 in std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<is::map, std::allocator<is::map>, irr::video::IVideoDriver*&, irr::scene::ISceneManager*&, std::vector<int, std::allocator<int> >&> (this=0x7fffffffd7c8, __a=...)
+    at /usr/include/c++/5/bits/shared_ptr_base.h:617
+#9  0x0000000000416d0f in std::__shared_ptr<is::map, (__gnu_cxx::_Lock_policy)2>::__shared_ptr<std::allocator<is::map>, irr::video::IVideoDriver*&, irr::scene::ISceneManager*&, std::vector<int, std::allocator<int> >&> (this=0x7fffffffd7c0, __tag=..., __a=...)
+    at /usr/include/c++/5/bits/shared_ptr_base.h:1097
+#10 0x0000000000415836 in std::shared_ptr<is::map>::shared_ptr<std::allocator<is::map>, irr::video::IVideoDriver*&, irr::scene::ISceneManager*&, std::vector<int, std::allocator<int> >&> (
+    this=0x7fffffffd7c0, __tag=..., __a=...) at /usr/include/c++/5/bits/shared_ptr.h:319
+#11 0x00000000004144fc in std::allocate_shared<is::map, std::allocator<is::map>, irr::video::IVideoDriver*&, irr::scene::ISceneManager*&, std::vector<int, std::allocator<int> >&> (__a=...)
+    at /usr/include/c++/5/bits/shared_ptr.h:620
+#12 0x00000000004132c0 in std::make_shared<is::map, irr::video::IVideoDriver*&, irr::scene::ISceneManager*&, std::vector<int, std::allocator<int> >&> ()
+    at /usr/include/c++/5/bits/shared_ptr.h:636
+#13 0x000000000042c07d in is::Game::Init (this=0x32e8560, engine=0xb465a0)
+    at /home/peixot_b/Epitech/Tek2/CPP/cpp_indie_studio/src/Game.cpp:50
+#14 0x0000000000409bf1 in is::GameEngine::PushState (this=0xb465a0, state=0x32e8560)
+---Type <return> to continue, or q <return> to quit---Program received signal SIGSEGV, Segmentation fault.
+    at /home/peixot_b/Epitech/Tek2/CPP/cpp_indie_studio/src/GameEngine.cpp:96
+#15 0x000000000041c27a in is::MenuEventReceiver::OnEvent (this=0x1035928, event=...)
+    at /home/peixot_b/Epitech/Tek2/CPP/cpp_indie_studio/src/MenuEventReceiver.cpp:33
+#16 0x0000000000455739 in irr::gui::CGUIEnvironment::OnEvent (this=0x102a920, event=...)
+    at CGUIEnvironment.cpp:399
+#17 0x0000000000595152 in irr::gui::CGUIButton::OnEvent (this=0x3421ac0, event=...)
+    at CGUIButton.cpp:215
+#18 0x00000000004562cf in irr::gui::CGUIEnvironment::postEventFromUser (this=0x102a920,
+    event=...) at CGUIEnvironment.cpp:570
+#19 0x0000000000451e7e in irr::CIrrDeviceStub::postEventFromUser (this=0xb46840, event=...)
+    at CIrrDeviceStub.cpp:224
+#20 0x0000000000444992 in irr::CIrrDeviceLinux::run (this=0xb46840) at CIrrDeviceLinux.cpp:999
+#21 0x0000000000409a15 in is::GameEngine::Running (this=0xb465a0)
+    at /home/peixot_b/Epitech/Tek2/CPP/cpp_indie_studio/src/GameEngine.cpp:57
+#22 0x0000000000407cc2 in main ()
+    at /home/peixot_b/Epitech/Tek2/CPP/cpp_indie_studio/src/main.cpp:17
