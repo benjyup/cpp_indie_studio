@@ -129,13 +129,13 @@ bool is::Bomb::operator!=(const is::Bomb &rhs) const
 void is::Bomb::_startFires(std::list<std::shared_ptr<is::Bomb>> bombs)
 {
   this->_fires.emplace_back(this->_map, &this->_sceneManager, &this->_videoDriver, this->_posSpace, this->_posMap, FireDirection::FORWARD,
-			    this->_reducePower(bombs, this->_posMap, this->_power, [&](irr::core::vector3df &pos) { pos.X += 1; }));
+			    this->_reducePower(bombs, this->_posMap, this->_power, [&](irr::core::vector3df &pos) { pos.X += 1; }), _pm);
   this->_fires.emplace_back(this->_map, &this->_sceneManager, &this->_videoDriver, this->_posSpace, this->_posMap, FireDirection::BACKWARD,
-			    this->_reducePower(bombs, this->_posMap, this->_power, [&](irr::core::vector3df &pos) { pos.X -= 1; }));
+			    this->_reducePower(bombs, this->_posMap, this->_power, [&](irr::core::vector3df &pos) { pos.X -= 1; }), _pm);
   this->_fires.emplace_back(this->_map, &this->_sceneManager, &this->_videoDriver, this->_posSpace, this->_posMap, FireDirection::RIGHT,
-			    this->_reducePower(bombs, this->_posMap, this->_power, [&](irr::core::vector3df &pos) { pos.Y += 1; }));
+			    this->_reducePower(bombs, this->_posMap, this->_power, [&](irr::core::vector3df &pos) { pos.Y += 1; }), _pm);
   this->_fires.emplace_back(this->_map, &this->_sceneManager, &this->_videoDriver, this->_posSpace, this->_posMap, FireDirection::LEFT,
-			    this->_reducePower(bombs, this->_posMap, this->_power, [&](irr::core::vector3df &pos) { pos.Y -= 1; }));
+			    this->_reducePower(bombs, this->_posMap, this->_power, [&](irr::core::vector3df &pos) { pos.Y -= 1; }), _pm);
   std::for_each(this->_fires.begin(), this->_fires.end(), [](Fire &fire) {
     fire.startFire();
   });

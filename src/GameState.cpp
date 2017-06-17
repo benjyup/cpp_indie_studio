@@ -57,7 +57,6 @@ namespace is
 						    *_bombs.get()));
     for (auto &i : _char)
       _map->addCollision(i.get()->getMesh());
-    _powManager->newPow(irr::core::vector3df(7, 7, 0));
     _engine->getDevice()->setEventReceiver(&_receiver);
     _receiver.init();
     Vector3d	v(5 * SCALE + SCALE / 2 - SCALE, 0, 3 * SCALE + SCALE / 2 - SCALE);

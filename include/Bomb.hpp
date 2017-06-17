@@ -64,7 +64,7 @@ namespace is
     t_state 				_state;
     std::list<Fire>			_fires;
     std::list<Vector3d>			_blocksToDelete;
-	PowerUpManager &_pm;
+	is::PowerUpManager &_pm;
 
     int 				_reducePower(std::list<std::shared_ptr<is::Bomb>> bombs,
 						    irr::core::vector3df pos,
