@@ -32,4 +32,9 @@ void is::PowerUpManager::getPowerUp(irr::core::vector3df const &pos) {
             return;
         }
     }
+
+  /*_powUp.erase(std::remove_if(_powUp.begin(), _powUp.end(), [](auto powUp) {
+    return (powUp.check());
+  }));*/
+
 }
