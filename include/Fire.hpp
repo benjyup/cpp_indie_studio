@@ -52,7 +52,7 @@ namespace is
     is::map											&_map;
     irr::core::vector3di									_pos;
     FireDirection 										_dir;
-    bool											_ja;
+    bool											_isBreakable;
     irr::core::vector3df                          _pow;
   };
 }
