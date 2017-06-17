@@ -6,6 +6,8 @@
 #include "Bomb.hpp"
 
 unsigned int			is::Bomb::ID = 0;
+unsigned int			is::Bomb::TIME_TO_BLOWUP = 2;
+
 
 is::Bomb::Bomb(is::map &map, irr::video::ITexture *texture, irr::scene::IAnimatedMesh *bombMesh, const irr::core::vector3df &posMap, int power,
 	       irr::video::IVideoDriver &videoDriver, irr::scene::ISceneManager &sceneManager) :
@@ -52,11 +54,11 @@ bool is::Bomb::blowUp(std::list<std::shared_ptr<is::Bomb>> bombs)
   std::clock_t 		end_clock = std::clock();
   int 			duration = static_cast<int>((std::clock() - _start_clock) / CLOCKS_PER_SEC);
 
-  if (this->_state == BOMB_PLANTED && duration == ((_id == 0) ? (2) : (5)))
+  if (this->_state == BOMB_PLANTED && duration >= TIME_TO_BLOWUP)
     {
       this->_explosion(bombs);
     }
-  else if (this->_state == FIRE && duration == 2)
+  else if (this->_state == FIRE && duration >= TIME_TO_BLOWUP)
       {
 	this->_stopFires();
 	return (true);
