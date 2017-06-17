@@ -22,7 +22,7 @@ is::PowerUp::PowerUp(irr::scene::IAnimatedMesh *node,
 {
     irr::video::SMaterial material;
     _node = node;
-    _power = static_cast<is::poweris>(std::rand() % 3);
+
     if (!_mesh)
         throw is::IndieStudioException("Error while loading mesh");
     _mesh->setMaterialFlag(irr::video::EMF_LIGHTING, false);
@@ -43,18 +43,8 @@ is::PowerUp::~PowerUp() {
     _map->delObject({(int)_posMap.X, (int)_posMap.Y, (int)_posMap.Z});
 }
 
-void is::PowerUp::getPower(is::Character *c) {
-    switch (_power) {
-        case is::poweris::POWERLIVE:
-            c->incLive();
-            break;
-        case is::poweris::POWERBOMB:
-            c->incbomb();
-            break;
-        case is::poweris::POWERPOWER:
-            c->incPower();
-            break;
-    };
+is::poweris &is::PowerUp::getType() {
+    return _type;
 }
 
 bool is::PowerUp::check(irr::core::vector3df const &pos) {

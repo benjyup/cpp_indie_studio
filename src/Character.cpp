@@ -104,6 +104,7 @@ void is::Character::update(is::PowerUpManager *pm, is::map *map) {
   std::cerr << "Type :" << ret << std::endl;
     if (ret == is::POWERUP)
     {
+        pm->getPower(*this, pos);
         pm->getPowerUp(pos);
         std::cerr << "HIT WITH A  POWERUP !" << std::endl;
     }

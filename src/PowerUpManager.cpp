@@ -37,3 +37,23 @@ void is::PowerUpManager::getPowerUp(irr::core::vector3df const &pos) {
     return (powUp->check(pos));
   }));
 }
+
+void is::PowerUpManager::getPower(is::Character &c, irr::core::vector3df const &pos) {
+    is::poweris power;
+    for (auto &ref : _powUp)
+    {
+        if (ref->check(pos))
+            power = ref->getType();
+    }
+    switch (power) {
+        case is::poweris::POWERLIVE:
+            c.incLive();
+            break;
+        case is::poweris::POWERBOMB:
+            c.incbomb();
+            break;
+        case is::poweris::POWERPOWER:
+            c.incPower();
+            break;
+        };
+}
