@@ -14,13 +14,14 @@ is::Character::Character(scene::IAnimatedMesh *node, video::ITexture *texture,
 	  _receiver(receiver),
 	  _bombsManager(bombsManager),
 	  _keySlow(false),
-	  _Config(Config)
+	  _Config(Config),
+	  _animDie(0)
 {
   irr::scene::ITriangleSelector	*t;
   video::SMaterial material;
   if (_mesh)
     {
-      _mesh->setMaterialFlag(video::EMF_LIGHTING, false);
+      _mesh->setMaterialFlag(video::EMF_LIGHTING, true);
       _mesh->setMD2Animation(scene::EMAT_RUN);
       _mesh->setScale(irr::core::vector3df(1, 1, 1));
       _mesh->setMaterialTexture(0, _text);
@@ -28,13 +29,13 @@ is::Character::Character(scene::IAnimatedMesh *node, video::ITexture *texture,
       _dir = Character::DIR::TOP;
       _mesh->setRotation(irr::core::vector3df(0, 270, 0));
       _mesh->getMaterial(0).Lighting = true;
-      _mesh->setScale({0.3f, 0.3f, 0.3f});
+      _mesh->setScale({0.26f, 0.26f, 0.26f});
       _mesh->getMaterial(0).NormalizeNormals = true;
       t = smgr->createTriangleSelector(_mesh);
       _mesh->setTriangleSelector(t);
       t->drop();
     }
-  _alive = true;
+  _state = STATE::ALIVE;
 }
 
 void		is::Character::die()
@@ -44,73 +45,94 @@ void		is::Character::die()
 
 void		is::Character::moove()
 {
-  irr::core::vector3df v;
+  irr::core::vector3df v = _mesh->getPosition();
+  bool			t = false;
 
-  v = _mesh->getPosition();
+  if (_state == STATE::DYING)
+    return;
   if (_receiver.isKeyDown(_Config.at(Options::MOVES::MOVE_UP)))
     {
       if (_dir != is::Character::DIR::TOP)
 	{
+	  _mesh->setMD2Animation(scene::EMAT_RUN);
 	  _mesh->setRotation(irr::core::vector3df(0, 270, 0));
 	  _dir = is::Character::DIR::TOP;
 	}
       _mesh->setPosition(irr::core::vector3df(v.X, v.Y, v.Z + DEFAULT_SPEED));
-      std::cout << "Je suis en : pos.x " << _mesh->getPosition().X << " pos.y = " << _mesh->getPosition().Y << " pos.z = " << _mesh->getPosition().Z << std::endl;
+      t = true;
     }
   if (_receiver.isKeyDown(_Config.at(Options::MOVES::MOVE_DOWN)))
     {
       if (_dir != is::Character::DIR::DOWN)
 	{
+	  _mesh->setMD2Animation(scene::EMAT_RUN);
 	  _mesh->setRotation(irr::core::vector3df(0, 90, 0));
 	  _dir = is::Character::DIR::DOWN;
 	}
       _mesh->setPosition(irr::core::vector3df(v.X, v.Y, v.Z - DEFAULT_SPEED));
-      std::cout << "Je suis en : pos.x " << _mesh->getPosition().X << " pos.y = " << _mesh->getPosition().Y << " pos.z = " << _mesh->getPosition().Z << std::endl;
+      t = true;
     }
   if (_receiver.isKeyDown(_Config.at(Options::MOVES::MOVE_RIGHT)))
     {
       if (_dir != is::Character::DIR::RIGHT)
 	{
+	  _mesh->setMD2Animation(scene::EMAT_RUN);
 	  _mesh->setRotation(irr::core::vector3df(0, 0, 0));
 	  _dir = is::Character::DIR::RIGHT;
 	}
       _mesh->setPosition(irr::core::vector3df(v.X + DEFAULT_SPEED, v.Y, v.Z));
-      std::cout << "Je suis en : pos.x " << _mesh->getPosition().X << " pos.y = " << _mesh->getPosition().Y << " pos.z = " << _mesh->getPosition().Z << std::endl;
+      t = true;
     }
   if (_receiver.isKeyDown(_Config.at(Options::MOVES::MOVE_LEFT)))
     {
       if (_dir != is::Character::DIR::LEFT)
 	{
+	  _mesh->setMD2Animation(scene::EMAT_RUN);
 	  _mesh->setRotation(irr::core::vector3df(0, 180, 0));
 	  _dir = is::Character::DIR::LEFT;
 	}
       _mesh->setPosition(irr::core::vector3df(v.X - DEFAULT_SPEED, v.Y, v.Z));
-      std::cout << "Je suis en : pos.x " << _mesh->getPosition().X << " pos.y = " << _mesh->getPosition().Y << " pos.z = " << _mesh->getPosition().Z << std::endl;
+      t = true;
     }
   if (_receiver.isKeyDown(_Config.at(Options::MOVES::MOVE_ACTION)))
     {
+      _dir = DIR::NONE;
+      _mesh->setMD2Animation(scene::EMAT_CROUCH_WALK);
       if (_keySlow)
- 	     	_bombsManager.putBomb({ceil(floor(_mesh->getPosition().Z) / (float)SCALE) - 1, ceil(floor(_mesh->getPosition().X) / (float)SCALE), 0}, 2);
+	_bombsManager.putBomb({ceil(floor(_mesh->getPosition().Z) / (float) SCALE) - 1,
+			       ceil(floor(_mesh->getPosition().X) / (float) SCALE), 0}, 2);
       _keySlow = false;
-      std::cout << "Je suis en : pos.x " << _mesh->getPosition().X << " pos.y = " << _mesh->getPosition().Y << " pos.z = " << _mesh->getPosition().Z << std::endl;
+      t = true;
     }
-  else
+  if (!t)
+  {
+    if (_dir != is::Character::DIR::NONE)
+      _mesh->setMD2Animation(scene::EMAT_STAND);
+    _dir = DIR::NONE;
     _keySlow = true;
+  }
 }
 
 void is::Character::update(is::PowerUpManager *pm, is::map *map) {
-    irr::core::vector3df pos = {ceil(floor(_mesh->getPosition().Z) / (float)SCALE) - 1, ceil(floor(_mesh->getPosition().X) / (float)SCALE), 0};
-    int ret = map->getLocalType({ceil(floor(_mesh->getPosition().Z) / (float)SCALE) - 1, ceil(floor(_mesh->getPosition().X) / (float)SCALE), 0});
-  std::cerr << "Type :" << ret << std::endl;
-    if (ret == is::POWERUP)
+  irr::core::vector3df pos = {(f32) (ceil(floor(_mesh->getPosition().Z) / (float)SCALE) - 1), ceil(floor(_mesh->getPosition().X) / (float)SCALE), 0};
+  int ret = map->getLocalType({ceil(floor(_mesh->getPosition().Z) / (float)SCALE) - 1, ceil(floor(_mesh->getPosition().X) / (float)SCALE), 0});
+
+  if (ret == is::POWERUP)
+    pm->getPowerUp(pos);
+  else if (ret == is::FIRE)
+      {
+	if (_state != STATE::DYING)
+	    _mesh->setMD2Animation(scene::EMAT_CROUCH_DEATH);
+	_state = STATE::DYING;
+      }
+  if (_state == STATE::DYING)
     {
-        pm->getPowerUp(pos);
-        std::cerr << "HIT WITH A  POWERUP !" << std::endl;
-    }
-  if (ret == is::FIRE)
-    {
-      std::cerr << "Need to die" << std::endl;
-      _alive = false;
+      std::cerr << "Frame Nr "<< _mesh->getFrameNr() << std::endl;
+      std::cerr << _mesh->getEndFrame() << std::endl;
+      if (_mesh->getFrameNr() >= (float)_mesh->getEndFrame() - 1.0f)
+	 _animDie++;
+      if (_animDie == 5)
+	_state = STATE::DEAD;
     }
 }
 
@@ -121,5 +143,5 @@ irr::scene::IAnimatedMeshSceneNode 		*is::Character::getMesh()
 
 bool 					is::Character::getAlive()
 {
-  return (_alive);
+  return !(_state == STATE::DEAD);
 }

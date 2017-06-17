@@ -98,11 +98,6 @@ namespace is
   void GameState::Update(void)
   {
     // A changer
-    _char.remove_if([&](auto &Char) {
-      if (!Char->getAlive())
-	  Char->die();
-      return !Char->getAlive();
-    });
     for (auto &i : _char)
       {
 	i->update(_powManager.get(), _map.get());
@@ -115,11 +110,14 @@ namespace is
   void GameState::Draw(void)
   {
     this->_driver->beginScene();
-//      this->_char[0]->moove();
-//    this->_char[1]->moove();
+   _char.remove_if([&](auto &Char) {
+      if (!Char->getAlive())
+	Char->die();
+      return !Char->getAlive();
+    });
     this->_bombs->checkBombsStatus();
     _sceneManager->drawAll();
-    _map->printMap();
+//    _map->printMap();
     //_cam->draw();
     //_map->draw();
     this->_driver->endScene();

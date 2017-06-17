@@ -27,7 +27,7 @@ is::Bomb::Bomb(is::map &map, irr::video::ITexture *texture, irr::scene::IAnimate
   if (!(this->_node = this->_sceneManager.addAnimatedMeshSceneNode(bombMesh)))
     throw is::IndieStudioException("Error on loading bomb.");
   this->_node->setPosition(this->_posSpace);
-  this->_node->setScale({0.5f * SCALE, 0.5f * SCALE, 0.5f * SCALE});
+  this->_node->setScale({0.3f * SCALE, 0.3f * SCALE, 0.3f * SCALE});
   this->_map.addObject(Type::BOMB, {(int)posMap.X, (int)posMap.Y, (int)posMap.Z});
   std::cerr << "Bomb() id = " << this->_id << std::endl;
   std::cout << "Bomb pos.x = " << posMap.X << " pos.y = " << posMap.Y << " pos.Z = " << posMap.Z << std::endl;
