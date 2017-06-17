@@ -26,6 +26,11 @@ namespace                                       is
   class                                         MenuState : public IGameState
   {
    public:
+
+    static const irr::io::path			            WALLPAPER;
+    static const irr::s32		 	                  BUTTON_WIDTH;
+    static const irr::s32		 	                  BUTTON_HEIGHT;
+
     MenuState();
     virtual                                     ~MenuState();
     virtual void                                Init(GameEngine *engine);
@@ -36,10 +41,8 @@ namespace                                       is
     virtual void                                Update(void);
     virtual void                                Draw(void);
     virtual void                                ChangeState(GameEngine *engine, IGameState *state);
+
    protected:
-    static const irr::io::path			            WALLPAPER;
-    static const irr::s32		 	                  BUTTON_WIDTH;
-    static const irr::s32		 	                  BUTTON_HEIGHT;
     MenuEventReceiver				                    _menuEventReceiver;
     GameEngine 					                        *_engine;
     irr::video::IVideoDriver			              *_driver;

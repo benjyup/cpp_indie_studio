@@ -2,6 +2,7 @@
 // Created by vincent on 23/05/17.
 //
 
+#include <ChoosePlayerState.hpp>
 #include "MenuEventReceiver.hpp"
 #include "MenuState.hpp"
 #include "GameState.hpp"
@@ -30,7 +31,7 @@ bool 		is::MenuEventReceiver::OnEvent(const irr::SEvent &event)
 	    {
 	      //_engine->getSceneManager()->clear();
 	      std::cerr << "Play Button" << std::endl;
-	      this->_engine->PushState(new is::GameState);
+	      this->_engine->PushState(new is::ChoosePlayerState);
 	    }
 	  break;
 	  case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_OPTIONS_BUTTON):

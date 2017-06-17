@@ -6,16 +6,20 @@
 #define CPP_INDIE_STUDIO_CHOOSEPLAYER_HPP
 
 #include <array>
+#include <utility>
 #include "irrlicht.h"
 #include "IGameState.hpp"
 #include "Options.hpp"
 #include "Button.hpp"
+#include "Player.hpp"
+#include "ChoosePlayerEventReceiver.hpp"
 
 namespace is
 {
   class ChoosePlayerState : public IGameState
   {
    public:
+
     ChoosePlayerState();
     ~ChoosePlayerState();
 
@@ -29,10 +33,27 @@ namespace is
     virtual void ChangeState(GameEngine *engine, IGameState *state);
 
    private:
-    Options			*_options;
-    irr::gui::IGUIEnvironment	*_gui;
-    irr::video::IVideoDriver	*_driver;
-    std::vector<is::Button>	_buttons;
+    static std::vector<std::pair<std::string, std::string>>			GFX_PATH;
+
+    Options									*_options;
+    irr::gui::IGUIEnvironment							*_gui;
+    irr::video::IVideoDriver							*_driver;
+    std::vector<is::Button>							_buttons;
+    irr::scene::ISceneManager   						*_sceneManager;
+    std::array<std::pair<irr::video::ITexture *, irr::video::ITexture *>, 4>	_gfxAI;
+    std::array<std::pair<irr::video::ITexture *, irr::video::ITexture *>, 2>	_gfxPlayer;
+    std::vector<Player>								_players;
+    irr::video::ITexture							*_voidButton;
+    irr::video::ITexture							*_voidButtonHovered;
+    irr::u32 									_nbrOfPlayers;
+    irr::u32 									_nbrOfAI;
+    ChoosePlayerEventReceiver							choosePlayerEventReceiver;
+    ChoosePlayerEventReceiver::SContext 					eventContext;
+
+
+    void			_drawButtons();
+
+
   };
 }
 
