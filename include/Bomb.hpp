@@ -13,10 +13,11 @@
 #include "IndieStudioException.hpp"
 #include "Fire.hpp"
 #include "map.hpp"
+#include "PowerUpManager.hpp"
 
 namespace is
 {
-
+	class PowerUpManager;
   class Bomb
   {
    public:
@@ -25,7 +26,7 @@ namespace is
 
     Bomb(map &map, irr::video::ITexture *texture, irr::scene::IAnimatedMesh *bombMesh,
 	 const irr::core::vector3df &posMap, int power,
-	 irr::video::IVideoDriver &videoDriver, irr::scene::ISceneManager &sceneManager);
+	 irr::video::IVideoDriver &videoDriver, irr::scene::ISceneManager &sceneManager, is::PowerUpManager &pm);
 
     ~Bomb();
 
@@ -60,6 +61,7 @@ namespace is
     t_state 				_state;
     std::list<Fire>			_fires;
     std::list<Vector3d>			_blocksToDelete;
+	PowerUpManager &_pm;
 
     int 				_reducePower(std::list<std::shared_ptr<is::Bomb>> bombs,
 						    irr::core::vector3df pos,

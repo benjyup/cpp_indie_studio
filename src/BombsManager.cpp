@@ -9,12 +9,13 @@
 #include "Fire.hpp"
 #include <IndieStudioException.hpp>
 
-is::BombsManager::BombsManager(is::map &map, irr::video::IVideoDriver &videoDriver, irr::scene::ISceneManager &sceneManager) :
+is::BombsManager::BombsManager(is::map &map, irr::video::IVideoDriver &videoDriver, irr::scene::ISceneManager &sceneManager, is::PowerUpManager &pm) :
 	_map(map),
 	_videoDriver(videoDriver),
 	_sceneManager(sceneManager),
 	_texture(NULL),
-	_mesh(this->_sceneManager.getMesh("./gfx/bomb.obj"))
+	_mesh(this->_sceneManager.getMesh("./gfx/bomb.obj")),
+	_pm(pm)
 
 {
 }
@@ -26,7 +27,7 @@ is::BombsManager::~BombsManager()
 
 void is::BombsManager::putBomb(const irr::core::vector3df &pos, int power)
 {
-  this->_bombs.push_back(std::make_shared<Bomb>(this->_map, this->_texture, this->_mesh, pos, power, this->_videoDriver, this->_sceneManager));
+  this->_bombs.push_back(std::make_shared<Bomb>(this->_map, this->_texture, this->_mesh, pos, power, this->_videoDriver, this->_sceneManager, this->_pm));
 }
 
 bool is::BombsManager::checkBombsStatus()

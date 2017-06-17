@@ -48,7 +48,8 @@ namespace is
     mapi = _parserMap.getVector();
     //mapi = _genMap.getMap();
     _map = std::make_shared<is::map>(_driver, _sceneManager, mapi);
-    _bombs = std::make_shared<is::BombsManager>(*(_map.get()), *_driver, *_sceneManager);
+    _powManager = std::make_shared<is::PowerUpManager>(PowerUpManager(*_sceneManager, *_driver, _map.get()));
+    _bombs = std::make_shared<is::BombsManager>(*(_map.get()), *_driver, *_sceneManager, *_powManager);
     _opt = &_engine->getOptions();
     _char[0] = std::make_shared<is::Character>(_sceneManager->getMesh("./chef/tris.md2"), _driver->getTexture("./chef/chef.pcx"), _sceneManager, core::vector3df(1 * SCALE + 7, 10, 1 * SCALE + 7), _receiver, _opt->getP1Config(),
     *_bombs.get());
@@ -56,7 +57,6 @@ namespace is
     _char[1] = std::make_shared<is::Character>(_sceneManager->getMesh("./chef/tris.md2"), _driver->getTexture("./chef/chef.pcx"), _sceneManager, core::vector3df(3 * SCALE - SCALE / 2, 3, 2 * SCALE), _receiver, _opt->getP2Config(),
     *_bombs.get());
     _map->addCollision(_char[1].get()->_mesh);
-    _powManager = std::make_shared<is::PowerUpManager>(PowerUpManager(*_sceneManager, *_driver, _map.get()));
     _powManager->newPow(irr::core::vector3df(7, 7, 0));
     _engine->getDevice()->setEventReceiver(&_receiver);
     _receiver.init();

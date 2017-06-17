@@ -21,6 +21,7 @@ using namespace irr;
 namespace  is
 {
     class PowerUpManager;
+    class BombsManager;
   class Character
   {
     enum class DIR : irr::u8

@@ -24,14 +24,6 @@ void is::PowerUpManager::newPow(irr::core::vector3df const &map) {
 }
 
 void is::PowerUpManager::getPowerUp(irr::core::vector3df const &pos) {
-//    for (auto i = _powUp.begin(); i != _powUp.end(); ++i)
-//    {
-//        if (i->get()->check(pos))
-//        {
-//            _powUp.erase(i);
-//            return;
-//        }
-//    }
   _powUp.erase(std::remove_if(_powUp.begin(), _powUp.end(), [pos](auto powUp) {
     return (powUp->check(pos));
   }));
