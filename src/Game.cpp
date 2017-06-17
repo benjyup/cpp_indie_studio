@@ -59,6 +59,7 @@ namespace is
     _powManager = std::make_shared<is::PowerUpManager>(PowerUpManager(*_sceneManager, *_driver, _map.get()));
     _powManager->newPow(irr::core::vector3df(7, 7, 0));
     _engine->getDevice()->setEventReceiver(&_receiver);
+    _receiver.init();
     Vector3d	v(5 * SCALE + SCALE / 2 - SCALE, 0, 3 * SCALE + SCALE / 2 - SCALE);
     //_bomb = std::make_shared<is::Bombs>(_map.get(), _driver, _sceneManager);
     //   Vector3d	v(3, 3, 1);
@@ -107,6 +108,7 @@ namespace is
   {
     this->_driver->beginScene();
     this->_char[0]->moove();
+    this->_char[1]->moove();
     this->_bombs->checkBombsStatus();
     _sceneManager->drawAll();
     //_cam->draw();
