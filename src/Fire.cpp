@@ -7,14 +7,14 @@
 #include "map.hpp"
 #include <irrlicht.h>
 
-const std::map<FireDirection, std::function<void(irr::core::vector3di &pos)>> Fire::_DIRECTIONS_ACTION = {
-	{FORWARD,  [](irr::core::vector3di &pos) { pos.X += 1; }},
-	{BACKWARD, [](irr::core::vector3di &pos) { pos.X -= 1; }},
-	{RIGHT,    [](irr::core::vector3di &pos) { pos.Y += 1; }},
-	{LEFT,     [](irr::core::vector3di &pos) { pos.Y -= 1; }}
+const std::map<is::FireDirection, std::function<void(irr::core::vector3di &pos)>> is::Fire::_DIRECTIONS_ACTION = {
+	{is::FORWARD,  [](irr::core::vector3di &pos) { pos.X += 1; }},
+	{is::BACKWARD, [](irr::core::vector3di &pos) { pos.X -= 1; }},
+	{is::RIGHT,    [](irr::core::vector3di &pos) { pos.Y += 1; }},
+	{is::LEFT,     [](irr::core::vector3di &pos) { pos.Y -= 1; }}
 };
 
-Fire::Fire(is:: map &map, irr::scene::ISceneManager* smgr, irr::video::IVideoDriver* driver,
+is::Fire::Fire(is:: map &map, irr::scene::ISceneManager* smgr, irr::video::IVideoDriver* driver,
 	   irr::core::vector3df Position, irr::core::vector3df posMap, FireDirection Direction, float power) :
 	_power(power),
 	_map(map),
@@ -31,11 +31,11 @@ Fire::Fire(is:: map &map, irr::scene::ISceneManager* smgr, irr::video::IVideoDri
 }
 
 
-Fire::~Fire()
+is::Fire::~Fire()
 {
 }
 
-void Fire::startFire()
+void	is::Fire::startFire()
 {
   irr::core::vector3di  pos(this->_pos);
 
@@ -50,7 +50,7 @@ void Fire::startFire()
   std::cerr << "START FIRE" << std::endl;
 }
 
-void Fire::stopFire()
+void	is::Fire::stopFire()
 {
   _ps->setEmitter(0);
   _em->drop();
@@ -66,7 +66,7 @@ void Fire::stopFire()
   std::cerr << "DELETE FIRE" << std::endl;
 }
 
-void	Fire::initMapDir()
+void	is::Fire::initMapDir()
 {
   std::map<FireDirection, irr::core::vector3df> m;
   m = {{FORWARD, irr::core::vector3df(0.00f, 0.00f, 0.015f)},
@@ -78,7 +78,7 @@ void	Fire::initMapDir()
   _direction = m;
 }
 
-void	Fire::createBox(FireDirection Direction, irr::f32 power)
+void	is::Fire::createBox(FireDirection Direction, irr::f32 power)
 {
   irr::core::vector3df	newPower(power * 1.5, power * 1.5, power * 1.5);
 
@@ -100,7 +100,7 @@ void	Fire::createBox(FireDirection Direction, irr::f32 power)
     }
 }
 
-void	Fire::createFire(irr::scene::ISceneManager* smgr, irr::core::vector3df Position)
+void	is::Fire::createFire(irr::scene::ISceneManager* smgr, irr::core::vector3df Position)
 {
   _ps->setEmitter(_em);
   _paf = _ps->createFadeOutParticleAffector();
@@ -115,17 +115,17 @@ void	Fire::createFire(irr::scene::ISceneManager* smgr, irr::core::vector3df Posi
   std::cout << "debut createFire" << std::endl;
 }
 
-void	Fire::setPosition(irr::core::vector3df position)
+void	is::Fire::setPosition(irr::core::vector3df position)
 {
   _ps->setPosition(position);
 }
 
-void	Fire::setScale(irr::core::vector3df scale)
+void	is::Fire::setScale(irr::core::vector3df scale)
 {
   _ps->setScale(scale);
 }
 
-void Fire::draw()
+void	is::Fire::draw()
 {
   _ps->render();
 }

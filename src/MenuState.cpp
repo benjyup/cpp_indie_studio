@@ -115,6 +115,7 @@ namespace is
   {
     this->_engine->getDevice()->getCursorControl()->setVisible(true);
     this->_engine->getDevice()->setEventReceiver(&this->_menuEventReceiver);
+    _engine->setSceneManager(_sceneManager);
     this->drawButtons();
   }
 

@@ -136,6 +136,22 @@ void 	is::map::moveObject(Block &object, const Vector3d &v)
       }
 }
 
+void 	is::map::printMap()
+{
+  int j = 0;
+  for (auto const &i : _mapi)
+    {
+      std::cerr << i.type;
+      j++;
+      if (j == size)
+	{
+	  std::cerr << std::endl;
+	  j = 0;
+	}
+    }
+  std::cerr << std::endl;
+}
+
 void 	is::map::delObject(Block &object)
 {
   int i = 0;
@@ -198,22 +214,7 @@ int     is::map::getLocalType(Vector3d const &pos) const {
         std::cout << "UPDATE False" << std::endl;
         return (-1);
     }
-    if (_mapi[posi].type == Type::POWERUP)
-    {
-        std::cout << "PowerUp found !" << std::endl;
-        return (is::Type::POWERUP);
-    }
-    else
-    {
-        std::cout << pos << " pos.z = " << pos.getZ() << std::endl;
-        if (_mapi[posi].type == Type::BREAK)
-            std::cout << "UPDATE type = BREAK" << std::endl;
-        if (_mapi[posi].type == Type::FIRE)
-            std::cout << "UPDATE type = FIRE" << std::endl;
-        if (_mapi[posi].type == Type::WALL)
-            std::cout << "UPDATE type = WALL" << std::endl;
-    }
-    return (-1);
+  return (_mapi[posi].type);
 }
 
 bool 	is::map::canIMoove(Vector3d const &pos) const

@@ -7,7 +7,7 @@
 #include <vector>
 #include "irrlicht.h"
 #include "GameEngine.hpp"
-#include "Game.hpp"
+#include "GameState.hpp"
 
 
 #ifdef _IRR_WINDOWS_

@@ -4,7 +4,7 @@
 
 #include <iostream>
 #include <thread>
-#include "Game.hpp"
+#include "GameState.hpp"
 #include "BombsManager.hpp"
 #include "Fire.hpp"
 #include <IndieStudioException.hpp>
@@ -35,7 +35,7 @@ bool is::BombsManager::checkBombsStatus()
   bool 		ret = false;
 
   this->_bombs.erase(std::remove_if(this->_bombs.begin(), this->_bombs.end(),
-				    [&](auto bomb) {
+				    [&](auto const &bomb) {
 				      ret = true;
 				      return bomb->blowUp(this->_bombs);
 				    }),
