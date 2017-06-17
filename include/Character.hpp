@@ -20,8 +20,10 @@ using namespace irr;
 
 namespace  is
 {
-   class PowerUpManager;
-   class BombsManager;
+    class PowerUpManager;
+    class BombsManager;
+    class map;
+
   class Character
   {
     enum class DIR : irr::u8
@@ -44,7 +46,9 @@ namespace  is
 	      BombsManager &bombsManager);
     ~Character() {}
     void 	moove();
-    void  incLive() {_live += 1;}
+    void  incLive();
+    void    incbomb();
+    void    incPower();
     void   update(is::PowerUpManager *, is::map *);
     irr::core::vector3df    			&getPos(){return _pos;}
     scene::IAnimatedMeshSceneNode 		*getMesh();

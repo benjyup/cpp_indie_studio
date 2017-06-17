@@ -118,7 +118,11 @@ void is::Character::update(is::PowerUpManager *pm, is::map *map) {
   int ret = map->getLocalType({ceil(floor(_mesh->getPosition().Z) / (float)SCALE) - 1, ceil(floor(_mesh->getPosition().X) / (float)SCALE), 0});
 
   if (ret == is::POWERUP)
-    pm->getPowerUp(pos);
+    {
+      pm->getPower(*this, pos);
+      pm->getPowerUp(pos);
+      std::cerr << "HIT WITH A  POWERUP !" << std::endl;
+    }
   else if (ret == is::FIRE)
       {
 	if (_state != STATE::DYING)
@@ -144,4 +148,16 @@ irr::scene::IAnimatedMeshSceneNode 		*is::Character::getMesh()
 bool 					is::Character::getAlive()
 {
   return !(_state == STATE::DEAD);
+}
+
+void is::Character::incLive() {
+    _live += 1;
+}
+
+void is::Character::incbomb() {
+    _bomb += 1;
+}
+
+void is::Character::incPower() {
+    _power += 1;
 }

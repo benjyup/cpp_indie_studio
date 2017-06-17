@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <map>
+#include "PowerUpManager.hpp"
 #include "map.hpp"
 #include <irrlicht.h>
 
@@ -38,7 +39,7 @@ namespace is
     void											setScale(irr::core::vector3df scale);
 
     void											startFire();
-    void 											stopFire();
+    void 											stopFire(is::PowerUpManager &pm);
     void 											draw();
    private:
     static const std::map<FireDirection, std::function<void(irr::core::vector3di &pos)>>	_DIRECTIONS_ACTION;
@@ -51,7 +52,8 @@ namespace is
     is::map											&_map;
     irr::core::vector3di									_pos;
     FireDirection 										_dir;
-    bool											_ja;
+    bool											_isBreakable;
+    irr::core::vector3df                          _pow;
   };
 }
 

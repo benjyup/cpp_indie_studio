@@ -19,17 +19,19 @@ namespace is
     };
 
     class Character;
+    class map;
     class PowerUp
             : public __gnu_cxx::__normal_iterator<::std::shared_ptr<::is::PowerUp> *, ::std::vector<::std::shared_ptr<::is::PowerUp>>> {
     public:
         PowerUp(irr::scene::IAnimatedMesh *,
-                 irr::video::ITexture *,
-                 irr::scene::ISceneManager &,
-                 irr::core::vector3df const &,
-                is::map                     *);
+                irr::video::ITexture *,
+                irr::scene::ISceneManager &,
+                irr::core::vector3df const &,
+                is::map                     *,
+                is::poweris);
         ~PowerUp();
         bool    check(irr::core::vector3df const &);
-        void    getPower(is::Character *);
+        is::poweris    &getType();
     private:
 
         irr::scene::IAnimatedMeshSceneNode  *_mesh;
@@ -39,7 +41,8 @@ namespace is
         irr::core::vector3df                _posSpace;
         irr::scene::IAnimatedMesh           *_node;
         is::map                             *_map;
-        is::poweris                         _power;
+        is::poweris                         _type;
+
     };
 }
 

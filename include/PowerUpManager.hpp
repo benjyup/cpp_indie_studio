@@ -17,14 +17,15 @@ namespace is {
 
         void    newPow(irr::core::vector3df const &);
         void    getPowerUp(irr::core::vector3df const &);
+        void    getPower(is::Character &, irr::core::vector3df const &);
     private:
 
         irr::scene::ISceneManager                   &_sceneManager;
         irr::video::IVideoDriver                    &_driver;
         std::vector<std::shared_ptr<is::PowerUp>>   _powUp;
         is::map                                     *_map;
-        irr::scene::IAnimatedMesh                   *_mesh;
-        irr::video::ITexture                        *_texture;
+        std::vector<irr::scene::IAnimatedMesh*>      _mesh;
+        std::vector<irr::video::ITexture*>           _texture;
     };
 }
 

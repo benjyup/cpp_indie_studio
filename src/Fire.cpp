@@ -6,6 +6,7 @@
 #include "Fire.hpp"
 #include "map.hpp"
 #include <irrlicht.h>
+#include <PowerUpManager.hpp>
 
 const std::map<is::FireDirection, std::function<void(irr::core::vector3di &pos)>> is::Fire::_DIRECTIONS_ACTION = {
 	{is::FORWARD,  [](irr::core::vector3di &pos) { pos.X += 1; }},
@@ -20,7 +21,7 @@ is::Fire::Fire(is:: map &map, irr::scene::ISceneManager* smgr, irr::video::IVide
 	_map(map),
 	_pos({posMap.X, posMap.Y, posMap.Z}),
 	_dir(Direction),
-	_ja(false)
+	_isBreakable(false)
 {
   initMapDir();
   std::cout << "power = " << power << std::endl;
@@ -46,14 +47,18 @@ void	is::Fire::startFire()
     {
       std::cout << "START FIRE pos.x = " << pos.X << " pos.y = " << pos.Y << " pos.z = " << pos.Z<< std::endl;
       if (this->_map.getLocalType({pos.X, pos.Y, pos.Z}) == BREAK)
-	this->_ja = true;
+      {
+          this->_isBreakable = true;
+          _pow.X = pos.X;
+          _pow.Y = pos.Y;
+      }
       this->_map.addObject(is::Type::FIRE, {pos.X, pos.Y, pos.Z});
       _DIRECTIONS_ACTION.at(this->_dir)(pos);
     }
   std::cerr << "START FIRE" << std::endl;
 }
 
-void	is::Fire::stopFire()
+void	is::Fire::stopFire(is::PowerUpManager &pm)
 {
   _ps->setEmitter(0);
   _em->drop();
@@ -66,10 +71,10 @@ void	is::Fire::stopFire()
       this->_map.delObject({pos.X, pos.Y, pos.Z});
       _DIRECTIONS_ACTION.at(this->_dir)(pos);
     }
-/*
-  if (!(this->_ja))
-    //addPowerup
-*/
+
+  if (this->_isBreakable)
+    pm.newPow(irr::core::vector3df(_pow.X, _pow.Y, 0));
+
   std::cerr << "DELETE FIRE" << std::endl;
 }
 

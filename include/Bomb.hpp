@@ -18,6 +18,8 @@
 namespace is
 {
 	class PowerUpManager;
+	class map;
+	class Fire;
   class Bomb
   {
    public:
