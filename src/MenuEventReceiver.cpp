@@ -29,6 +29,7 @@ bool 		is::MenuEventReceiver::OnEvent(const irr::SEvent &event)
 	  case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_PLAY_BUTTON):
 	    {
 	      //_engine->getSceneManager()->clear();
+	      std::cerr << "Play Button" << std::endl;
 	      this->_engine->PushState(new is::Game);
 	    }
 	  break;
