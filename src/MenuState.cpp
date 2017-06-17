@@ -113,6 +113,7 @@ namespace is
 
   void MenuState::Resume(void)
   {
+    this->_engine->getDevice()->getCursorControl()->setVisible(true);
     this->_engine->getDevice()->setEventReceiver(&this->_menuEventReceiver);
     this->drawButtons();
   }

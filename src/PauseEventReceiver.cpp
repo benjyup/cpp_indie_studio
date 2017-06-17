@@ -31,7 +31,8 @@ bool 		is::PauseEventReceiver::OnEvent(const irr::SEvent &event)
             this->_engine->PushState(new OptionsState);
             break;
         case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_MENU_BUTTON):
-            this->_engine->ChangeState(new MenuState);
+	  this->_engine->PopState();
+	  this->_engine->PopState();
             break;
         default:
             break;
