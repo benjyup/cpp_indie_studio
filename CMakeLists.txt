@@ -52,7 +52,7 @@ set(SOURCE_FILES
 	src/GenerateMap.cpp
         include/Sound.hpp
         include/PowerUp.hpp src/PowerUp.cpp src/PowerUpManager.cpp include/PowerUpManager.hpp
-	)
+        src/ChoosePlayerState.cpp include/ChoosePlayerState.hpp)
 
 include_directories(irrlicht-1.8.4/include Interface src/gameEngine src/
                     include ./irrKlang-64bit-1.5.0/include)

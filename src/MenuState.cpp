@@ -109,6 +109,7 @@ namespace is
 
   void MenuState::Pause(void)
   {
+
   }
 
   void MenuState::Resume(void)

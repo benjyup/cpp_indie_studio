@@ -22,6 +22,7 @@ namespace is
    public:
 
     static unsigned int			ID;
+    static unsigned int			TIME_TO_BLOWUP;
 
     Bomb(map &map, irr::video::ITexture *texture, irr::scene::IAnimatedMesh *bombMesh,
 	 const irr::core::vector3df &posMap, int power,
