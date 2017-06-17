@@ -32,7 +32,7 @@ is::PowerUp::PowerUp(irr::scene::IAnimatedMesh *node,
     _mesh->getMaterial(0).Lighting = false;
     _mesh->getMaterial(0).NormalizeNormals = true;
     _map->addObject(Type::POWERUP, {(int)_posMap.X, (int)_posMap.Y, (int)_posMap.Z});
-    std::cout << "MapPowerup : " << _posMap.X << ", " << _posMap.Y << ", " << _posMap.Y <<  std::endl;
+    std::cout << "MapPowerup : " << _posMap.X << ", " << _posMap.Y <<  std::endl;
     std::cerr << "New powerUp has been create !" << std::endl;
 }
 

@@ -16,7 +16,7 @@ namespace is
   class BombsManager
   {
    public:
-    BombsManager(is::map &map, irr::video::IVideoDriver &videoDriver, irr::scene::ISceneManager &sceneManager);
+    BombsManager(is::map &map, irr::video::IVideoDriver &videoDriver, irr::scene::ISceneManager &sceneManager, is::PowerUpManager &pm);
     ~BombsManager();
 
     void 			putBomb(const irr::core::vector3df &pos, int power);
@@ -33,6 +33,7 @@ namespace is
 		       std::vector<std::thread> &,
 		       std::vector<is::Bomb> &)> 		_explosion;
     std::mutex					_bomb_mutex;
+    is::PowerUpManager                  &_pm;
   };
 }
 

@@ -10,7 +10,7 @@ unsigned int			is::Bomb::TIME_TO_BLOWUP = 2;
 
 
 is::Bomb::Bomb(is::map &map, irr::video::ITexture *texture, irr::scene::IAnimatedMesh *bombMesh, const irr::core::vector3df &posMap, int power,
-	       irr::video::IVideoDriver &videoDriver, irr::scene::ISceneManager &sceneManager) :
+	       irr::video::IVideoDriver &videoDriver, irr::scene::ISceneManager &sceneManager, is::PowerUpManager &pm) :
 	_id(ID++),
 	_posMap(posMap),
 	_posSpace(posMap.Y * SCALE - SCALE / 2, 0.55 * SCALE, posMap.X * SCALE + SCALE / 2),
@@ -21,7 +21,8 @@ is::Bomb::Bomb(is::map &map, irr::video::ITexture *texture, irr::scene::IAnimate
 	_alreadyBlowUp(false),
 	_start_clock(std::clock()),
 	_state(BOMB_PLANTED),
-	_fires()
+	_fires(),
+    _pm(pm)
 {
   if (!(this->_node = this->_sceneManager.addAnimatedMeshSceneNode(bombMesh)))
     throw is::IndieStudioException("Error on loading bomb.");
@@ -139,13 +140,14 @@ void is::Bomb::_startFires(std::list<std::shared_ptr<is::Bomb>> bombs)
     fire.startFire();
   });
   std::for_each(this->_blocksToDelete.begin(), this->_blocksToDelete.end(), [&](auto pos) {
-    this->_map.delObject(pos);
+      this->_map.delObject(pos);
+      //_pm.newPow(core::vector3df(pos.getX(), pos.getY(), 0));
   });
 }
 
 void is::Bomb::_stopFires()
 {
-  std::for_each(this->_fires.begin(), this->_fires.end(), [](Fire &fire) {
+  std::for_each(this->_fires.begin(), this->_fires.end(), [this](Fire &fire) {
     fire.stopFire();
   });
 }

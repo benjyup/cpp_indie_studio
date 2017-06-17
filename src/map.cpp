@@ -246,22 +246,22 @@ int 	is::map::find(Vector3d const &v) const
   return (posi);
 }
 
-void 	is::map::addObject(Type t, Vector3d const &pos)
+int 	is::map::addObject(Type t, Vector3d const &pos)
 {
   int i = 0;
   irr::core::vector3df v;
 
   if ((i = find(pos)) == -1)
     {
-      std::cout << "Can't add Block, Already something there" << std::endl;
-      return ;
+      std::cerr << "Can't add Block, Already something there" << std::endl;
+      return 1;
     }
   _mapi[i].node->setMaterialTexture(0, _texture[t]);
   v = _mapi[i].node->getPosition();
   _mapi[i].type = t;
   v.Y = _mapi[i].setY();
   _mapi[i].node->setPosition(v);
-  return;
+  return 0;
 }
 
 void	is::map::draw()
