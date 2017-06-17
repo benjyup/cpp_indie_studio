@@ -18,6 +18,9 @@ is::PowerUpManager::PowerUpManager(irr::scene::ISceneManager &sceneManager,
 }
 
 void is::PowerUpManager::newPow(irr::core::vector3df const &map) {
+    int prob = std::rand() % 3;
+    if (prob != 0)
+        return;
     _powUp.emplace_back(std::make_shared<is::PowerUp>(_mesh,
                                                       _texture,
                                                       _sceneManager, map, _map));

@@ -22,6 +22,7 @@ namespace  is
 {
     class PowerUpManager;
     class BombsManager;
+    class map;
   class Character
   {
     enum class DIR : irr::u8

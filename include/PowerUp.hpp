@@ -19,6 +19,7 @@ namespace is
     };
 
     class Character;
+    class map;
     class PowerUp
             : public __gnu_cxx::__normal_iterator<::std::shared_ptr<::is::PowerUp> *, ::std::vector<::std::shared_ptr<::is::PowerUp>>> {
     public:

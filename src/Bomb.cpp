@@ -148,7 +148,7 @@ void is::Bomb::_startFires(std::list<std::shared_ptr<is::Bomb>> bombs)
 void is::Bomb::_stopFires()
 {
   std::for_each(this->_fires.begin(), this->_fires.end(), [this](Fire &fire) {
-    fire.stopFire();
+    fire.stopFire(_pm);
   });
 }
 
