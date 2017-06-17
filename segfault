@@ -1,0 +1,23 @@
+//SEGFAULT QUAND JE PASSE DU INGAME A MENU
+
+Program received signal SIGSEGV, Segmentation fault.
+0x0000000000412abf in irr::core::string<wchar_t, irr::core::irrAllocator<wchar_t> >::operator=<wchar_t> (this=0x10c98c8, c=0x461d <error: Cannot access memory at address 0x461d>)
+    at /home/peixot_b/Epitech/Tek2/CPP/cpp_indie_studio/irrlicht-1.8.4/include/irrString.h:361
+    361                     do
+    (gdb) where
+    #0  0x0000000000412abf in irr::core::string<wchar_t, irr::core::irrAllocator<wchar_t> >::operator=<wchar_t> (this=0x10c98c8, c=0x461d <error: Cannot access memory at address 0x461d>)
+        at /home/peixot_b/Epitech/Tek2/CPP/cpp_indie_studio/irrlicht-1.8.4/include/irrString.h:361
+	#1  0x0000000000459c5c in irr::gui::IGUIElement::setText (this=0x10c9820,
+	    text=0x461d <error: Cannot access memory at address 0x461d>)
+	        at ../../include/IGUIElement.h:482
+		#2  0x00000000004a9fc9 in irr::scene::ISceneNode::OnAnimate (this=0x1030858, timeMs=17949)
+		    at ../../include/ISceneNode.h:132
+		    #3  0x00000000004a5c72 in irr::scene::CSceneManager::drawAll (this=0x1030850)
+		        at CSceneManager.cpp:1371
+			#4  0x0000000000411c8b in is::MenuState::Draw (this=0x1032970)
+			    at /home/peixot_b/Epitech/Tek2/CPP/cpp_indie_studio/src/MenuState.cpp:132
+			    #5  0x0000000000409d76 in is::GameEngine::Draw (this=0xb43580)
+			        at /home/peixot_b/Epitech/Tek2/CPP/cpp_indie_studio/src/GameEngine.cpp:131
+				#6  0x0000000000407d17 in main ()
+				    at /home/peixot_b/Epitech/Tek2/CPP/cpp_indie_studio/src/main.cpp:21
+				    
