@@ -14,7 +14,7 @@
 
 using namespace irr;
 
-#define DEFAULT_SPEED 2
+#define DEFAULT_SPEED 1.2
 #define DEFAULT_POWER 1
 #define DEFAULT_BOMB 1
 

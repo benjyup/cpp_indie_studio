@@ -50,9 +50,9 @@ namespace is
     _map = std::make_shared<is::map>(_driver, _sceneManager, mapi);
     _bombs = std::make_shared<is::BombsManager>(*(_map.get()), *_driver, *_sceneManager);
     _opt = &_engine->getOptions();
-    _char.push_back(std::make_shared<is::Character>(_sceneManager->getMesh("./chef/tris.md2"), _driver->getTexture("./chef/chef.pcx"), _sceneManager, core::vector3df(1 * SCALE + 7, 10, 1 * SCALE + 7), _receiver, _opt->getP1Config(),
+    _char.push_back(std::make_shared<is::Character>(_sceneManager->getMesh("./chef/tris.md2"), _driver->getTexture("./chef/chef.pcx"), _sceneManager, core::vector3df(1 * SCALE + 7, 5, 1 * SCALE + 7), _receiver, _opt->getP1Config(),
 						    *_bombs.get()));
-    _char.push_back(std::make_shared<is::Character>(_sceneManager->getMesh("./chef/tris.md2"), _driver->getTexture("./chef/chef.pcx"), _sceneManager, core::vector3df(3 * SCALE - SCALE / 2, 3, 2 * SCALE), _receiver, _opt->getP2Config(),
+    _char.push_back(std::make_shared<is::Character>(_sceneManager->getMesh("./chef/tris.md2"), _driver->getTexture("./chef/chef.pcx"), _sceneManager, core::vector3df(3 * SCALE + SCALE / 2, 5, 3 * SCALE + SCALE / 2), _receiver, _opt->getP2Config(),
 						    *_bombs.get()));
     for (auto &i : _char)
       _map->addCollision(i.get()->getMesh());
@@ -61,9 +61,7 @@ namespace is
     _engine->getDevice()->setEventReceiver(&_receiver);
     _receiver.init();
     Vector3d	v(5 * SCALE + SCALE / 2 - SCALE, 0, 3 * SCALE + SCALE / 2 - SCALE);
-    //_bomb = std::make_shared<is::Bombs>(_map.get(), _driver, _sceneManager);
-    //   Vector3d	v(3, 3, 1);
-    //_bomb->putBomb(v, 1);
+
     _cam = std::make_shared<Camera>(_sceneManager, _driver, MENU, _engine);
     //_cam->setMenuMode();
     _cam->setInGameMode();
