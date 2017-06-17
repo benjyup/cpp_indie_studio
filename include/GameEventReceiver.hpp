@@ -24,6 +24,7 @@ namespace is
     GameEventReceiver();
     virtual ~GameEventReceiver();
 
+    void					init();
     virtual bool 				OnEvent(const irr::SEvent& event);
     void					setDevice(irr::IrrlichtDevice *device);
     void					setEngine(GameEngine *engine);

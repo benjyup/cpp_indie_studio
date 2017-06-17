@@ -19,6 +19,7 @@ namespace is
 	  _errorMsg(NULL),
     _parserMap("map01.txt")
   {
+    std::cerr << "Menu Event()" << std::endl;
   }
 
   MenuState::~MenuState()
@@ -34,7 +35,7 @@ namespace is
     this->_gui = this->_engine->getGuiEnv();
     this->_menuEventReceiver.setEngine(this->_engine);
     this->_engine->getDevice()->setEventReceiver(&this->_menuEventReceiver);
-
+    this->_engine->getDevice()->getCursorControl()->setVisible(true);
     if (!(this->_errorMsg = this->_gui->addStaticText(L"", irr::core::rect<irr::s32>(100, 300, 300, 400))))
       throw IndieStudioException("Not able to init the error message.");
     this->_buttons = {

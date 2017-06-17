@@ -4,6 +4,7 @@
 
 #include <Camera.hpp>
 #include <GenerateMap.hpp>
+#include <PauseState.hpp>
 #include "Game.hpp"
 
 static std::vector<int>        mapi; // =
@@ -39,8 +40,8 @@ namespace is
   void Game::Init(GameEngine *engine)
   {
     this->_engine = engine;
-    this->_sceneManager = this->_engine->getSceneManager();
-    _sceneManager->clear();
+    this->_sceneManager = this->_engine->getSceneManager()->createNewSceneManager(false);
+    this->_engine->setSceneManager(_sceneManager);
     this->_driver = this->_engine->getDriver();
     this->_gui = this->_engine->getGuiEnv();
     this->_engine->getDevice()->getCursorControl()->setVisible(false);
@@ -49,10 +50,10 @@ namespace is
     _map = std::make_shared<is::map>(_driver, _sceneManager, mapi);
     _bombs = std::make_shared<is::BombsManager>(*(_map.get()), *_driver, *_sceneManager);
     _opt = _engine->getOptions();
-    _char[0] = std::make_shared<is::Character>(_sceneManager->getMesh("./chef/tris.md2"), _driver->getTexture("./chef/chef.pcx"), _sceneManager, core::vector3df(10 * SCALE + 7, 5, 10 * SCALE + 7), _receiver, _opt,
+    _char[0] = std::make_shared<is::Character>(_sceneManager->getMesh("./chef/tris.md2"), _driver->getTexture("./chef/chef.pcx"), _sceneManager, core::vector3df(10 * SCALE + 7, 2, 10 * SCALE + 7), _receiver, _opt,
     *_bombs.get());
     _map->addCollision(_char[0].get()->_mesh);
-    _char[1] = std::make_shared<is::Character>(_sceneManager->getMesh("./chef/tris.md2"), _driver->getTexture("./chef/chef.pcx"), _sceneManager, core::vector3df(3 * SCALE - SCALE / 2, 5, 2 * SCALE), _receiver, _opt,
+    _char[1] = std::make_shared<is::Character>(_sceneManager->getMesh("./chef/tris.md2"), _driver->getTexture("./chef/chef.pcx"), _sceneManager, core::vector3df(3 * SCALE - SCALE / 2, 2, 2 * SCALE), _receiver, _opt,
     *_bombs.get());
     _map->addCollision(_char[1].get()->_mesh);
     _powManager = std::make_shared<is::PowerUpManager>(PowerUpManager(*_sceneManager, *_driver, _map.get()));
@@ -62,12 +63,10 @@ namespace is
     //_bomb = std::make_shared<is::Bombs>(_map.get(), _driver, _sceneManager);
     //   Vector3d	v(3, 3, 1);
     //_bomb->putBomb(v, 1);
-    _bombs->putBomb({6, 3, 0}, 10000);
-    _bombs->putBomb({7, 3, 0}, 10000);
-    _bombs->putBomb({1, 12, 0}, 2);
     _cam = std::make_shared<Camera>(_sceneManager, _driver, MENU, _engine);
     //_cam->setMenuMode();
-    //_cam->setInGameMode();
+    _cam->setInGameMode();
+    changing = false;
   }
 
   void Game::Cleanup(void)
@@ -81,10 +80,21 @@ namespace is
 
   void Game::Resume(void)
   {
+    std::cerr << "Reprise" << std::endl;
+    changing  = false;
+    _engine->getDevice()->getCursorControl()->setVisible(false);
+    _engine->getDevice()->setEventReceiver(&this->_receiver);
+//    _engine->setSceneManager(_sceneManager);
   }
 
   void Game::HandleEvents(void)
   {
+    if (_receiver.isKeyDown(irr::KEY_ESCAPE) && changing == false)
+      {
+	_receiver.init();
+	changing = true;
+	_engine->PushState(new PauseState);
+      }
   }
 
   void Game::Update(void)
@@ -93,7 +103,6 @@ namespace is
 
   void Game::Draw(void)
   {
-    std::unique_lock<std::mutex> lock(DRAW_MUTEX);
     this->_driver->beginScene();
     this->_char[0]->moove();
     this->_bombs->checkBombsStatus();

@@ -10,11 +10,16 @@
 #include "MenuState.hpp"
 
 is::Camera::Camera(irr::scene::ISceneManager* smgr, irr::video::IVideoDriver *driver,
-	       CamMode cameraMode, is::GameEngine *engine)
+		   CamMode cameraMode, is::GameEngine *engine)
 	: _smgr(smgr), _driver(driver), _currMode(cameraMode), _engine(engine), _anim(0),
 	  _anim1Time(10000), _anim2Time(5000), _anim3Time(5000), _anim4Time(5000)
 {
   _timer = _engine->getDevice()->getTimer();
+  _camera = _smgr->addCameraSceneNode(0,
+				      irr::core::vector3df(BLOCK / 2 * SCALE, 2000, BLOCK / 2 * 100),
+				      irr::core::vector3df(((0.5 + (BLOCK - 2)) * SCALE) / 2,
+							   0.0,
+							   ((0.5 + (BLOCK)) * SCALE) / 2));
 }
 
 is::Camera::~Camera()
@@ -27,9 +32,9 @@ void			is::Camera::setMenuMode()
   irr::scene::ISceneNodeAnimator* anim = 0;
   anim = _smgr->createFlyCircleAnimator(irr::core::vector3df(0,200,0), 400.0f, 0.0003f);
   _smgr->addCameraSceneNode(0, irr::core::vector3df(BLOCK / 2 * SCALE, 2000, BLOCK / 2 * 100),
-			   irr::core::vector3df(((0.5 + (BLOCK - 2)) * SCALE) / 2,
-						0.0f,
-						((0.5 + (BLOCK - 1)) * SCALE)) / 2)->addAnimator(anim);
+			    irr::core::vector3df(((0.5 + (BLOCK - 2)) * SCALE) / 2,
+						 0.0f,
+						 ((0.5 + (BLOCK - 1)) * SCALE)) / 2)->addAnimator(anim);
   anim->drop();
 }
 
@@ -44,8 +49,8 @@ void			is::Camera::setInGameMode()
 void			is::Camera::setAnimation1()
 {
   _anim = _smgr->createFlyStraightAnimator(irr::core::vector3df(0, 3 * SCALE, -2750),
-					  irr::core::vector3df(0, 3 * SCALE, 100),
-					  _anim1Time, false, false);
+					   irr::core::vector3df(0, 3 * SCALE, 100),
+					   _anim1Time, false, false);
   _camera->addAnimator(_anim);
 }
 
@@ -111,30 +116,15 @@ void 			is::Camera::setTextIntro()
 
 void			is::Camera::setSplashScreen()
 {
-  _camera = _smgr->addCameraSceneNode(0,
-				     irr::core::vector3df(BLOCK / 2 * SCALE, 2000, BLOCK / 2 * 100),
-				     irr::core::vector3df(((0.5 + (BLOCK - 2)) * SCALE) / 2,
-							  0.0,
-							  ((0.5 + (BLOCK)) * SCALE) / 2));
-  setTextIntro();
-  setAnimation1();
-  while (_engine->Running())
-    {
-      if (_timer->getTime() >= _anim1Time - 30 && _timer->getTime() <= (_anim1Time))
-	setAnimation2();
-      if (_timer->getTime() >= (_anim1Time + _anim2Time - 30) && _timer->getTime() <= (_anim1Time + _anim2Time))
-	setAnimation3();
-      _engine->HandleEvents();
-      _engine->Update();
-      _engine->Draw();
-      if (_timer->getTime() >= (_anim1Time + _anim2Time + _anim3Time) - 30)
-	{
-	  //_smgr->clear();
-    _engine->ChangeState(new is::MenuState);
-	  break;
-	}
-    }
-  _anim->drop();
+
+  std::cerr << "SplashIntro" << std::endl;
+  if (_timer->getTime() >= _anim1Time - 30 && _timer->getTime() <= (_anim1Time))
+    setAnimation2();
+  if (_timer->getTime() >= (_anim1Time + _anim2Time - 30) && _timer->getTime() <= (_anim1Time + _anim2Time))
+    setAnimation3();
+//  if (_timer->getTime() >= (_anim1Time + _anim2Time + _anim3Time) - 30)
+//    _engine->ChangeState(new is::MenuState);
+//  _anim->drop();
 }
 
 scene::ISceneManager	*is::Camera::get_smgr() const
@@ -155,4 +145,12 @@ void			is::Camera::set_smgr(scene::ISceneManager *_smgr)
 void			is::Camera::set_currMode(CamMode _currMode)
 {
   Camera::_currMode = _currMode;
+}
+
+bool is::Camera::checkEndIntro(void)
+{
+  std::cerr << "EndIntro" << std::endl;
+  if (_timer->getTime() >= (_anim1Time + _anim2Time + _anim3Time) - 30)
+    return true;
+  return false;
 }

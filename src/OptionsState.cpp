@@ -17,7 +17,6 @@ is::OptionsState::~OptionsState()
 
 void is::OptionsState::Init(is::GameEngine *engine)
 {
-
   this->_engine = engine;
   this->_sceneManager = this->_engine->getSceneManager();
   this->_driver = this->_engine->getDriver();

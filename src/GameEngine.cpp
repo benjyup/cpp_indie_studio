@@ -40,7 +40,6 @@ void is::GameEngine::Init(const char* title, int width, int height,
   this->_driver = this->_device->getVideoDriver();
   this->_smgr = this->_device->getSceneManager();
   this->_guienv = this->_device->getGUIEnvironment();
-
   irr::core::stringw wStr(title);
   this->_device->setWindowCaption(wStr.c_str());
 
@@ -160,4 +159,9 @@ const irr::core::vector2d<int> &is::GameEngine::getWindowSize() const
 is::Options &is::GameEngine::getOptions()
 {
   return (this->_options);
+}
+
+void is::GameEngine::setSceneManager(irr::scene::ISceneManager *sceneManager)
+{
+	_smgr = sceneManager;
 }

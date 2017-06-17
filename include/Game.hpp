@@ -55,6 +55,7 @@ namespace is
     Options					_opt;
     GameEventReceiver				_receiver;
     std::shared_ptr<Camera>			_cam;
+    bool					changing;
   };
 }
 
