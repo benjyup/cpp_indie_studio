@@ -114,7 +114,7 @@ void	is::map::addCollision(irr::scene::ISceneNode *node)
   for (auto const & i : _t)
     {
       scene::ISceneNodeAnimator* anim = _smgr->createCollisionResponseAnimator(
-	      i, node, core::vector3df(4,8,4),
+	      i, node, core::vector3df(6,10,6),
 	      core::vector3df(0,0,0), core::vector3df(1,3,1));
       node->addAnimator(anim);
       anim->drop();

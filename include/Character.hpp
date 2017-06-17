@@ -14,7 +14,7 @@
 
 using namespace irr;
 
-#define DEFAULT_SPEED 2
+#define DEFAULT_SPEED 1.2
 #define DEFAULT_POWER 1
 #define DEFAULT_BOMB 1
 
@@ -23,6 +23,7 @@ namespace  is
     class PowerUpManager;
     class BombsManager;
     class map;
+
   class Character
   {
     enum class DIR : irr::u8
@@ -30,7 +31,14 @@ namespace  is
       LEFT = 0,
       RIGHT,
       TOP,
-      DOWN
+      DOWN,
+      NONE
+    };
+    enum class STATE : irr::u8
+    {
+      ALIVE = 0,
+      DYING,
+      DEAD
     };
    public:
     Character(scene::IAnimatedMesh *node, video::ITexture *texture, scene::ISceneManager *smgr,
@@ -60,9 +68,9 @@ namespace  is
     DIR						_dir;
     BombsManager &_bombsManager;
     bool 					_keySlow;
-    bool 					_alive;
-   public:
     const std::map<Options::MOVES, irr::EKEY_CODE> 	&_Config;
+    STATE 						_state;
+    char 						_animDie;
   };
 }
 
