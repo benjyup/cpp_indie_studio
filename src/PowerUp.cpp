@@ -11,12 +11,14 @@ is::PowerUp::PowerUp(irr::scene::IAnimatedMesh *node,
                     irr::video::ITexture *texture,
                     irr::scene::ISceneManager &smgr,
                     irr::core::vector3df const &pos,
-                    is::map                     *map) : _mesh(smgr.addAnimatedMeshSceneNode(node)),
+                    is::map                     *map,
+                    is::poweris                 type) : _mesh(smgr.addAnimatedMeshSceneNode(node)),
                                                        _text(texture),
                                                        _smgr(smgr),
                                                        _posMap(pos),
                                                        _posSpace(_posMap.Y * SCALE - SCALE / 2, 0.15 * SCALE, _posMap.X * SCALE + SCALE / 2),
-                                                       _map(map)
+                                                       _map(map),
+                                                       _type(type)
 {
     irr::video::SMaterial material;
     _node = node;
