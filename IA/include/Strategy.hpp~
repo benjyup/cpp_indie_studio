@@ -1,0 +1,85 @@
+//
+// Created by rene_r on 6/13/17.
+//
+
+#pragma once
+
+#include "Character.hpp"
+#include "../LuaBridge/Source/LuaBridge/LuaBridge.h"
+
+namespace is
+{
+  class Ia;
+  
+  class IStrategy
+  {
+    virtual ~IStrategy()    = 0;
+    virtual void goToDir(is::Character::DIR)    = 0;
+    virtual void choseNextDir()  = 0;
+    virtual void defineDir()     = 0;
+    virtual void go() = 0;
+  };
+  enum STRAT
+    {
+      ATTACK,
+      HIDE,
+      WAIT
+    };
+  class Strategy
+  {
+    is::Character::DIR		_dir;
+    irr::core::vector3df	_pos;
+    is::Ia		       *_ia;
+    luabridge::LuaRef     _action;
+    std::string name;
+    luabridge::lua_State	*_L;
+    bool			_open;
+    //    std::unique_ptr<luabridge::LuaRef> interactFunc;
+  public:
+    Strategy(luabridge::lua_State	*L, const std::string &);
+    Strategy();
+    ~Strategy();
+    int loadScript(STRAT);
+    void loadScript(luabridge::lua_State* L, const std::string& scriptFilename);
+    void goToDir(is::Character::DIR);
+    
+    void choseNextDir();
+    void defineDir();
+    void go();
+    void move();
+    void Allo(std::string const &);
+  };
+
+  
+  // class Hide : public IStrategy
+  // {
+  //   is::Character::DIR		_dir;
+  //   irr::core::vector3df	_pos;
+  //   is::Ia		       *_ia;
+    
+  // public:
+    
+  //   Hide(is::Ia &);
+  //   ~Hide();
+    
+  //   virtual void goToDir(is::Character::DIR);
+  //   virtual void choseNextDir();
+  //   virtual void defineDir();
+  //   virtual void	go();
+  // };
+
+  // class Attack public : IStrategy
+  // {
+
+  //   DIR _dir;
+  //   core::vector3df _pos;
+
+  // public:
+  //   Attack();
+  //   ~Attack();
+  //   virtual goToDir(DIR);
+  //   virtual choseNextDir();
+  //   virtual defineDir();
+  // };
+  
+};
