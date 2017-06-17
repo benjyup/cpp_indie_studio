@@ -190,6 +190,32 @@ bool 	is::map::canIMoove2(Vector3d const &pos) const
   return (false);
 }
 
+int     is::map::getLocalType(Vector3d const &pos) const {
+    int 		posi = 0;
+
+    if ((posi = find(pos)) == -1)
+    {
+        std::cout << "return false" << std::endl;
+        return (-1);
+    }
+    if (_mapi[posi].type == Type::POWERUP)
+    {
+        std::cout << "PowerUp found !" << std::endl;
+        return (is::Type::POWERUP);
+    }
+    else
+    {
+        std::cout << pos << " pos.z = " << pos.getZ() << std::endl;
+        if (_mapi[posi].type == Type::BREAK)
+            std::cout << "type = BREAK" << std::endl;
+        if (_mapi[posi].type == Type::FIRE)
+            std::cout << "type = FIRE" << std::endl;
+        if (_mapi[posi].type == Type::WALL)
+            std::cout << "type = WALL" << std::endl;
+    }
+    return (-1);
+}
+
 bool 	is::map::canIMoove(Vector3d const &pos) const
 {
   int 		posi = 0;

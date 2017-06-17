@@ -18,6 +18,7 @@ namespace is
         POWERPOWER
     };
 
+    class Character;
     class PowerUp
     {
     public:

@@ -89,6 +89,8 @@ namespace is
 
   void Game::Update(void)
   {
+      _char[0]->update(_powManager.get(), _map.get());
+      _char[1]->update(_powManager.get(), _map.get());
   }
 
   void Game::Draw(void)
