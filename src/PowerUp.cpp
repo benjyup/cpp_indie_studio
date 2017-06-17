@@ -48,3 +48,9 @@ void is::PowerUp::getPower(is::Character *c) {
             break;
     };
 }
+
+bool is::PowerUp::check(irr::core::vector3df const &pos) {
+    if (_posMap.X == pos.X && _posMap.Y == pos.Y)
+        return true;
+    return false;
+}

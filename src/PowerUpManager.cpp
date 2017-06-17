@@ -22,3 +22,13 @@ void is::PowerUpManager::newPow(irr::core::vector3df const &map) {
                                                       _texture,
                                                       _sceneManager, map, _map));
 }
+
+void is::PowerUpManager::getPowerUp(irr::core::vector3df const &pos) {
+    for (auto i : _powUp)
+    {
+        if (i.get()->check(pos))
+        {
+            _powUp.erase(*i);
+        }
+    }
+}

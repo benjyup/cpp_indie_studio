@@ -20,7 +20,7 @@ namespace is
 
     class Character;
     class PowerUp
-    {
+            : public __gnu_cxx::__normal_iterator<::std::shared_ptr<::is::PowerUp> *, ::std::vector<::std::shared_ptr<::is::PowerUp>>> {
     public:
         PowerUp(irr::scene::IAnimatedMesh *,
                  irr::video::ITexture *,
@@ -28,6 +28,7 @@ namespace is
                  irr::core::vector3df const &,
                 is::map                     *);
         ~PowerUp();
+        bool    check(irr::core::vector3df const &);
         void    getPower(is::Character *);
     private:
 

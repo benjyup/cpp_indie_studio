@@ -95,10 +95,11 @@ void		is::Character::moove()
 }
 
 void is::Character::update(is::PowerUpManager *pm, is::map *map) {
-
+    irr::core::vector3df pos = {ceil(floor(_mesh->getPosition().Z) / (float)SCALE) - 1, ceil(floor(_mesh->getPosition().X) / (float)SCALE), 0};
     int ret = map->getLocalType({ceil(floor(_mesh->getPosition().Z) / (float)SCALE) - 1, ceil(floor(_mesh->getPosition().X) / (float)SCALE), 0});
     if (ret == is::POWERUP)
     {
+        pm->getPowerUp(pos);
         std::cerr << "HIT WITH A  POWERUP !" << std::endl;
     }
 }

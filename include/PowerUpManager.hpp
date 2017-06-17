@@ -16,6 +16,7 @@ namespace is {
         ~PowerUpManager() {};
 
         void    newPow(irr::core::vector3df const &);
+        void    getPowerUp(irr::core::vector3df const &);
     private:
 
         irr::scene::ISceneManager                   &_sceneManager;
