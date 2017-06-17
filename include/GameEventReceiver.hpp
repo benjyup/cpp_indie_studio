@@ -30,12 +30,22 @@ namespace is
     void					setEngine(GameEngine *engine);
 
     bool 					isKeyDown(irr::EKEY_CODE keyCode) const;
+    irr::s16 					isHorAxe() const;
+    irr::s16 					isVerAxe() const;
+    void					setVerAxe(irr::s16 axe);
+    void					setHorAxe(irr::s16 axe);
+    bool 					isActionOn() const;
 
    private:
     irr::IrrlichtDevice					*_device;
     GameEngine						*_engine;
     std::vector<std::shared_ptr<IGameState>> 		_states;
     std::array<bool, irr::KEY_KEY_CODES_COUNT>		_keys;
+    //std::array<bool, irr::SJoystickInfo::Axes>		_joys;
+    irr::SEvent::SJoystickEvent				_JoystickState;
+    irr::s16 						_horAxe;
+    irr::s16 						_verAxe;
+    bool						_action;
   };
 }
 

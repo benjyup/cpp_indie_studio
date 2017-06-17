@@ -50,7 +50,7 @@ void		is::Character::moove()
 
   if (_state == STATE::DYING)
     return;
-  if (_receiver.isKeyDown(_Config.at(Options::MOVES::MOVE_UP)))
+  if (_receiver.isKeyDown(_Config.at(Options::MOVES::MOVE_UP)) || _receiver.isVerAxe() == 1)
     {
       if (_dir != is::Character::DIR::TOP)
 	{
@@ -61,7 +61,7 @@ void		is::Character::moove()
       _mesh->setPosition(irr::core::vector3df(v.X, v.Y, v.Z + DEFAULT_SPEED + _speed));
       t = true;
     }
-  if (_receiver.isKeyDown(_Config.at(Options::MOVES::MOVE_DOWN)))
+  if (_receiver.isKeyDown(_Config.at(Options::MOVES::MOVE_DOWN)) || _receiver.isVerAxe() == -1)
     {
       if (_dir != is::Character::DIR::DOWN)
 	{
@@ -72,7 +72,7 @@ void		is::Character::moove()
       _mesh->setPosition(irr::core::vector3df(v.X, v.Y, v.Z - DEFAULT_SPEED - _speed));
       t = true;
     }
-  if (_receiver.isKeyDown(_Config.at(Options::MOVES::MOVE_RIGHT)))
+  if (_receiver.isKeyDown(_Config.at(Options::MOVES::MOVE_RIGHT)) || _receiver.isHorAxe() == 1)
     {
       if (_dir != is::Character::DIR::RIGHT)
 	{
@@ -83,7 +83,7 @@ void		is::Character::moove()
       _mesh->setPosition(irr::core::vector3df(v.X + DEFAULT_SPEED + _speed, v.Y, v.Z));
       t = true;
     }
-  if (_receiver.isKeyDown(_Config.at(Options::MOVES::MOVE_LEFT)))
+  if (_receiver.isKeyDown(_Config.at(Options::MOVES::MOVE_LEFT)) || _receiver.isHorAxe() == -1)
     {
       if (_dir != is::Character::DIR::LEFT)
 	{
@@ -94,7 +94,7 @@ void		is::Character::moove()
       _mesh->setPosition(irr::core::vector3df(v.X - DEFAULT_SPEED - _speed, v.Y, v.Z));
       t = true;
     }
-  if (_receiver.isKeyDown(_Config.at(Options::MOVES::MOVE_ACTION)))
+  if (_receiver.isKeyDown(_Config.at(Options::MOVES::MOVE_ACTION)) || _receiver.isActionOn())
     {
       _dir = DIR::NONE;
       _mesh->setMD2Animation(scene::EMAT_CROUCH_WALK);
