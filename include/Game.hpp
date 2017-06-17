@@ -52,7 +52,7 @@ namespace is
     std::shared_ptr<BombsManager>		_bombs;
     std::array<std::shared_ptr<Character>, 2>	_char;
       std::shared_ptr<is::PowerUpManager>       _powManager;
-    Options					_opt;
+    Options					*_opt;
     GameEventReceiver				_receiver;
     std::shared_ptr<Camera>			_cam;
     bool					changing;
