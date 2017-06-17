@@ -195,7 +195,7 @@ int     is::map::getLocalType(Vector3d const &pos) const {
 
     if ((posi = find(pos)) == -1)
     {
-        std::cout << "return false" << std::endl;
+        std::cout << "UPDATE False" << std::endl;
         return (-1);
     }
     if (_mapi[posi].type == Type::POWERUP)
@@ -207,11 +207,11 @@ int     is::map::getLocalType(Vector3d const &pos) const {
     {
         std::cout << pos << " pos.z = " << pos.getZ() << std::endl;
         if (_mapi[posi].type == Type::BREAK)
-            std::cout << "type = BREAK" << std::endl;
+            std::cout << "UPDATE type = BREAK" << std::endl;
         if (_mapi[posi].type == Type::FIRE)
-            std::cout << "type = FIRE" << std::endl;
+            std::cout << "UPDATE type = FIRE" << std::endl;
         if (_mapi[posi].type == Type::WALL)
-            std::cout << "type = WALL" << std::endl;
+            std::cout << "UPDATE type = WALL" << std::endl;
     }
     return (-1);
 }
