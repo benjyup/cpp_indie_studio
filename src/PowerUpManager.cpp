@@ -24,11 +24,12 @@ void is::PowerUpManager::newPow(irr::core::vector3df const &map) {
 }
 
 void is::PowerUpManager::getPowerUp(irr::core::vector3df const &pos) {
-    for (auto i : _powUp)
+    for (auto i = _powUp.begin(); i != _powUp.end(); ++i)
     {
-        if (i.get()->check(pos))
+        if (i->get()->check(pos))
         {
-            _powUp.erase(*i);
+            _powUp.erase(i);
+            return;
         }
     }
 }
