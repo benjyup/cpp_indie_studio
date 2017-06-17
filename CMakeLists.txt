@@ -9,7 +9,6 @@ set(SOURCE_FILES
         src/main.cpp
         src/GameEngine.cpp include/GameEngine.hpp
         Interface/IGameEngine.hpp
-        src/GameState.cpp include/GameState.hpp
         src/Options.cpp include/Options.hpp
         src/MenuState.cpp include/MenuState.hpp
 	src/ScoreEnd.cpp include/ScoreEnd.hpp
@@ -27,7 +26,7 @@ set(SOURCE_FILES
 	include/Block.hpp
         include/Fire.hpp
         include/Camera.hpp
-        include/Game.hpp
+        include/GameState.hpp
         include/map.hpp
         include/ParseMap.hpp
         include/PlanetSystem.hpp
@@ -42,7 +41,7 @@ set(SOURCE_FILES
 	src/Character.cpp
         src/GameEventReceiver.cpp
         src/Camera.cpp
-        src/Game.cpp
+        src/GameState.cpp
         src/map.cpp
         src/ParseMap.cpp
         src/PlanetSystem.cpp
@@ -52,7 +51,7 @@ set(SOURCE_FILES
 	src/GenerateMap.cpp
         include/Sound.hpp
         include/PowerUp.hpp src/PowerUp.cpp src/PowerUpManager.cpp include/PowerUpManager.hpp
-        src/ChoosePlayerState.cpp include/ChoosePlayerState.hpp)
+	)
 
 include_directories(irrlicht-1.8.4/include Interface src/gameEngine src/
                     include ./irrKlang-64bit-1.5.0/include)

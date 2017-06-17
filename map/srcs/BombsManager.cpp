@@ -4,7 +4,7 @@
 
 #include <iostream>
 #include <thread>
-#include "Game.hpp"
+#include "GameState.hpp"
 #include "BombsManager.hpp"
 #include "Fire.hpp"
 #include "../../src/IndieStudioException.hpp"

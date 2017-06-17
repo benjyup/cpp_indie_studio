@@ -30,7 +30,6 @@ set(SOURCE_FILES
         include/BombsManager.hpp
         include/Sound.hpp
         ../src/GameEngine.cpp
-        ../src/GameState.cpp
         ../src/Options.cpp
         ../src/Options.hpp
         ../src/IndieStudioException.cpp

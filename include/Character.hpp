@@ -20,7 +20,7 @@ using namespace irr;
 
 namespace  is
 {
-    class PowerUpManager;
+  class PowerUpManager;
   class Character
   {
     enum class DIR : irr::u8
@@ -39,8 +39,12 @@ namespace  is
     void  incLive() {_live += 1;}
     void   update(is::PowerUpManager *, is::map *);
     irr::core::vector3df    			&getPos(){return _pos;}
-    scene::IAnimatedMeshSceneNode 		*_mesh;
+    scene::IAnimatedMeshSceneNode 		*getMesh();
+    bool 					getAlive();
+    void					die();
+
    private:
+    scene::IAnimatedMeshSceneNode 		*_mesh;
     video::ITexture 				*_text;
     scene::ISceneManager 			*_smgr;
     core::vector3df 				_pos;
@@ -52,6 +56,7 @@ namespace  is
     DIR						_dir;
     BombsManager &_bombsManager;
     bool 					_keySlow;
+    bool 					_alive;
    public:
     const std::map<Options::MOVES, irr::EKEY_CODE> 	&_Config;
   };

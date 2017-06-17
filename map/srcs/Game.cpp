@@ -4,7 +4,7 @@
 
 #include <Camera.hpp>
 #include <GenerateMap.hpp>
-#include "Game.hpp"
+#include "GameState.hpp"
 
 static std::vector<int>        mapi; // =
 // {
