@@ -24,7 +24,8 @@ bool 		is::PauseEventReceiver::OnEvent(const irr::SEvent &event)
       switch (buttonID)
         {
         case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_RESUME_BUTTON):
-            this->_engine->PopState();
+	std::cerr << "Resume Button" << std::endl;
+	    this->_engine->PopState();
             break;
         case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_OPTIONS_BUTTON):
             this->_engine->PushState(new OptionsState);
@@ -36,8 +37,8 @@ bool 		is::PauseEventReceiver::OnEvent(const irr::SEvent &event)
             break;
         }
     }
-  else if (event.EventType == irr::EET_KEY_INPUT_EVENT && event.KeyInput.Key == irr::KEY_ESCAPE)
-      this->_device->closeDevice();
+//  else if (event.EventType == irr::EET_KEY_INPUT_EVENT && event.KeyInput.Key == irr::KEY_ESCAPE)
+//      this->_device->closeDevice();
   return (false);
 }
 

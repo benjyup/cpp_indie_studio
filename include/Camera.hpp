@@ -44,6 +44,8 @@ namespace is
 
     void setAnimation3();
 
+    bool 	checkEndIntro(void);
+
     irr::scene::ISceneManager *get_smgr() const;
 
     CamMode get_currMode() const;

@@ -39,5 +39,6 @@ namespace is
         ParseMap	    				                  _parserMap;
         std::shared_ptr<map>			                  _map;
         IntroEventReceiver                                _introEventReceiver;
+      	Camera					*_cam;
     };
 }

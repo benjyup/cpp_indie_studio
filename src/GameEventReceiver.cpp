@@ -3,14 +3,14 @@
 //
 
 #include <iostream>
+#include <OptionsState.hpp>
 #include "GameEventReceiver.hpp"
+#include "PauseState.hpp"
 
 is::GameEventReceiver::GameEventReceiver()
 {
 //  _char = Char;
   std::cerr << "GameEventReceiver()" << std::endl;
-  for (int i = 0 ; i < this->_keys.size() ; i++)
-    this->_keys[i] = false;
 }
 
 is::GameEventReceiver::~GameEventReceiver()
@@ -28,12 +28,20 @@ bool 		is::GameEventReceiver::OnEvent(const irr::SEvent &event)
     }
 */
   this->_keys[event.KeyInput.Key] = event.KeyInput.PressedDown;
- return (false);
+  return (false);
+}
+
+void	is::GameEventReceiver::init()
+{
+  for (int i = 0 ; i < this->_keys.size() ; i++)
+    this->_keys[i] = false;
 }
 
 void is::GameEventReceiver::setDevice(irr::IrrlichtDevice *device)
 {
   this->_device = device;
+  for (int i = 0 ; i < this->_keys.size() ; i++)
+    this->_keys[i] = false;
 }
 
 void is::GameEventReceiver::setEngine(GameEngine *engine)

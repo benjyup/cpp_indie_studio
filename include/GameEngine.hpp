@@ -42,6 +42,7 @@ namespace is {
     std::vector<std::shared_ptr<IGameState>> 	getState() const;
     const irr::core::vector2d<int>		&getWindowSize() const;
     Options					&getOptions();
+    void 					setSceneManager(irr::scene::ISceneManager *);
 
    private:
     std::vector<std::shared_ptr<IGameState>>	_states;

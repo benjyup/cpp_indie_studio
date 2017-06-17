@@ -20,8 +20,8 @@ namespace is
         {
             if (event.KeyInput.Key == irr::KEY_ESCAPE)
                 this->_device->closeDevice();
-            else
-                this->_engine->PushState(new MenuState);
+//            else
+//                this->_engine->PushState(new MenuState);
         }
     return (false);
     }
