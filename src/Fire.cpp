@@ -54,7 +54,10 @@ void	is::Fire::startFire()
           _pow.Y = pos.Y;
       }
         if (this->_map.getLocalType({pos.X, pos.Y, pos.Z}) == POWERUP)
+        {
+            std::cerr << "COLLISION FIRE POWERUP" << std::endl;
             _pm->getPowerUp({pos.X, pos.Y, pos.Z});
+        }
       this->_map.addObject(is::Type::FIRE, {pos.X, pos.Y, pos.Z});
       _DIRECTIONS_ACTION.at(this->_dir)(pos);
     }
