@@ -25,9 +25,9 @@ namespace is
         this->_engine->getDevice()->setEventReceiver(&this->_introEventReceiver);
         _mapi = _parserMap.getVector();
         _map = std::make_shared<is::map>(_driver, _sceneManager, _mapi);
-	_cam = new Camera(_sceneManager, this->_driver, SPLASHSCREEN, _engine);
+	    _cam = new Camera(_sceneManager, this->_driver, SPLASHSCREEN, _engine);
     	_cam->setTextIntro();
-         _cam->setAnimation1();
+      _cam->setAnimation1();
       std::cerr << "gros fdp" << std::endl;
     }
 
