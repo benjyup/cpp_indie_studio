@@ -123,3 +123,15 @@ bool 					is::Character::getAlive()
 {
   return (_alive);
 }
+
+void is::Character::incLive() {
+    _live += 1;
+}
+
+void is::Character::incbomb() {
+    _bomb += 1;
+}
+
+void is::Character::incPower() {
+    _power += 1;
+}

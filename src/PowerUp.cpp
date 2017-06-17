@@ -48,6 +48,12 @@ void is::PowerUp::getPower(is::Character *c) {
         case is::poweris::POWERLIVE:
             c->incLive();
             break;
+        case is::poweris::POWERBOMB:
+            c->incbomb();
+            break;
+        case is::poweris::POWERPOWER:
+            c->incPower();
+            break;
     };
 }
 

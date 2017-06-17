@@ -38,7 +38,9 @@ namespace  is
 	      BombsManager &bombsManager);
     ~Character() {}
     void 	moove();
-    void  incLive() {_live += 1;}
+    void  incLive();
+    void    incbomb();
+    void    incPower();
     void   update(is::PowerUpManager *, is::map *);
     irr::core::vector3df    			&getPos(){return _pos;}
     scene::IAnimatedMeshSceneNode 		*getMesh();
