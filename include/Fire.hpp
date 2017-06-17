@@ -51,7 +51,7 @@ namespace is
     is::map											&_map;
     irr::core::vector3di									_pos;
     FireDirection 										_dir;
-
+    bool											_ja;
   };
 }
 

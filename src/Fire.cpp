@@ -19,7 +19,8 @@ is::Fire::Fire(is:: map &map, irr::scene::ISceneManager* smgr, irr::video::IVide
 	_power(power),
 	_map(map),
 	_pos({posMap.X, posMap.Y, posMap.Z}),
-	_dir(Direction)
+	_dir(Direction),
+	_ja(false)
 {
   initMapDir();
   std::cout << "power = " << power << std::endl;
@@ -44,6 +45,8 @@ void	is::Fire::startFire()
   for (float i = 0.0f ; i <= _power ; i += 1)
     {
       std::cout << "START FIRE pos.x = " << pos.X << " pos.y = " << pos.Y << " pos.z = " << pos.Z<< std::endl;
+      if (this->_map.getLocalType({pos.X, pos.Y, pos.Z}) == BREAK)
+	this->_ja = true;
       this->_map.addObject(is::Type::FIRE, {pos.X, pos.Y, pos.Z});
       _DIRECTIONS_ACTION.at(this->_dir)(pos);
     }
@@ -63,6 +66,10 @@ void	is::Fire::stopFire()
       this->_map.delObject({pos.X, pos.Y, pos.Z});
       _DIRECTIONS_ACTION.at(this->_dir)(pos);
     }
+/*
+  if (!(this->_ja))
+    //addPowerup
+*/
   std::cerr << "DELETE FIRE" << std::endl;
 }
 
