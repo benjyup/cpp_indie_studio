@@ -32,7 +32,7 @@ namespace  is
     };
    public:
     Character(scene::IAnimatedMesh *node, video::ITexture *texture, scene::ISceneManager *smgr,
-	      core::vector3df const &pos, const GameEventReceiver &receiver, const Options &opt,
+	      core::vector3df const &pos, const GameEventReceiver &receiver, std::map<Options::MOVES, irr::EKEY_CODE>  const &Config,
 	      BombsManager &bombsManager);
     ~Character() {}
     void 	moove();
@@ -49,11 +49,11 @@ namespace  is
     int _power;
     int _live;
     const GameEventReceiver 			&_receiver;
-    const Options				&_opt;
     DIR						_dir;
     BombsManager &_bombsManager;
     bool 					_keySlow;
-
+   public:
+    const std::map<Options::MOVES, irr::EKEY_CODE> 	&_Config;
   };
 }
 
