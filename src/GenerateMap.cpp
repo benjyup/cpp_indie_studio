@@ -3,11 +3,8 @@
 //
 
 #include "GenerateMap.hpp"
-#include <vector>
 #include <iostream>
-#include <cstdlib>
 #include <ctime>
-#include <zconf.h>
 #include <fstream>
 
 is::GenerateMap::GenerateMap(std::string const &fileName)
