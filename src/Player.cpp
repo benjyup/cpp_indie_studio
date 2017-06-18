@@ -9,7 +9,7 @@ is::Player::~Player()
 
 }
 
-is::Player::Player(Player::PlayerType type, const std::string &meshPath) : type(type), meshPath(meshPath)
+is::Player::Player(Player::PlayerType type, const std::string &meshPath) : type(type), meshPath(meshPath), mesh(NULL)
 {
 
 }
@@ -39,4 +39,24 @@ const std::string &is::Player::getMeshPath() const
 void is::Player::setMeshPath(const std::string &meshPath)
 {
   Player::meshPath = meshPath;
+}
+
+irr::scene::IAnimatedMeshSceneNode *is::Player::getMesh() const
+{
+  return mesh;
+}
+
+void is::Player::setMesh(irr::scene::IAnimatedMeshSceneNode *mesh)
+{
+  Player::mesh = mesh;
+}
+
+const std::string &is::Player::getTexturePath() const
+{
+  return texturePath;
+}
+
+void is::Player::setTexturePath(const std::string &texturePath)
+{
+  Player::texturePath = texturePath;
 }

@@ -76,6 +76,18 @@ void is::OptionsEventReceiver::_guiEvent(const irr::SEvent &event)
 	      _change = CHANGE::POP;
 	    	}
 	  break;
+		case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_SOUND_ON_BUTTON):
+	    {
+				event.GUIEvent.Caller->setID((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_SOUND_OFF_BUTTON);
+				this->_optionsContext->engine->getSound().setVolume(0);
+	    }
+	  break;
+		case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_SOUND_OFF_BUTTON):
+	    {
+				event.GUIEvent.Caller->setID((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_SOUND_ON_BUTTON);
+				this->_optionsContext->engine->getSound().setVolume(0.1);
+	    }
+	  break;
 		case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_TMP_MOVE_ACTION_BUTTON):
 	  break;
 		case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_TMP_MOVE_FORWARD_BUTTON):

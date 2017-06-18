@@ -12,6 +12,7 @@
 # include "IGameEngine.hpp"
 #include "Options.hpp"
 #include "Sound.hpp"
+#include "Button.hpp"
 
 namespace is {
   enum class CHANGE : irr::u8
@@ -23,6 +24,7 @@ namespace is {
     GAME,
     MENU,
     PAUSE,
+    QUIT
   };
 
   class GameEngine : public IGameEngine {
@@ -56,6 +58,8 @@ namespace is {
     Options					&getOptions();
     Sound					&getSound();
     void 					setSceneManager(irr::scene::ISceneManager *);
+    void					setWinner(Button::GUI_ID_BOUTON const &);
+    Button::GUI_ID_BOUTON		const  	&getWinner();
 
    private:
     std::vector<std::shared_ptr<IGameState>>	_states;
@@ -68,6 +72,7 @@ namespace is {
     bool 					_fullscreen;
     Options					_options;
     Sound					_sound;
+    Button::GUI_ID_BOUTON 			_winnnerPlayer;
 
     virtual void 				Init(const char *title, int width = 640, int height = 480,
 						     int bpp = 0, bool fullscreen = false);

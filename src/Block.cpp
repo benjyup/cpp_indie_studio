@@ -27,6 +27,7 @@ namespace is
     type = t;
     node->setPosition(irr::core::vector3df(this->pos.getX() * SCALE, setY(),
 					   (this->pos.getY()) * SCALE));
+    if (text)
     node->setMaterialTexture(0, text);
     node->setScale(irr::core::vector3df(SCALE, SCALE, SCALE));
     node->setRotation(irr::core::vector3df(0, 0, 0));

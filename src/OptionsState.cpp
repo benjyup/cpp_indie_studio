@@ -35,8 +35,12 @@ void is::OptionsState::Init(is::GameEngine *engine)
   this->_optionsContext.errorMsg = this->_errorMsg;
   this->_optionsEventReceiver.Init(&this->_optionsContext);
 	this->_optionsContext.name = std::string("Player " + std::to_string(this->_optionsContext.player));
-	
-  this->_buttons = {
+	irr::s32 sound;
+	if (_engine->getSound().get_soundEngine()->getSoundVolume() == 0)
+		sound = (irr::s32)Button::GUI_ID_BOUTON::GUI_ID_SOUND_OFF_BUTTON;
+	else
+		sound = (irr::s32)Button::GUI_ID_BOUTON::GUI_ID_SOUND_ON_BUTTON;
+	this->_buttons = {
 		//---------------DROITE
 		  {
 		  windowSize.X / 2 - MenuState::BUTTON_WIDTH / 2 + 130,
@@ -143,6 +147,14 @@ void is::OptionsState::Init(is::GameEngine *engine)
 		  20 + BUTTON_WIDTH,
 		  20 + BUTTON_HEIGHT,
 		  (irr::s32) Button::GUI_ID_BOUTON::GUI_ID_CHANGE_PLAYER1_BUTTON,
+			""
+	  },
+	  {
+		  20,
+		  windowSize.Y - BUTTON_HEIGHT - 20,
+			20 + BUTTON_WIDTH,
+		  windowSize.Y - 20,
+		  sound,
 			""
 	  }
   };

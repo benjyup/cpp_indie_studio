@@ -6,6 +6,7 @@
 #include <IndieStudioException.hpp>
 #include <MenuState.hpp>
 #include "ChoosePlayerState.hpp"
+#include "ChooseSkinState.hpp"
 
 
 std::vector<std::pair<std::string, std::string>>	is::ChoosePlayerState::GFX_PATH = {
@@ -52,6 +53,7 @@ void is::ChoosePlayerState::Init(is::GameEngine *engine)
   this->eventContext.gfxAI = &this->_gfxAI;
   this->eventContext.gfxPlayer = &this->_gfxPlayer;
   this->eventContext.stop = false;
+  this->eventContext.chooseSkin = false;
 
   this->choosePlayerEventReceiver.init(&this->eventContext);
 
@@ -87,8 +89,7 @@ void is::ChoosePlayerState::Init(is::GameEngine *engine)
 
   for (int y = 0 ; y < 4 ; ++y)
     this->_players.emplace_back(Player::PlayerType::VOID, "");
-
-  MenuState::BUTTON_WIDTH;
+  this->_options->setPlayers(this->_players);
 
   this->_buttons.emplace_back(10,
 			      engine->getWindowSize().Y  / 4,
@@ -180,7 +181,18 @@ void is::ChoosePlayerState::Pause(void)
 
 void is::ChoosePlayerState::Resume(void)
 {
-
+  this->_drawButtons();
+  this->_buttons[this->_buttons.size() - 5]->setImage(this->_buttonsTextures[DELETE_PLAYER_BUTTON_INDEX].first);
+  this->_buttons[this->_buttons.size() - 5]->setPressedImage(this->_buttonsTextures[DELETE_PLAYER_BUTTON_INDEX].second);
+  this->_buttons[this->_buttons.size() - 4]->setImage(this->_buttonsTextures[DELETE_BOT_BUTTON_INDEX].first);
+  this->_buttons[this->_buttons.size() - 4]->setPressedImage(this->_buttonsTextures[DELETE_BOT_BUTTON_INDEX].second);
+  this->_buttons[this->_buttons.size() - 3]->setImage(this->_buttonsTextures[PLAY_BUTTON_INDEX].first);
+  this->_buttons[this->_buttons.size() - 3]->setPressedImage(this->_buttonsTextures[PLAY_BUTTON_INDEX].second);
+  this->_buttons[this->_buttons.size() - 2]->setImage(this->_buttonsTextures[ADD_PLAYER_BUTTON_INDEX].first);
+  this->_buttons[this->_buttons.size() - 2]->setPressedImage(this->_buttonsTextures[ADD_PLAYER_BUTTON_INDEX].second);
+  this->_buttons.back()->setImage(this->_buttonsTextures[ADD_BOT_BUTTON_INDEX].first);
+  this->_buttons.back()->setPressedImage(this->_buttonsTextures[ADD_BOT_BUTTON_INDEX].second);
+  this->eventContext.engine->getDevice()->setEventReceiver(&this->choosePlayerEventReceiver);
 }
 
 void is::ChoosePlayerState::HandleEvents(void)
@@ -204,6 +216,12 @@ void is::ChoosePlayerState::Draw(void)
       this->eventContext.engine->ChangeState(new GameState);
       return ;
     }
+  else if (this->eventContext.chooseSkin == true)
+      {
+	this->eventContext.chooseSkin = false;
+	this->eventContext.engine->PushState(new ChooseSkinState(this->eventContext.player));
+	return ;
+      }
   this->_driver->beginScene();
   this->_sceneManager->drawAll();
   for (auto b : this->_buttons)

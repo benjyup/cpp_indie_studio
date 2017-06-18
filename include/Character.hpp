@@ -51,11 +51,15 @@ namespace  is
     void    incPower();
     void   update(is::PowerUpManager *, is::map *);
     irr::core::vector3df    			const &getPos() const;
-    scene::IAnimatedMeshSceneNode 		*getMesh();
+    scene::ISceneNode 		*getMesh();
     bool 					getAlive();
     void					die();
     void					pushAnim(irr::scene::ISceneNodeAnimator *, unsigned int);
     irr::scene::ISceneNodeAnimator		*getAnim(unsigned int);
+    int           getSpeed() const;
+    int           getBomb() const;
+    int           getPower() const;
+    int						getId();
 
    private:
     scene::IAnimatedMeshSceneNode 		*_mesh;
@@ -65,7 +69,6 @@ namespace  is
     int _speed;
     int _bomb;
     int _power;
-    int _live;
     const GameEventReceiver 			&_receiver;
     DIR						_dir;
     BombsManager &_bombsManager;

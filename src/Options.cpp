@@ -104,6 +104,16 @@ bool 		is::Options::isAlreadyBind(int player, const irr::EKEY_CODE key, const Op
   return (false);
 }
 
+std::vector<is::Player> &is::Options::getPlayers()
+{
+  return _players;
+}
+
+void is::Options::setPlayers(const std::vector<is::Player> &players)
+{
+  this->_players = players;
+}
+
 template <typename T>
 T is::Options::keyToString(irr::EKEY_CODE key) const
 {

@@ -27,9 +27,9 @@ namespace is
     void 	draw();
     float 	setY();
 
+    scene::IMeshSceneNode		*node;
    private:
     friend class 			map;
-    scene::IMeshSceneNode		*node;
     Vector3d				pos;
     Type 				type;
   };
