@@ -19,6 +19,7 @@ namespace is {
         void    getPowerUp(irr::core::vector3df const &);
         void    getPower(is::Character &, irr::core::vector3df const &);
         void    update();
+        std::string save() const;
     private:
 
         irr::scene::ISceneManager                   &_sceneManager;
