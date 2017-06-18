@@ -85,14 +85,15 @@ namespace is
     int 			p = 0;
     int 			ai = 0;
 
-    v.push_back({1 * SCALE + SCALE / 2, 2, 1 * SCALE + SCALE / 2});
-    v.push_back({BLOCK * SCALE + SCALE / 2, 2, 1 * SCALE + SCALE / 2});
-    v.push_back({BLOCK * SCALE + SCALE / 2, 2, BLOCK * SCALE + SCALE / 2});
-    v.push_back({1 * SCALE + SCALE / 2, 2, BLOCK * SCALE + SCALE / 2});
+    v.push_back({1 * SCALE - SCALE / 2, 2, 1 * SCALE + SCALE / 2});
+    v.push_back({(BLOCK - 2) * SCALE - SCALE / 2, 2, (BLOCK - 2) * SCALE + SCALE / 2});
+    v.push_back({(BLOCK  - 2) * SCALE - SCALE / 2, 2, 1 * SCALE + SCALE / 2});
+    v.push_back({1 * SCALE - SCALE / 2, 2, BLOCK * SCALE + SCALE / 2});
     for (auto &i : player)
       {
 	if (i.getType() == Player::PlayerType::PLAYER)
 	  {
+	    std::cerr << "adding Player" << std::endl;
 	    if (p == 0)
 	      {
 		_char.push_back(std::make_shared<is::Character>(_sceneManager->getMesh(i.getMeshPath().c_str()), _driver->getTexture(i.getTexturePath().c_str()), _sceneManager, v[p + ai], _receiver, _opt->getP1Config(),
