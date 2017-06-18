@@ -54,6 +54,7 @@ bool is::PowerUp::check(irr::core::vector3df const &pos) {
 }
 
 void is::PowerUp::update() {
+    _map->addObject(Type::POWERUP, {(int)_posMap.X, (int)_posMap.Y, (int)_posMap.Z});
     static int  rot = 0;
     _mesh->setRotation(irr::core::vector3df(0, rot, 0));
     rot == 361 ? rot = 0 : rot += 1;

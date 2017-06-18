@@ -104,7 +104,7 @@ int 			is::Bomb::_reducePower(std::list<std::shared_ptr<is::Bomb>> bombs,
 	  (*it)->_explosion(bombs);
 	//std::cout << "DESTRUIT UNE AUTRE BOMBE" << std::endl;
       }
-  else if (b->getType() == Type::POWERUP)
+  if (b->getType() == Type::POWERUP)
     {
         _pm.getPowerUp({(int)pos.X, (int)pos.Y, (int)pos.Z});
     }
