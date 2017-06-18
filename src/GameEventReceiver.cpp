@@ -62,14 +62,6 @@ bool 		is::GameEventReceiver::OnEvent(const irr::SEvent &event)
 	}
       if (event.JoystickEvent.IsButtonPressed(1))
 	_action = true;
-      if (event.JoystickEvent.IsButtonPressed(16))
-	_action = true;
-      if (event.JoystickEvent.IsButtonPressed(17))
-	_action = true;
-      if (event.JoystickEvent.IsButtonPressed(18))
-	_action = true;
-      if (event.JoystickEvent.IsButtonPressed(19))
-	_action = true;
     }
   if (event.EventType == irr::EET_KEY_INPUT_EVENT)
     this->_keys[event.KeyInput.Key] = event.KeyInput.PressedDown;
