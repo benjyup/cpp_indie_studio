@@ -109,7 +109,7 @@ int 			is::Bomb::_reducePower(std::list<std::shared_ptr<is::Bomb>> bombs,
       }
   if (b->getType() == Type::POWERUP)
     {
-        _pm.getPowerUp({(int)pos.X, (int)pos.Y, (int)pos.Z});
+        _pm.getPowerUp({pos.X, pos.Y, pos.Z});
     }
   //std::cout << "ret = " << ret << std::endl;
   //std::cerr << "_reducPower" << std::endl;
