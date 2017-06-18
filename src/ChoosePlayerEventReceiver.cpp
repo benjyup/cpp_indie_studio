@@ -34,6 +34,9 @@ bool is::ChoosePlayerEventReceiver::OnEvent(const irr::SEvent &event)
 	  case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_DELETE_PLAYER):
 	    this->_deletePlayer(Player::PLAYER, this->_sContext->nbrOfPlayers);
 	  break;
+	  case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_DELETE_AI):
+	    this->_deletePlayer(Player::AI, this->_sContext->nbrOfAI);
+	  break;
 	  case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_ADD_POS1):
 	    this->_chooseSkin(0);
 	  break;

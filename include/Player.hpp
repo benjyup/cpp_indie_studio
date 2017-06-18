@@ -45,6 +45,7 @@ namespace is
     PlayerType 		type;
     std::string		meshPath;
     std::string		texturePath;
+
    public:
     const std::string &getTexturePath() const;
 
