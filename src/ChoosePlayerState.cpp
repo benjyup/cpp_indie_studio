@@ -193,6 +193,7 @@ void is::ChoosePlayerState::Resume(void)
   this->_buttons[this->_buttons.size() - 2]->setPressedImage(this->_buttonsTextures[ADD_PLAYER_BUTTON_INDEX].second);
   this->_buttons.back()->setImage(this->_buttonsTextures[ADD_BOT_BUTTON_INDEX].first);
   this->_buttons.back()->setPressedImage(this->_buttonsTextures[ADD_BOT_BUTTON_INDEX].second);
+  this->_players = this->_options->getPlayers();
 }
 
 void is::ChoosePlayerState::HandleEvents(void)
@@ -218,6 +219,7 @@ void is::ChoosePlayerState::Draw(void)
     }
   else if (this->eventContext.chooseSkin == true)
       {
+	this->_options->setPlayers(this->_players);
 	this->eventContext.chooseSkin = false;
 	this->eventContext.engine->PushState(new ChooseSkinState(this->eventContext.player));
 	return ;
