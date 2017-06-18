@@ -250,7 +250,7 @@ void is::MenuState::drawButtons()
       {
         irr::video::SColor col = _gui->getSkin()->getColor((irr::gui::EGUI_DEFAULT_COLOR)i);
         col.set(255, 255, 255, 255);
-        _gui->getSkin()->setColor((irr::gui::EGUI_DEFAULT_COLOR)i, col);        
+        _gui->getSkin()->setColor((irr::gui::EGUI_DEFAULT_COLOR)i, col);      
       }
   }
 }

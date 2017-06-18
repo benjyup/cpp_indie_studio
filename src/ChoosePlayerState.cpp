@@ -202,8 +202,8 @@ void is::ChoosePlayerState::Draw(void)
 
   if (this->eventContext.stop == true)
     {
-      //this->eventContext.engine->ChangeState(new GameState);
-      this->eventContext.engine->PushState(new ChooseSkinState);
+      this->eventContext.engine->ChangeState(new GameState);
+      //this->eventContext.engine->PushState(new ChooseSkinState);
       return ;
     }
   this->_driver->beginScene();
