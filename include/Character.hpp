@@ -43,7 +43,7 @@ namespace  is
    public:
     Character(scene::IAnimatedMesh *node, video::ITexture *texture, scene::ISceneManager *smgr,
 	      core::vector3df const &pos, const GameEventReceiver &receiver, std::map<Options::MOVES, irr::EKEY_CODE>  const &Config,
-	      BombsManager &bombsManager);
+	      BombsManager &bombsManager, int id);
     ~Character() {}
     void 	moove();
     void  incSpeed();
@@ -71,6 +71,7 @@ namespace  is
     const std::map<Options::MOVES, irr::EKEY_CODE> 	&_Config;
     STATE 						_state;
     char 						_animDie;
+    int 					_id;
   };
 }
 

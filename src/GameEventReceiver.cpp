@@ -60,7 +60,15 @@ bool 		is::GameEventReceiver::OnEvent(const irr::SEvent &event)
 	  default:
 	    break;
 	}
-      if (event.JoystickEvent.IsButtonPressed(2))
+      if (event.JoystickEvent.IsButtonPressed(1))
+	_action = true;
+      if (event.JoystickEvent.IsButtonPressed(16))
+	_action = true;
+      if (event.JoystickEvent.IsButtonPressed(17))
+	_action = true;
+      if (event.JoystickEvent.IsButtonPressed(18))
+	_action = true;
+      if (event.JoystickEvent.IsButtonPressed(19))
 	_action = true;
     }
   if (event.EventType == irr::EET_KEY_INPUT_EVENT)
@@ -96,21 +104,25 @@ bool 			is::GameEventReceiver::isKeyDown(irr::EKEY_CODE keyCode) const
   return (this->_keys[keyCode]);
 }
 
-irr::s16 		is::GameEventReceiver::isHorAxe() const
+irr::s16 		is::GameEventReceiver::isHorAxe(int id) const
 {
-  irr::s16	i = _horAxe;
-  return (i);
+  if (id == 1)
+    return (_horAxe);
+  else
+    return (0);
 }
 
-irr::s16 		is::GameEventReceiver::isVerAxe() const
+irr::s16 		is::GameEventReceiver::isVerAxe(int id) const
 {
-  irr::s16	i = _verAxe;
-  return (_verAxe);
+  if (id == 1)
+    return (_verAxe);
+  else
+    return (0);
 }
 
 void 			is::GameEventReceiver::setVerAxe(irr::s16 axe)
 {
-  _verAxe = 0;
+  _verAxe = axe;
 }
 
 void 			is::GameEventReceiver::setHorAxe(irr::s16 axe)
@@ -118,7 +130,10 @@ void 			is::GameEventReceiver::setHorAxe(irr::s16 axe)
   _horAxe = axe;
 }
 
-bool 			is::GameEventReceiver::isActionOn() const
+bool 			is::GameEventReceiver::isActionOn(int id) const
 {
-  return _action;
+  if (id == 1)
+    return _action;
+  else
+    return false;
 }

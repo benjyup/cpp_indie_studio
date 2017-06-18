@@ -11,7 +11,7 @@ int 		main(void) {
   try {
       std::shared_ptr<is::GameEngine> engine = std::make_shared<is::GameEngine>("Indie Studio",
 										1900, 1000, 0, false);
-      engine->PushState(new is::IntroState);
+      engine->PushState(new is::MenuState);
 
       core::array<SJoystickInfo> joystickInfo;
       if(engine->getDevice()->activateJoysticks(joystickInfo))

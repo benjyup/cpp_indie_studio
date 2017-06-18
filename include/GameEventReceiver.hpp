@@ -30,11 +30,11 @@ namespace is
     void					setEngine(GameEngine *engine);
 
     bool 					isKeyDown(irr::EKEY_CODE keyCode) const;
-    irr::s16 					isHorAxe() const;
-    irr::s16 					isVerAxe() const;
+    irr::s16 					isHorAxe(int id) const;
+    irr::s16 					isVerAxe(int id) const;
     void					setVerAxe(irr::s16 axe);
     void					setHorAxe(irr::s16 axe);
-    bool 					isActionOn() const;
+    bool 					isActionOn(int id) const;
 
    private:
     CHANGE						_change;

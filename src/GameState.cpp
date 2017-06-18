@@ -55,9 +55,9 @@ namespace is
     _bombs = std::make_shared<is::BombsManager>(*(_map.get()), *_driver, *_sceneManager, *_powManager);
     _opt = &_engine->getOptions();
     _char.push_back(std::make_shared<is::Character>(_sceneManager->getMesh("./chef/tris.md2"), _driver->getTexture("./chef/chef.pcx"), _sceneManager, core::vector3df(1 * SCALE + 7, 2, 1 * SCALE + 7), _receiver, _opt->getP1Config(),
-						    *_bombs.get()));
-    _char.push_back(std::make_shared<is::Character>(_sceneManager->getMesh("./chef/tris.md2"), _driver->getTexture("./chef/chef.pcx"), _sceneManager, core::vector3df(3 * SCALE + SCALE / 2, 2, 3 * SCALE + SCALE / 2), _receiver, _opt->getP2Config(),
-						    *_bombs.get()));
+						    *_bombs.get(), 1));
+    _char.push_back(std::make_shared<is::Character>(_sceneManager->getMesh("./chef/tris.md2"), _driver->getTexture("./chef/chef.pcx"), _sceneManager, core::vector3df((BLOCK - 2) * SCALE - 7, 2, (BLOCK - 2) * SCALE - 7), _receiver, _opt->getP2Config(),
+						    *_bombs.get(), 2));
     for (auto &i : _char)
       _map->addCollision(i.get()->getMesh());
     _receiver.init();
