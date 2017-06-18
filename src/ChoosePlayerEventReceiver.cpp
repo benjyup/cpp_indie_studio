@@ -29,7 +29,7 @@ bool is::ChoosePlayerEventReceiver::OnEvent(const irr::SEvent &event)
 	    _addPlayer(Player::AI, this->_sContext->nbrOfAI);
 	  break;
 	  case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_ADD_PLAY):
-	    this->_sContext->stop = true;
+	    _play();
 	  break;
 	  case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_DELETE_PLAYER):
 	    this->_deletePlayer(Player::PLAYER, this->_sContext->nbrOfPlayers);
@@ -97,4 +97,24 @@ void is::ChoosePlayerEventReceiver::_chooseSkin(int pos)
       this->_sContext->chooseSkin = true;
       this->_sContext->player = pos;
     }
+}
+
+void is::ChoosePlayerEventReceiver::_play()
+{
+  int 		playerFound = 0;
+
+  for (auto &p : *(this->_sContext->players))
+    {
+      if (p.getType() != Player::PlayerType::VOID)
+	playerFound += 1;
+      if (p.getType() != Player::PlayerType::VOID && (p.getMeshPath().empty() || p.getTexturePath().empty()))
+	{
+	  std::cout << p.getMeshPath() << " " << p.getTexturePath() << std::endl;
+	  std::cerr << "RETURN" << std::endl;
+	  return ;
+	}
+    }
+  std::cerr << "TRUE" << std::endl;
+  if (playerFound >= 2)
+    this->_sContext->stop = true;
 }

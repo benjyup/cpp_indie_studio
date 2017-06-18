@@ -82,3 +82,4 @@ void is::ChooseSkinStateEventReceiver::_apply()
 {
   this->_context->apply = true;
 }
+

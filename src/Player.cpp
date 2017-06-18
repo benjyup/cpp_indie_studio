@@ -9,7 +9,10 @@ is::Player::~Player()
 
 }
 
-is::Player::Player(Player::PlayerType type, const std::string &meshPath) : type(type), meshPath(meshPath), mesh(NULL)
+is::Player::Player(Player::PlayerType type, const std::string &meshPath) : type(type),
+									   meshPath(meshPath),
+									   mesh(NULL),
+									   texturePath("")
 {
 
 }

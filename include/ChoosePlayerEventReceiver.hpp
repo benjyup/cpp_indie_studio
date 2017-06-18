@@ -47,6 +47,7 @@ namespace is
     void 						_addPlayer(Player::PlayerType type, irr::u32 &nbrOf);
     void 						_deletePlayer(Player::PlayerType type, irr::u32 &nbrOf);
     void 						_chooseSkin(int);
+    void 						_play();
   };
 }
 
