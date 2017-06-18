@@ -106,7 +106,7 @@ void is::BombsManager::addCollision(std::list<std::shared_ptr<is::Character>> co
       for (auto const &c : Char)
 	{
 	  c->pushAnim(_sceneManager.createCollisionResponseAnimator(
-		  i.second, c->getMesh(), core::vector3df(4,6,4),
+		  i.second, c->getMesh(), core::vector3df(4,7,4),
 		  core::vector3df(0,0,0), core::vector3df(0,0,0)), i.first);
 	  c.get()->getMesh()->addAnimator(c->getAnim(i.first));
 	}
