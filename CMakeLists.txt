@@ -53,7 +53,7 @@ set(SOURCE_FILES
         include/Sound.hpp
         include/PowerUp.hpp src/PowerUp.cpp src/PowerUpManager.cpp include/PowerUpManager.hpp
         include/ChoosePlayerState.hpp
-        src/ChoosePlayerEventReceiver.cpp include/ChoosePlayerEventReceiver.hpp src/Player.cpp include/Player.hpp)
+        src/ChoosePlayerEventReceiver.cpp include/ChoosePlayerEventReceiver.hpp src/Player.cpp include/Player.hpp src/ChooseSkinState.cpp src/ChooseSkinState.hpp)
 
 include_directories(irrlicht-1.8.4/include Interface src/gameEngine src/
         include ./irrKlang-64bit-1.5.0/include)

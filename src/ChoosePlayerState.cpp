@@ -6,6 +6,7 @@
 #include <IndieStudioException.hpp>
 #include <MenuState.hpp>
 #include "ChoosePlayerState.hpp"
+#include "ChooseSkinState.hpp"
 
 
 std::vector<std::pair<std::string, std::string>>	is::ChoosePlayerState::GFX_PATH = {
@@ -201,7 +202,8 @@ void is::ChoosePlayerState::Draw(void)
 
   if (this->eventContext.stop == true)
     {
-      this->eventContext.engine->ChangeState(new GameState);
+      //this->eventContext.engine->ChangeState(new GameState);
+      this->eventContext.engine->PushState(new ChooseSkinState);
       return ;
     }
   this->_driver->beginScene();
