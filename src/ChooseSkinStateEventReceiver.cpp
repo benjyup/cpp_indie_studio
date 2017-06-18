@@ -44,7 +44,8 @@ bool is::ChooseSkinStateEventReceiver::OnEvent(const irr::SEvent &event)
 	  case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_SKIN_APPLY):
 	    this->_apply();
 	  break;
-
+	  default:
+	  std::cerr << "DEFAULT" << std::endl;
 	}
     }
   return false;
@@ -57,8 +58,14 @@ void is::ChooseSkinStateEventReceiver::_nextMesh()
 
 void is::ChooseSkinStateEventReceiver::_prevMesh()
 {
-  if ((this->_context->current_index -= 1) <= 0)
-    this->_context->current_index = this->_context->meshes->size() - 1;
+  std::cout << "PREV MESH" << std::endl;
+  if (this->_context->current_index == 0)
+    {
+      std::cout << "PREV MESH" << std::endl;
+      this->_context->current_index = this->_context->meshes->size() - 1;
+    }
+  else
+    this->_context->current_index -= 1;
 }
 
 void is::ChooseSkinStateEventReceiver::_nextTexture()

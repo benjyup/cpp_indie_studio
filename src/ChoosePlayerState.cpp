@@ -181,6 +181,7 @@ void is::ChoosePlayerState::Pause(void)
 
 void is::ChoosePlayerState::Resume(void)
 {
+  this->eventContext.engine->getDevice()->setEventReceiver(&this->choosePlayerEventReceiver);
   this->_drawButtons();
   this->_buttons[this->_buttons.size() - 5]->setImage(this->_buttonsTextures[DELETE_PLAYER_BUTTON_INDEX].first);
   this->_buttons[this->_buttons.size() - 5]->setPressedImage(this->_buttonsTextures[DELETE_PLAYER_BUTTON_INDEX].second);
@@ -192,7 +193,6 @@ void is::ChoosePlayerState::Resume(void)
   this->_buttons[this->_buttons.size() - 2]->setPressedImage(this->_buttonsTextures[ADD_PLAYER_BUTTON_INDEX].second);
   this->_buttons.back()->setImage(this->_buttonsTextures[ADD_BOT_BUTTON_INDEX].first);
   this->_buttons.back()->setPressedImage(this->_buttonsTextures[ADD_BOT_BUTTON_INDEX].second);
-  this->eventContext.engine->getDevice()->setEventReceiver(&this->choosePlayerEventReceiver);
 }
 
 void is::ChoosePlayerState::HandleEvents(void)
