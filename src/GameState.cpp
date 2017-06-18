@@ -200,7 +200,14 @@ namespace is
       this->_config = "Player " + std::to_string(tab) + " :\n";
     else
       this->_config = "IA " + std::to_string(tab - 2) + " :\n";
-    //this->_config += "power = " + std::to_string(_char[tab - 1]->getPower());
+    for (auto &character : this->_char)
+    {
+      if (tab == 1 && character->getid() == (irr::s32)Button::GUI_ID_BOUTON::GUI_ID_PLAYER1_WINNER)
+      {
+        this->_config += "power = " + std::to_string(character->getPower());
+        break;
+      }
+    }
   }
   void GameState::Draw(void)
   {
