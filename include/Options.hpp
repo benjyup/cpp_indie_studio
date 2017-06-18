@@ -8,6 +8,7 @@
 #include <vector>
 #include <regex>
 #include "irrlicht.h"
+#include "Player.hpp"
 
 namespace is
 {
@@ -34,12 +35,14 @@ namespace is
     const std::map<Options::MOVES, irr::EKEY_CODE>		&getP1Config() const;
     const std::map<Options::MOVES, irr::EKEY_CODE>		&getP2Config() const;
     irr::u8							getVolume() const;
+    std::vector<Player>						&getPlayers();
 
     void							setVolume(const irr::u8 pourcent);
     void 							setP1config(const irr::EKEY_CODE key, const Options::MOVES move);
     void 							setP2config(const irr::EKEY_CODE key, const Options::MOVES move);
     void 							setP1config(const std::map<Options::MOVES, irr::EKEY_CODE> &moves);
     void 							setP2config(const std::map<Options::MOVES, irr::EKEY_CODE> &moves);
+    void							setPlayers(const std::vector<Player> &players);
 
     template <typename T = std::string>
     T 								keyToString(irr::EKEY_CODE key) const;
@@ -52,6 +55,7 @@ namespace is
     bool 							_fullscreen;
     std::map<Options::MOVES, irr::EKEY_CODE> 			_p1Config;
     std::map<Options::MOVES, irr::EKEY_CODE> 			_p2Config;
+    std::vector<Player>						_players;
 
     bool 							isAlreadyBind(int player, const irr::EKEY_CODE, const Options::MOVES move) const;
   };

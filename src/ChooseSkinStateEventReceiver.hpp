@@ -16,6 +16,10 @@ namespace is
     struct SContext
     {
       GameEngine 					*engine;
+      irr::u32 						current_index;
+      std::vector<std::pair<irr::scene::IAnimatedMeshSceneNode *,
+	      std::vector<irr::video::ITexture*>>>	*meshes;
+      bool						apply;
     };
 
     ChooseSkinStateEventReceiver();
@@ -26,6 +30,13 @@ namespace is
 
    private:
     SContext						*_context;
+
+    void						_nextMesh();
+    void						_prevMesh();
+    void						_nextTexture();
+    void						_prevTexture();
+    void						_apply();
+
   };
 }
 

@@ -7,13 +7,14 @@
 
 
 #include <IGameState.hpp>
+#include <ChooseSkinStateEventReceiver.hpp>
 #include "Button.hpp"
 
 namespace is {
   class ChooseSkinState : public IGameState
   {
    public:
-    ChooseSkinState();
+    ChooseSkinState(irr::u32 player);
    ~ChooseSkinState();
 
     virtual void Resume(void);
@@ -27,15 +28,20 @@ namespace is {
 
    private:
     static const std::vector<std::pair<std::string, std::vector<std::string>>>	MESH_PATH;
+    static const std::vector<std::pair<std::string, std::string>>		BUTTON_GFX_PATH;
 
-    irr::u32 									_current_index;
     irr::gui::IGUIEnvironment							*_gui;
     irr::video::IVideoDriver							*_driver;
     irr::scene::ISceneManager   						*_sceneManager;
+    is::Options									*_options;
     std::vector<std::pair<irr::scene::IAnimatedMeshSceneNode *, std::vector<irr::video::ITexture*>>>	_meshes;
     std::vector<is::Button>							_buttons;
+    ChooseSkinStateEventReceiver						_receiver;
+    ChooseSkinStateEventReceiver::SContext					_context;
+    irr::u32 									_player;
 
     void 									_drawButtons();
+    void									_drawMeshes();
 
   };
 }

@@ -34,8 +34,17 @@ bool is::ChoosePlayerEventReceiver::OnEvent(const irr::SEvent &event)
 	  case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_DELETE_PLAYER):
 	    this->_deletePlayer(Player::PLAYER, this->_sContext->nbrOfPlayers);
 	  break;
-	  case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_DELETE_AI):
-	    this->_deletePlayer(Player::AI, this->_sContext->nbrOfAI);
+	  case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_ADD_POS1):
+	    this->_chooseSkin(0);
+	  break;
+	  case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_ADD_POS2):
+	    this->_chooseSkin(1);
+	  break;
+	  case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_ADD_POS3):
+	    this->_chooseSkin(2);
+	  break;
+	  case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_ADD_POS4):
+	    this->_chooseSkin(3);
 	  break;
 	}
     }
@@ -73,5 +82,16 @@ void is::ChoosePlayerEventReceiver::_addPlayer(is::Player::PlayerType playerType
     {
       this->_sContext->players->at(i).setType(playerType);
       nbrOf += 1;
+    }
+}
+
+void is::ChoosePlayerEventReceiver::_chooseSkin(int pos)
+{
+  std::cerr << "chooseSkin" << std::endl;
+  if (this->_sContext->players->at(pos).getType() != Player::PlayerType::VOID)
+    {
+      std::cerr << "chooseSkin" << std::endl;
+      this->_sContext->chooseSkin = true;
+      this->_sContext->player = pos;
     }
 }
