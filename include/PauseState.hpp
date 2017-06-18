@@ -21,8 +21,10 @@ namespace is
     virtual                                             ~PauseState();
     virtual void 					                    Init(is::GameEngine *engine);
     virtual void 					                    Resume(void);
+    virtual void 					                    HandleEvents(void);
 
    private:
+    CHANGE 							    _change;
     PauseEventReceiver				                    _PauseEventReceiver;
   };
 }

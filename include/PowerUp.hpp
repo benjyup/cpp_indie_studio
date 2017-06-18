@@ -31,7 +31,9 @@ namespace is
                 is::poweris);
         ~PowerUp();
         bool    check(irr::core::vector3df const &);
+        void    getPower(is::Character *);
         is::poweris    &getType();
+        void           update();
     private:
 
         irr::scene::IAnimatedMeshSceneNode  *_mesh;
@@ -42,7 +44,6 @@ namespace is
         irr::scene::IAnimatedMesh           *_node;
         is::map                             *_map;
         is::poweris                         _type;
-
     };
 }
 

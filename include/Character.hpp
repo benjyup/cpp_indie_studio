@@ -46,11 +46,11 @@ namespace  is
 	      BombsManager &bombsManager);
     ~Character() {}
     void 	moove();
-    void  incLive();
+    void  incSpeed();
     void    incbomb();
     void    incPower();
     void   update(is::PowerUpManager *, is::map *);
-    irr::core::vector3df    			&getPos(){return _pos;}
+    irr::core::vector3df    			const &getPos() const;
     scene::IAnimatedMeshSceneNode 		*getMesh();
     bool 					getAlive();
     void					die();

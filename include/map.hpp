@@ -12,6 +12,7 @@
 #include "Fire.hpp"
 #include "Block.hpp"
 #include "PlanetSystem.hpp"
+#include "PowerUpManager.hpp"
 
 # define SCALE	15
 # define BLOCK	15
@@ -36,6 +37,7 @@ namespace is
   };
 
   class Block;
+  class PowerUpManager;
   class map
   {
    public:
@@ -74,6 +76,9 @@ namespace is
     std::shared_ptr<PlanetSystem>				_planetG;
     irr::scene::ISceneNode					*_skyUp;
     irr::scene::ISceneNode					*_skyDown;
+    is::PowerUpManager                      *_pm;
+  public:
+      void set_pm(is::PowerUpManager *_pm);
   };
 }
 

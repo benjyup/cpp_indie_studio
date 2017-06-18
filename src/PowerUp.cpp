@@ -43,7 +43,7 @@ is::PowerUp::~PowerUp() {
     _map->delObject({(int)_posMap.X, (int)_posMap.Y, (int)_posMap.Z});
 }
 
-is::poweris &is::PowerUp::getType() {
+is::poweris  &is::PowerUp::getType() {
     return _type;
 }
 
@@ -51,4 +51,10 @@ bool is::PowerUp::check(irr::core::vector3df const &pos) {
     if (_posMap.X == pos.X && _posMap.Y == pos.Y)
         return true;
     return false;
+}
+
+void is::PowerUp::update() {
+    static int  rot = 0;
+    _mesh->setRotation(irr::core::vector3df(0, rot, 0));
+    rot == 361 ? rot = 0 : rot += 1;
 }

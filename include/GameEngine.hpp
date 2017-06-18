@@ -13,6 +13,17 @@
 #include "Options.hpp"
 
 namespace is {
+  enum class CHANGE : irr::u8
+  {
+    NONE = 0,
+    POP,
+    POP2,
+    OPTION,
+    GAME,
+    MENU,
+    PAUSE,
+  };
+
   class GameEngine : public IGameEngine {
    public:
     GameEngine(const std::string &title, int width = 1920, int height = 1080,

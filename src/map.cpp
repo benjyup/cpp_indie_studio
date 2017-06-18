@@ -28,7 +28,7 @@ is::map::map(video::IVideoDriver *driver, scene::ISceneManager *smgr,
       _t.push_back(smgr->createOctreeTriangleSelector(mesh->getMesh(0), b.node));
       b.node->setTriangleSelector(_t.back());
       b.init((Type) map[j], _texture[map[j]], size);
-      _mapi.push_back(b);
+	      _mapi.push_back(b);
       std::cout << "map[" << i << "] = " << map[j] << std::endl;
       if (map[j] != GRASS)
 	{
@@ -66,28 +66,28 @@ void is::map::initEffects()
 				  irr::core::vector3df(-0.5 * SCALE, 0.5 * SCALE, 0.5 * SCALE),
 				  irr::core::vector3df(-0.5 * SCALE, 0.5 * SCALE, 0.5 * SCALE),
 				  TOP,
-				  3);
+				  3, _pm);
   _fire2 = std::make_shared<Fire>(*this,
 				  _smgr,
 				  _driver,
 				  irr::core::vector3df(-0.5 * SCALE, 0.5 * SCALE, (0.5 + (BLOCK - 1)) * SCALE),
 				  irr::core::vector3df(-0.5 * SCALE, 0.5 * SCALE, (0.5 + (BLOCK - 1)) * SCALE),
 				  TOP,
-				  3);
+				  3, _pm);
   _fire3 = std::make_shared<Fire>(*this,
 				  _smgr,
 				  _driver,
 				  irr::core::vector3df((0.5 + (BLOCK - 2)) * SCALE, 0.5 * SCALE, 0.5 * SCALE),
 				  irr::core::vector3df((0.5 + (BLOCK - 2)) * SCALE, 0.5 * SCALE, 0.5 * SCALE),
 				  TOP,
-				  3);
+				  3, _pm);
   _fire4 = std::make_shared<Fire>(*this,
 				  _smgr,
 				  _driver,
 				  irr::core::vector3df((0.5 + (BLOCK - 2)) * SCALE,0.5 * SCALE, (0.5 + (BLOCK - 1)) * SCALE),
 				  irr::core::vector3df((0.5 + (BLOCK - 2)) * SCALE,0.5 * SCALE, (0.5 + (BLOCK - 1)) * SCALE),
 				  TOP,
-				  3);
+				  3, _pm);
   _planetR = std::make_shared<PlanetSystem>(_smgr, _driver, "./gfx/particlered.bmp", 800.0f, 0.001f,
 					    irr::core::vector3df(6.0 * SCALE, 0.5 * SCALE, 7 * SCALE));
   _planetW = std::make_shared<PlanetSystem>(_smgr, _driver, "./gfx/particlewhite.bmp", 600.0f, 0.0009f,
@@ -114,8 +114,8 @@ void	is::map::addCollision(irr::scene::ISceneNode *node)
   for (auto const & i : _t)
     {
       scene::ISceneNodeAnimator* anim = _smgr->createCollisionResponseAnimator(
-	      i, node, core::vector3df(6,10,6),
-	      core::vector3df(0,0,0), core::vector3df(1,3,1));
+	      i, node, core::vector3df(5,9,5),
+	      core::vector3df(0,0,0), core::vector3df(0,0,0));
       node->addAnimator(anim);
       anim->drop();
     }
@@ -278,4 +278,8 @@ void	is::map::draw()
   for (auto it = _mapi.begin(); it != _mapi.end(); it++){
       it->draw();
     }
+}
+
+void is::map::set_pm(is::PowerUpManager *pm) {
+    _pm = pm;
 }

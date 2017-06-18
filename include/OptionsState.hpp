@@ -21,7 +21,9 @@ namespace is
     virtual ~OptionsState();
     virtual void 					Init(is::GameEngine *engine);
     virtual void 					Resume(void);
-    private:
+    virtual void 					HandleEvents(void);
+   private:
+    CHANGE 						_change;
     OptionsEventReceiver				                _optionsEventReceiver;
   };
 }

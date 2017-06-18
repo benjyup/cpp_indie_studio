@@ -23,7 +23,7 @@ is::PowerUpManager::PowerUpManager(irr::scene::ISceneManager &sceneManager,
 }
 
 void is::PowerUpManager::newPow(irr::core::vector3df const &map) {
-    int prob = std::rand() % 2;
+    int prob = std::rand() % 3;
     if (prob != 0)
         return;
     int type = std::rand() % 3;
@@ -47,7 +47,7 @@ void is::PowerUpManager::getPower(is::Character &c, irr::core::vector3df const &
     }
     switch (power) {
         case is::poweris::POWERLIVE:
-            c.incLive();
+            c.incSpeed();
             break;
         case is::poweris::POWERBOMB:
             c.incbomb();
@@ -56,4 +56,11 @@ void is::PowerUpManager::getPower(is::Character &c, irr::core::vector3df const &
             c.incPower();
             break;
         };
+}
+
+void is::PowerUpManager::update() {
+    for (auto &i : _powUp)
+    {
+        i->update();
+    }
 }

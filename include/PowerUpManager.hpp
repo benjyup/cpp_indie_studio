@@ -18,6 +18,7 @@ namespace is {
         void    newPow(irr::core::vector3df const &);
         void    getPowerUp(irr::core::vector3df const &);
         void    getPower(is::Character &, irr::core::vector3df const &);
+        void    update();
     private:
 
         irr::scene::ISceneManager                   &_sceneManager;

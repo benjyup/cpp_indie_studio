@@ -22,21 +22,22 @@ is::Bomb::Bomb(is::map &map, irr::video::ITexture *texture, irr::scene::IAnimate
 	_start_clock(std::clock()),
 	_state(BOMB_PLANTED),
 	_fires(),
-    _pm(pm)
+    _pm(pm),
+	_collision(false)
 {
-  if (!(this->_node = this->_sceneManager.addAnimatedMeshSceneNode(bombMesh)))
+  if (!(this->_node = this->_sceneManager.addOctreeSceneNode(bombMesh, 0, 1)))
     throw is::IndieStudioException("Error on loading bomb.");
   this->_node->setPosition(this->_posSpace);
-  this->_node->setScale({0.3f * SCALE, 0.3f * SCALE, 0.3f * SCALE});
+  this->_node->setScale({0.5f * SCALE, 0.5f * SCALE, 0.5f * SCALE});
   this->_map.addObject(Type::BOMB, {(int)posMap.X, (int)posMap.Y, (int)posMap.Z});
-  std::cerr << "Bomb() id = " << this->_id << std::endl;
-  std::cout << "Bomb pos.x = " << posMap.X << " pos.y = " << posMap.Y << " pos.Z = " << posMap.Z << std::endl;
+//  std::cerr << "Bomb() id = " << this->_id << std::endl;
+//  std::cout << "Bomb pos.x = " << posMap.X << " pos.y = " << posMap.Y << " pos.Z = " << posMap.Z << std::endl;
 }
 
 is::Bomb::~Bomb()
 {
   this->_map.delObject({(int)this->_posMap.X, (int)this->_posMap.Y, (int)this->_posMap.Z});
-  std::cerr << "~Bomb() id = " << this->_id << std::endl;
+//  std::cerr << "~Bomb() id = " << this->_id << std::endl;
 }
 
 
@@ -103,6 +104,10 @@ int 			is::Bomb::_reducePower(std::list<std::shared_ptr<is::Bomb>> bombs,
 	  (*it)->_explosion(bombs);
 	//std::cout << "DESTRUIT UNE AUTRE BOMBE" << std::endl;
       }
+  else if (b->getType() == Type::POWERUP)
+    {
+        _pm.getPowerUp({(int)pos.X, (int)pos.Y, (int)pos.Z});
+    }
   //std::cout << "ret = " << ret << std::endl;
   //std::cerr << "_reducPower" << std::endl;
   return (ret);
@@ -129,19 +134,18 @@ bool is::Bomb::operator!=(const is::Bomb &rhs) const
 void is::Bomb::_startFires(std::list<std::shared_ptr<is::Bomb>> bombs)
 {
   this->_fires.emplace_back(this->_map, &this->_sceneManager, &this->_videoDriver, this->_posSpace, this->_posMap, FireDirection::FORWARD,
-			    this->_reducePower(bombs, this->_posMap, this->_power, [&](irr::core::vector3df &pos) { pos.X += 1; }));
+                            this->_reducePower(bombs, this->_posMap, this->_power, [&](irr::core::vector3df &pos) { pos.X += 1;}), &_pm);
   this->_fires.emplace_back(this->_map, &this->_sceneManager, &this->_videoDriver, this->_posSpace, this->_posMap, FireDirection::BACKWARD,
-			    this->_reducePower(bombs, this->_posMap, this->_power, [&](irr::core::vector3df &pos) { pos.X -= 1; }));
+			    this->_reducePower(bombs, this->_posMap, this->_power, [&](irr::core::vector3df &pos) { pos.X -= 1; }), &_pm);
   this->_fires.emplace_back(this->_map, &this->_sceneManager, &this->_videoDriver, this->_posSpace, this->_posMap, FireDirection::RIGHT,
-			    this->_reducePower(bombs, this->_posMap, this->_power, [&](irr::core::vector3df &pos) { pos.Y += 1; }));
+			    this->_reducePower(bombs, this->_posMap, this->_power, [&](irr::core::vector3df &pos) { pos.Y += 1; }), &_pm);
   this->_fires.emplace_back(this->_map, &this->_sceneManager, &this->_videoDriver, this->_posSpace, this->_posMap, FireDirection::LEFT,
-			    this->_reducePower(bombs, this->_posMap, this->_power, [&](irr::core::vector3df &pos) { pos.Y -= 1; }));
+			    this->_reducePower(bombs, this->_posMap, this->_power, [&](irr::core::vector3df &pos) { pos.Y -= 1; }), &_pm);
   std::for_each(this->_fires.begin(), this->_fires.end(), [](Fire &fire) {
     fire.startFire();
   });
   std::for_each(this->_blocksToDelete.begin(), this->_blocksToDelete.end(), [&](auto pos) {
       this->_map.delObject(pos);
-      //_pm.newPow(core::vector3df(pos.getX(), pos.getY(), 0));
   });
 }
 
@@ -162,6 +166,31 @@ void is::Bomb::_explosion(std::list<std::shared_ptr<is::Bomb>> bombs)
   this->_alreadyBlowUp = true;
   this->_state = FIRE;
   this->_startFires(bombs);
-  this->_node->remove();
+  _node->remove();
   this->_start_clock = std::clock();
+}
+
+bool is::Bomb::getCollision() const
+{
+  return _collision;
+}
+
+bool is::Bomb::alreadyBlowUp() const
+{
+  return _alreadyBlowUp;
+}
+
+void is::Bomb::setCollision(bool b)
+{
+	_collision = b;
+}
+
+irr::scene::IMeshSceneNode *is::Bomb::getMesh()
+{
+  return (_node);
+}
+
+void is::Bomb::setMesh(irr::scene::IMeshSceneNode *mesh)
+{
+_node = mesh;
 }

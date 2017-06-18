@@ -29,7 +29,7 @@ namespace is
   {
    public:
     Fire(is::map &map, irr::scene::ISceneManager* smgr, irr::video::IVideoDriver* driver, irr::core::vector3df Position, irr::core::vector3df posMap,
-	 FireDirection Direction, float power);
+	 FireDirection Direction, float power, is::PowerUpManager *_pm);
     ~Fire();
 
     void											initMapDir();
@@ -54,6 +54,9 @@ namespace is
     FireDirection 										_dir;
     bool											_isBreakable;
     irr::core::vector3df                          _pow;
+    is::PowerUpManager                            *_pm;
+  public:
+      void set_pm(PowerUpManager *_pm);
   };
 }
 

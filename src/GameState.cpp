@@ -29,10 +29,10 @@ static std::vector<int>        mapi; // =
 namespace is
 {
 
-  std::mutex					GameState::DRAW_MUTEX;
-
-  GameState::GameState(): _parserMap("map01.txt"), _genMap("map02.txt")
-  {}
+  GameState::GameState(): _change(CHANGE::NONE), _parserMap("map01.txt"), _genMap("map02.txt"), _receiver(_change)
+  {
+    std::cerr << "initing game" << std::endl;
+  }
 
   GameState::~GameState()
   {}
@@ -40,6 +40,8 @@ namespace is
   void GameState::Init(GameEngine *engine)
   {
     this->_engine = engine;
+    std::cerr << "initing game1" << std::endl;
+    _engine->getDevice()->setEventReceiver(NULL);
     this->_sceneManager = this->_engine->getSceneManager()->createNewSceneManager(false);
     this->_engine->setSceneManager(_sceneManager);
     this->_driver = this->_engine->getDriver();
@@ -49,16 +51,15 @@ namespace is
     mapi = _genMap.getMap();
     _map = std::make_shared<is::map>(_driver, _sceneManager, mapi);
     _powManager = std::make_shared<is::PowerUpManager>(PowerUpManager(*_sceneManager, *_driver, _map.get()));
+    _map.get()->set_pm(_powManager.get());
     _bombs = std::make_shared<is::BombsManager>(*(_map.get()), *_driver, *_sceneManager, *_powManager);
     _opt = &_engine->getOptions();
-    _char.push_back(std::make_shared<is::Character>(_sceneManager->getMesh("./chef/tris.md2"), _driver->getTexture("./chef/chef.pcx"), _sceneManager, core::vector3df(1 * SCALE + 7, 5, 1 * SCALE + 7), _receiver, _opt->getP1Config(),
+    _char.push_back(std::make_shared<is::Character>(_sceneManager->getMesh("./chef/tris.md2"), _driver->getTexture("./chef/chef.pcx"), _sceneManager, core::vector3df(1 * SCALE + 7, 2, 1 * SCALE + 7), _receiver, _opt->getP1Config(),
 						    *_bombs.get()));
-    _char.push_back(std::make_shared<is::Character>(_sceneManager->getMesh("./chef/tris.md2"), _driver->getTexture("./chef/chef.pcx"), _sceneManager, core::vector3df(3 * SCALE + SCALE / 2, 5, 3 * SCALE + SCALE / 2), _receiver, _opt->getP2Config(),
+    _char.push_back(std::make_shared<is::Character>(_sceneManager->getMesh("./chef/tris.md2"), _driver->getTexture("./chef/chef.pcx"), _sceneManager, core::vector3df(3 * SCALE + SCALE / 2, 2, 3 * SCALE + SCALE / 2), _receiver, _opt->getP2Config(),
 						    *_bombs.get()));
     for (auto &i : _char)
       _map->addCollision(i.get()->getMesh());
-    _powManager->newPow(irr::core::vector3df(7, 7, 0));
-    _engine->getDevice()->setEventReceiver(&_receiver);
     _receiver.init();
     Vector3d	v(5 * SCALE + SCALE / 2 - SCALE, 0, 3 * SCALE + SCALE / 2 - SCALE);
 
@@ -66,11 +67,12 @@ namespace is
     //_cam->setMenuMode();
     _cam->setInGameMode();
     changing = false;
+    _engine->getDevice()->setEventReceiver(&_receiver);
+    std::cerr << "initing game2" << std::endl;
   }
 
   void GameState::Cleanup(void)
   {
-
   }
 
   void GameState::Pause(void)
@@ -80,7 +82,9 @@ namespace is
   void GameState::Resume(void)
   {
     std::cerr << "Reprise" << std::endl;
+    _change = CHANGE::NONE;
     changing  = false;
+    _receiver.init();
     _engine->getDevice()->getCursorControl()->setVisible(false);
     _engine->getDevice()->setEventReceiver(&this->_receiver);
   }
@@ -91,18 +95,28 @@ namespace is
       {
 	_receiver.init();
 	changing = true;
-	_engine->PushState(new PauseState);
+	_change = CHANGE::PAUSE;
       }
-  }
-
-  void GameState::Update(void)
-  {
-    // A changer
     for (auto &i : _char)
       {
 	i->update(_powManager.get(), _map.get());
 	i->moove();
       }
+    if (_change == CHANGE::PAUSE)
+      _engine->PushState(new PauseState);
+  }
+
+  void GameState::Update(void)
+  {
+    // A changer
+    _char.remove_if([&](auto &Char) {
+      if (!Char->getAlive())
+	Char->die();
+      return !Char->getAlive();
+    });
+    this->_bombs->checkBombsStatus(_char);
+//    _bombs->addCollision(_char);
+    _powManager->update();
 //      _char[0]->update(_powManager.get(), _map.get());
 //      _char[1]->update(_powManager.get(), _map.get());
   }
@@ -110,12 +124,6 @@ namespace is
   void GameState::Draw(void)
   {
     this->_driver->beginScene();
-   _char.remove_if([&](auto &Char) {
-      if (!Char->getAlive())
-	Char->die();
-      return !Char->getAlive();
-    });
-    this->_bombs->checkBombsStatus();
     _sceneManager->drawAll();
 //    _map->printMap();
     //_cam->draw();

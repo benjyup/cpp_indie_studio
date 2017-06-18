@@ -28,8 +28,6 @@ namespace is
   {
    public:
 
-    static std::mutex					DRAW_MUTEX;
-
     GameState();
     virtual ~GameState();
     virtual void Init(GameEngine *engine);
@@ -42,6 +40,7 @@ namespace is
     virtual void ChangeState(GameEngine *engine,
 			     IGameState *state);
    private:
+    CHANGE 					_change;
     ParseMap	    				_parserMap;
     GenerateMap					_genMap;
     irr::video::IVideoDriver			*_driver;

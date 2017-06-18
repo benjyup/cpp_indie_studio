@@ -3,12 +3,13 @@
 //
 
 #include <iostream>
+#include <mutex>
 #include "OptionsEventReceiver.hpp"
 #include "IndieStudioException.hpp"
 
 const irr::core::stringw			is::OptionsEventReceiver::PRESS_KEY = L"PRESS KEY";
 
-is::OptionsEventReceiver::OptionsEventReceiver() : _getKey(false), _keyToChange()
+is::OptionsEventReceiver::OptionsEventReceiver(CHANGE &change) :  _change(change), _getKey(false), _keyToChange()
 {
 
 }
@@ -35,7 +36,7 @@ bool is::OptionsEventReceiver::OnEvent(const irr::SEvent &event)
 
 void is::OptionsEventReceiver::_guiEvent(const irr::SEvent &event)
 {
-  if (event.EventType == irr::EET_GUI_EVENT && event.GUIEvent.EventType == irr::gui::EGET_BUTTON_CLICKED)
+  if (_change == CHANGE::NONE && event.EventType == irr::EET_GUI_EVENT && event.GUIEvent.EventType == irr::gui::EGET_BUTTON_CLICKED)
     {
       irr::s32	buttonID = event.GUIEvent.Caller->getID();
       switch (buttonID)
@@ -59,7 +60,7 @@ void is::OptionsEventReceiver::_guiEvent(const irr::SEvent &event)
 	  case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_CANCEL_BUTTON):
 	    {
 	      this->_getKey = false;
-	      this->_optionsContext->engine->PopState();
+	      _change = CHANGE::POP;
 	    }
 	  break;
 	  case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_APPLY_BUTTON):
@@ -72,7 +73,7 @@ void is::OptionsEventReceiver::_guiEvent(const irr::SEvent &event)
 								this->_optionsContext->errorMsg->setText(irr::core::stringw(e.what()).c_str());
 		  					return ;
 								}
-	    	this->_optionsContext->engine->PopState();
+	      _change = CHANGE::POP;
 	    	}
 	  break;
 		case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_TMP_MOVE_ACTION_BUTTON):

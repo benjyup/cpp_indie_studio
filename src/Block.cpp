@@ -24,9 +24,7 @@ namespace is
   void Block::init(Type t, video::ITexture *text, int size)
   {
     node->setMaterialFlag(irr::video::EMF_LIGHTING, false);
-//    printf("pos : %d\nvector : %d\n", pos % size, this->pos.getY());
     type = t;
-    std::cout << "TYPE = " << type << std::endl;
     node->setPosition(irr::core::vector3df(this->pos.getX() * SCALE, setY(),
 					   (this->pos.getY()) * SCALE));
     node->setMaterialTexture(0, text);

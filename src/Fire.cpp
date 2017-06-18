@@ -16,12 +16,13 @@ const std::map<is::FireDirection, std::function<void(irr::core::vector3di &pos)>
 };
 
 is::Fire::Fire(is:: map &map, irr::scene::ISceneManager* smgr, irr::video::IVideoDriver* driver,
-	   irr::core::vector3df Position, irr::core::vector3df posMap, FireDirection Direction, float power) :
+	   irr::core::vector3df Position, irr::core::vector3df posMap, FireDirection Direction, float power, is::PowerUpManager *pm) :
 	_power(power),
 	_map(map),
 	_pos({posMap.X, posMap.Y, posMap.Z}),
 	_dir(Direction),
-	_isBreakable(false)
+	_isBreakable(false),
+    _pm(pm)
 {
   initMapDir();
   std::cout << "power = " << power << std::endl;
@@ -52,6 +53,11 @@ void	is::Fire::startFire()
           _pow.X = pos.X;
           _pow.Y = pos.Y;
       }
+        if (this->_map.getLocalType({pos.X, pos.Y, pos.Z}) == POWERUP)
+        {
+            std::cerr << "COLLISION FIRE POWERUP" << std::endl;
+            _pm->getPowerUp({pos.X, pos.Y, pos.Z});
+        }
       this->_map.addObject(is::Type::FIRE, {pos.X, pos.Y, pos.Z});
       _DIRECTIONS_ACTION.at(this->_dir)(pos);
     }
@@ -140,4 +146,8 @@ void	is::Fire::setScale(irr::core::vector3df scale)
 void	is::Fire::draw()
 {
   _ps->render();
+}
+
+void is::Fire::set_pm(is::PowerUpManager *pm) {
+    _pm = pm;
 }

@@ -39,6 +39,13 @@ namespace is
       GUI_ID_RESUME_BUTTON,
       GUI_ID_WALLPAPER_BUTTON,
       GUI_ID_PRESS_BUTTON,
+      GUI_ID_ADD_POS1,
+      GUI_ID_ADD_POS2,
+      GUI_ID_ADD_POS3,
+      GUI_ID_ADD_POS4,
+      GUI_ID_ADD_PLAYER,
+      GUI_ID_ADD_AI,
+      GUI_ID_ADD_PLAY,
       GUI_ID_LENGTH,
     };
 

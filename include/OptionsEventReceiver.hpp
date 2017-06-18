@@ -28,13 +28,14 @@ namespace is
       irr::gui::IGUIStaticText				*errorMsg;
     };
 
-    OptionsEventReceiver();
+    OptionsEventReceiver(CHANGE &);
     virtual ~OptionsEventReceiver();
 
     virtual bool 		OnEvent(const irr::SEvent& event);
     void 			Init(SOptionsContext *optionsContext);
 
    private:
+    CHANGE						&_change;
     SOptionsContext					  *_optionsContext;
     bool 						          _getKey;
     Button::GUI_ID_BOUTON 	  _keyToChange;
