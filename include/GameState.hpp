@@ -41,10 +41,13 @@ namespace is
     virtual void ChangeState(GameEngine *engine,
 			     IGameState *state);
    private:
+
    void          addText();
     void	checkWinner();
    void          addButtons();
    void          setTime();
+    void	 initPlayer();
+
     CHANGE 					_change;
     ParseMap	    				_parserMap;
     GenerateMap					_genMap;
