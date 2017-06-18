@@ -27,9 +27,9 @@ is::BombsManager::~BombsManager()
 
 }
 
-void is::BombsManager::putBomb(const irr::core::vector3df &pos, int power)
+void is::BombsManager::putBomb(const irr::core::vector3df &pos, int power, int &nbrOfPlayerBombs)
 {
-  this->_bombs.push_back(std::make_shared<Bomb>(this->_map, this->_texture, this->_mesh, pos, power, this->_videoDriver, this->_sceneManager, this->_pm));
+  this->_bombs.push_back(std::make_shared<Bomb>(this->_map, this->_texture, this->_mesh, pos, power, this->_videoDriver, this->_sceneManager, this->_pm, nbrOfPlayerBombs));
 }
 
 bool is::BombsManager::checkBombsStatus(std::list<std::shared_ptr<is::Character>> const &Char)
