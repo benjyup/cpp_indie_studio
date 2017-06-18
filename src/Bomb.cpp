@@ -22,21 +22,22 @@ is::Bomb::Bomb(is::map &map, irr::video::ITexture *texture, irr::scene::IAnimate
 	_start_clock(std::clock()),
 	_state(BOMB_PLANTED),
 	_fires(),
-    _pm(pm)
+    _pm(pm),
+	_collision(false)
 {
-  if (!(this->_node = this->_sceneManager.addAnimatedMeshSceneNode(bombMesh)))
+  if (!(this->_node = this->_sceneManager.addOctreeSceneNode(bombMesh, 0, 1)))
     throw is::IndieStudioException("Error on loading bomb.");
   this->_node->setPosition(this->_posSpace);
-  this->_node->setScale({0.3f * SCALE, 0.3f * SCALE, 0.3f * SCALE});
+  this->_node->setScale({0.5f * SCALE, 0.5f * SCALE, 0.5f * SCALE});
   this->_map.addObject(Type::BOMB, {(int)posMap.X, (int)posMap.Y, (int)posMap.Z});
-  std::cerr << "Bomb() id = " << this->_id << std::endl;
-  std::cout << "Bomb pos.x = " << posMap.X << " pos.y = " << posMap.Y << " pos.Z = " << posMap.Z << std::endl;
+//  std::cerr << "Bomb() id = " << this->_id << std::endl;
+//  std::cout << "Bomb pos.x = " << posMap.X << " pos.y = " << posMap.Y << " pos.Z = " << posMap.Z << std::endl;
 }
 
 is::Bomb::~Bomb()
 {
   this->_map.delObject({(int)this->_posMap.X, (int)this->_posMap.Y, (int)this->_posMap.Z});
-  std::cerr << "~Bomb() id = " << this->_id << std::endl;
+//  std::cerr << "~Bomb() id = " << this->_id << std::endl;
 }
 
 
@@ -165,6 +166,31 @@ void is::Bomb::_explosion(std::list<std::shared_ptr<is::Bomb>> bombs)
   this->_alreadyBlowUp = true;
   this->_state = FIRE;
   this->_startFires(bombs);
-  this->_node->remove();
+  _node->remove();
   this->_start_clock = std::clock();
+}
+
+bool is::Bomb::getCollision() const
+{
+  return _collision;
+}
+
+bool is::Bomb::alreadyBlowUp() const
+{
+  return _alreadyBlowUp;
+}
+
+void is::Bomb::setCollision(bool b)
+{
+	_collision = b;
+}
+
+irr::scene::IMeshSceneNode *is::Bomb::getMesh()
+{
+  return (_node);
+}
+
+void is::Bomb::setMesh(irr::scene::IMeshSceneNode *mesh)
+{
+_node = mesh;
 }

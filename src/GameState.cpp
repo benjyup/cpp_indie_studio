@@ -54,9 +54,9 @@ namespace is
     _map.get()->set_pm(_powManager.get());
     _bombs = std::make_shared<is::BombsManager>(*(_map.get()), *_driver, *_sceneManager, *_powManager);
     _opt = &_engine->getOptions();
-    _char.push_back(std::make_shared<is::Character>(_sceneManager->getMesh("./chef/tris.md2"), _driver->getTexture("./chef/chef.pcx"), _sceneManager, core::vector3df(1 * SCALE + 7, 5, 1 * SCALE + 7), _receiver, _opt->getP1Config(),
+    _char.push_back(std::make_shared<is::Character>(_sceneManager->getMesh("./chef/tris.md2"), _driver->getTexture("./chef/chef.pcx"), _sceneManager, core::vector3df(1 * SCALE + 7, 2, 1 * SCALE + 7), _receiver, _opt->getP1Config(),
 						    *_bombs.get()));
-    _char.push_back(std::make_shared<is::Character>(_sceneManager->getMesh("./chef/tris.md2"), _driver->getTexture("./chef/chef.pcx"), _sceneManager, core::vector3df(3 * SCALE + SCALE / 2, 5, 3 * SCALE + SCALE / 2), _receiver, _opt->getP2Config(),
+    _char.push_back(std::make_shared<is::Character>(_sceneManager->getMesh("./chef/tris.md2"), _driver->getTexture("./chef/chef.pcx"), _sceneManager, core::vector3df(3 * SCALE + SCALE / 2, 2, 3 * SCALE + SCALE / 2), _receiver, _opt->getP2Config(),
 						    *_bombs.get()));
     for (auto &i : _char)
       _map->addCollision(i.get()->getMesh());
@@ -109,7 +109,13 @@ namespace is
   void GameState::Update(void)
   {
     // A changer
-
+    _char.remove_if([&](auto &Char) {
+      if (!Char->getAlive())
+	Char->die();
+      return !Char->getAlive();
+    });
+    this->_bombs->checkBombsStatus(_char);
+//    _bombs->addCollision(_char);
     _powManager->update();
 //      _char[0]->update(_powManager.get(), _map.get());
 //      _char[1]->update(_powManager.get(), _map.get());
@@ -118,12 +124,6 @@ namespace is
   void GameState::Draw(void)
   {
     this->_driver->beginScene();
-   _char.remove_if([&](auto &Char) {
-      if (!Char->getAlive())
-	Char->die();
-      return !Char->getAlive();
-    });
-    this->_bombs->checkBombsStatus();
     _sceneManager->drawAll();
 //    _map->printMap();
     //_cam->draw();

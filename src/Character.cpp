@@ -161,3 +161,8 @@ void is::Character::incbomb() {
 void is::Character::incPower() {
     _power += 1;
 }
+
+irr::core::vector3df const &is::Character::getPos() const
+{
+  return _mesh->getPosition();
+}

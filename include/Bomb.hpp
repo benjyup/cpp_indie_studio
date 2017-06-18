@@ -37,6 +37,11 @@ namespace is
     void 				remove();
     bool 				blowUp(std::list<std::shared_ptr<is::Bomb>> bombs);
     const irr::core::vector3df		&getPos() const;
+    bool				getCollision() const;
+    bool 				alreadyBlowUp() const;
+    void				setCollision(bool b);
+    irr::scene::IMeshSceneNode		*getMesh();
+    void				setMesh(irr::scene::IMeshSceneNode *);
 
     bool 				operator==(const Bomb &rhs) const;
     bool 				operator!=(const Bomb &rhs) const;
@@ -58,13 +63,14 @@ namespace is
     is::map 				&_map;
     irr::video::IVideoDriver 		&_videoDriver;
     irr::scene::ISceneManager 		&_sceneManager;
-    irr::scene::IAnimatedMeshSceneNode 	*_node;
+    irr::scene::IMeshSceneNode 		*_node;
     bool 				_alreadyBlowUp;
     std::clock_t			_start_clock;
     t_state 				_state;
     std::list<Fire>			_fires;
     std::list<Vector3d>			_blocksToDelete;
 	is::PowerUpManager &_pm;
+    bool				_collision;
 
     int 				_reducePower(std::list<std::shared_ptr<is::Bomb>> bombs,
 						    irr::core::vector3df pos,

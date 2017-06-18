@@ -13,6 +13,7 @@
 
 namespace is
 {
+  class Character;
   class BombsManager
   {
    public:
@@ -20,7 +21,8 @@ namespace is
     ~BombsManager();
 
     void 			putBomb(const irr::core::vector3df &pos, int power);
-    bool 			checkBombsStatus();
+    bool 			checkBombsStatus(std::list<std::shared_ptr<is::Character>> const &Char);
+    void addCollision(std::list<std::shared_ptr<is::Character>> const &Char);
 
    private:
     is::map					&_map;
@@ -34,6 +36,10 @@ namespace is
 		       std::vector<is::Bomb> &)> 		_explosion;
     std::mutex					_bomb_mutex;
     is::PowerUpManager                  &_pm;
+    std::list<irr::scene::ITriangleSelector*>	_col;
+
+    bool checkChar(std::list<std::shared_ptr<Character>> const &Char, irr::core::vector3df const &v);
+
   };
 }
 
