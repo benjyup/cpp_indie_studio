@@ -8,8 +8,6 @@
 #include <irrlicht.h>
 #include "map.hpp"
 
-using namespace irr;
-
 namespace is
 {
 
@@ -20,14 +18,14 @@ namespace is
    public:
     Block(Vector3d const & pos);
     ~Block();
-    void   init(Type t, video::ITexture *text, int size);
+    void   init(Type t, irr::video::ITexture *text, int size);
     Block 	&operator=(Block const &);
     is::Type 	getType() const;
     void	setType(is::Type &t);
     void 	draw();
     float 	setY();
 
-    scene::IMeshSceneNode		*node;
+    irr::scene::IMeshSceneNode		*node;
    private:
     friend class 			map;
     Vector3d				pos;

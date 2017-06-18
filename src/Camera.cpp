@@ -84,7 +84,7 @@ void			is::Camera::setTextMenu()
   if (_node)
     {
       _node->setMaterialFlag(irr::video::EMF_LIGHTING, false);
-      _node->setMD2Animation(scene::EMAT_STAND);
+      _node->setMD2Animation(irr::scene::EMAT_STAND);
       _node->setScale({10.0f, 10.0f, 10.0f});
       _node->setRotation({0, 180, 0});
       _node->setMaterialTexture( 0, _driver->getTexture("./gfx/fire.jpg"));
@@ -106,7 +106,7 @@ void 			is::Camera::setTextIntro()
   if (_node)
     {
       _node->setMaterialFlag(irr::video::EMF_LIGHTING, false);
-      _node->setMD2Animation(scene::EMAT_STAND);
+      _node->setMD2Animation(irr::scene::EMAT_STAND);
       _node->setScale({10.0f, 10.0f, 10.0f});
       _node->setRotation({0, 180, 0});
       _node->setMaterialTexture( 0, _driver->getTexture("./gfx/fire.jpg"));
@@ -124,7 +124,7 @@ void			is::Camera::setSplashScreen()
     setAnimation3();
 }
 
-scene::ISceneManager	*is::Camera::get_smgr() const
+irr::scene::ISceneManager	*is::Camera::get_smgr() const
 {
   return _smgr;
 }
@@ -134,7 +134,7 @@ is::CamMode			is::Camera::get_currMode() const
   return _currMode;
 }
 
-void			is::Camera::set_smgr(scene::ISceneManager *_smgr)
+void			is::Camera::set_smgr(irr::scene::ISceneManager *_smgr)
 {
   Camera::_smgr = _smgr;
 }

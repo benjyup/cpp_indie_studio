@@ -17,8 +17,6 @@
 # define SCALE	15
 # define BLOCK	15
 
-using namespace irr;
-
 enum Type : int;
 
 class Fire;
@@ -41,7 +39,7 @@ namespace is
   class map
   {
    public:
-    map(video::IVideoDriver *driver, scene::ISceneManager *smgr, std::vector<int> &map);
+    map(irr::video::IVideoDriver *driver, irr::scene::ISceneManager *smgr, std::vector<int> &map);
     virtual ~map();
     void		moveObject(Block &object, Vector3d const &pos);
     int 		addObject(Type type, Vector3d const &);
@@ -54,16 +52,16 @@ namespace is
     Block const		*findBlock(Vector3d const &v) const;
     int			find(Block const &b) const;
     void		initEffects();
-    void		addCollision(scene::ISceneNode *);
+    void		addCollision(irr::scene::ISceneNode *);
     void		draw();
     void 		printMap();
 
    private:
-    scene::ISceneManager *_smgr;
-    video::IVideoDriver *_driver;
+    irr::scene::ISceneManager *_smgr;
+    irr::video::IVideoDriver *_driver;
     std::vector<Block> 						_mapi;
     std::vector<int>						&_map;
-    video::ITexture 						*_texture[Type::NBR_OF_TYPE];
+    irr::video::ITexture 						*_texture[Type::NBR_OF_TYPE];
     int 							size;
     std::vector<irr::scene::ITriangleSelector *>		_t;
 

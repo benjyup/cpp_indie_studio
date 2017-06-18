@@ -14,7 +14,7 @@ int 		main(void) {
 										1900, 1000, 0, false);
       engine->PushState(new is::IntroState);
 
-      core::array<SJoystickInfo> joystickInfo;
+      irr::core::array<irr::SJoystickInfo> joystickInfo;
       engine->getDevice()->activateJoysticks(joystickInfo);
 			while (engine->Running())
 	{
