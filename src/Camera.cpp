@@ -122,9 +122,6 @@ void			is::Camera::setSplashScreen()
     setAnimation2();
   if (_timer->getTime() >= (_anim1Time + _anim2Time - 30) && _timer->getTime() <= (_anim1Time + _anim2Time))
     setAnimation3();
-//  if (_timer->getTime() >= (_anim1Time + _anim2Time + _anim3Time) - 30)
-//    _engine->ChangeState(new is::MenuState);
-//  _anim->drop();
 }
 
 scene::ISceneManager	*is::Camera::get_smgr() const

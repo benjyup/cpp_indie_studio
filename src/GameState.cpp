@@ -8,31 +8,13 @@
 #include <ScoreEnd.hpp>
 #include "GameState.hpp"
 
-static std::vector<int>        mapi; // =
-// {
-// 	1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-// 	1, 0, 0, 2, 2, 0, 0, 0, 0, 0, 2, 2, 0, 0, 1,
-// 	1, 0, 1, 0, 1, 0, 1, 2, 1, 0, 1, 0, 1, 0, 1,
-// 	1, 2, 1, 2, 1, 0, 0, 2, 0, 0, 0, 0, 1, 2, 1,
-// 	1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1,
-// 	1, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 1,
-// 	1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1,
-// 	1, 2, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 2, 1,
-// 	1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1,
-// 	1, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 1,
-// 	1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1,
-// 	1, 2, 1, 0, 2, 0, 0, 2, 0, 0, 0, 0, 1, 2, 1,
-// 	1, 0, 1, 0, 1, 0, 1, 2, 1, 0, 0, 0, 1, 0, 1,
-// 	1, 0, 0, 2, 2, 0, 0, 2, 0, 0, 2, 2, 0, 0, 1,
-// 	1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
-// };
+static std::vector<int>        mapi;
 
 namespace is
 {
 
   GameState::GameState(): _change(CHANGE::NONE), _parserMap("map01.txt"), _genMap("map02.txt"), _receiver(_change), min(0)
   {
-    std::cerr << "initing game" << std::endl;
   }
 
   GameState::~GameState()
@@ -41,7 +23,6 @@ namespace is
   void GameState::Init(GameEngine *engine)
   {
     this->_engine = engine;
-    std::cerr << "initing game1" << std::endl;
     _engine->getDevice()->setEventReceiver(NULL);
     this->_sceneManager = this->_engine->getSceneManager()->createNewSceneManager(false);
     this->_engine->setSceneManager(_sceneManager);
@@ -49,7 +30,6 @@ namespace is
     this->_gui = this->_engine->getGuiEnv();
     this->_engine->getDevice()->getCursorControl()->setVisible(false);
     this->_engine->getSound().setGameMusic();
-    //mapi = _parserMap.getVector();
     mapi = _genMap.getMap();
     _map = std::make_shared<is::map>(_driver, _sceneManager, mapi);
     _powManager = std::make_shared<is::PowerUpManager>(PowerUpManager(*_sceneManager, *_driver, _map.get()));
@@ -57,21 +37,15 @@ namespace is
     _bombs = std::make_shared<is::BombsManager>(*(_map.get()), *_driver, *_sceneManager, *_powManager, _engine);
     _opt = &_engine->getOptions();
     initPlayer();
-//    _char.push_back(std::make_shared<is::Character>(_sceneManager->getMesh("./chef/tris.md2"), _driver->getTexture("./chef/chef.pcx"), _sceneManager, core::vector3df(1 * SCALE + 7, 2, 1 * SCALE + 7), _receiver, _opt->getP1Config(),
-//						    *_bombs.get(), (int)Button::GUI_ID_BOUTON::GUI_ID_PLAYER1_WINNER));
-//    _char.push_back(std::make_shared<is::Character>(_sceneManager->getMesh("./chef/tris.md2"), _driver->getTexture("./chef/chef.pcx"), _sceneManager, core::vector3df((BLOCK - 2) * SCALE - 7, 2, (BLOCK - 2) * SCALE - 7), _receiver, _opt->getP2Config(),
-//						    *_bombs.get(), (int)Button::GUI_ID_BOUTON::GUI_ID_PLAYER2_WINNER));
     for (auto &i : _char)
       _map->addCollision(i.get()->getMesh());
     _receiver.init();
     Vector3d	v(5 * SCALE + SCALE / 2 - SCALE, 0, 3 * SCALE + SCALE / 2 - SCALE);
 
     _cam = std::make_shared<Camera>(_sceneManager, _driver, MENU, _engine);
-    //_cam->setMenuMode();
     _cam->setInGameMode();
     changing = false;
     _engine->getDevice()->setEventReceiver(&_receiver);
-    std::cerr << "initing game2" << std::endl;
     if (_gui != NULL)
       this->_font = _gui->getFont("./gfx/font_space.bmp");
     this->addText();
@@ -93,7 +67,6 @@ namespace is
       {
 	if (i.getType() == Player::PlayerType::PLAYER)
 	  {
-	    std::cerr << "adding Player" << std::endl;
 	    if (p == 0)
 	      {
 		_char.push_back(std::make_shared<is::Character>(_sceneManager->getMesh(i.getMeshPath().c_str()), _driver->getTexture(i.getTexturePath().c_str()), _sceneManager, v[p + ai], _receiver, _opt->getP1Config(),
@@ -104,20 +77,6 @@ namespace is
 		_char.push_back(std::make_shared<is::Character>(_sceneManager->getMesh(i.getMeshPath().c_str()), _driver->getTexture(i.getTexturePath().c_str()), _sceneManager, v[p + ai], _receiver, _opt->getP2Config(),
 								*_bombs.get(), (int)Button::GUI_ID_BOUTON::GUI_ID_PLAYER2_WINNER));
 	  }
-//	else if (i.getType() == Player::PlayerType::AI)
-//	    {
-//	      if (ai == 1)
-//		{
-//		  _char.push_back(std::make_shared<is::IA>(_sceneManager->getMesh(i.getMeshPath().c_str()), *_driver->getTexture(i.getTexturePath().c_str()), *_sceneManager, v, _receiver, _opt->getP1Config(),
-//								  *_bombs.get(), (int)Button::GUI_ID_BOUTON::GUI_ID_PLAYER1_WINNER));
-//		  ai++;
-//		}
-//	      else
-//		{
-//		  _char.push_back(std::make_shared<is::IA>(_sceneManager->getMesh(i.getMeshPath().c_str()), *_driver->getTexture(i.getTexturePath().c_str()), *_sceneManager, v, _receiver, _opt->getP2Config(),
-//								  *_bombs.get(), (int)Button::GUI_ID_BOUTON::GUI_ID_PLAYER2_WINNER));
-//		}
-//	    }
       }
   }
 
@@ -196,7 +155,6 @@ namespace is
 
   void GameState::Resume(void)
   {
-    std::cerr << "Reprise" << std::endl;
     _change = CHANGE::NONE;
     changing  = false;
     _receiver.init();
@@ -226,7 +184,6 @@ namespace is
     _char.remove_if([&](auto &Char) {
       if (!Char->getAlive())
 	{
-//	  _engine->getSound().loseSound();
 	  Char->die();
 	}
       return !Char->getAlive();
@@ -283,9 +240,6 @@ namespace is
   {
     this->_driver->beginScene();
     _sceneManager->drawAll();
-//    _map->printMap();
-    //_cam->draw();
-    //_map->draw();
     for (auto &button : this->_buttons)
       {
 	button->setImage(this->_pathButton[(Button::GUI_ID_BOUTON)button->getID()]);

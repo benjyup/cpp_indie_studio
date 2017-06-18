@@ -39,9 +39,8 @@ bool is::BombsManager::checkBombsStatus(std::list<std::shared_ptr<is::Character>
   this->_bombs.remove_if([&](auto const &bomb) {
     ret = true;
     bool t;
-    	if ((t = bomb->blowUp(this->_bombs)))
-;//	  _engine->getSound().bombSound();
-    return t;
+    	if ((t = bomb->blowUp(this->_bombs)));
+    		return t;
   });
   for (auto &i : _bombs)
     {
@@ -52,10 +51,9 @@ bool is::BombsManager::checkBombsStatus(std::list<std::shared_ptr<is::Character>
 	  node->setMaterialType(irr::video::EMT_TRANSPARENT_ADD_COLOR);
 	  _colNode[i->_id] = node;
 	  _col[i->_id] = _sceneManager.createOctreeTriangleSelector(_mesh2, node);
-//	  node->setMaterialType(irr::video::EMT_NORMAL_MAP_TRANSPARENT_ADD_COLOR);
 	  node->setTriangleSelector(_col[i->_id]);
 	  node->setScale(irr::core::vector3df(9, 10, 9));
-	  node->setPosition({i->getPos().X + 9 / 2, 0, i->getPos().Z - 9 / 2});//{i->getPos2() * SCALE,  * SCALE, 2 * SCALE});
+	  node->setPosition({i->getPos().X + 9 / 2, 0, i->getPos().Z - 9 / 2});
 	  i->setCollision(true);
 	}
   for (auto &i : _bombs)

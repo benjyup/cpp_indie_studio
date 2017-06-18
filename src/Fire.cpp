@@ -25,7 +25,6 @@ is::Fire::Fire(is:: map &map, irr::scene::ISceneManager* smgr, irr::video::IVide
     _pm(pm)
 {
   initMapDir();
-  std::cout << "power = " << power << std::endl;
   _fireText = driver->getTexture("./gfx/fire.bmp");
   _ps = smgr->addParticleSystemSceneNode(false);
   createBox(Direction, power);
@@ -43,10 +42,8 @@ void	is::Fire::startFire()
   irr::core::vector3di  pos(this->_pos);
 
   _ps->setEmitter(_em);
-  std::cerr << "START FIRE" << std::endl;
   for (float i = 0.0f ; i <= _power ; i += 1)
     {
-      std::cout << "START FIRE pos.x = " << pos.X << " pos.y = " << pos.Y << " pos.z = " << pos.Z<< std::endl;
       if (this->_map.getLocalType({pos.X, pos.Y, pos.Z}) == BREAK)
       {
           this->_isBreakable = true;
@@ -55,13 +52,11 @@ void	is::Fire::startFire()
       }
         if (this->_map.getLocalType({pos.X, pos.Y, pos.Z}) == POWERUP)
         {
-            std::cerr << "COLLISION FIRE POWERUP" << std::endl;
             _pm->getPowerUp({pos.X, pos.Y, pos.Z});
         }
       this->_map.addObject(is::Type::FIRE, {pos.X, pos.Y, pos.Z});
       _DIRECTIONS_ACTION.at(this->_dir)(pos);
     }
-  std::cerr << "START FIRE" << std::endl;
 }
 
 void	is::Fire::stopFire(is::PowerUpManager &pm)
@@ -69,19 +64,15 @@ void	is::Fire::stopFire(is::PowerUpManager &pm)
   _ps->setEmitter(0);
   _em->drop();
   _ps->remove();
-  std::cerr << "DELETE FIRE" << std::endl;
   irr::core::vector3di  pos(this->_pos);
   for (float i = 0.0f ; i <= _power ; i += 1)
     {
-      std::cout << "DELETE FIRE pos.x = " << pos.X << " pos.y = " << pos.Y << " pos.z = " << pos.Z<< std::endl;
       this->_map.delObject({pos.X, pos.Y, pos.Z});
       _DIRECTIONS_ACTION.at(this->_dir)(pos);
     }
 
   if (this->_isBreakable)
     pm.newPow(irr::core::vector3df(_pow.X, _pow.Y, 0));
-
-  std::cerr << "DELETE FIRE" << std::endl;
 }
 
 void	is::Fire::initMapDir()
@@ -130,7 +121,6 @@ void	is::Fire::createFire(irr::scene::ISceneManager* smgr, irr::core::vector3df 
   _ps->setMaterialFlag(irr::video::EMF_ZWRITE_ENABLE, false);
   _ps->setMaterialTexture(0, _fireText);
   _ps->setMaterialType(irr::video::EMT_TRANSPARENT_ADD_COLOR);
-  std::cout << "debut createFire" << std::endl;
 }
 
 void	is::Fire::setPosition(irr::core::vector3df position)

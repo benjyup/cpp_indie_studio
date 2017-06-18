@@ -67,8 +67,7 @@ is::ChooseSkinState::~ChooseSkinState()
 void is::ChooseSkinState::Init(is::GameEngine *engine)
 {
   engine->getDevice()->setEventReceiver(NULL);
-  //engine->getSceneManager()->createNewSceneManager();
-
+  
   this->_options = &engine->getOptions();
   this->_gui = engine->getGuiEnv();
   this->_driver = engine->getDriver();

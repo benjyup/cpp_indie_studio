@@ -9,8 +9,6 @@
 
 is::GameEventReceiver::GameEventReceiver(CHANGE &change) : _change(change)
 {
-//  _char = Char;
-  std::cerr << "GameEventReceiver()" << std::endl;
 }
 
 is::GameEventReceiver::~GameEventReceiver()
@@ -20,13 +18,6 @@ is::GameEventReceiver::~GameEventReceiver()
 
 bool 		is::GameEventReceiver::OnEvent(const irr::SEvent &event)
 {
-/*
-  for (auto const &i : _p1_conf)
-    {
-      if (i.second == event.KeyInput.Key)
-	_char[0]->moove(i.first);
-    }
-*/
   if (_change != CHANGE::NONE)
     return (false);
   if(event.EventType == irr::EET_JOYSTICK_INPUT_EVENT)
@@ -72,8 +63,6 @@ void	is::GameEventReceiver::init()
 {
   for (int i = 0; i < this->_keys.size(); i++)
     this->_keys[i] = false;
-  //for (int i = 0; i < this->_joys.size(); i++)
-  //  this->_joys[i] = false;
 }
 
 void is::GameEventReceiver::setDevice(irr::IrrlichtDevice *device)
@@ -81,8 +70,6 @@ void is::GameEventReceiver::setDevice(irr::IrrlichtDevice *device)
   this->_device = device;
   for (int i = 0 ; i < this->_keys.size() ; i++)
     this->_keys[i] = false;
-  //for (int i = 0 ; i < this->_joys.size() ; i++)
-   // this->_joys[i] = false;
 }
 
 void is::GameEventReceiver::setEngine(GameEngine *engine)
@@ -96,17 +83,17 @@ bool 			is::GameEventReceiver::isKeyDown(irr::EKEY_CODE keyCode) const
   return (this->_keys[keyCode]);
 }
 
-irr::s16 		is::GameEventReceiver::isHorAxe(int id) const
+irr::s16 		is::GameEventReceiver::isHorAxe(Button::GUI_ID_BOUTON id) const
 {
-  if (id == 1)
+  if (id == Button::GUI_ID_BOUTON::GUI_ID_PLAYER1_WINNER)
     return (_horAxe);
   else
     return (0);
 }
 
-irr::s16 		is::GameEventReceiver::isVerAxe(int id) const
+irr::s16 		is::GameEventReceiver::isVerAxe(Button::GUI_ID_BOUTON id) const
 {
-  if (id == 1)
+  if (id == Button::GUI_ID_BOUTON::GUI_ID_PLAYER1_WINNER)
     return (_verAxe);
   else
     return (0);
@@ -122,9 +109,9 @@ void 			is::GameEventReceiver::setHorAxe(irr::s16 axe)
   _horAxe = axe;
 }
 
-bool 			is::GameEventReceiver::isActionOn(int id) const
+bool 			is::GameEventReceiver::isActionOn(Button::GUI_ID_BOUTON id) const
 {
-  if (id == 1)
+  if (id == Button::GUI_ID_BOUTON::GUI_ID_PLAYER1_WINNER)
     return _action;
   else
     return false;

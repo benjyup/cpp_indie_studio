@@ -30,14 +30,11 @@ is::Bomb::Bomb(is::map &map, irr::video::ITexture *texture, irr::scene::IAnimate
   this->_node->setPosition(this->_posSpace);
   this->_node->setScale({0.45f * SCALE, 0.45f * SCALE, 0.45f * SCALE});
   this->_map.addObject(Type::BOMB, {(int)posMap.X, (int)posMap.Y, (int)posMap.Z});
-//  std::cerr << "Bomb() id = " << this->_id << std::endl;
-//  std::cout << "Bomb pos.x = " << posMap.X << " pos.y = " << posMap.Y << " pos.Z = " << posMap.Z << std::endl;
 }
 
 is::Bomb::~Bomb()
 {
   this->_map.delObject({(int)this->_posMap.X, (int)this->_posMap.Y, (int)this->_posMap.Z});
-//  std::cerr << "~Bomb() id = " << this->_id << std::endl;
 }
 
 
@@ -76,9 +73,7 @@ int 			is::Bomb::_reducePower(std::list<std::shared_ptr<is::Bomb>> bombs,
   int			ret = 0;
   const 		Block *b;
 
-  //std::cerr << "_reducPower" << std::endl;
   callback(pos);
-  //std::cout << "pos.x = " << pos.X << " pos.y = " << pos.Y << " pos.z = " << pos.Z<< std::endl;
   while (this->_map.canIMoove(is::Vector3d(pos.X, pos.Y, pos.Z)) && ret < power)
     {
       callback(pos);
@@ -102,14 +97,11 @@ int 			is::Bomb::_reducePower(std::list<std::shared_ptr<is::Bomb>> bombs,
 	std::cout << std::boolalpha << _alreadyBlowUp << std::endl;
 	if ((*it)->_alreadyBlowUp == false)
 	  (*it)->_explosion(bombs);
-	//std::cout << "DESTRUIT UNE AUTRE BOMBE" << std::endl;
       }
   if (b->getType() == Type::POWERUP)
     {
         _pm.getPowerUp({(int)pos.X, (int)pos.Y, (int)pos.Z});
     }
-  //std::cout << "ret = " << ret << std::endl;
-  //std::cerr << "_reducPower" << std::endl;
   return (ret);
 }
 

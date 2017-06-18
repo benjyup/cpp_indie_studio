@@ -38,7 +38,6 @@ is::ChoosePlayerState::~ChoosePlayerState()
 
 void is::ChoosePlayerState::Init(is::GameEngine *engine)
 {
-  //engine->getSceneManager()->createNewSceneManager();
   engine->getDevice()->setEventReceiver(NULL);
   this->_options = &engine->getOptions();
   this->_gui = engine->getGuiEnv();
@@ -229,7 +228,6 @@ void is::ChoosePlayerState::Draw(void)
   for (auto b : this->_buttons)
     {
       if (i < 4)
-	//b->setImage();
 	{
 	  if (this->_players[i].getType() == Player::PlayerType::PLAYER)
 	    {
