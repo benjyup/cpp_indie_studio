@@ -34,6 +34,12 @@ namespace is
 
    private:
     static std::vector<std::pair<std::string, std::string>>			GFX_PATH;
+    static const irr::u32 								PLAY_BUTTON_INDEX;
+    static const irr::u32 								VOID_BUTTON_INDEX;
+    static const irr::u32 								ADD_BOT_BUTTON_INDEX;
+    static const irr::u32 								ADD_PLAYER_BUTTON_INDEX;
+    static const irr::u32 								DELETE_BOT_BUTTON_INDEX;
+    static const irr::u32 								DELETE_PLAYER_BUTTON_INDEX;
 
     Options									*_options;
     irr::gui::IGUIEnvironment							*_gui;
@@ -43,10 +49,9 @@ namespace is
     std::array<std::pair<irr::video::ITexture *, irr::video::ITexture *>, 4>	_gfxAI;
     std::array<std::pair<irr::video::ITexture *, irr::video::ITexture *>, 2>	_gfxPlayer;
     std::vector<Player>								_players;
-    irr::video::ITexture							*_playButton;
-    irr::video::ITexture							*_playButtonHovered;
-    irr::video::ITexture							*_voidButton;
-    irr::video::ITexture							*_voidButtonHovered;
+
+    std::array<std::pair<irr::video::ITexture *, irr::video::ITexture *>, 6>	_buttonsTextures;
+
     irr::u32 									_nbrOfPlayers;
     irr::u32 									_nbrOfAI;
     ChoosePlayerEventReceiver							choosePlayerEventReceiver;

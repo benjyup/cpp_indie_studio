@@ -3,6 +3,7 @@
 //
 
 #include <OptionsState.hpp>
+#include <ChoosePlayerState.hpp>
 #include "MenuState.hpp"
 #include "Camera.hpp"
 #include "Fire.hpp"
@@ -146,7 +147,7 @@ namespace is
   void MenuState::HandleEvents(void)
   {
     if (_change == CHANGE::GAME)
-      _engine->PushState(new GameState);
+      _engine->PushState(new ChoosePlayerState);
     else if (_change == CHANGE::OPTION)
 	_engine->PushState(new OptionsState);
   }

@@ -4,39 +4,39 @@
 
 #include "Player.hpp"
 
-Player::~Player()
+is::Player::~Player()
 {
 
 }
 
-Player::Player(Player::PlayerType type, const std::string &meshPath) : type(type), meshPath(meshPath)
+is::Player::Player(Player::PlayerType type, const std::string &meshPath) : type(type), meshPath(meshPath)
 {
 
 }
 
-Player::Player(const Player &other) :
+is::Player::Player(const Player &other) :
 	type(other.type),
 	meshPath(other.meshPath)
 {
 
 }
 
-Player::PlayerType Player::getType() const
+is::Player::PlayerType is::Player::getType() const
 {
   return type;
 }
 
-void Player::setType(Player::PlayerType type)
+void is::Player::setType(Player::PlayerType type)
 {
   Player::type = type;
 }
 
-const std::string &Player::getMeshPath() const
+const std::string &is::Player::getMeshPath() const
 {
   return meshPath;
 }
 
-void Player::setMeshPath(const std::string &meshPath)
+void is::Player::setMeshPath(const std::string &meshPath)
 {
   Player::meshPath = meshPath;
 }

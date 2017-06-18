@@ -11,11 +11,18 @@
 std::vector<std::pair<std::string, std::string>>	is::ChoosePlayerState::GFX_PATH = {
 	{"ButtonGFX/p1button.png", "ButtonGFX/p1buttonhovered.png"} ,
 	{"ButtonGFX/p2button.png", "ButtonGFX/p2buttonhovered.png"},
-	{"ButtonGFX/aionebutton.png", "ButtonGFX/aionebutton.png"},
-	{"ButtonGFX/aitwobutton.png", "ButtonGFX/aitwobutton.png"},
-	{"ButtonGFX/aithreebutton.png", "ButtonGFX/aithreebutton.png"},
-	{"ButtonGFX/aifourbutton.png", "ButtonGFX/aifourbutton.png"}
+	{"ButtonGFX/aionebutton.png", "ButtonGFX/aionebuttonhovered.png"},
+	{"ButtonGFX/aitwobutton.png", "ButtonGFX/aitwobuttonhovered.png"},
+	{"ButtonGFX/aithreebutton.png", "ButtonGFX/aithreebuttonhovered.png"},
+	{"ButtonGFX/aifourbutton.png", "ButtonGFX/aifourbuttonhovered.png"}
 };
+
+const irr::u32 								is::ChoosePlayerState::VOID_BUTTON_INDEX = 0;
+const irr::u32 								is::ChoosePlayerState::PLAY_BUTTON_INDEX = 1;
+const irr::u32 								is::ChoosePlayerState::ADD_BOT_BUTTON_INDEX = 2;
+const irr::u32 								is::ChoosePlayerState::ADD_PLAYER_BUTTON_INDEX = 3;
+const irr::u32 								is::ChoosePlayerState::DELETE_BOT_BUTTON_INDEX = 4;
+const irr::u32 								is::ChoosePlayerState::DELETE_PLAYER_BUTTON_INDEX = 5;
 
 is::ChoosePlayerState::ChoosePlayerState() :
 	_buttons()
@@ -48,14 +55,19 @@ void is::ChoosePlayerState::Init(is::GameEngine *engine)
 
   this->choosePlayerEventReceiver.init(&this->eventContext);
 
-  if (!(this->_voidButton = this->_driver->getTexture("ButtonGFX/voidbutton.png")) ||
-      !(this->_voidButtonHovered = this->_driver->getTexture("ButtonGFX/voidbuttonhovered.png")))
+  if (!(this->_buttonsTextures[VOID_BUTTON_INDEX].first = this->_driver->getTexture("ButtonGFX/voidbutton.png")) ||
+      !(this->_buttonsTextures[VOID_BUTTON_INDEX].second = this->_driver->getTexture("ButtonGFX/voidbuttonhovered.png")) ||
+      !(this->_buttonsTextures[PLAY_BUTTON_INDEX].first = this->_driver->getTexture("ButtonGFX/playbutton.png")) ||
+      !(this->_buttonsTextures[PLAY_BUTTON_INDEX].second = this->_driver->getTexture("ButtonGFX/playbuttonhovered.png")) ||
+      !(this->_buttonsTextures[ADD_BOT_BUTTON_INDEX].first = this->_driver->getTexture("ButtonGFX/addbotbutton.png")) ||
+      !(this->_buttonsTextures[ADD_BOT_BUTTON_INDEX].second = this->_driver->getTexture("ButtonGFX/addbotbuttonhovered.png")) ||
+      !(this->_buttonsTextures[ADD_PLAYER_BUTTON_INDEX].first = this->_driver->getTexture("ButtonGFX/addplayerbutton.png")) ||
+      !(this->_buttonsTextures[ADD_PLAYER_BUTTON_INDEX].second = this->_driver->getTexture("ButtonGFX/addplayerbuttonhovered.png")) ||
+      !(this->_buttonsTextures[DELETE_PLAYER_BUTTON_INDEX].first = this->_driver->getTexture("ButtonGFX/deleteplayerbutton.png")) ||
+      !(this->_buttonsTextures[DELETE_PLAYER_BUTTON_INDEX].second = this->_driver->getTexture("ButtonGFX/deleteplayerbuttonhovered.png")) ||
+      !(this->_buttonsTextures[DELETE_BOT_BUTTON_INDEX].first = this->_driver->getTexture("ButtonGFX/deletebotbutton.png")) ||
+      !(this->_buttonsTextures[DELETE_BOT_BUTTON_INDEX].second = this->_driver->getTexture("ButtonGFX/deletebotbuttonhovered.png")))
     throw is::IndieStudioException("Error on loading playerChoose.");
-
-  if (!(this->_playButton = this->_driver->getTexture("ButtonGFX/playbutton.png")) ||
-      !(this->_playButtonHovered = this->_driver->getTexture("ButtonGFX/playbuttonhovered.png")))
-    throw is::IndieStudioException("Error on loading playerChoose.");
-
 
   int 		i = 0;
   for (int y = 0 ; y < _gfxPlayer.size(); ++y)
@@ -106,6 +118,20 @@ void is::ChoosePlayerState::Init(is::GameEngine *engine)
 			      (irr::s32)Button::GUI_ID_BOUTON::GUI_ID_ADD_POS4,
 			      L"",
 			      L"");
+  this->_buttons.emplace_back(engine->getWindowSize().X - (MenuState::BUTTON_WIDTH - 10),
+			      engine->getWindowSize().Y  / 4 + MenuState::BUTTON_HEIGHT * 1,
+			      engine->getWindowSize().X - 10,
+			      engine->getWindowSize().Y  / 4 + MenuState::BUTTON_HEIGHT * 2,
+			      (irr::s32)Button::GUI_ID_BOUTON::GUI_ID_DELETE_PLAYER,
+			      L"",
+			      L"");
+  this->_buttons.emplace_back(engine->getWindowSize().X - (MenuState::BUTTON_WIDTH - 10),
+			      engine->getWindowSize().Y  / 4 + MenuState::BUTTON_HEIGHT * 2,
+			      engine->getWindowSize().X - 10,
+			      engine->getWindowSize().Y  / 4 + MenuState::BUTTON_HEIGHT * 3,
+			      (irr::s32)Button::GUI_ID_BOUTON::GUI_ID_DELETE_AI,
+			      L"",
+			      L"");
   this->_buttons.emplace_back(engine->getWindowSize().X  / 2 - MenuState::BUTTON_WIDTH / 2,
 			      engine->getWindowSize().Y   - MenuState::BUTTON_HEIGHT - 20,
 			      engine->getWindowSize().X / 2  - MenuState::BUTTON_WIDTH / 2 + MenuState::BUTTON_WIDTH ,
@@ -113,29 +139,33 @@ void is::ChoosePlayerState::Init(is::GameEngine *engine)
 			      (irr::s32)Button::GUI_ID_BOUTON::GUI_ID_ADD_PLAY,
 			      L"",
 			      L"");
-  this->_buttons.emplace_back(engine->getWindowSize().X - MenuState::BUTTON_WIDTH - 10,
+  this->_buttons.emplace_back(engine->getWindowSize().X - (MenuState::BUTTON_WIDTH - 10) * 2,
 			      engine->getWindowSize().Y  / 4 + MenuState::BUTTON_HEIGHT * 1,
-			      engine->getWindowSize().X - 10,
+			      engine->getWindowSize().X - (MenuState::BUTTON_WIDTH - 10),
 			      engine->getWindowSize().Y  / 4 + MenuState::BUTTON_HEIGHT * 2,
 			      (irr::s32)Button::GUI_ID_BOUTON::GUI_ID_ADD_PLAYER,
 			      L"",
 			      L"");
-  this->_buttons.emplace_back(engine->getWindowSize().X - MenuState::BUTTON_WIDTH - 10,
+  this->_buttons.emplace_back(engine->getWindowSize().X - (MenuState::BUTTON_WIDTH - 10) * 2,
 			      engine->getWindowSize().Y  / 4 + MenuState::BUTTON_HEIGHT * 2,
-			      engine->getWindowSize().X - 10,
+			      engine->getWindowSize().X - (MenuState::BUTTON_WIDTH - 10),
 			      engine->getWindowSize().Y  / 4 + MenuState::BUTTON_HEIGHT * 3,
 			      (irr::s32)Button::GUI_ID_BOUTON::GUI_ID_ADD_AI,
 			      L"",
 			      L"");
   this->_drawButtons();
-  this->_buttons[this->_buttons.size() - 3]->setImage(this->_playButton);
-  this->_buttons[this->_buttons.size() - 3]->setPressedImage(this->_playButtonHovered);
-  this->_buttons[this->_buttons.size() - 2]->setImage(this->_voidButton);
-  this->_buttons[this->_buttons.size() - 2]->setPressedImage(this->_voidButtonHovered);
-  this->_buttons.back()->setImage(this->_voidButton);
-  this->_buttons.back()->setPressedImage(this->_voidButtonHovered);
-  engine->getDevice()->setEventReceiver(&this->choosePlayerEventReceiver);
+  this->_buttons[this->_buttons.size() - 5]->setImage(this->_buttonsTextures[DELETE_PLAYER_BUTTON_INDEX].first);
+  this->_buttons[this->_buttons.size() - 5]->setPressedImage(this->_buttonsTextures[DELETE_PLAYER_BUTTON_INDEX].second);
+  this->_buttons[this->_buttons.size() - 4]->setImage(this->_buttonsTextures[DELETE_BOT_BUTTON_INDEX].first);
+  this->_buttons[this->_buttons.size() - 4]->setPressedImage(this->_buttonsTextures[DELETE_BOT_BUTTON_INDEX].second);
+  this->_buttons[this->_buttons.size() - 3]->setImage(this->_buttonsTextures[PLAY_BUTTON_INDEX].first);
+  this->_buttons[this->_buttons.size() - 3]->setPressedImage(this->_buttonsTextures[PLAY_BUTTON_INDEX].second);
+  this->_buttons[this->_buttons.size() - 2]->setImage(this->_buttonsTextures[ADD_PLAYER_BUTTON_INDEX].first);
+  this->_buttons[this->_buttons.size() - 2]->setPressedImage(this->_buttonsTextures[ADD_PLAYER_BUTTON_INDEX].second);
+  this->_buttons.back()->setImage(this->_buttonsTextures[ADD_BOT_BUTTON_INDEX].first);
+  this->_buttons.back()->setPressedImage(this->_buttonsTextures[ADD_BOT_BUTTON_INDEX].second);
 
+  engine->getDevice()->setEventReceiver(&this->choosePlayerEventReceiver);
 }
 
 void is::ChoosePlayerState::Cleanup(void)
@@ -194,8 +224,8 @@ void is::ChoosePlayerState::Draw(void)
 		nbrOfAI += 1;
 	      } else
 	      {
-		b->setImage(this->_voidButton);
-		b->setPressedImage(this->_voidButtonHovered);
+		b->setImage(this->_buttonsTextures[VOID_BUTTON_INDEX].first);
+		b->setPressedImage(this->_buttonsTextures[VOID_BUTTON_INDEX].second);
 	      }
 	}
       b->draw();

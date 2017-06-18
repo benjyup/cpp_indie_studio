@@ -23,29 +23,20 @@ bool is::ChoosePlayerEventReceiver::OnEvent(const irr::SEvent &event)
       switch (buttonID)
 	{
 	  case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_ADD_PLAYER):
-	    {
-	      if (this->_sContext->nbrOfPlayers < 2)
-		{
-		  _addPlayer();
-		  std::cerr << "ADD PLAYER" << std::endl;
-		}
-	    }
+	    _addPlayer(Player::PLAYER, this->_sContext->nbrOfPlayers);
 	  break;
 	  case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_ADD_AI):
-	    {
-	      if (this->_sContext->nbrOfAI < 4)
-		{
-		  _addAI();
-		  std::cerr << "ADD AI" << std::endl;
-		}
-	    }
+	    _addPlayer(Player::AI, this->_sContext->nbrOfAI);
 	  break;
 	  case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_ADD_PLAY):
-	    {
-	      this->_sContext->stop = true;
-	    }
+	    this->_sContext->stop = true;
 	  break;
-
+	  case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_DELETE_PLAYER):
+	    this->_deletePlayer(Player::PLAYER, this->_sContext->nbrOfPlayers);
+	  break;
+	  case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_DELETE_AI):
+	    this->_deletePlayer(Player::AI, this->_sContext->nbrOfAI);
+	  break;
 	}
     }
   return false;
@@ -57,30 +48,30 @@ void is::ChoosePlayerEventReceiver::init(is::ChoosePlayerEventReceiver::SContext
   this->_sContext = sContext;
 }
 
-void is::ChoosePlayerEventReceiver::_addPlayer()
+void is::ChoosePlayerEventReceiver::_deletePlayer(Player::PlayerType playerType, irr::u32 &nbrOf)
 {
-  irr::u32 		i = 0;
+  if (nbrOf <= 0)
+    return ;
 
-  this->_sContext->nbrOfPlayers += 1;
-  while (i < this->_sContext->players->size() && this->_sContext->players->at(i).getType() != Player::VOID)
-    i += 1;
-  std::cout << "i = " << i << std::endl;
-  if (i != this->_sContext->players->size())
-    {
-      this->_sContext->players->at(i).setType(Player::PlayerType::PLAYER);
-    }
+  irr::u32		i = this->_sContext->players->size() - 1;
+  while (i >= 0 &&  this->_sContext->players->at(i).getType() != playerType)
+    i -= 1;
+  this->_sContext->players->at(i).setType(Player::PlayerType::VOID);
+  nbrOf -= 1;
 }
 
-void is::ChoosePlayerEventReceiver::_addAI()
+void is::ChoosePlayerEventReceiver::_addPlayer(is::Player::PlayerType playerType, irr::u32 &nbrOf)
 {
   irr::u32 		i = 0;
 
-  this->_sContext->nbrOfAI += 1;
+  if (nbrOf >= ((playerType == Player::AI) ? (4) : (2)))
+    return ;
+
   while (i < this->_sContext->players->size() && this->_sContext->players->at(i).getType() != Player::VOID)
     i += 1;
-  std::cout << "i = " << i << std::endl;
   if (i != this->_sContext->players->size())
     {
-      this->_sContext->players->at(i).setType(Player::PlayerType::AI);
+      this->_sContext->players->at(i).setType(playerType);
+      nbrOf += 1;
     }
 }

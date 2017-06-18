@@ -9,34 +9,38 @@
 #include <iosfwd>
 #include <sstream>
 
-class Player
+namespace is
 {
- public:
 
-  enum PlayerType : int
+  class Player
   {
-    PLAYER,
-    AI,
-    VOID
+   public:
+
+    enum PlayerType : int
+    {
+      PLAYER,
+      AI,
+      VOID
+    };
+
+    Player(PlayerType type, const std::string &meshPath);
+    Player(const Player &other);
+
+    ~Player();
+
+    PlayerType getType() const;
+
+    void setType(PlayerType type);
+
+    const std::string &getMeshPath() const;
+
+    void setMeshPath(const std::string &meshPath);
+
+   private:
+    PlayerType 		type;
+    std::string		meshPath;
   };
 
-  Player(PlayerType type, const std::string &meshPath);
-  Player(const Player &other);
-
-  ~Player();
-
-  PlayerType getType() const;
-
-  void setType(PlayerType type);
-
-  const std::string &getMeshPath() const;
-
-  void setMeshPath(const std::string &meshPath);
-
- private:
-  PlayerType 		type;
-  std::string		meshPath;
-};
-
+}
 
 #endif //CPP_INDIE_STUDIO_PLAYER_HPP

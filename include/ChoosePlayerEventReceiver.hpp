@@ -42,8 +42,8 @@ class ChoosePlayerEventReceiver : public irr::IEventReceiver
 	  4>					_players;
   SContext					*_sContext;
 
-  void 						_addPlayer();
-  void 						_addAI();
+  void 						_addPlayer(Player::PlayerType type, irr::u32 &nbrOf);
+  void 						_deletePlayer(Player::PlayerType type, irr::u32 &nbrOf);
 };
 
 }
