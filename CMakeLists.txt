@@ -64,3 +64,43 @@ link_directories(irrlicht-1.8.4/lib/Linux/deepinx86_64 irrlicht-1.8.4/lib/Linux/
 add_executable(cpp_indie_studio ${SOURCE_FILES})
 
 target_link_libraries(cpp_indie_studio Irrlicht.a GL.so libXxf86vm.so libIrrKlang.so libXext.so libX11.so libXcursor.so -lpthread)
+
+set(RUNTIME /)
+
+install(TARGETS cpp_indie_studio DESTINATION /usr/games/indie_studio)
+install(DIRECTORY lib/ DESTINATION /usr/lib
+  PATTERN "*.so"
+  PERMISSIONS WORLD_EXECUTE WORLD_WRITE WORLD_READ
+  GROUP_EXECUTE GROUP_READ OWNER_READ OWNER_EXECUTE)
+install(DIRECTORY ButtonGFX/ DESTINATION /usr/games/indie_studio/ButtonGFX
+  PATTERN "*"
+  PERMISSIONS WORLD_EXECUTE WORLD_WRITE WORLD_READ
+  GROUP_EXECUTE GROUP_READ)
+install(DIRECTORY gfx/ DESTINATION /usr/games/indie_studio/gfx
+  PATTERN "*"
+  PERMISSIONS WORLD_EXECUTE WORLD_WRITE WORLD_READ
+  GROUP_EXECUTE GROUP_READ)
+install(DIRECTORY IA/ DESTINATION /usr/games/indie_studio/IA
+  PATTERN "*"
+  PERMISSIONS WORLD_EXECUTE WORLD_WRITE WORLD_READ
+  GROUP_EXECUTE GROUP_READ)
+install(DIRECTORY models/ DESTINATION /usr/games/indie_studio/models
+  PATTERN "*"
+  PERMISSIONS WORLD_EXECUTE WORLD_WRITE WORLD_READ
+      GROUP_EXECUTE GROUP_READ)
+install(DIRECTORY powersUp/ DESTINATION /usr/games/indie_studio/powersUp
+  PATTERN "*"
+  PERMISSIONS WORLD_EXECUTE WORLD_WRITE WORLD_READ
+  GROUP_EXECUTE GROUP_READ)
+install(DIRECTORY chef/ DESTINATION /usr/games/indie_studio/chef
+  PATTERN "*"
+  PERMISSIONS WORLD_EXECUTE WORLD_WRITE WORLD_READ
+      GROUP_EXECUTE GROUP_READ)
+install(DIRECTORY map/ DESTINATION /usr/games/indie_studio/
+  PATTERN "*"
+  PERMISSIONS WORLD_EXECUTE WORLD_WRITE WORLD_READ
+  GROUP_EXECUTE GROUP_READ)
+install(DIRECTORY launcher/ DESTINATION /usr/bin/
+  PATTERN "cpp_indie_studio"
+  PERMISSIONS WORLD_EXECUTE WORLD_WRITE WORLD_READ
+  GROUP_EXECUTE GROUP_READ)

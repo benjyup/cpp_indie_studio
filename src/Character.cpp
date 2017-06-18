@@ -10,7 +10,7 @@ is::Character::Character(scene::IAnimatedMesh *node, video::ITexture *texture,
 			 const GameEventReceiver &receiver,
 			 std::map<Options::MOVES, irr::EKEY_CODE> const &Config,
 			 BombsManager &bombsManager, int id)
-	: _mesh(smgr->addAnimatedMeshSceneNode(node)), _text(texture), _smgr(smgr), _pos(pos), _speed(DEFAULT_SPEED), _bomb(DEFAULT_BOMB), _power(DEFAULT_POWER), _live(1),
+	: _mesh(smgr->addAnimatedMeshSceneNode(node)), _text(texture), _smgr(smgr), _pos(pos), _speed(DEFAULT_SPEED), _bomb(DEFAULT_BOMB), _power(DEFAULT_POWER),
 	  _receiver(receiver),
 	  _bombsManager(bombsManager),
 	  _keySlow(false),
@@ -178,7 +178,21 @@ irr::scene::ISceneNodeAnimator *is::Character::getAnim(unsigned int _id)
   return _anim[_id];
 }
 
-int is::Character::getId()
+int                             is::Character::getSpeed() const
+{
+  return (this->_speed);
+}
+int                             is::Character::getBomb() const
+{
+  return (this->_bomb);
+}
+
+int                             is::Character::getPower() const
+{
+  return (this->_power);
+}
+
+int                             is::Character::getId()
 {
   return _id;
 }

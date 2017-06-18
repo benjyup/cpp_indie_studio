@@ -166,7 +166,9 @@ void is::ChooseSkinState::Init(is::GameEngine *engine)
 
 void is::ChooseSkinState::Cleanup(void)
 {
-
+  Camera c(this->_sceneManager, this->_driver, CamMode::MENU, this->_context.engine);
+  c.setMenuMode();
+  this->_context.engine->getDevice()->setEventReceiver(NULL);
 }
 
 void is::ChooseSkinState::Pause(void)
@@ -193,8 +195,6 @@ void is::ChooseSkinState::Draw(void)
 {
   if (this->_context.apply)
     {
-      std::cerr << "_PLAYER = " << _player << std::endl;
-      std::cerr << "_PLAYER SIZE = " << this->_options->getPlayers().size()<< std::endl;
       this->_options->getPlayers()[_player]
 	      .setMeshPath(this->MESH_PATH.at(this->_context.current_index).first);
       this->_options->getPlayers()[_player]
@@ -224,12 +224,12 @@ void is::ChooseSkinState::_drawMeshes()
   std::cout << "current_index = " << _context.current_index << std::endl;
   if (this->_context.current_index > 0)
     {
-      this->_meshes[this->_context.current_index - 1].first->setPosition({((0.5f + (BLOCK - 2))) * SCALE - 180, 50, (((0.5f + (BLOCK - 2))) * SCALE - 20)});
+      this->_meshes[this->_context.current_index - 1].first->setPosition({((0.5f + (BLOCK - 2))) * SCALE  + 0, 50, ((0.5f + (BLOCK - 2))) * SCALE - 150});
       this->_meshes[this->_context.current_index - 1].first->setVisible(true);
     }
   else
     {
-      this->_meshes.back().first->setPosition({((0.5f + (BLOCK - 2))) * SCALE - 180, 50, (((0.5f + (BLOCK - 2))) * SCALE - 20)});
+      this->_meshes.back().first->setPosition({((0.5f + (BLOCK - 2))) * SCALE  + 0, 50, ((0.5f + (BLOCK - 2))) * SCALE - 150});
       this->_meshes.back().first->setVisible(true);
     }
 
@@ -238,12 +238,12 @@ void is::ChooseSkinState::_drawMeshes()
 
   if (this->_context.current_index < this->_meshes.size() - 1)
     {
-      this->_meshes[this->_context.current_index + 1].first->setPosition({((0.5f + (BLOCK - 2))) * SCALE  + 0, 50, ((0.5f + (BLOCK - 2))) * SCALE - 150});
+      this->_meshes[this->_context.current_index + 1].first->setPosition({((0.5f + (BLOCK - 2))) * SCALE - 180, 50, (((0.5f + (BLOCK - 2))) * SCALE - 20)});;
       this->_meshes[this->_context.current_index + 1].first->setVisible(true);
     }
   else
     {
-      this->_meshes.front().first->setPosition({((0.5f + (BLOCK - 2))) * SCALE  + 0, 50, ((0.5f + (BLOCK - 2))) * SCALE - 150});
+      this->_meshes.front().first->setPosition({((0.5f + (BLOCK - 2))) * SCALE - 180, 50, (((0.5f + (BLOCK - 2))) * SCALE - 20)});;
       this->_meshes.front().first->setVisible(true);
     }
 }

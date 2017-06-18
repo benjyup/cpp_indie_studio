@@ -56,6 +56,9 @@ namespace  is
     void					die();
     void					pushAnim(irr::scene::ISceneNodeAnimator *, unsigned int);
     irr::scene::ISceneNodeAnimator		*getAnim(unsigned int);
+    int           getSpeed() const;
+    int           getBomb() const;
+    int           getPower() const;
     int						getId();
 
    private:
@@ -66,7 +69,6 @@ namespace  is
     int _speed;
     int _bomb;
     int _power;
-    int _live;
     const GameEventReceiver 			&_receiver;
     DIR						_dir;
     BombsManager &_bombsManager;

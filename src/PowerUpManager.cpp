@@ -64,3 +64,11 @@ void is::PowerUpManager::update() {
         i->update();
     }
 }
+
+std::string is::PowerUpManager::save() const {
+    std::string     save;
+    save.clear();
+    for (auto &i : _powUp) {
+
+    }
+}
