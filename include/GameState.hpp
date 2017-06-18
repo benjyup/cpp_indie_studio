@@ -40,6 +40,7 @@ namespace is
     virtual void ChangeState(GameEngine *engine,
 			     IGameState *state);
    private:
+   void          addText();
     CHANGE 					_change;
     ParseMap	    				_parserMap;
     GenerateMap					_genMap;
@@ -55,6 +56,8 @@ namespace is
     GameEventReceiver				_receiver;
     std::shared_ptr<Camera>			_cam;
     bool					changing;
+    std::vector<irr::gui::IGUIStaticText*> 	    _text;
+    irr::gui::IGUIFont                          *_font;
   };
 }
 

@@ -13,6 +13,7 @@
 Sound::Sound()
 {
   _soundEngine = irrklang::createIrrKlangDevice();
+  _soundEngine->setSoundVolume(0.1);
 }
 
 Sound::~Sound()

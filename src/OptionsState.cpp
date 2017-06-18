@@ -144,6 +144,14 @@ void is::OptionsState::Init(is::GameEngine *engine)
 		  20 + BUTTON_HEIGHT,
 		  (irr::s32) Button::GUI_ID_BOUTON::GUI_ID_CHANGE_PLAYER1_BUTTON,
 			""
+	  },
+	  {
+		  20,
+		  windowSize.Y - BUTTON_HEIGHT - 20,
+			20 + BUTTON_WIDTH,
+		  windowSize.Y - 20,
+		  (irr::s32) Button::GUI_ID_BOUTON::GUI_ID_SOUND_ON_BUTTON,
+			""
 	  }
   };
 

@@ -27,7 +27,7 @@ bool 		is::MenuEventReceiver::OnEvent(const irr::SEvent &event)
 						_change = CHANGE::GAME;
 				break;
 				case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_LOAD_BUTTON):
-						_change = CHANGE::GAME; // change pour load le game
+						_change = CHANGE::GAME;
 				break;
 				case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_OPTIONS_BUTTON):
 						_change = CHANGE::OPTION;
