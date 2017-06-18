@@ -202,7 +202,7 @@ namespace is
       button->draw();
     }
     setTime();
-    this->_text[0]->second->setText(irr::core::stringw(this->_time.c_str()).c_str());
+    this->_text[0]->setText(irr::core::stringw(this->_time.c_str()).c_str());
     for (auto &text : this->_text)
     {
       text.second->draw();
