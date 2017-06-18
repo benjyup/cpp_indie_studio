@@ -21,6 +21,7 @@
 #include "Character.hpp"
 #include "Camera.hpp"
 #include "GenerateMap.hpp"
+#include "Button.hpp"
 
 namespace is
 {
@@ -41,6 +42,8 @@ namespace is
 			     IGameState *state);
    private:
    void          addText();
+   void          addButtons();
+   void          setTime();
     CHANGE 					_change;
     ParseMap	    				_parserMap;
     GenerateMap					_genMap;
@@ -52,13 +55,19 @@ namespace is
     std::shared_ptr<BombsManager>		_bombs;
     std::list<std::shared_ptr<Character>>	_char;
     std::shared_ptr<is::PowerUpManager>       _powManager;
+
     Options					*_opt;
     GameEventReceiver				_receiver;
     std::shared_ptr<Camera>			_cam;
     bool					changing;
-    std::vector<irr::gui::IGUIStaticText*> 	    _text;
+    std::map<int, irr::gui::IGUIStaticText*> 	    _text;
     irr::gui::IGUIFont                          *_font;
-  };
+    std::vector<is::Button> 			              _buttons;
+    std::map<Button::GUI_ID_BOUTON, irr::video::ITexture*> _pathButton;
+    int                                                 _baseTime;
+    std::string                                            _time;
+    int                                                    min;
+   };
 }
 
 #endif //CPP_INDIE_STUDIO_GAME_HPP

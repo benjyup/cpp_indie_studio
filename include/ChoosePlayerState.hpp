@@ -34,12 +34,12 @@ namespace is
 
    private:
     static std::vector<std::pair<std::string, std::string>>			GFX_PATH;
-    static const irr::u32 								PLAY_BUTTON_INDEX;
-    static const irr::u32 								VOID_BUTTON_INDEX;
-    static const irr::u32 								ADD_BOT_BUTTON_INDEX;
-    static const irr::u32 								ADD_PLAYER_BUTTON_INDEX;
-    static const irr::u32 								DELETE_BOT_BUTTON_INDEX;
-    static const irr::u32 								DELETE_PLAYER_BUTTON_INDEX;
+    static const irr::u32 							PLAY_BUTTON_INDEX;
+    static const irr::u32 							VOID_BUTTON_INDEX;
+    static const irr::u32 							ADD_BOT_BUTTON_INDEX;
+    static const irr::u32 							ADD_PLAYER_BUTTON_INDEX;
+    static const irr::u32 							DELETE_BOT_BUTTON_INDEX;
+    static const irr::u32 							DELETE_PLAYER_BUTTON_INDEX;
 
     Options									*_options;
     irr::gui::IGUIEnvironment							*_gui;

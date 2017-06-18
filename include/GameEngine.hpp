@@ -23,6 +23,7 @@ namespace is {
     GAME,
     MENU,
     PAUSE,
+    QUIT
   };
 
   class GameEngine : public IGameEngine {

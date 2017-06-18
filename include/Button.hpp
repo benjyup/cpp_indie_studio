@@ -53,6 +53,9 @@ namespace is
       GUI_ID_SAVE_BUTTON,
       GUI_ID_SOUND_ON_BUTTON,
       GUI_ID_SOUND_OFF_BUTTON,
+      GUI_ID_BORDER_LEFT,
+      GUI_ID_BORDER_RIGHT,
+      GUI_ID_TOP,
       GUI_ID_LENGTH,
     };
 

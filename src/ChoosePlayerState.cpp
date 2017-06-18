@@ -89,8 +89,6 @@ void is::ChoosePlayerState::Init(is::GameEngine *engine)
   for (int y = 0 ; y < 4 ; ++y)
     this->_players.emplace_back(Player::PlayerType::VOID, "");
 
-  MenuState::BUTTON_WIDTH;
-
   this->_buttons.emplace_back(10,
 			      engine->getWindowSize().Y  / 4,
 			      MenuState::BUTTON_WIDTH + 10,

@@ -5,6 +5,7 @@
 #include <IndieStudioException.hpp>
 #include <iostream>
 #include <map.hpp>
+#include <MenuState.hpp>
 #include "ChooseSkinState.hpp"
 
 const std::vector<std::pair<std::string, std::vector<std::string>>>		is::ChooseSkinState::MESH_PATH = {
@@ -98,6 +99,26 @@ void is::ChooseSkinState::Init(is::GameEngine *engine)
       std::cout << "FIN FIRST BOUCLE" << std::endl;
       anim->drop();
     }
+
+/*
+  GUI_ID_LEFT_ARROW,
+	  GUI_ID_RIGHT_ARROW,
+	  GUI_ID_UP_ARROW,
+	  GUI_ID_DOWN_ARROW,
+*/
+
+
+/*
+  this->_buttons.emplace_back(engine->getWindowSize().X /,
+			      engine->getWindowSize().Y  / 4,
+			      MenuState::BUTTON_WIDTH + 10,
+			      engine->getWindowSize().Y / 4 + MenuState::BUTTON_HEIGHT,
+			      (irr::s32)Button::GUI_ID_BOUTON::GUI_ID_UP_ARROW,
+			      L"",
+			      L"");
+*/
+
+
   std::cout << "FINI" << std::endl;
 }
 
@@ -151,4 +172,32 @@ void is::ChooseSkinState::Draw(void)
 void is::ChooseSkinState::ChangeState(is::GameEngine *engine, is::IGameState *state)
 {
 
+}
+
+void is::ChooseSkinState::_drawButtons()
+{
+  for (auto &it : this->_buttons)
+    {
+      it.set(this->_gui->addButton({it.getX(), it.getY(), it.getX2(), it.getY2()},
+				   0,
+				   it.getId(),
+				   it.getText().c_str(),
+				   it.getHint().c_str()));
+      it->setUseAlphaChannel(true);
+      it->setScaleImage(true);
+    }
+  for (irr::s32 i = 0; i < irr::gui::EGDC_COUNT; ++i)
+    {
+      if (i != irr::gui::EGDC_BUTTON_TEXT)
+	{
+	  irr::video::SColor col = _gui->getSkin()->getColor((irr::gui::EGUI_DEFAULT_COLOR) i);
+	  col.set(0, 43, 50, 251);
+	  _gui->getSkin()->setColor((irr::gui::EGUI_DEFAULT_COLOR) i, col);
+	} else
+	{
+	  irr::video::SColor col = _gui->getSkin()->getColor((irr::gui::EGUI_DEFAULT_COLOR) i);
+	  col.set(255, 255, 255, 255);
+	  _gui->getSkin()->setColor((irr::gui::EGUI_DEFAULT_COLOR) i, col);
+	}
+    }
 }
