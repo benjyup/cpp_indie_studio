@@ -56,7 +56,7 @@ namespace  is
     void					die();
     void					pushAnim(irr::scene::ISceneNodeAnimator *, unsigned int);
     irr::scene::ISceneNodeAnimator		*getAnim(unsigned int);
-    int           getSpeed() const;
+    float           getSpeed() const;
     int           getBomb() const;
     int           getPower() const;
     int						getId();
@@ -66,7 +66,7 @@ namespace  is
     video::ITexture 				*_text;
     scene::ISceneManager 			*_smgr;
     core::vector3df 				_pos;
-    int _speed;
+    float _speed;
     int _bomb;
     int _power;
     const GameEventReceiver 			&_receiver;
