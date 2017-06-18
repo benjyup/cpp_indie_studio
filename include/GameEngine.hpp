@@ -11,6 +11,7 @@
 # include "irrlicht.h"
 # include "IGameEngine.hpp"
 #include "Options.hpp"
+#include "Sound.hpp"
 
 namespace is {
   enum class CHANGE : irr::u8
@@ -53,6 +54,7 @@ namespace is {
     std::vector<std::shared_ptr<IGameState>> 	getState() const;
     const irr::core::vector2d<int>		&getWindowSize() const;
     Options					&getOptions();
+    Sound					&getSound();
     void 					setSceneManager(irr::scene::ISceneManager *);
 
    private:
@@ -65,6 +67,7 @@ namespace is {
     bool 					_running;
     bool 					_fullscreen;
     Options					_options;
+    Sound					_sound;
 
     virtual void 				Init(const char *title, int width = 640, int height = 480,
 						     int bpp = 0, bool fullscreen = false);

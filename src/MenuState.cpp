@@ -35,6 +35,7 @@ namespace is
     this->_menuEventReceiver.setEngine(this->_engine);
     this->_engine->getDevice()->setEventReceiver(&this->_menuEventReceiver);
     this->_engine->getDevice()->getCursorControl()->setVisible(true);
+    this->_engine->getSound().setMenuMusic();
     if (!(this->_errorMsg = this->_gui->addStaticText(L"", irr::core::rect<irr::s32>(100, 300, 300, 400))))
       throw IndieStudioException("Not able to init the error message.");
     this->_buttons = {
