@@ -17,11 +17,11 @@ namespace is
     void                        IntroState::Init(GameEngine *engine)
     {
         this->_engine = engine;
-        this->_engine->getDevice()->setEventReceiver(NULL);
         this->_driver = this->_engine->getDriver();
         this->_sceneManager = this->_engine->getSceneManager();
         this->_introEventReceiver.setEngine(this->_engine);
-    	this->_sceneManager = _sceneManager->createNewSceneManager(false);
+    	  this->_sceneManager = _sceneManager->createNewSceneManager(false);
+        this->_engine->getDevice()->setEventReceiver(&_introEventReceiver);
       	engine->setSceneManager(_sceneManager);
       _mapi = _parserMap.getVector();
         _map = std::make_shared<is::map>(_driver, _sceneManager, _mapi);
