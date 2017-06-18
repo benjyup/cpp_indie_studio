@@ -253,17 +253,17 @@ void is::MenuState::drawButtons()
   for (irr::s32 i = 0; i < irr::gui::EGDC_COUNT; ++i)
     {
       if (i != irr::gui::EGDC_BUTTON_TEXT)
-	{
-	  irr::video::SColor col = _gui->getSkin()->getColor((irr::gui::EGUI_DEFAULT_COLOR)i);
-	  col.set(0, 43, 50, 251);
-	  _gui->getSkin()->setColor((irr::gui::EGUI_DEFAULT_COLOR)i, col);
-	}
+      {
+        irr::video::SColor col = _gui->getSkin()->getColor((irr::gui::EGUI_DEFAULT_COLOR)i);
+        col.set(0, 43, 50, 251);
+        _gui->getSkin()->setColor((irr::gui::EGUI_DEFAULT_COLOR)i, col);
+      }
       else
-	{
-	  irr::video::SColor col = _gui->getSkin()->getColor((irr::gui::EGUI_DEFAULT_COLOR)i);
-	  col.set(255, 255, 255, 255);
-	  _gui->getSkin()->setColor((irr::gui::EGUI_DEFAULT_COLOR)i, col);
-	}
+      {
+        irr::video::SColor col = _gui->getSkin()->getColor((irr::gui::EGUI_DEFAULT_COLOR)i);
+        col.set(255, 255, 255, 255);
+        _gui->getSkin()->setColor((irr::gui::EGUI_DEFAULT_COLOR)i, col);      
+      }
     }
 }
 

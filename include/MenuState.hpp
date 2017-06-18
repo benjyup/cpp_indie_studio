@@ -58,7 +58,6 @@ namespace                                       is
     std::map<irr::EKEY_CODE, irr::video::ITexture*>        _pathKey;
     OptionsEventReceiver::SOptionsContext		    _optionsContext;
     Options						                          _options;
-
     std::map<Options::MOVES, irr::EKEY_CODE>		getPlayerConfig(irr::s8 player);
     void					                              drawButtons();
     void                                        initTexture();

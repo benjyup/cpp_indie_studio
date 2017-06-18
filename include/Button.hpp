@@ -57,6 +57,9 @@ namespace is
       GUI_ID_PLAYER2_WINNER,
       GUI_ID_IA1_WINNER,
       GUI_ID_IA2_WINNER,
+      GUI_ID_BORDER_LEFT,
+      GUI_ID_BORDER_RIGHT,
+      GUI_ID_TOP,
       GUI_ID_LENGTH,
     };
 
