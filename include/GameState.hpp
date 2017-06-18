@@ -46,6 +46,7 @@ namespace is
    void          addButtons();
    void          setTime();
    void          setInfo(int tab);
+   void          fillInfoConfig(std::shared_ptr<Character> &currentCharacter);
     CHANGE 					_change;
     ParseMap	    				_parserMap;
     GenerateMap					_genMap;

@@ -193,6 +193,17 @@ namespace is
     checkWinner();
   }
 
+  void GameState::fillInfoConfig(std::shared_ptr<Character> &currentCharacter)
+  {
+    this->_config += "pw: " + std::to_string(currentCharacter->getPower()) + "\n";
+    if (currentCharacter->getAlive() == true)
+      this->_config += "ALIVE";
+    else
+      this->_config += "DEAD";
+    this->_config += "\n";
+    this->_config += "spd: " + std::to_string(currentCharacter->getSpeed()) + "\n";
+    this->_config += "bomb: " + std::to_string(currentCharacter->getBomb()) + "\n";
+  }
   void GameState::setInfo(int tab)
   {
     this->_config.clear();
@@ -204,50 +215,22 @@ namespace is
     {
       if (tab == 1 && character->getId() == (irr::s32)Button::GUI_ID_BOUTON::GUI_ID_PLAYER1_WINNER)
       {
-        this->_config += "pw: " + std::to_string(character->getPower()) + "\n";
-        if (character->getAlive() == true)
-          this->_config += "ALIVE";
-        else
-          this->_config += "DEAD";
-        this->_config += "\n";
-        this->_config += "spd: " + std::to_string(character->getSpeed()) + "\n";
-        this->_config += "bomb: " + std::to_string(character->getBomb()) + "\n";
+        fillInfoConfig(character);
         break;
       }
       if (tab == 2 && character->getId() == (irr::s32)Button::GUI_ID_BOUTON::GUI_ID_PLAYER2_WINNER)
       {
-        this->_config += "pw: " + std::to_string(character->getPower()) + "\n";
-        if (character->getAlive() == true)
-          this->_config += "ALIVE";
-        else
-          this->_config += "DEAD";
-        this->_config += "\n";
-        this->_config += "spd: " + std::to_string(character->getSpeed()) + "\n";
-        this->_config += "bomb: " + std::to_string(character->getBomb()) + "\n";
+        fillInfoConfig(character);
         break;
       }
       if (tab == 3 && character->getId() == (irr::s32)Button::GUI_ID_BOUTON::GUI_ID_IA1_WINNER)
       {
-        this->_config += "pw: " + std::to_string(character->getPower()) + "\n";
-        if (character->getAlive() == true)
-          this->_config += "ALIVE";
-        else
-          this->_config += "DEAD";
-        this->_config += "\n";
-        this->_config += "spd: " + std::to_string(character->getSpeed()) + "\n";
-        this->_config += "bomb: " + std::to_string(character->getBomb()) + "\n";
+        fillInfoConfig(character);
         break;
       }
       if (tab == 4 && character->getId() == (irr::s32)Button::GUI_ID_BOUTON::GUI_ID_IA2_WINNER)
       {
-        this->_config += "pw: " + std::to_string(character->getPower()) + "\n";
-        if (character->getAlive() == true)
-          this->_config += "ALIVE";
-        else
-          this->_config += "DEAD";
-        this->_config += "\n";
-        this->_config += "spd: " + std::to_string(character->getSpeed()) + "\n";
-        this->_config += "bomb: " + std::to_string(character->getBomb()) + "\n";
+        fillInfoConfig(character);
         break;
       }
     }
