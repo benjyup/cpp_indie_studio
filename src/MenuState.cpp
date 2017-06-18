@@ -8,6 +8,7 @@
 #include "Fire.hpp"
 #include "map.hpp"
 #include "PlanetSystem.hpp"
+#include "ScoreEnd.hpp"
 
 namespace is
 {
@@ -76,31 +77,51 @@ namespace is
         this->_pathButton[Button::GUI_ID_BOUTON::GUI_ID_RESUME_BUTTON] = this->_driver->getTexture("./ButtonGFX/resumebutton.png");
         this->_pathButton[Button::GUI_ID_BOUTON::GUI_ID_WALLPAPER_BUTTON] = this->_driver->getTexture("./ButtonGFX/bomberman3dtitle.png");
         this->_pathButton[Button::GUI_ID_BOUTON::GUI_ID_PRESS_BUTTON] = this->_driver->getTexture("./ButtonGFX/pressakeybutton.png");
+        this->_pathButton[Button::GUI_ID_BOUTON::GUI_ID_WINNER] = this->_driver->getTexture("./ButtonGFX/thewinnerisbutton.png");
         this->initKeyTexture();
      }
   }
   void MenuState::initKeyTexture()
   {
-    int              letter;
+    int               i = 0;
     std::string       doss = "./ButtonGFX/";
     std::string       buttonpng = "button.png";
     std::string       tmp;
 
-    letter = (int)irr::KEY_KEY_A;
-    while (letter <= (int)irr::KEY_KEY_Z)
+    while (i != irr::KEY_KEY_CODES_COUNT)
     {
-      letter = letter + 32;
-      tmp = doss + (char)letter + buttonpng;
-      letter = letter - 32;
-      this->_pathKey[(irr::EKEY_CODE)letter] = this->_driver->getTexture(irr::io::path(tmp.c_str()));
-      letter++;
+      irr::core::string<char> s(_options.keyToString<irr::core::stringw>((irr::EKEY_CODE)i));
+      std::string  key(s.c_str());
+      std::transform(key.begin(), key.end(), key.begin(), ::tolower);
+      this->removeSpace(key);
+      if (key.find("num") != std::string::npos)
+        this->removeNum(key);
+      tmp = doss + key + buttonpng;
+      if ((this->_pathKey[(irr::EKEY_CODE)i] = this->_driver->getTexture(irr::io::path(tmp.c_str()))) == NULL)
+        this->_pathKey[(irr::EKEY_CODE)i] = this->_driver->getTexture(irr::io::path("./ButtonGFX/voidbutton.png"));
+      i++;
     }
-    //std::cout << _options.keyToString<std::string>(irr::KEY_LEFT) << std::endl;
-    this->_pathKey[irr::KEY_LEFT] = this->_driver->getTexture("./ButtonGFX/leftarrowbutton.png");
-    this->_pathKey[irr::KEY_RIGHT] = this->_driver->getTexture("./ButtonGFX/rightarrowbutton.png");
-    this->_pathKey[irr::KEY_UP] = this->_driver->getTexture("./ButtonGFX/uparrowbutton.png");
-    this->_pathKey[irr::KEY_DOWN] = this->_driver->getTexture("./ButtonGFX/downarrowbutton.png");
-    this->_pathKey[irr::KEY_SPACE] = this->_driver->getTexture("./ButtonGFX/spacebarbutton.png");
+  }
+  void MenuState::removeSpace(std::string &str)
+  {
+    int cpt = 0;
+    
+    while (str[cpt] != '\0')
+    {
+      if (str[cpt] == ' ')
+        str.erase(cpt, 1);
+      cpt++;
+    }
+  }
+  void MenuState::removeNum(std::string &str)
+  {
+    int cpt = str.find("num");
+
+    while (str[cpt] != 'm')
+    {
+      str.erase(cpt, 1);
+    } 
+    str.erase(cpt, 1);
   }
   void MenuState::Cleanup(void)
   {
@@ -121,7 +142,7 @@ namespace is
   void MenuState::HandleEvents(void)
   {
     if (_change == CHANGE::GAME)
-      _engine->PushState(new GameState);
+      _engine->PushState(new ScoreEnd);
     else if (_change == CHANGE::OPTION)
 	_engine->PushState(new OptionsState);
   }

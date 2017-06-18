@@ -63,5 +63,7 @@ namespace                                       is
     void					                              drawButtons();
     void                                        initTexture();
     void                                        initKeyTexture();
+    void                                        removeSpace(std::string &str);
+    void                                        removeNum(std::string &str);
   };
 }
