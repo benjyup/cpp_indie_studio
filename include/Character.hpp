@@ -58,7 +58,6 @@ namespace  is
     irr::scene::ISceneNodeAnimator		*getAnim(unsigned int);
     int           getSpeed() const;
     int           getBomb() const;
-    int           getLive() const;
     int           getPower() const;
     int						getId();
 
@@ -70,7 +69,6 @@ namespace  is
     int _speed;
     int _bomb;
     int _power;
-    int _live;
     const GameEventReceiver 			&_receiver;
     DIR						_dir;
     BombsManager &_bombsManager;

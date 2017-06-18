@@ -83,13 +83,13 @@ namespace is
     setTime();
     irr::gui::IGUIStaticText *text0 = this->_gui->addStaticText(irr::core::stringw(this->_time.c_str()).c_str(), {this->_engine->getWindowSize().X / 2 - 13, 20, this->_engine->getWindowSize().X / 2 + 100, 50});
     this->_text[0] = text0;
-    irr::gui::IGUIStaticText *text1 = this->_gui->addStaticText(irr::core::stringw(std::string("PLAYER 1 :").c_str()).c_str(), {20, 20, 70, 50});
+    irr::gui::IGUIStaticText *text1 = this->_gui->addStaticText(irr::core::stringw(std::string("PLAYER 1 :").c_str()).c_str(), {20, 20, 70, 200});
     this->_text[1] = text1;
-    irr::gui::IGUIStaticText *text2 = this->_gui->addStaticText(irr::core::stringw(std::string("PLAYER 2 :").c_str()).c_str(), {90, 20, 150, 50});
+    irr::gui::IGUIStaticText *text2 = this->_gui->addStaticText(irr::core::stringw(std::string("PLAYER 2 :").c_str()).c_str(), {90, 20, 150, 200});
     this->_text[2] = text2;
-    irr::gui::IGUIStaticText *text3 = this->_gui->addStaticText(irr::core::stringw(std::string("IA 1 :").c_str()).c_str(), {this->_engine->getWindowSize().X - 150, 20, this->_engine->getWindowSize().X - 90, 50});
+    irr::gui::IGUIStaticText *text3 = this->_gui->addStaticText(irr::core::stringw(std::string("IA 1 :").c_str()).c_str(), {this->_engine->getWindowSize().X - 150, 20, this->_engine->getWindowSize().X - 90, 200});
     this->_text[3] = text3;
-    irr::gui::IGUIStaticText *text4 = this->_gui->addStaticText(irr::core::stringw(std::string("IA 2 :").c_str()).c_str(), {this->_engine->getWindowSize().X - 70, 20, this->_engine->getWindowSize().X - 10, 50});
+    irr::gui::IGUIStaticText *text4 = this->_gui->addStaticText(irr::core::stringw(std::string("IA 2 :").c_str()).c_str(), {this->_engine->getWindowSize().X - 70, 20, this->_engine->getWindowSize().X - 10, 200});
     this->_text[4] = text4;
   }
 
@@ -204,7 +204,50 @@ namespace is
     {
       if (tab == 1 && character->getId() == (irr::s32)Button::GUI_ID_BOUTON::GUI_ID_PLAYER1_WINNER)
       {
-        this->_config += "power = " + std::to_string(character->getPower());
+        this->_config += "pw: " + std::to_string(character->getPower()) + "\n";
+        if (character->getAlive() == true)
+          this->_config += "ALIVE";
+        else
+          this->_config += "DEAD";
+        this->_config += "\n";
+        this->_config += "spd: " + std::to_string(character->getSpeed()) + "\n";
+        this->_config += "bomb: " + std::to_string(character->getBomb()) + "\n";
+        break;
+      }
+      if (tab == 2 && character->getId() == (irr::s32)Button::GUI_ID_BOUTON::GUI_ID_PLAYER2_WINNER)
+      {
+        this->_config += "pw: " + std::to_string(character->getPower()) + "\n";
+        if (character->getAlive() == true)
+          this->_config += "ALIVE";
+        else
+          this->_config += "DEAD";
+        this->_config += "\n";
+        this->_config += "spd: " + std::to_string(character->getSpeed()) + "\n";
+        this->_config += "bomb: " + std::to_string(character->getBomb()) + "\n";
+        break;
+      }
+      if (tab == 3 && character->getId() == (irr::s32)Button::GUI_ID_BOUTON::GUI_ID_IA1_WINNER)
+      {
+        this->_config += "pw: " + std::to_string(character->getPower()) + "\n";
+        if (character->getAlive() == true)
+          this->_config += "ALIVE";
+        else
+          this->_config += "DEAD";
+        this->_config += "\n";
+        this->_config += "spd: " + std::to_string(character->getSpeed()) + "\n";
+        this->_config += "bomb: " + std::to_string(character->getBomb()) + "\n";
+        break;
+      }
+      if (tab == 4 && character->getId() == (irr::s32)Button::GUI_ID_BOUTON::GUI_ID_IA2_WINNER)
+      {
+        this->_config += "pw: " + std::to_string(character->getPower()) + "\n";
+        if (character->getAlive() == true)
+          this->_config += "ALIVE";
+        else
+          this->_config += "DEAD";
+        this->_config += "\n";
+        this->_config += "spd: " + std::to_string(character->getSpeed()) + "\n";
+        this->_config += "bomb: " + std::to_string(character->getBomb()) + "\n";
         break;
       }
     }
