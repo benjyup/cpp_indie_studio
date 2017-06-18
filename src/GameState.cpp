@@ -102,7 +102,7 @@ namespace is
   void GameState::addButtons()
   {
     this->_buttons = {
-      {0, 0, 300, 200, (irr::s32)Button::GUI_ID_BOUTON::GUI_ID_BORDER_LEFT, L"player 1\nplayer2", L"left border"},
+      {0, 0, 300, 200, (irr::s32)Button::GUI_ID_BOUTON::GUI_ID_BORDER_LEFT, L"", L"left border"},
       {this->_engine->getWindowSize().X - 300, 0, this->_engine->getWindowSize().X, 200, (irr::s32)Button::GUI_ID_BOUTON::GUI_ID_BORDER_RIGHT, L"", L"left border"},
       {this->_engine->getWindowSize().X / 2 - 100, 0, this->_engine->getWindowSize().X / 2 + 100, 300, (irr::s32)Button::GUI_ID_BOUTON::GUI_ID_TOP, L"", L"top"}
     };
@@ -202,7 +202,7 @@ namespace is
       button->draw();
     }
     setTime();
-    this->_text.begin()->second->setText(irr::core::stringw(this->_time.c_str()).c_str());
+    this->_text[0]->second->setText(irr::core::stringw(this->_time.c_str()).c_str());
     for (auto &text : this->_text)
     {
       text.second->draw();
