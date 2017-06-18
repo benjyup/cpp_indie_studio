@@ -1,7 +1,7 @@
-The winner is
-IA 1
-IA 2
-IA 3
-IA 4
-all Key in option.cpp
-retirer le fond des touches
+IA hovered
+icone fleche gauche et droite
+add player
+add bot
+Boite pour tout mettre
+delete player
+delete bot

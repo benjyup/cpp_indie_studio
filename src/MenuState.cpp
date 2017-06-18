@@ -87,6 +87,12 @@ namespace is
 	this->_pathButton[Button::GUI_ID_BOUTON::GUI_ID_SOUND_ON_BUTTON] = this->_driver->getTexture("./ButtonGFX/soundonbutton.png");
 	this->_pathButton[Button::GUI_ID_BOUTON::GUI_ID_SOUND_OFF_BUTTON] = this->_driver->getTexture("./ButtonGFX/soundoffbutton.png");
 
+	this->_pathButton[Button::GUI_ID_BOUTON::GUI_ID_PLAYER1_WINNER] = this->_driver->getTexture("./ButtonGFX/p1button.png");
+	this->_pathButton[Button::GUI_ID_BOUTON::GUI_ID_PLAYER2_WINNER] = this->_driver->getTexture("./ButtonGFX/p2button.png");
+	this->_pathButton[Button::GUI_ID_BOUTON::GUI_ID_IA1_WINNER] = this->_driver->getTexture("./ButtonGFX/aionebutton.png");
+	this->_pathButton[Button::GUI_ID_BOUTON::GUI_ID_IA2_WINNER] = this->_driver->getTexture("./ButtonGFX/aitwobutton.png");
+
+
 	this->initKeyTexture();
       }
   }

@@ -52,8 +52,9 @@ bool is::BombsManager::checkBombsStatus(std::list<std::shared_ptr<is::Character>
 	  node->setMaterialType(irr::video::EMT_TRANSPARENT_ADD_COLOR);
 	  _colNode[i->_id] = node;
 	  _col[i->_id] = _sceneManager.createOctreeTriangleSelector(_mesh2, node);
+//	  node->setMaterialType(irr::video::EMT_NORMAL_MAP_TRANSPARENT_ADD_COLOR);
 	  node->setTriangleSelector(_col[i->_id]);
-	  node->setScale(irr::core::vector3df(8, SCALE, 8));
+	  node->setScale(irr::core::vector3df(8, 10, 8));
 	  node->setPosition({i->getPos().X + 8 / 2, 0, i->getPos().Z - 8 / 2});//{i->getPos2() * SCALE,  * SCALE, 2 * SCALE});
 	  i->setCollision(true);
 	}
@@ -105,7 +106,7 @@ void is::BombsManager::addCollision(std::list<std::shared_ptr<is::Character>> co
       for (auto const &c : Char)
 	{
 	  c->pushAnim(_sceneManager.createCollisionResponseAnimator(
-		  i.second, c->getMesh(), core::vector3df(4,6,4),
+		  i.second, c->getMesh(), core::vector3df(4,7,4),
 		  core::vector3df(0,0,0), core::vector3df(0,0,0)), i.first);
 	  c.get()->getMesh()->addAnimator(c->getAnim(i.first));
 	}

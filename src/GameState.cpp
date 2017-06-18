@@ -5,6 +5,7 @@
 #include <Camera.hpp>
 #include <GenerateMap.hpp>
 #include <PauseState.hpp>
+#include <ScoreEnd.hpp>
 #include "GameState.hpp"
 
 static std::vector<int>        mapi; // =
@@ -56,9 +57,9 @@ namespace is
     _bombs = std::make_shared<is::BombsManager>(*(_map.get()), *_driver, *_sceneManager, *_powManager, _engine);
     _opt = &_engine->getOptions();
     _char.push_back(std::make_shared<is::Character>(_sceneManager->getMesh("./chef/tris.md2"), _driver->getTexture("./chef/chef.pcx"), _sceneManager, core::vector3df(1 * SCALE + 7, 2, 1 * SCALE + 7), _receiver, _opt->getP1Config(),
-						    *_bombs.get(), 1));
+						    *_bombs.get(), (int)Button::GUI_ID_BOUTON::GUI_ID_PLAYER1_WINNER));
     _char.push_back(std::make_shared<is::Character>(_sceneManager->getMesh("./chef/tris.md2"), _driver->getTexture("./chef/chef.pcx"), _sceneManager, core::vector3df((BLOCK - 2) * SCALE - 7, 2, (BLOCK - 2) * SCALE - 7), _receiver, _opt->getP2Config(),
-						    *_bombs.get(), 2));
+						    *_bombs.get(), (int)Button::GUI_ID_BOUTON::GUI_ID_PLAYER2_WINNER));
     for (auto &i : _char)
       _map->addCollision(i.get()->getMesh());
     _receiver.init();
@@ -178,7 +179,6 @@ namespace is
 
   void GameState::Update(void)
   {
-    // A changer
     _char.remove_if([&](auto &Char) {
       if (!Char->getAlive())
 	{
@@ -190,8 +190,7 @@ namespace is
     this->_bombs->checkBombsStatus(_char);
     _bombs->addCollision(_char);
     _powManager->update();
-//      _char[0]->update(_powManager.get(), _map.get());
-//      _char[1]->update(_powManager.get(), _map.get());
+    checkWinner();
   }
 
   void GameState::setInfo(int tab)
@@ -239,5 +238,14 @@ namespace is
 			      IGameState *state)
   {
     this->_engine->ChangeState(state);
+  }
+
+  void GameState::checkWinner()
+  {
+    if (_char.size() == 1)
+      {
+	_engine->setWinner((Button::GUI_ID_BOUTON)_char.front()->getId());
+	_engine->ChangeState(new ScoreEnd);
+      }
   }
 }

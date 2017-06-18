@@ -42,6 +42,7 @@ namespace is
 			     IGameState *state);
    private:
    void          addText();
+    void	checkWinner();
    void          addButtons();
    void          setTime();
    void          setInfo(int tab);

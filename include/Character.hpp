@@ -60,6 +60,8 @@ namespace  is
     int           getBomb() const;
     int           getLive() const;
     int           getPower() const;
+    int						getId();
+
    private:
     scene::IAnimatedMeshSceneNode 		*_mesh;
     video::ITexture 				*_text;

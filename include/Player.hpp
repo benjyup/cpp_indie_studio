@@ -8,6 +8,7 @@
 
 #include <iosfwd>
 #include <sstream>
+#include "IAnimatedMeshSceneNode.h"
 
 namespace is
 {
@@ -36,9 +37,21 @@ namespace is
 
     void setMeshPath(const std::string &meshPath);
 
+    irr::scene::IAnimatedMeshSceneNode *getMesh() const;
+
+    void setMesh(irr::scene::IAnimatedMeshSceneNode *mesh);
+
    private:
     PlayerType 		type;
     std::string		meshPath;
+    std::string		texturePath;
+   public:
+    const std::string &getTexturePath() const;
+
+    void setTexturePath(const std::string &texturePath);
+
+   private:
+    irr::scene::IAnimatedMeshSceneNode *mesh;
   };
 
 }

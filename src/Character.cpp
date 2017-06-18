@@ -195,3 +195,8 @@ int                             is::Character::getPower() const
 {
   return (this->_power);
 }
+
+int                             is::Character::getId()
+{
+  return _id;
+}
