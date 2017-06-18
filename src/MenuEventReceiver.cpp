@@ -4,13 +4,9 @@
 
 #include <ChoosePlayerState.hpp>
 #include "MenuEventReceiver.hpp"
-#include "MenuState.hpp"
-#include "GameState.hpp"
 #include "OptionsState.hpp"
-#include "ScoreEnd.hpp"
-#include "PauseState.hpp"
 
-is::MenuEventReceiver::MenuEventReceiver() : _device(NULL)
+is::MenuEventReceiver::MenuEventReceiver(CHANGE &change) : _device(NULL), _change(change)
 {
   std::cout << "MenuEventReceiver()" << std::endl;
 }
@@ -22,22 +18,16 @@ is::MenuEventReceiver::~MenuEventReceiver()
 
 bool 		is::MenuEventReceiver::OnEvent(const irr::SEvent &event)
 {
-  if (event.EventType == irr::EET_GUI_EVENT && event.GUIEvent.EventType == irr::gui::EGET_BUTTON_CLICKED)
+  if (_change == CHANGE::NONE && event.EventType == irr::EET_GUI_EVENT && event.GUIEvent.EventType == irr::gui::EGET_BUTTON_CLICKED)
     {
       irr::s32	buttonID = event.GUIEvent.Caller->getID();
       switch (buttonID)
 	{
 	  case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_PLAY_BUTTON):
-	    {
-	      //_engine->getSceneManager()->clear();
-	      std::cerr << "Play Button" << std::endl;
-	      this->_engine->PushState(new is::ChoosePlayerState);
-	    }
+	      _change = CHANGE::GAME;
 	  break;
 	  case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_OPTIONS_BUTTON):
-	    {
-	      this->_engine->PushState(new OptionsState);
-	    }
+	      _change = CHANGE::OPTION;
 	  break;
 	  case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_QUIT_BUTTON):
 	      this->_engine->Quit();

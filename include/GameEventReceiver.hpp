@@ -21,7 +21,7 @@ namespace is
   class GameEventReceiver : public irr::IEventReceiver
   {
    public:
-    GameEventReceiver();
+    GameEventReceiver(CHANGE &);
     virtual ~GameEventReceiver();
 
     void					init();
@@ -37,6 +37,7 @@ namespace is
     bool 					isActionOn() const;
 
    private:
+    CHANGE						_change;
     irr::IrrlichtDevice					*_device;
     GameEngine						*_engine;
     std::vector<std::shared_ptr<IGameState>> 		_states;

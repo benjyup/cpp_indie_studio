@@ -26,7 +26,6 @@ namespace                                       is
   class                                         MenuState : public IGameState
   {
    public:
-
     static const irr::io::path			            WALLPAPER;
     static const irr::s32		 	                  BUTTON_WIDTH;
     static const irr::s32		 	                  BUTTON_HEIGHT;
@@ -43,6 +42,7 @@ namespace                                       is
     virtual void                                ChangeState(GameEngine *engine, IGameState *state);
 
    protected:
+    CHANGE 							_change;
     MenuEventReceiver				                    _menuEventReceiver;
     GameEngine 					                        *_engine;
     irr::video::IVideoDriver			              *_driver;
@@ -58,6 +58,7 @@ namespace                                       is
     std::map<irr::EKEY_CODE, irr::video::ITexture*>        _pathKey;
     OptionsEventReceiver::SOptionsContext		    _optionsContext;
     Options						                          _options;
+
     std::map<Options::MOVES, irr::EKEY_CODE>		getPlayerConfig(irr::s8 player);
     void					                              drawButtons();
     void                                        initTexture();

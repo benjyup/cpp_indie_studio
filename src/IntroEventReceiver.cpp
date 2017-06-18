@@ -8,7 +8,7 @@
 
 namespace is
 {
-    IntroEventReceiver::IntroEventReceiver(): _device(NULL)
+    IntroEventReceiver::IntroEventReceiver(CHANGE &change): _change(change), _device(NULL)
     {
     }
     IntroEventReceiver::~IntroEventReceiver()
@@ -16,12 +16,12 @@ namespace is
     }
     bool 		is::IntroEventReceiver::OnEvent(const irr::SEvent &event)
     {
-    if (event.EventType == irr::EET_KEY_INPUT_EVENT)
+    if (_change == CHANGE::NONE && event.EventType == irr::EET_KEY_INPUT_EVENT)
         {
             if (event.KeyInput.Key == irr::KEY_ESCAPE)
                 this->_device->closeDevice();
             else
-                this->_engine->PushState(new MenuState);
+		_change = CHANGE::MENU;
         }
     return (false);
     }

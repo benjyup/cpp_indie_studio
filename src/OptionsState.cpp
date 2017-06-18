@@ -7,7 +7,8 @@
 
 is::OptionsState::OptionsState() :
 	MenuState(),
-	_optionsEventReceiver()
+	_change(CHANGE::NONE),
+	_optionsEventReceiver(_change)
 {
 }
 
@@ -18,12 +19,13 @@ is::OptionsState::~OptionsState()
 void is::OptionsState::Init(is::GameEngine *engine)
 {
   this->_engine = engine;
+  engine->getDevice()->setEventReceiver(NULL);
   this->_sceneManager = this->_engine->getSceneManager();
   this->_driver = this->_engine->getDriver();
   this->_gui = this->_engine->getGuiEnv();
   this->_options = this->_engine->getOptions();
+  this->_engine->getDevice()->getCursorControl()->setVisible(true);
   auto windowSize = this->_engine->getWindowSize();
-	engine->getDevice()->setEventReceiver(&this->_optionsEventReceiver);
 
   if (!(this->_errorMsg = this->_gui->addStaticText(L"", irr::core::rect<irr::s32>(100, 300, 300, 400))))
     throw IndieStudioException("Not able to init the error message.");
@@ -144,11 +146,21 @@ void is::OptionsState::Init(is::GameEngine *engine)
 			""
 	  }
   };
-	this->initTexture();
+
+  this->initTexture();
   this->drawButtons();
+  engine->getDevice()->setEventReceiver(&this->_optionsEventReceiver);
 }
 
 void is::OptionsState::Resume(void)
 {
   this->_engine->getDevice()->setEventReceiver(&this->_optionsEventReceiver);
+  this->_engine->getDevice()->getCursorControl()->setVisible(true);
+  this->drawButtons();
+}
+
+void is::OptionsState::HandleEvents(void)
+{
+  if (_change == CHANGE::POP)
+    _engine->PopState();
 }

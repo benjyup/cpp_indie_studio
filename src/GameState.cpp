@@ -29,10 +29,10 @@ static std::vector<int>        mapi; // =
 namespace is
 {
 
-  std::mutex					GameState::DRAW_MUTEX;
-
-  GameState::GameState(): _parserMap("map01.txt"), _genMap("map02.txt")
-  {}
+  GameState::GameState(): _change(CHANGE::NONE), _parserMap("map01.txt"), _genMap("map02.txt"), _receiver(_change)
+  {
+    std::cerr << "initing game" << std::endl;
+  }
 
   GameState::~GameState()
   {}
@@ -40,6 +40,8 @@ namespace is
   void GameState::Init(GameEngine *engine)
   {
     this->_engine = engine;
+    std::cerr << "initing game1" << std::endl;
+    _engine->getDevice()->setEventReceiver(NULL);
     this->_sceneManager = this->_engine->getSceneManager()->createNewSceneManager(false);
     this->_engine->setSceneManager(_sceneManager);
     this->_driver = this->_engine->getDriver();
@@ -58,7 +60,6 @@ namespace is
 						    *_bombs.get()));
     for (auto &i : _char)
       _map->addCollision(i.get()->getMesh());
-    _engine->getDevice()->setEventReceiver(&_receiver);
     _receiver.init();
     Vector3d	v(5 * SCALE + SCALE / 2 - SCALE, 0, 3 * SCALE + SCALE / 2 - SCALE);
 
@@ -66,11 +67,12 @@ namespace is
     //_cam->setMenuMode();
     _cam->setInGameMode();
     changing = false;
+    _engine->getDevice()->setEventReceiver(&_receiver);
+    std::cerr << "initing game2" << std::endl;
   }
 
   void GameState::Cleanup(void)
   {
-
   }
 
   void GameState::Pause(void)
@@ -80,7 +82,9 @@ namespace is
   void GameState::Resume(void)
   {
     std::cerr << "Reprise" << std::endl;
+    _change = CHANGE::NONE;
     changing  = false;
+    _receiver.init();
     _engine->getDevice()->getCursorControl()->setVisible(false);
     _engine->getDevice()->setEventReceiver(&this->_receiver);
   }
@@ -91,18 +95,21 @@ namespace is
       {
 	_receiver.init();
 	changing = true;
-	_engine->PushState(new PauseState);
+	_change = CHANGE::PAUSE;
       }
-  }
-
-  void GameState::Update(void)
-  {
-    // A changer
     for (auto &i : _char)
       {
 	i->update(_powManager.get(), _map.get());
 	i->moove();
       }
+    if (_change == CHANGE::PAUSE)
+      _engine->PushState(new PauseState);
+  }
+
+  void GameState::Update(void)
+  {
+    // A changer
+
     _powManager->update();
 //      _char[0]->update(_powManager.get(), _map.get());
 //      _char[1]->update(_powManager.get(), _map.get());

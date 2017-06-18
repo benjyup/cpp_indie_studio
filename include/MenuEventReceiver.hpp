@@ -19,7 +19,8 @@ namespace is
   class MenuEventReceiver : public irr::IEventReceiver
   {
    public:
-    MenuEventReceiver();
+    MenuEventReceiver(CHANGE &change);
+
     virtual ~MenuEventReceiver();
 
     virtual bool 				OnEvent(const irr::SEvent& event);
@@ -30,6 +31,7 @@ namespace is
     irr::IrrlichtDevice				*_device;
     GameEngine					*_engine;
     std::vector<std::shared_ptr<IGameState>> 	_states;
+    CHANGE 				&_change;
   };
 
 }

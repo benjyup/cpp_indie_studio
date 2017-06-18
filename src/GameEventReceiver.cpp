@@ -7,7 +7,7 @@
 #include "GameEventReceiver.hpp"
 #include "PauseState.hpp"
 
-is::GameEventReceiver::GameEventReceiver()
+is::GameEventReceiver::GameEventReceiver(CHANGE &change) : _change(change)
 {
 //  _char = Char;
   std::cerr << "GameEventReceiver()" << std::endl;
@@ -27,6 +27,8 @@ bool 		is::GameEventReceiver::OnEvent(const irr::SEvent &event)
 	_char[0]->moove(i.first);
     }
 */
+  if (_change != CHANGE::NONE)
+    return (false);
   if(event.EventType == irr::EET_JOYSTICK_INPUT_EVENT)
     {
       switch (event.JoystickEvent.Axis[0])

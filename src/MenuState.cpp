@@ -2,6 +2,7 @@
 // greg
 //
 
+#include <OptionsState.hpp>
 #include "MenuState.hpp"
 #include "Camera.hpp"
 #include "Fire.hpp"
@@ -14,10 +15,7 @@ namespace is
   const irr::s32		MenuState::BUTTON_WIDTH = 250;
   const irr::s32		MenuState::BUTTON_HEIGHT = 75;
   
-  MenuState::MenuState() :
-	  _menuEventReceiver(),
-	  _errorMsg(NULL),
-    _parserMap("map01.txt")
+  MenuState::MenuState() : _change(CHANGE::NONE), _menuEventReceiver(_change), _errorMsg(NULL), _parserMap("map01.txt")
   {
     std::cerr << "Menu Event()" << std::endl;
   }
@@ -109,6 +107,7 @@ namespace is
 
   void MenuState::Pause(void)
   {
+    _change = CHANGE::NONE;
   }
 
   void MenuState::Resume(void)
@@ -120,6 +119,10 @@ namespace is
 
   void MenuState::HandleEvents(void)
   {
+    if (_change == CHANGE::GAME)
+      _engine->PushState(new GameState);
+    else if (_change == CHANGE::OPTION)
+	_engine->PushState(new OptionsState);
   }
 
   void MenuState::Update(void)

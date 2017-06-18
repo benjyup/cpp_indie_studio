@@ -2,16 +2,15 @@
 // greg
 //
 
+#include <OptionsState.hpp>
 #include "PauseState.hpp"
 #include "IndieStudioException.hpp"
 
 namespace           is // tester le vite !
 {
-    PauseState::PauseState():
-    MenuState(),
-
-    _PauseEventReceiver()
+    PauseState::PauseState(): MenuState(), _change(CHANGE::NONE), _PauseEventReceiver(_change)
     {
+      std::cerr << "Pause state created" << std::endl;
     }
     PauseState::~PauseState()
     {
@@ -23,8 +22,8 @@ namespace           is // tester le vite !
         this->_sceneManager = this->_engine->getSceneManager();
         this->_driver = this->_engine->getDriver();
         this->_gui = this->_engine->getGuiEnv();
+	 this->_engine->getDevice()->setEventReceiver(NULL);
         this->_PauseEventReceiver.setEngine(this->_engine);
-        this->_engine->getDevice()->setEventReceiver(&this->_PauseEventReceiver);
 	this->_engine->getDevice()->getCursorControl()->setVisible(true);
         if (!(this->_errorMsg = this->_gui->addStaticText(L"", irr::core::rect<irr::s32>(100, 300, 300, 400))))
             throw IndieStudioException("Not able to init the error message.");
@@ -35,10 +34,27 @@ namespace           is // tester le vite !
         };
         this->initTexture();
         this->drawButtons();
+      this->_engine->getDevice()->setEventReceiver(&this->_PauseEventReceiver);
     }
     void            PauseState::Resume()
     {
+      _change = CHANGE::NONE;
         this->_engine->getDevice()->setEventReceiver(&this->_PauseEventReceiver);
         this->drawButtons();
     }
+
+  void PauseState::HandleEvents(void)
+  {
+    if (_change == CHANGE::POP)
+      _engine->PopState();
+    else if (_change == CHANGE::OPTION)
+	_engine->PushState(new OptionsState);
+      else if (_change == CHANGE::POP2)
+	  {
+	    _engine->PopState();
+	    _engine->PopState();
+	  }
+  }
+
 }
+
