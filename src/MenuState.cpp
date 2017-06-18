@@ -97,6 +97,7 @@ namespace is
       this->_pathKey[(irr::EKEY_CODE)letter] = this->_driver->getTexture(irr::io::path(tmp.c_str()));
       letter++;
     }
+    std::cout << _options.keyToString<std::string>(irr::KEY_LEFT) << std::endl;
     this->_pathKey[irr::KEY_LEFT] = this->_driver->getTexture("./ButtonGFX/leftarrowbutton.png");
     this->_pathKey[irr::KEY_RIGHT] = this->_driver->getTexture("./ButtonGFX/rightarrowbutton.png");
     this->_pathKey[irr::KEY_UP] = this->_driver->getTexture("./ButtonGFX/uparrowbutton.png");

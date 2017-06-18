@@ -15,7 +15,6 @@ namespace is
     }
     void                        IntroState::Init(GameEngine *engine)
     {
-	std::cerr << "gros fdp" << std::endl;
         this->_engine = engine;
         this->_driver = this->_engine->getDriver();
         this->_sceneManager = this->_engine->getSceneManager();
@@ -28,16 +27,12 @@ namespace is
 	    _cam = new Camera(_sceneManager, this->_driver, SPLASHSCREEN, _engine);
     	_cam->setTextIntro();
       _cam->setAnimation1();
-      std::cerr << "gros fdp" << std::endl;
-    }
+     }
 
     void                        IntroState::Cleanup()
     {
-      std::cerr << "Cleaning up" << std::endl;
-      delete _cam;
-      std::cerr << "Cleaning up" << std::endl;
+     delete _cam;
       _sceneManager->clear();
-      std::cerr << "Cleaning up" << std::endl;
     }
     void                        IntroState::Pause()
     {
@@ -47,22 +42,18 @@ namespace is
     }
     void                        IntroState::HandleEvents()
     {
-      std::cerr << "gros fdp0" << std::endl;
     }
     void                        IntroState::Update()
     {
-      std::cerr << "gros fdp1" << std::endl;
       _cam->setSplashScreen();
-      std::cerr << "gros fdp1" << std::endl;
     }
     void                        IntroState::Draw()
     {
-      std::cerr << "gros fdp2" << std::endl;
       this->_driver->beginScene();
       _sceneManager->drawAll();
       this->_driver->endScene();
       if (this->_cam->checkEndIntro())
-	_engine->ChangeState(new is::MenuState);
+	      _engine->ChangeState(new is::MenuState);
     }
 
 
