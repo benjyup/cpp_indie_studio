@@ -29,9 +29,9 @@ namespace is
 
    private:
     irr::IrrlichtDevice				*_device;
-    GameEngine					*_engine;
+    GameEngine					      *_engine;
     std::vector<std::shared_ptr<IGameState>> 	_states;
-    CHANGE 				&_change;
+    CHANGE 				            &_change;
   };
 
 }

@@ -22,22 +22,22 @@ bool 		is::MenuEventReceiver::OnEvent(const irr::SEvent &event)
     {
       irr::s32	buttonID = event.GUIEvent.Caller->getID();
       switch (buttonID)
-	{
-	  case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_PLAY_BUTTON):
-	      _change = CHANGE::GAME;
-	  break;
-	  case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_OPTIONS_BUTTON):
-	      _change = CHANGE::OPTION;
-	  break;
-	  case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_QUIT_BUTTON):
-	      this->_engine->Quit();
-	  break;
-	  default:
-		break;
-		}
+			{
+				case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_PLAY_BUTTON):
+						_change = CHANGE::GAME;
+				break;
+				case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_OPTIONS_BUTTON):
+						_change = CHANGE::OPTION;
+				break;
+				case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_QUIT_BUTTON):
+						this->_engine->Quit();
+				break;
+				default:
+				break;
+			}
     }
   else if (event.EventType == irr::EET_KEY_INPUT_EVENT && event.KeyInput.Key == irr::KEY_ESCAPE)
-      this->_device->closeDevice();
+    this->_device->closeDevice();
   return (false);
 }
 

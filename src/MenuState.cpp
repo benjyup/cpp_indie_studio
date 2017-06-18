@@ -142,7 +142,7 @@ namespace is
   void MenuState::HandleEvents(void)
   {
     if (_change == CHANGE::GAME)
-      _engine->PushState(new ScoreEnd);
+      _engine->PushState(new GameState);
     else if (_change == CHANGE::OPTION)
 	_engine->PushState(new OptionsState);
   }
@@ -165,7 +165,8 @@ namespace is
           button->setImage(this->_pathButton[Button::GUI_ID_BOUTON::GUI_ID_PRESS_BUTTON]);
         else
         {
-          switch ((Button::GUI_ID_BOUTON)button->getID())
+          Button::GUI_ID_BOUTON but = (Button::GUI_ID_BOUTON)button->getID();
+          switch (but)
           {
           case  Button::GUI_ID_BOUTON::GUI_ID_MOVE_ACTION_BUTTON:
             if (this->_optionsContext.player == 1)
