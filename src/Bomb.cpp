@@ -10,7 +10,7 @@ unsigned int			is::Bomb::TIME_TO_BLOWUP = 2;
 
 
 is::Bomb::Bomb(is::map &map, irr::video::ITexture *texture, irr::scene::IAnimatedMesh *bombMesh, const irr::core::vector3df &posMap, int power,
-	       irr::video::IVideoDriver &videoDriver, irr::scene::ISceneManager &sceneManager, is::PowerUpManager &pm) :
+	       irr::video::IVideoDriver &videoDriver, irr::scene::ISceneManager &sceneManager, is::PowerUpManager &pm, int &nbrOfPlayerBombs) :
 	_id(ID++),
 	_posMap(posMap),
 	_posSpace(posMap.Y * SCALE - SCALE / 2, 0.55 * SCALE, posMap.X * SCALE + SCALE / 2),
@@ -23,17 +23,20 @@ is::Bomb::Bomb(is::map &map, irr::video::ITexture *texture, irr::scene::IAnimate
 	_state(BOMB_PLANTED),
 	_fires(),
 	_pm(pm),
-	_collision(false)
+	_collision(false),
+	_nbrOfPlayerBombs(nbrOfPlayerBombs)
 {
   if (!(this->_node = this->_sceneManager.addOctreeSceneNode(bombMesh, 0, 1)))
     throw is::IndieStudioException("Error on loading bomb.");
   this->_node->setPosition(this->_posSpace);
   this->_node->setScale({0.45f * SCALE, 0.45f * SCALE, 0.45f * SCALE});
   this->_map.addObject(Type::BOMB, {(int)posMap.X, (int)posMap.Y, (int)posMap.Z});
+  this->_nbrOfPlayerBombs -= 1;
 }
 
 is::Bomb::~Bomb()
 {
+  this->_nbrOfPlayerBombs += 1;
   this->_map.delObject({(int)this->_posMap.X, (int)this->_posMap.Y, (int)this->_posMap.Z});
 }
 
@@ -100,7 +103,7 @@ int 			is::Bomb::_reducePower(std::list<std::shared_ptr<is::Bomb>> bombs,
       }
   if (b->getType() == Type::POWERUP)
     {
-        _pm.getPowerUp({(int)pos.X, (int)pos.Y, (int)pos.Z});
+        _pm.getPowerUp({pos.X, pos.Y, pos.Z});
     }
   return (ret);
 }

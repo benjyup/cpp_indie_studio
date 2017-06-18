@@ -19,7 +19,7 @@ is::Fire::Fire(is:: map &map, irr::scene::ISceneManager* smgr, irr::video::IVide
 	   irr::core::vector3df Position, irr::core::vector3df posMap, FireDirection Direction, float power, is::PowerUpManager *pm) :
 	_power(power),
 	_map(map),
-	_pos({posMap.X, posMap.Y, posMap.Z}),
+	_pos({static_cast<int>(posMap.X), static_cast<int>(posMap.Y), static_cast<int>(posMap.Z)}),
 	_dir(Direction),
 	_isBreakable(false),
     _pm(pm)
@@ -51,9 +51,7 @@ void	is::Fire::startFire()
           _pow.Y = pos.Y;
       }
         if (this->_map.getLocalType({pos.X, pos.Y, pos.Z}) == POWERUP)
-        {
-            _pm->getPowerUp({pos.X, pos.Y, pos.Z});
-        }
+          _pm->getPowerUp({static_cast<float>(pos.X), static_cast<float>(pos.Y), static_cast<float>(pos.Z)});
       this->_map.addObject(is::Type::FIRE, {pos.X, pos.Y, pos.Z});
       _DIRECTIONS_ACTION.at(this->_dir)(pos);
     }

@@ -76,7 +76,7 @@ void is::ChoosePlayerEventReceiver::_addPlayer(is::Player::PlayerType playerType
 {
   irr::u32 		i = 0;
 
-  if (nbrOf >= ((playerType == Player::AI) ? (4) : (2)))
+  if (nbrOf >= ((playerType == Player::AI) ? (1) : (2)))
     return ;
 
   while (i < this->_sContext->players->size() && this->_sContext->players->at(i).getType() != Player::VOID)

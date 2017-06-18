@@ -21,7 +21,7 @@ is::Character::Character(scene::IAnimatedMesh *node, video::ITexture *texture,
   irr::scene::ITriangleSelector	*t;
   if (_mesh)
     {
-      _mesh->setMaterialFlag(video::EMF_LIGHTING, false);
+      _mesh->setMaterialFlag(video::E_MATERIAL_FLAG::EMF_LIGHTING, false);
       _mesh->setMD2Animation(scene::EMAT_RUN);
       _mesh->setScale(irr::core::vector3df(1, 1, 1));
       _mesh->setMaterialTexture(0, _text);
@@ -97,10 +97,13 @@ void		is::Character::moove()
   if (_receiver.isKeyDown(_Config.at(Options::MOVES::MOVE_ACTION)) || _receiver.isActionOn((Button::GUI_ID_BOUTON)_id))
     {
       _dir = DIR::NONE;
-      _mesh->setMD2Animation(scene::EMAT_CROUCH_WALK);
-      if (_keySlow)
-	_bombsManager.putBomb({ceil(floor(_mesh->getPosition().Z) / (float) SCALE) - 1,
-			       ceil(floor(_mesh->getPosition().X) / (float) SCALE), 0}, 2);
+      if (_keySlow && this->_bomb > 0)
+	{
+	  _mesh->setMD2Animation(scene::EMAT_CROUCH_WALK);
+	  _bombsManager.putBomb({ceil(floor(_mesh->getPosition().Z) / (float) SCALE) - 1,
+				 ceil(floor(_mesh->getPosition().X) / (float) SCALE), 0},
+				this->_power, this->_bomb);
+	}
       _keySlow = false;
       t = true;
     }
@@ -115,7 +118,8 @@ void		is::Character::moove()
 
 void is::Character::update(is::PowerUpManager *pm, is::map *map) {
   irr::core::vector3df pos = {(f32) (ceil(floor(_mesh->getPosition().Z) / (float)SCALE) - 1), ceil(floor(_mesh->getPosition().X) / (float)SCALE), 0};
-  int ret = map->getLocalType({ceil(floor(_mesh->getPosition().Z) / (float)SCALE) - 1, ceil(floor(_mesh->getPosition().X) / (float)SCALE), 0});
+  int ret = map->getLocalType({static_cast<int32_t>(ceil(floor(_mesh->getPosition().Z) / (float)SCALE) - 1),
+                               static_cast<int32_t>(ceil(floor(_mesh->getPosition().X) / (float)SCALE)), 0});
 
   if (ret == is::POWERUP)
     {

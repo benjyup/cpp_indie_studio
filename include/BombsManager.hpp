@@ -22,7 +22,9 @@ namespace is
     is::GameEngine *engine);
     ~BombsManager();
 
-    void 			putBomb(const irr::core::vector3df &pos, int power);
+    void 			putBomb(const irr::core::vector3df &pos,
+					int power,
+    int &nbrOfPlayerBombs);
     bool 			checkBombsStatus(std::list<std::shared_ptr<is::Character>> const &Char);
     void addCollision(std::list<std::shared_ptr<is::Character>> const &Char);
 

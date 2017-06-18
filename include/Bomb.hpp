@@ -29,7 +29,8 @@ namespace is
 
     Bomb(map &map, irr::video::ITexture *texture, irr::scene::IAnimatedMesh *bombMesh,
 	 const irr::core::vector3df &posMap, int power,
-	 irr::video::IVideoDriver &videoDriver, irr::scene::ISceneManager &sceneManager, is::PowerUpManager &pm);
+	 irr::video::IVideoDriver &videoDriver, irr::scene::ISceneManager &sceneManager, is::PowerUpManager &pm,
+	 int &nbrOfPlayerBombs);
 
     ~Bomb();
 
@@ -73,6 +74,7 @@ namespace is
     std::list<Vector3d>			_blocksToDelete;
     is::PowerUpManager &_pm;
     bool				_collision;
+    int 				&_nbrOfPlayerBombs;
 
     int 				_reducePower(std::list<std::shared_ptr<is::Bomb>> bombs,
 						    irr::core::vector3df pos,
