@@ -32,7 +32,8 @@ namespace is
   std::mutex					Game::DRAW_MUTEX;
 
   Game::Game(): _parserMap("map01.txt"), _genMap("map02.txt")
-  {}
+  {
+  }
 
   Game::~Game()
   {}

@@ -9,13 +9,14 @@ is::Character::Character(scene::IAnimatedMesh *node, video::ITexture *texture,
 			 core::vector3df const & pos,
 			 const GameEventReceiver &receiver,
 			 std::map<Options::MOVES, irr::EKEY_CODE> const &Config,
-			 BombsManager &bombsManager)
+			 BombsManager &bombsManager, int id)
 	: _mesh(smgr->addAnimatedMeshSceneNode(node)), _text(texture), _smgr(smgr), _pos(pos), _speed(DEFAULT_SPEED), _bomb(DEFAULT_BOMB), _power(DEFAULT_POWER), _live(1),
 	  _receiver(receiver),
 	  _bombsManager(bombsManager),
 	  _keySlow(false),
 	  _Config(Config),
-	  _animDie(0)
+	  _animDie(0),
+	  _id(id)
 {
   irr::scene::ITriangleSelector	*t;
   video::SMaterial material;
@@ -50,7 +51,7 @@ void		is::Character::moove()
 
   if (_state == STATE::DYING)
     return;
-  if (_receiver.isKeyDown(_Config.at(Options::MOVES::MOVE_UP)) || _receiver.isVerAxe() == 1)
+  if (_receiver.isKeyDown(_Config.at(Options::MOVES::MOVE_UP)) || _receiver.isVerAxe(_id) == 1)
     {
       if (_dir != is::Character::DIR::TOP)
 	{
@@ -61,7 +62,7 @@ void		is::Character::moove()
       _mesh->setPosition(irr::core::vector3df(v.X, v.Y, v.Z + DEFAULT_SPEED + _speed));
       t = true;
     }
-  if (_receiver.isKeyDown(_Config.at(Options::MOVES::MOVE_DOWN)) || _receiver.isVerAxe() == -1)
+  if (_receiver.isKeyDown(_Config.at(Options::MOVES::MOVE_DOWN)) || _receiver.isVerAxe(_id) == -1)
     {
       if (_dir != is::Character::DIR::DOWN)
 	{
@@ -72,7 +73,7 @@ void		is::Character::moove()
       _mesh->setPosition(irr::core::vector3df(v.X, v.Y, v.Z - DEFAULT_SPEED - _speed));
       t = true;
     }
-  if (_receiver.isKeyDown(_Config.at(Options::MOVES::MOVE_RIGHT)) || _receiver.isHorAxe() == 1)
+  if (_receiver.isKeyDown(_Config.at(Options::MOVES::MOVE_RIGHT)) || _receiver.isHorAxe(_id) == 1)
     {
       if (_dir != is::Character::DIR::RIGHT)
 	{
@@ -83,7 +84,7 @@ void		is::Character::moove()
       _mesh->setPosition(irr::core::vector3df(v.X + DEFAULT_SPEED + _speed, v.Y, v.Z));
       t = true;
     }
-  if (_receiver.isKeyDown(_Config.at(Options::MOVES::MOVE_LEFT)) || _receiver.isHorAxe() == -1)
+  if (_receiver.isKeyDown(_Config.at(Options::MOVES::MOVE_LEFT)) || _receiver.isHorAxe(_id) == -1)
     {
       if (_dir != is::Character::DIR::LEFT)
 	{
@@ -94,7 +95,7 @@ void		is::Character::moove()
       _mesh->setPosition(irr::core::vector3df(v.X - DEFAULT_SPEED - _speed, v.Y, v.Z));
       t = true;
     }
-  if (_receiver.isKeyDown(_Config.at(Options::MOVES::MOVE_ACTION)) || _receiver.isActionOn())
+  if (_receiver.isKeyDown(_Config.at(Options::MOVES::MOVE_ACTION)) || _receiver.isActionOn(_id))
     {
       _dir = DIR::NONE;
       _mesh->setMD2Animation(scene::EMAT_CROUCH_WALK);
