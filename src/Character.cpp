@@ -177,3 +177,21 @@ irr::scene::ISceneNodeAnimator *is::Character::getAnim(unsigned int _id)
 {
   return _anim[_id];
 }
+
+int                             is::Character::getSpeed() const
+{
+  return (this->_speed);
+}
+int                             is::Character::getBomb() const
+{
+  return (this->_bomb);
+}
+int                             is::Character::getLive() const
+{
+  return (this->_live);
+}
+
+int                             is::Character::getPower() const
+{
+  return (this->_power);
+}

@@ -80,9 +80,16 @@ namespace is
   {
     this->_baseTime = time(NULL);
     setTime();
-    irr::gui::IGUIStaticText *text = this->_gui->addStaticText(irr::core::stringw(this->_time.c_str()).c_str(), {this->_engine->getWindowSize().X / 2 - 10, 20, this->_engine->getWindowSize().X / 2 + 100, 50});
-    text->setOverrideFont(this->_font);
-    this->_text[0] = text;
+    irr::gui::IGUIStaticText *text0 = this->_gui->addStaticText(irr::core::stringw(this->_time.c_str()).c_str(), {this->_engine->getWindowSize().X / 2 - 13, 20, this->_engine->getWindowSize().X / 2 + 100, 50});
+    this->_text[0] = text0;
+    irr::gui::IGUIStaticText *text1 = this->_gui->addStaticText(irr::core::stringw(std::string("PLAYER 1 :").c_str()).c_str(), {20, 20, 70, 50});
+    this->_text[1] = text1;
+    irr::gui::IGUIStaticText *text2 = this->_gui->addStaticText(irr::core::stringw(std::string("PLAYER 2 :").c_str()).c_str(), {90, 20, 150, 50});
+    this->_text[2] = text2;
+    irr::gui::IGUIStaticText *text3 = this->_gui->addStaticText(irr::core::stringw(std::string("IA 1 :").c_str()).c_str(), {this->_engine->getWindowSize().X - 150, 20, this->_engine->getWindowSize().X - 90, 50});
+    this->_text[3] = text3;
+    irr::gui::IGUIStaticText *text4 = this->_gui->addStaticText(irr::core::stringw(std::string("IA 2 :").c_str()).c_str(), {this->_engine->getWindowSize().X - 70, 20, this->_engine->getWindowSize().X - 10, 50});
+    this->_text[4] = text4;
   }
 
   void GameState::setTime()
@@ -187,6 +194,15 @@ namespace is
 //      _char[1]->update(_powManager.get(), _map.get());
   }
 
+  void GameState::setInfo(int tab)
+  {
+    this->_config.clear();
+    if (tab == 1 || tab == 2)
+      this->_config = "Player " + std::to_string(tab) + " :\n";
+    else
+      this->_config = "IA " + std::to_string(tab - 2) + " :\n";
+    //this->_config += "power = " + std::to_string(_char[tab - 1]->getPower());
+  }
   void GameState::Draw(void)
   {
     this->_driver->beginScene();
@@ -201,10 +217,19 @@ namespace is
       button->setScaleImage(true);
       button->draw();
     }
-    setTime();
-    this->_text[0]->setText(irr::core::stringw(this->_time.c_str()).c_str());
     for (auto &text : this->_text)
     {
+      if (text.first == 0)
+      {
+        setTime();
+        text.second->setText(irr::core::stringw(this->_time.c_str()).c_str());   
+      }
+      else
+      {
+        setInfo(text.first);
+        text.second->setText(irr::core::stringw(this->_config.c_str()).c_str());
+      }
+      text.second->setOverrideFont(this->_font);
       text.second->draw();
     }
     this->_driver->endScene();

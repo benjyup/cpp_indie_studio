@@ -56,7 +56,10 @@ namespace  is
     void					die();
     void					pushAnim(irr::scene::ISceneNodeAnimator *, unsigned int);
     irr::scene::ISceneNodeAnimator		*getAnim(unsigned int);
-
+    int           getSpeed() const;
+    int           getBomb() const;
+    int           getLive() const;
+    int           getPower() const;
    private:
     scene::IAnimatedMeshSceneNode 		*_mesh;
     video::ITexture 				*_text;

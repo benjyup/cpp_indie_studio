@@ -44,6 +44,7 @@ namespace is
    void          addText();
    void          addButtons();
    void          setTime();
+   void          setInfo(int tab);
     CHANGE 					_change;
     ParseMap	    				_parserMap;
     GenerateMap					_genMap;
@@ -66,6 +67,7 @@ namespace is
     std::map<Button::GUI_ID_BOUTON, irr::video::ITexture*> _pathButton;
     int                                                 _baseTime;
     std::string                                            _time;
+    std::string                                            _config;
     int                                                    min;
    };
 }
