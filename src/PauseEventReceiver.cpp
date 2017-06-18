@@ -24,11 +24,13 @@ bool 		is::PauseEventReceiver::OnEvent(const irr::SEvent &event)
       switch (buttonID)
 	{
 	  case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_RESUME_BUTTON):
-	    std::cerr << "Resume Button" << std::endl;
 	    _change = CHANGE::POP;
 	  break;
 	  case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_OPTIONS_BUTTON):
 	      _change = CHANGE::OPTION;
+	  break;
+	  case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_SAVE_BUTTON):
+				_change = CHANGE::POP2;
 	  break;
 	  case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_MENU_BUTTON):
 	      _change = CHANGE::POP2;

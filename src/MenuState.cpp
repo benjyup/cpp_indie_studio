@@ -16,7 +16,7 @@ namespace is
   const irr::s32		MenuState::BUTTON_WIDTH = 250;
   const irr::s32		MenuState::BUTTON_HEIGHT = 75;
   
-  MenuState::MenuState() : _change(CHANGE::NONE), _menuEventReceiver(_change), _errorMsg(NULL), _parserMap("map01.txt")
+  MenuState::MenuState() : _change(CHANGE::NONE), _menuEventReceiver(_change, _buttons), _errorMsg(NULL), _parserMap("map01.txt")
   {
     std::cerr << "Menu Event()" << std::endl;
   }
@@ -38,9 +38,10 @@ namespace is
     if (!(this->_errorMsg = this->_gui->addStaticText(L"", irr::core::rect<irr::s32>(100, 300, 300, 400))))
       throw IndieStudioException("Not able to init the error message.");
     this->_buttons = {
-	    { engine->getWindowSize().X / 2 - BUTTON_WIDTH / 2, engine->getWindowSize().Y - BUTTON_HEIGHT * 4 - 45, engine->getWindowSize().X / 2 + BUTTON_WIDTH / 2, engine->getWindowSize().Y - BUTTON_HEIGHT * 3 - 30, (irr::s32)Button::GUI_ID_BOUTON::GUI_ID_PLAY_BUTTON, L"", L"Launch the game" },
-	    { engine->getWindowSize().X / 2 - BUTTON_WIDTH / 2, engine->getWindowSize().Y - BUTTON_HEIGHT * 3 - 30, engine->getWindowSize().X / 2 + BUTTON_WIDTH / 2, engine->getWindowSize().Y - BUTTON_HEIGHT * 2 - 15, (irr::s32)Button::GUI_ID_BOUTON::GUI_ID_OPTIONS_BUTTON, L"", L"Configure the game" },
-	    { engine->getWindowSize().X / 2 - BUTTON_WIDTH / 2, engine->getWindowSize().Y - BUTTON_HEIGHT * 2 - 15, engine->getWindowSize().X / 2 + BUTTON_WIDTH / 2, engine->getWindowSize().Y - BUTTON_HEIGHT, (irr::s32)Button::GUI_ID_BOUTON::GUI_ID_QUIT_BUTTON, L"", L"Quit the game"},
+	    { engine->getWindowSize().X / 2 - BUTTON_WIDTH / 2, engine->getWindowSize().Y - BUTTON_HEIGHT * 4 - 60, engine->getWindowSize().X / 2 + BUTTON_WIDTH / 2, engine->getWindowSize().Y - BUTTON_HEIGHT * 3 - 45, (irr::s32)Button::GUI_ID_BOUTON::GUI_ID_PLAY_BUTTON, L"", L"Launch the game" },
+      { engine->getWindowSize().X / 2 - BUTTON_WIDTH / 2, engine->getWindowSize().Y - BUTTON_HEIGHT * 3 - 45, engine->getWindowSize().X / 2 + BUTTON_WIDTH / 2, engine->getWindowSize().Y - BUTTON_HEIGHT * 2 - 30, (irr::s32)Button::GUI_ID_BOUTON::GUI_ID_LOAD_BUTTON, L"", L"Configure the game" },
+	    { engine->getWindowSize().X / 2 - BUTTON_WIDTH / 2, engine->getWindowSize().Y - BUTTON_HEIGHT * 2 - 30, engine->getWindowSize().X / 2 + BUTTON_WIDTH / 2, engine->getWindowSize().Y - BUTTON_HEIGHT - 15, (irr::s32)Button::GUI_ID_BOUTON::GUI_ID_OPTIONS_BUTTON, L"", L"Configure the game" },
+	    { engine->getWindowSize().X / 2 - BUTTON_WIDTH / 2, engine->getWindowSize().Y - BUTTON_HEIGHT - 15, engine->getWindowSize().X / 2 + BUTTON_WIDTH / 2, engine->getWindowSize().Y, (irr::s32)Button::GUI_ID_BOUTON::GUI_ID_QUIT_BUTTON, L"", L"Quit the game"},
       { engine->getWindowSize().X / 2 - 545 / 2, 30, engine->getWindowSize().X / 2 + 575 / 2, 375, (irr::s32)Button::GUI_ID_BOUTON::GUI_ID_WALLPAPER_BUTTON, L"", L"WALLPAPER"},
      };
     _mapi = _parserMap.getVector();
@@ -78,6 +79,8 @@ namespace is
         this->_pathButton[Button::GUI_ID_BOUTON::GUI_ID_WALLPAPER_BUTTON] = this->_driver->getTexture("./ButtonGFX/bomberman3dtitle.png");
         this->_pathButton[Button::GUI_ID_BOUTON::GUI_ID_PRESS_BUTTON] = this->_driver->getTexture("./ButtonGFX/pressakeybutton.png");
         this->_pathButton[Button::GUI_ID_BOUTON::GUI_ID_WINNER] = this->_driver->getTexture("./ButtonGFX/thewinnerisbutton.png");
+        this->_pathButton[Button::GUI_ID_BOUTON::GUI_ID_LOAD_BUTTON] = this->_driver->getTexture("./ButtonGFX/capslockbutton.png");
+        this->_pathButton[Button::GUI_ID_BOUTON::GUI_ID_SAVE_BUTTON] = this->_driver->getTexture("./ButtonGFX/capslockbutton.png");
         this->initKeyTexture();
      }
   }
@@ -161,11 +164,12 @@ namespace is
     }
     for (auto &button : this->_buttons)
       {
+        Button::GUI_ID_BOUTON but = (Button::GUI_ID_BOUTON)button->getID();
+
         if (button.getPress() == 1)
           button->setImage(this->_pathButton[Button::GUI_ID_BOUTON::GUI_ID_PRESS_BUTTON]);
         else
         {
-          Button::GUI_ID_BOUTON but = (Button::GUI_ID_BOUTON)button->getID();
           switch (but)
           {
           case  Button::GUI_ID_BOUTON::GUI_ID_MOVE_ACTION_BUTTON:
@@ -199,7 +203,7 @@ namespace is
               button->setImage(this->_pathKey[this->_optionsContext.player2ConfigTmp[Options::MOVES::MOVE_LEFT]]);  
             break;
           default:
-            button->setImage(this->_pathButton[(Button::GUI_ID_BOUTON)button->getID()]);
+              button->setImage(this->_pathButton[(Button::GUI_ID_BOUTON)button->getID()]);
             break;
           }
         }

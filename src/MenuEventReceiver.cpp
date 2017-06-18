@@ -6,7 +6,7 @@
 #include "MenuEventReceiver.hpp"
 #include "OptionsState.hpp"
 
-is::MenuEventReceiver::MenuEventReceiver(CHANGE &change) : _device(NULL), _change(change)
+is::MenuEventReceiver::MenuEventReceiver(CHANGE &change, std::vector<is::Button> &buttons) : _device(NULL), _change(change), _buttons(buttons)
 {
   std::cout << "MenuEventReceiver()" << std::endl;
 }
@@ -21,10 +21,13 @@ bool 		is::MenuEventReceiver::OnEvent(const irr::SEvent &event)
   if (_change == CHANGE::NONE && event.EventType == irr::EET_GUI_EVENT && event.GUIEvent.EventType == irr::gui::EGET_BUTTON_CLICKED)
     {
       irr::s32	buttonID = event.GUIEvent.Caller->getID();
-      switch (buttonID)
+			switch (buttonID)
 			{
 				case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_PLAY_BUTTON):
 						_change = CHANGE::GAME;
+				break;
+				case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_LOAD_BUTTON):
+						_change = CHANGE::GAME; // change pour load le game
 				break;
 				case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_OPTIONS_BUTTON):
 						_change = CHANGE::OPTION;
