@@ -31,7 +31,10 @@ bool 		is::PauseEventReceiver::OnEvent(const irr::SEvent &event)
 	      _change = CHANGE::OPTION;
 	  break;
 	  case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_MENU_BUTTON):
+	    {
 	      _change = CHANGE::POP2;
+	      _engine->getSound().setMenuMusic();
+	    }
 	  break;
 	  default:
 	    break;

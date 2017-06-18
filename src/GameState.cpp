@@ -47,6 +47,7 @@ namespace is
     this->_driver = this->_engine->getDriver();
     this->_gui = this->_engine->getGuiEnv();
     this->_engine->getDevice()->getCursorControl()->setVisible(false);
+    this->_engine->getSound().setGameMusic();
     //mapi = _parserMap.getVector();
     mapi = _genMap.getMap();
     _map = std::make_shared<is::map>(_driver, _sceneManager, mapi);
