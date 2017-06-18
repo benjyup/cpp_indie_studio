@@ -9,14 +9,16 @@
 #include "Fire.hpp"
 #include <IndieStudioException.hpp>
 
-is::BombsManager::BombsManager(is::map &map, irr::video::IVideoDriver &videoDriver, irr::scene::ISceneManager &sceneManager, is::PowerUpManager &pm) :
+is::BombsManager::BombsManager(is::map &map, irr::video::IVideoDriver &videoDriver, irr::scene::ISceneManager &sceneManager, is::PowerUpManager &pm,
+				is::GameEngine *engine) :
 	_map(map),
 	_videoDriver(videoDriver),
 	_sceneManager(sceneManager),
 	_texture(NULL),
 	_mesh(this->_sceneManager.getMesh("./gfx/bomb.obj")),
 	_pm(pm),
-	_mesh2(this->_sceneManager.getMesh("./gfx/wallBrick.obj"))
+	_mesh2(this->_sceneManager.getMesh("./gfx/wallBrick.obj")),
+	_engine(engine)
 {
 }
 
@@ -36,7 +38,10 @@ bool is::BombsManager::checkBombsStatus(std::list<std::shared_ptr<is::Character>
 
   this->_bombs.remove_if([&](auto const &bomb) {
     ret = true;
-    return bomb->blowUp(this->_bombs);
+    bool t;
+    	if ((t = bomb->blowUp(this->_bombs)))
+;//	  _engine->getSound().bombSound();
+    return t;
   });
   for (auto &i : _bombs)
     {
@@ -62,7 +67,9 @@ bool is::BombsManager::checkBombsStatus(std::list<std::shared_ptr<is::Character>
 		j->getMesh()->removeAnimator(j->getAnim(i->_id));
 		  std::cerr << "Deleting Animation" << std::endl;
 	    }
+	  _engine->getSound().bombSound();
 	  _sceneManager.addToDeletionQueue(_colNode[i->_id]);
+	  i->setPos(i->getMesh()->getPosition());
 	  _sceneManager.addToDeletionQueue(i->getMesh());
 	  i->setMesh(NULL);
 	}

@@ -8,6 +8,7 @@
 #include <thread>
 #include <functional>
 #include <list>
+#include "GameEngine.hpp"
 #include "map.hpp"
 #include "Bomb.hpp"
 
@@ -17,7 +18,8 @@ namespace is
   class BombsManager
   {
    public:
-    BombsManager(is::map &map, irr::video::IVideoDriver &videoDriver, irr::scene::ISceneManager &sceneManager, is::PowerUpManager &pm);
+    BombsManager(is::map &map, irr::video::IVideoDriver &videoDriver, irr::scene::ISceneManager &sceneManager, is::PowerUpManager &pm,
+    is::GameEngine *engine);
     ~BombsManager();
 
     void 			putBomb(const irr::core::vector3df &pos, int power);
@@ -39,6 +41,7 @@ namespace is
     is::PowerUpManager                  &_pm;
     std::map<unsigned int, irr::scene::ITriangleSelector *>	_col;
     std::map<unsigned int, irr::scene::IMeshSceneNode *>	_colNode;
+    is::GameEngine						*_engine;
 
     bool checkChar(std::list<std::shared_ptr<Character>> const &Char, irr::core::vector3df const &v);
 

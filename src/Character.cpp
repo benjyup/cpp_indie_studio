@@ -137,7 +137,7 @@ void is::Character::update(is::PowerUpManager *pm, is::map *map) {
       if (_mesh->getFrameNr() >= (float)_mesh->getEndFrame() - 1.0f)
 	 _animDie++;
       if (_animDie == 5)
-	_state = STATE::DEAD;
+	  _state = STATE::DEAD;
     }
 }
 

@@ -17,9 +17,9 @@
 
 namespace is
 {
-	class PowerUpManager;
-	class map;
-	class Fire;
+  class PowerUpManager;
+  class map;
+  class Fire;
   class Bomb
   {
    public:
@@ -37,6 +37,7 @@ namespace is
     void 				remove();
     bool 				blowUp(std::list<std::shared_ptr<is::Bomb>> bombs);
     const irr::core::vector3df		&getPos() const;
+    void				setPos(irr::core::vector3df const &pos);
     const irr::core::vector3df	&getPos2() const;
     bool				getCollision() const;
     bool 				alreadyBlowUp() const;
@@ -70,7 +71,7 @@ namespace is
     t_state 				_state;
     std::list<Fire>			_fires;
     std::list<Vector3d>			_blocksToDelete;
-	is::PowerUpManager &_pm;
+    is::PowerUpManager &_pm;
     bool				_collision;
 
     int 				_reducePower(std::list<std::shared_ptr<is::Bomb>> bombs,

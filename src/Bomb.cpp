@@ -158,7 +158,14 @@ void is::Bomb::_stopFires()
 
 const irr::core::vector3df &is::Bomb::getPos() const
 {
-  return (this->_node->getPosition());
+  if (_node)
+	  return (this->_node->getPosition());
+  return (_posSpace);
+}
+
+void			is::Bomb::setPos(irr::core::vector3df const &pos)
+{
+  _posSpace = pos;
 }
 
 void is::Bomb::_explosion(std::list<std::shared_ptr<is::Bomb>> bombs)
