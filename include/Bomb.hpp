@@ -37,6 +37,7 @@ namespace is
     void 				remove();
     bool 				blowUp(std::list<std::shared_ptr<is::Bomb>> bombs);
     const irr::core::vector3df		&getPos() const;
+    const irr::core::vector3df	&getPos2() const;
     bool				getCollision() const;
     bool 				alreadyBlowUp() const;
     void				setCollision(bool b);

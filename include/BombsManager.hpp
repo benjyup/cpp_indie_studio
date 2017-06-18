@@ -30,6 +30,7 @@ namespace is
     irr::scene::ISceneManager			&_sceneManager;
     irr::video::ITexture 			*_texture;
     irr::scene::IAnimatedMesh 			*_mesh;
+    irr::scene::IAnimatedMesh 			*_mesh2;
     std::list<std::shared_ptr<is::Bomb>>	_bombs;
     std::function<void(is::Bomb &,
 		       std::vector<std::thread> &,
@@ -37,6 +38,7 @@ namespace is
     std::mutex					_bomb_mutex;
     is::PowerUpManager                  &_pm;
     std::map<unsigned int, irr::scene::ITriangleSelector *>	_col;
+    std::map<unsigned int, irr::scene::IMeshSceneNode *>	_colNode;
 
     bool checkChar(std::list<std::shared_ptr<Character>> const &Char, irr::core::vector3df const &v);
 

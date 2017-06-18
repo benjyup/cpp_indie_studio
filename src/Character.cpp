@@ -141,7 +141,7 @@ void is::Character::update(is::PowerUpManager *pm, is::map *map) {
     }
 }
 
-irr::scene::IAnimatedMeshSceneNode 		*is::Character::getMesh()
+irr::scene::ISceneNode 		*is::Character::getMesh()
 {
   return (_mesh);
 }

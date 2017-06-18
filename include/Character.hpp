@@ -51,7 +51,7 @@ namespace  is
     void    incPower();
     void   update(is::PowerUpManager *, is::map *);
     irr::core::vector3df    			const &getPos() const;
-    scene::IAnimatedMeshSceneNode 		*getMesh();
+    scene::ISceneNode 		*getMesh();
     bool 					getAlive();
     void					die();
     void					pushAnim(irr::scene::ISceneNodeAnimator *, unsigned int);
