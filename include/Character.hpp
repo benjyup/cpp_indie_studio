@@ -54,6 +54,8 @@ namespace  is
     scene::IAnimatedMeshSceneNode 		*getMesh();
     bool 					getAlive();
     void					die();
+    void					pushAnim(irr::scene::ISceneNodeAnimator *, unsigned int);
+    irr::scene::ISceneNodeAnimator		*getAnim(unsigned int);
 
    private:
     scene::IAnimatedMeshSceneNode 		*_mesh;
@@ -72,6 +74,7 @@ namespace  is
     STATE 						_state;
     char 						_animDie;
     int 					_id;
+    std::map<unsigned int, irr::scene::ISceneNodeAnimator *>	_anim;
   };
 }
 

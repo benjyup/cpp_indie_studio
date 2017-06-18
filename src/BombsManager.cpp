@@ -38,34 +38,29 @@ bool is::BombsManager::checkBombsStatus(std::list<std::shared_ptr<is::Character>
     ret = true;
     return bomb->blowUp(this->_bombs);
   });
-//  for (auto &i : _bombs)
-//    {
-//      if (i->alreadyBlowUp() && i->getMesh() != NULL)
-//	{
-//	  for (auto &j : Char)
-//	    {
-////	      for (auto &k : j->getMesh()->getAnimators())
-//		{
-//		  std::cerr << k- << std::endl;
-////		  j.get()->getMesh()->removeAnimator(k);
-//		  std::cerr << "Deleting Animation" << std::endl;
-//		}
-	      //remove animator de la bombe;
-//	    }
-//	  std::cerr << "Deleting Animation2" << std::endl;
-//	  _sceneManager.addToDeletionQueue(i->getMesh());
-//	  i->setMesh(NULL);
-//	}
-//    }
   for (auto &i : _bombs)
     {
       if (!i->getCollision() && !i->alreadyBlowUp() && checkChar(Char, i->getPos()))
 	{
 	  std::cerr << "Creating Colision" << std::endl;
-	  _col.push_back(_sceneManager.createOctreeTriangleSelector(_mesh, i->getMesh()));
-	  i->getMesh()->setTriangleSelector(_col.back());
+	  _col[i->_id] = _sceneManager.createOctreeTriangleSelector(_mesh, i->getMesh());
+	  i->getMesh()->setTriangleSelector(_col[i->_id]);
 	  i->setCollision(true);
 	}
+  for (auto &i : _bombs)
+    {
+      if (i->getCollision() && i->alreadyBlowUp() && i->getMesh() != NULL)
+	{
+	  for (auto &j : Char)
+	    {
+	      if (j->getAnim(i->_id))
+		j->getMesh()->removeAnimator(j->getAnim(i->_id));
+		  std::cerr << "Deleting Animation" << std::endl;
+	    }
+	  _sceneManager.addToDeletionQueue(i->getMesh());
+	  i->setMesh(NULL);
+	}
+    }
     }
   return (ret);
 }
@@ -94,11 +89,10 @@ void is::BombsManager::addCollision(std::list<std::shared_ptr<is::Character>> co
       std::cerr << "Adding collision" << std::endl;
       for (auto const &c : Char)
 	{
-	  scene::ISceneNodeAnimator* anim = _sceneManager.createCollisionResponseAnimator(
-		  i, c.get()->getMesh(), core::vector3df(6,10,6),
-		  core::vector3df(0,0,0), core::vector3df(0,0,0));
-	  c.get()->getMesh()->addAnimator(anim);
-//	  anim->drop();
+	  c->pushAnim(_sceneManager.createCollisionResponseAnimator(
+		  i.second, c.get()->getMesh(), core::vector3df(6,10,6),
+		  core::vector3df(0,0,0), core::vector3df(0,0,0)), i.first);
+	  c.get()->getMesh()->addAnimator(c->getAnim(i.first));
 	}
       std::cerr << "Collision Added" << std::endl;
     }

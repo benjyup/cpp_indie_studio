@@ -158,7 +158,7 @@ void is::Bomb::_stopFires()
 
 const irr::core::vector3df &is::Bomb::getPos() const
 {
-  return (this->_posMap);
+  return (this->_posSpace);
 }
 
 void is::Bomb::_explosion(std::list<std::shared_ptr<is::Bomb>> bombs)
@@ -166,7 +166,6 @@ void is::Bomb::_explosion(std::list<std::shared_ptr<is::Bomb>> bombs)
   this->_alreadyBlowUp = true;
   this->_state = FIRE;
   this->_startFires(bombs);
-  _node->remove();
   this->_start_clock = std::clock();
 }
 
