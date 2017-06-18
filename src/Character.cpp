@@ -4,9 +4,9 @@
 
 #include "Character.hpp"
 
-is::Character::Character(scene::IAnimatedMesh *node, video::ITexture *texture,
-			 scene::ISceneManager * smgr,
-			 core::vector3df const & pos,
+is::Character::Character(irr::scene::IAnimatedMesh *node, irr::video::ITexture *texture,
+			 irr::scene::ISceneManager * smgr,
+			 irr::core::vector3df const & pos,
 			 const GameEventReceiver &receiver,
 			 std::map<Options::MOVES, irr::EKEY_CODE> const &Config,
 			 BombsManager &bombsManager, int id)
@@ -21,8 +21,8 @@ is::Character::Character(scene::IAnimatedMesh *node, video::ITexture *texture,
   irr::scene::ITriangleSelector	*t;
   if (_mesh)
     {
-      _mesh->setMaterialFlag(video::E_MATERIAL_FLAG::EMF_LIGHTING, false);
-      _mesh->setMD2Animation(scene::EMAT_RUN);
+      _mesh->setMaterialFlag(irr::video::E_MATERIAL_FLAG::EMF_LIGHTING, false);
+      _mesh->setMD2Animation(irr::scene::EMAT_RUN);
       _mesh->setScale(irr::core::vector3df(1, 1, 1));
       _mesh->setMaterialTexture(0, _text);
       _mesh->setPosition(pos);
@@ -54,7 +54,7 @@ void		is::Character::moove()
     {
       if (_dir != is::Character::DIR::TOP)
 	{
-	  _mesh->setMD2Animation(scene::EMAT_RUN);
+	  _mesh->setMD2Animation(irr::scene::EMAT_RUN);
 	  _mesh->setRotation(irr::core::vector3df(0, 270, 0));
 	  _dir = is::Character::DIR::TOP;
 	}
@@ -65,7 +65,7 @@ void		is::Character::moove()
     {
       if (_dir != is::Character::DIR::DOWN)
 	{
-	  _mesh->setMD2Animation(scene::EMAT_RUN);
+	  _mesh->setMD2Animation(irr::scene::EMAT_RUN);
 	  _mesh->setRotation(irr::core::vector3df(0, 90, 0));
 	  _dir = is::Character::DIR::DOWN;
 	}
@@ -76,7 +76,7 @@ void		is::Character::moove()
     {
       if (_dir != is::Character::DIR::RIGHT)
 	{
-	  _mesh->setMD2Animation(scene::EMAT_RUN);
+	  _mesh->setMD2Animation(irr::scene::EMAT_RUN);
 	  _mesh->setRotation(irr::core::vector3df(0, 0, 0));
 	  _dir = is::Character::DIR::RIGHT;
 	}
@@ -87,7 +87,7 @@ void		is::Character::moove()
     {
       if (_dir != is::Character::DIR::LEFT)
 	{
-	  _mesh->setMD2Animation(scene::EMAT_RUN);
+	  _mesh->setMD2Animation(irr::scene::EMAT_RUN);
 	  _mesh->setRotation(irr::core::vector3df(0, 180, 0));
 	  _dir = is::Character::DIR::LEFT;
 	}
@@ -99,7 +99,7 @@ void		is::Character::moove()
       _dir = DIR::NONE;
       if (_keySlow && this->_bomb > 0)
 	{
-	  _mesh->setMD2Animation(scene::EMAT_CROUCH_WALK);
+	  _mesh->setMD2Animation(irr::scene::EMAT_CROUCH_WALK);
 	  _bombsManager.putBomb({ceil(floor(_mesh->getPosition().Z) / (float) SCALE) - 1,
 				 ceil(floor(_mesh->getPosition().X) / (float) SCALE), 0},
 				this->_power, this->_bomb);
@@ -110,14 +110,14 @@ void		is::Character::moove()
   if (!t)
   {
     if (_dir != is::Character::DIR::NONE)
-      _mesh->setMD2Animation(scene::EMAT_STAND);
+      _mesh->setMD2Animation(irr::scene::EMAT_STAND);
     _dir = DIR::NONE;
     _keySlow = true;
   }
 }
 
 void is::Character::update(is::PowerUpManager *pm, is::map *map) {
-  irr::core::vector3df pos = {(f32) (ceil(floor(_mesh->getPosition().Z) / (float)SCALE) - 1), ceil(floor(_mesh->getPosition().X) / (float)SCALE), 0};
+  irr::core::vector3df pos = {(irr::f32) (ceil(floor(_mesh->getPosition().Z) / (float)SCALE) - 1), ceil(floor(_mesh->getPosition().X) / (float)SCALE), 0};
   int ret = map->getLocalType({static_cast<int32_t>(ceil(floor(_mesh->getPosition().Z) / (float)SCALE) - 1),
                                static_cast<int32_t>(ceil(floor(_mesh->getPosition().X) / (float)SCALE)), 0});
 
@@ -129,7 +129,7 @@ void is::Character::update(is::PowerUpManager *pm, is::map *map) {
   else if (ret == is::FIRE)
       {
 	if (_state != STATE::DYING)
-	    _mesh->setMD2Animation(scene::EMAT_CROUCH_DEATH);
+	    _mesh->setMD2Animation(irr::scene::EMAT_CROUCH_DEATH);
 	_state = STATE::DYING;
       }
   if (_state == STATE::DYING)

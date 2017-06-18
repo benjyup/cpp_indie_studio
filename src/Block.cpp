@@ -21,7 +21,7 @@ namespace is
     type = other.type;
   }
 
-  void Block::init(Type t, video::ITexture *text, int size)
+  void Block::init(Type t, irr::video::ITexture *text, int size)
   {
     node->setMaterialFlag(irr::video::EMF_LIGHTING, false);
     type = t;

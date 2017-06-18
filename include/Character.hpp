@@ -12,8 +12,6 @@
 #include "GameEventReceiver.hpp"
 #include "PowerUpManager.hpp"
 
-using namespace irr;
-
 #define DEFAULT_SPEED 1.2
 #define DEFAULT_POWER 1
 #define DEFAULT_BOMB 1
@@ -41,8 +39,8 @@ namespace  is
       DEAD
     };
    public:
-    Character(scene::IAnimatedMesh *node, video::ITexture *texture, scene::ISceneManager *smgr,
-	      core::vector3df const &pos, const GameEventReceiver &receiver, std::map<Options::MOVES, irr::EKEY_CODE>  const &Config,
+    Character(irr::scene::IAnimatedMesh *node, irr::video::ITexture *texture, irr::scene::ISceneManager *smgr,
+	      irr::core::vector3df const &pos, const GameEventReceiver &receiver, std::map<Options::MOVES, irr::EKEY_CODE>  const &Config,
 	      BombsManager &bombsManager, int id);
     ~Character() {}
     void 	moove();
@@ -51,7 +49,7 @@ namespace  is
     void    incPower();
     void   update(is::PowerUpManager *, is::map *);
     irr::core::vector3df    			const &getPos() const;
-    scene::ISceneNode 		*getMesh();
+    irr::scene::ISceneNode 		*getMesh();
     bool 					getAlive();
     void					die();
     void					pushAnim(irr::scene::ISceneNodeAnimator *, unsigned int);
@@ -62,10 +60,10 @@ namespace  is
     int						getId();
 
    private:
-    scene::IAnimatedMeshSceneNode 		*_mesh;
-    video::ITexture 				*_text;
-    scene::ISceneManager 			*_smgr;
-    core::vector3df 				_pos;
+    irr::scene::IAnimatedMeshSceneNode 		*_mesh;
+    irr::video::ITexture 				*_text;
+    irr::scene::ISceneManager 			*_smgr;
+    irr::core::vector3df 				_pos;
     int _speed;
     int _bomb;
     int _power;

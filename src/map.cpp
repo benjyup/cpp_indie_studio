@@ -8,7 +8,7 @@
 #include "PlanetSystem.hpp"
 #include "Camera.hpp"
 
-is::map::map(video::IVideoDriver *driver, scene::ISceneManager *smgr,
+is::map::map(irr::video::IVideoDriver *driver, irr::scene::ISceneManager *smgr,
 	     std::vector<int> &map) : _driver(driver), _smgr(smgr), _map(map)
 {
   _texture[Type::GRASS] = _driver->getTexture("./gfx/tile_aqua.png");
@@ -17,7 +17,7 @@ is::map::map(video::IVideoDriver *driver, scene::ISceneManager *smgr,
   _texture[Type::FIRE] = _texture[Type::GRASS];
   _texture[Type::BOMB] = _texture[Type::GRASS];
   _texture[Type::POWERUP] = _texture[Type::GRASS];
-  scene::IAnimatedMesh *mesh = smgr->getMesh("./gfx/wallStone.obj");
+  irr::scene::IAnimatedMesh *mesh = smgr->getMesh("./gfx/wallStone.obj");
   size = sqrt(map.size());
   irr::scene::ICameraSceneNode *cam = smgr->addCameraSceneNodeFPS();
   int i  = 0;
@@ -113,9 +113,9 @@ void	is::map::addCollision(irr::scene::ISceneNode *node)
 {
   for (auto const & i : _t)
     {
-      scene::ISceneNodeAnimator* anim = _smgr->createCollisionResponseAnimator(
-	      i, node, core::vector3df(5,9,5),
-	      core::vector3df(0,0,0), core::vector3df(0,0,0));
+      irr::scene::ISceneNodeAnimator* anim = _smgr->createCollisionResponseAnimator(
+	      i, node, irr::core::vector3df(5,9,5),
+	      irr::core::vector3df(0,0,0), irr::core::vector3df(0,0,0));
       node->addAnimator(anim);
       anim->drop();
     }
