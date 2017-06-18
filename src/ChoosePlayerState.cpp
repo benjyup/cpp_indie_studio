@@ -6,6 +6,7 @@
 #include <IndieStudioException.hpp>
 #include <MenuState.hpp>
 #include "ChoosePlayerState.hpp"
+#include "ChooseSkinState.hpp"
 
 
 std::vector<std::pair<std::string, std::string>>	is::ChoosePlayerState::GFX_PATH = {
@@ -87,8 +88,6 @@ void is::ChoosePlayerState::Init(is::GameEngine *engine)
 
   for (int y = 0 ; y < 4 ; ++y)
     this->_players.emplace_back(Player::PlayerType::VOID, "");
-
-  MenuState::BUTTON_WIDTH;
 
   this->_buttons.emplace_back(10,
 			      engine->getWindowSize().Y  / 4,
@@ -201,6 +200,7 @@ void is::ChoosePlayerState::Draw(void)
 
   if (this->eventContext.stop == true)
     {
+      //this->eventContext.engine->ChangeState(new GameState);
       this->eventContext.engine->ChangeState(new GameState);
       return ;
     }

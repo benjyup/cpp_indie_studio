@@ -20,19 +20,19 @@ bool 		is::MenuEventReceiver::OnEvent(const irr::SEvent &event)
 {
   if (_change == CHANGE::NONE && event.EventType == irr::EET_GUI_EVENT && event.GUIEvent.EventType == irr::gui::EGET_BUTTON_CLICKED)
     {
-      irr::s32	buttonID = event.GUIEvent.Caller->getID();
+      irr::s32 buttonID = event.GUIEvent.Caller->getID();
       switch (buttonID)
 	{
-	  case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_PLAY_BUTTON):
+	  case ((irr::s32) Button::GUI_ID_BOUTON::GUI_ID_PLAY_BUTTON):
 	    _change = CHANGE::GAME;
 	  break;
-	  case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_LOAD_BUTTON):
+	  case ((irr::s32) Button::GUI_ID_BOUTON::GUI_ID_LOAD_BUTTON):
 	    _change = CHANGE::GAME; // change pour load le game
 	  break;
-	  case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_OPTIONS_BUTTON):
+	  case ((irr::s32) Button::GUI_ID_BOUTON::GUI_ID_OPTIONS_BUTTON):
 	    _change = CHANGE::OPTION;
 	  break;
-	  case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_QUIT_BUTTON):
+	  case ((irr::s32) Button::GUI_ID_BOUTON::GUI_ID_QUIT_BUTTON):
 	    _change = CHANGE::QUIT;
 	  break;
 	  default:

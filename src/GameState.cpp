@@ -70,8 +70,18 @@ namespace is
     changing = false;
     _engine->getDevice()->setEventReceiver(&_receiver);
     std::cerr << "initing game2" << std::endl;
+    if (_gui != NULL)
+      this->_font = _gui->getFont("./gfx/font_space.bmp");
+    this->addText();
   }
 
+  void GameState::addText()
+  {
+                        irr::gui::IGUIStaticText *text = this->_gui->addStaticText(irr::core::stringw("LOLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL").c_str(),
+                                                        {10, 10, 100, 100});
+                        text->setOverrideFont(this->_font);
+                        this->_text.push_back(text);
+  }
   void GameState::Cleanup(void)
   {
   }
@@ -112,7 +122,7 @@ namespace is
     // A changer
     _char.remove_if([&](auto &Char) {
       if (!Char->getAlive())
-	Char->die();
+	    Char->die();
       return !Char->getAlive();
     });
     this->_bombs->checkBombsStatus(_char);
@@ -129,6 +139,8 @@ namespace is
 //    _map->printMap();
     //_cam->draw();
     //_map->draw();
+    for (auto &text : this->_text)
+      text->draw();
     this->_driver->endScene();
   }
 

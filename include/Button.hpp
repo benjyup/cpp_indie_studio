@@ -51,6 +51,8 @@ namespace is
       GUI_ID_DELETE_AI,
       GUI_ID_LOAD_BUTTON,
       GUI_ID_SAVE_BUTTON,
+      GUI_ID_SOUND_ON_BUTTON,
+      GUI_ID_SOUND_OFF_BUTTON,
       GUI_ID_LENGTH,
     };
 

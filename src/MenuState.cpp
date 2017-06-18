@@ -82,11 +82,15 @@ namespace is
 	this->_pathButton[Button::GUI_ID_BOUTON::GUI_ID_WALLPAPER_BUTTON] = this->_driver->getTexture("./ButtonGFX/bomberman3dtitle.png");
 	this->_pathButton[Button::GUI_ID_BOUTON::GUI_ID_PRESS_BUTTON] = this->_driver->getTexture("./ButtonGFX/pressakeybutton.png");
 	this->_pathButton[Button::GUI_ID_BOUTON::GUI_ID_WINNER] = this->_driver->getTexture("./ButtonGFX/thewinnerisbutton.png");
-	this->_pathButton[Button::GUI_ID_BOUTON::GUI_ID_LOAD_BUTTON] = this->_driver->getTexture("./ButtonGFX/capslockbutton.png");
-	this->_pathButton[Button::GUI_ID_BOUTON::GUI_ID_SAVE_BUTTON] = this->_driver->getTexture("./ButtonGFX/capslockbutton.png");
+	this->_pathButton[Button::GUI_ID_BOUTON::GUI_ID_LOAD_BUTTON] = this->_driver->getTexture("./ButtonGFX/loadbutton.png");
+	this->_pathButton[Button::GUI_ID_BOUTON::GUI_ID_SAVE_BUTTON] = this->_driver->getTexture("./ButtonGFX/savebutton.png");
+	this->_pathButton[Button::GUI_ID_BOUTON::GUI_ID_SOUND_ON_BUTTON] = this->_driver->getTexture("./ButtonGFX/soundonbutton.png");
+	this->_pathButton[Button::GUI_ID_BOUTON::GUI_ID_SOUND_OFF_BUTTON] = this->_driver->getTexture("./ButtonGFX/soundoffbutton.png");
+
 	this->initKeyTexture();
       }
   }
+
   void MenuState::initKeyTexture()
   {
     int               i = 0;
