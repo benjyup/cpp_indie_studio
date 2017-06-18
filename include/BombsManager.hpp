@@ -36,7 +36,7 @@ namespace is
 		       std::vector<is::Bomb> &)> 		_explosion;
     std::mutex					_bomb_mutex;
     is::PowerUpManager                  &_pm;
-    std::list<irr::scene::ITriangleSelector*>	_col;
+    std::map<unsigned int, irr::scene::ITriangleSelector *>	_col;
 
     bool checkChar(std::list<std::shared_ptr<Character>> const &Char, irr::core::vector3df const &v);
 

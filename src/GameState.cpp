@@ -116,7 +116,7 @@ namespace is
       return !Char->getAlive();
     });
     this->_bombs->checkBombsStatus(_char);
-//    _bombs->addCollision(_char);
+    _bombs->addCollision(_char);
     _powManager->update();
 //      _char[0]->update(_powManager.get(), _map.get());
 //      _char[1]->update(_powManager.get(), _map.get());
