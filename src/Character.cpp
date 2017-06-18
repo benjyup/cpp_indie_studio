@@ -50,7 +50,7 @@ void		is::Character::moove()
 
   if (_state == STATE::DYING)
     return;
-  if (_receiver.isKeyDown(_Config.at(Options::MOVES::MOVE_UP)) || _receiver.isVerAxe(_id) == 1)
+  if (_receiver.isKeyDown(_Config.at(Options::MOVES::MOVE_UP)) || _receiver.isVerAxe((Button::GUI_ID_BOUTON)_id) == 1)
     {
       if (_dir != is::Character::DIR::TOP)
 	{
@@ -61,7 +61,7 @@ void		is::Character::moove()
       _mesh->setPosition(irr::core::vector3df(v.X, v.Y, v.Z + DEFAULT_SPEED + _speed));
       t = true;
     }
-  if (_receiver.isKeyDown(_Config.at(Options::MOVES::MOVE_DOWN)) || _receiver.isVerAxe(_id) == -1)
+  if (_receiver.isKeyDown(_Config.at(Options::MOVES::MOVE_DOWN)) || _receiver.isVerAxe((Button::GUI_ID_BOUTON)_id) == -1)
     {
       if (_dir != is::Character::DIR::DOWN)
 	{
@@ -72,7 +72,7 @@ void		is::Character::moove()
       _mesh->setPosition(irr::core::vector3df(v.X, v.Y, v.Z - DEFAULT_SPEED - _speed));
       t = true;
     }
-  if (_receiver.isKeyDown(_Config.at(Options::MOVES::MOVE_RIGHT)) || _receiver.isHorAxe(_id) == 1)
+  if (_receiver.isKeyDown(_Config.at(Options::MOVES::MOVE_RIGHT)) || _receiver.isHorAxe((Button::GUI_ID_BOUTON)_id) == 1)
     {
       if (_dir != is::Character::DIR::RIGHT)
 	{
@@ -83,7 +83,7 @@ void		is::Character::moove()
       _mesh->setPosition(irr::core::vector3df(v.X + DEFAULT_SPEED + _speed, v.Y, v.Z));
       t = true;
     }
-  if (_receiver.isKeyDown(_Config.at(Options::MOVES::MOVE_LEFT)) || _receiver.isHorAxe(_id) == -1)
+  if (_receiver.isKeyDown(_Config.at(Options::MOVES::MOVE_LEFT)) || _receiver.isHorAxe((Button::GUI_ID_BOUTON)_id) == -1)
     {
       if (_dir != is::Character::DIR::LEFT)
 	{
@@ -94,7 +94,7 @@ void		is::Character::moove()
       _mesh->setPosition(irr::core::vector3df(v.X - DEFAULT_SPEED - _speed, v.Y, v.Z));
       t = true;
     }
-  if (_receiver.isKeyDown(_Config.at(Options::MOVES::MOVE_ACTION)) || _receiver.isActionOn(_id))
+  if (_receiver.isKeyDown(_Config.at(Options::MOVES::MOVE_ACTION)) || _receiver.isActionOn((Button::GUI_ID_BOUTON)_id))
     {
       _dir = DIR::NONE;
       if (_keySlow && this->_bomb > 0)
@@ -125,7 +125,6 @@ void is::Character::update(is::PowerUpManager *pm, is::map *map) {
     {
       pm->getPower(*this, pos);
       pm->getPowerUp(pos);
-      std::cerr << "HIT WITH A  POWERUP !" << std::endl;
     }
   else if (ret == is::FIRE)
       {
@@ -135,8 +134,6 @@ void is::Character::update(is::PowerUpManager *pm, is::map *map) {
       }
   if (_state == STATE::DYING)
     {
-      std::cerr << "Frame Nr "<< _mesh->getFrameNr() << std::endl;
-      std::cerr << _mesh->getEndFrame() << std::endl;
       if (_mesh->getFrameNr() >= (float)_mesh->getEndFrame() - 1.0f)
 	 _animDie++;
       if (_animDie == 5)

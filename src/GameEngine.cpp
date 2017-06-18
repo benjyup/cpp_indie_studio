@@ -60,51 +60,38 @@ bool is::GameEngine::Running()
 
 void is::GameEngine::Cleanup()
 {
-  // cleanup the all states
   while ( !this->_states.empty() ) {
       this->_states.back()->Cleanup();
       this->_states.pop_back();
     }
-
-  // switch back to windowed mode so other
-  // programs won't get accidentally resized
   this->_device->drop();
 }
 
 void is::GameEngine::ChangeState(IGameState *state)
 {
-  // cleanup the current state
   if ( !this->_states.empty() ) {
       this->_states.back()->Cleanup();
       this->_states.pop_back();
     }
-
-  // store and init the new state
   this->_states.emplace_back(state);
   this->_states.back()->Init(this);
 }
 
 void is::GameEngine::PushState(IGameState *state)
 {
-  // pause current state
   if ( !this->_states.empty() ) {
       this->_states.back()->Pause();
     }
-
-  // store and init the new state
   this->_states.emplace_back(state);
   this->_states.back()->Init(this);
 }
 
 void is::GameEngine::PopState()
 {
-  // cleanup the current state
   if ( !this->_states.empty() ) {
       this->_states.back()->Cleanup();
       this->_states.pop_back();
     }
-
-  // resume previous state
   if ( !this->_states.empty() ) {
       this->_states.back()->Resume();
     }
@@ -112,21 +99,18 @@ void is::GameEngine::PopState()
 
 void is::GameEngine::HandleEvents()
 {
-  // let the state handle events
   if (!this->_states.empty())
     this->_states.back()->HandleEvents();
 }
 
 void is::GameEngine::Update()
 {
-  // let the state update the game
   if (!this->_states.empty())
     this->_states.back()->Update();
 }
 
 void is::GameEngine::Draw()
 {
-  // let the state draw the screen
   if (!this->_states.empty())
     this->_states.back()->Draw();
 }

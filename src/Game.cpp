@@ -7,24 +7,7 @@
 #include <PauseState.hpp>
 #include "Game.hpp"
 
-static std::vector<int>        mapi; // =
-// {
-// 	1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-// 	1, 0, 0, 2, 2, 0, 0, 0, 0, 0, 2, 2, 0, 0, 1,
-// 	1, 0, 1, 0, 1, 0, 1, 2, 1, 0, 1, 0, 1, 0, 1,
-// 	1, 2, 1, 2, 1, 0, 0, 2, 0, 0, 0, 0, 1, 2, 1,
-// 	1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1,
-// 	1, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 1,
-// 	1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1,
-// 	1, 2, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 2, 1,
-// 	1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1,
-// 	1, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 1,
-// 	1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1,
-// 	1, 2, 1, 0, 2, 0, 0, 2, 0, 0, 0, 0, 1, 2, 1,
-// 	1, 0, 1, 0, 1, 0, 1, 2, 1, 0, 0, 0, 1, 0, 1,
-// 	1, 0, 0, 2, 2, 0, 0, 2, 0, 0, 2, 2, 0, 0, 1,
-// 	1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
-// };
+static std::vector<int>        mapi;
 
 namespace is
 {
@@ -47,7 +30,6 @@ namespace is
     this->_gui = this->_engine->getGuiEnv();
     this->_engine->getDevice()->getCursorControl()->setVisible(false);
     mapi = _parserMap.getVector();
-    //mapi = _genMap.getMap();
     _map = std::make_shared<is::map>(_driver, _sceneManager, mapi);
     _powManager = std::make_shared<is::PowerUpManager>(PowerUpManager(*_sceneManager, *_driver, _map.get()));
     _bombs = std::make_shared<is::BombsManager>(*(_map.get()), *_driver, *_sceneManager, *_powManager);
@@ -62,11 +44,7 @@ namespace is
     _engine->getDevice()->setEventReceiver(&_receiver);
     _receiver.init();
     Vector3d	v(5 * SCALE + SCALE / 2 - SCALE, 0, 3 * SCALE + SCALE / 2 - SCALE);
-    //_bomb = std::make_shared<is::Bombs>(_map.get(), _driver, _sceneManager);
-    //   Vector3d	v(3, 3, 1);
-    //_bomb->putBomb(v, 1);
     _cam = std::make_shared<Camera>(_sceneManager, _driver, MENU, _engine);
-    //_cam->setMenuMode();
     _cam->setInGameMode();
     changing = false;
   }
@@ -82,13 +60,9 @@ namespace is
 
   void Game::Resume(void)
   {
-    std::cerr << "Reprise" << std::endl;
     changing  = false;
     _engine->getDevice()->getCursorControl()->setVisible(false);
     _engine->getDevice()->setEventReceiver(&this->_receiver);
-//    _char[0]->_Config = _engine->getOptions().getP1Config();
-//    _char[1]->_Config = _engine->getOptions().getP2Config();
-//    _engine->setSceneManager(_sceneManager);
   }
 
   void Game::HandleEvents(void)
@@ -114,8 +88,6 @@ namespace is
     this->_char[1]->moove();
     this->_bombs->checkBombsStatus();
     _sceneManager->drawAll();
-    //_cam->draw();
-    //_map->draw();
     this->_driver->endScene();
   }
 
