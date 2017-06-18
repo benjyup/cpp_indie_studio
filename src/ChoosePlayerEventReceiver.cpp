@@ -40,6 +40,12 @@ bool is::ChoosePlayerEventReceiver::OnEvent(const irr::SEvent &event)
 		}
 	    }
 	  break;
+	  case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_ADD_PLAY):
+	    {
+	      this->_sContext->stop = true;
+	    }
+	  break;
+
 	}
     }
   return false;

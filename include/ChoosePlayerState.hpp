@@ -43,6 +43,8 @@ namespace is
     std::array<std::pair<irr::video::ITexture *, irr::video::ITexture *>, 4>	_gfxAI;
     std::array<std::pair<irr::video::ITexture *, irr::video::ITexture *>, 2>	_gfxPlayer;
     std::vector<Player>								_players;
+    irr::video::ITexture							*_playButton;
+    irr::video::ITexture							*_playButtonHovered;
     irr::video::ITexture							*_voidButton;
     irr::video::ITexture							*_voidButtonHovered;
     irr::u32 									_nbrOfPlayers;

@@ -45,6 +45,7 @@ namespace is
       GUI_ID_ADD_POS4,
       GUI_ID_ADD_PLAYER,
       GUI_ID_ADD_AI,
+      GUI_ID_ADD_PLAY,
       GUI_ID_LENGTH,
     };
 

@@ -31,6 +31,7 @@ is::ChoosePlayerState::~ChoosePlayerState()
 void is::ChoosePlayerState::Init(is::GameEngine *engine)
 {
   //engine->getSceneManager()->createNewSceneManager();
+  engine->getDevice()->setEventReceiver(NULL);
   this->_options = &engine->getOptions();
   this->_gui = engine->getGuiEnv();
   this->_driver = engine->getDriver();
@@ -43,13 +44,18 @@ void is::ChoosePlayerState::Init(is::GameEngine *engine)
   this->eventContext.nbrOfAI = 0;
   this->eventContext.gfxAI = &this->_gfxAI;
   this->eventContext.gfxPlayer = &this->_gfxPlayer;
+  this->eventContext.stop = false;
 
   this->choosePlayerEventReceiver.init(&this->eventContext);
-  engine->getDevice()->setEventReceiver(&this->choosePlayerEventReceiver);
 
   if (!(this->_voidButton = this->_driver->getTexture("ButtonGFX/voidbutton.png")) ||
       !(this->_voidButtonHovered = this->_driver->getTexture("ButtonGFX/voidbuttonhovered.png")))
     throw is::IndieStudioException("Error on loading playerChoose.");
+
+  if (!(this->_playButton = this->_driver->getTexture("ButtonGFX/playbutton.png")) ||
+      !(this->_playButtonHovered = this->_driver->getTexture("ButtonGFX/playbuttonhovered.png")))
+    throw is::IndieStudioException("Error on loading playerChoose.");
+
 
   int 		i = 0;
   for (int y = 0 ; y < _gfxPlayer.size(); ++y)
@@ -100,6 +106,13 @@ void is::ChoosePlayerState::Init(is::GameEngine *engine)
 			      (irr::s32)Button::GUI_ID_BOUTON::GUI_ID_ADD_POS4,
 			      L"",
 			      L"");
+  this->_buttons.emplace_back(engine->getWindowSize().X  / 2 - MenuState::BUTTON_WIDTH / 2,
+			      engine->getWindowSize().Y   - MenuState::BUTTON_HEIGHT - 20,
+			      engine->getWindowSize().X / 2  - MenuState::BUTTON_WIDTH / 2 + MenuState::BUTTON_WIDTH ,
+			      engine->getWindowSize().Y  - 20,
+			      (irr::s32)Button::GUI_ID_BOUTON::GUI_ID_ADD_PLAY,
+			      L"",
+			      L"");
   this->_buttons.emplace_back(engine->getWindowSize().X - MenuState::BUTTON_WIDTH - 10,
 			      engine->getWindowSize().Y  / 4 + MenuState::BUTTON_HEIGHT * 1,
 			      engine->getWindowSize().X - 10,
@@ -115,16 +128,19 @@ void is::ChoosePlayerState::Init(is::GameEngine *engine)
 			      L"",
 			      L"");
   this->_drawButtons();
+  this->_buttons[this->_buttons.size() - 3]->setImage(this->_playButton);
+  this->_buttons[this->_buttons.size() - 3]->setPressedImage(this->_playButtonHovered);
   this->_buttons[this->_buttons.size() - 2]->setImage(this->_voidButton);
   this->_buttons[this->_buttons.size() - 2]->setPressedImage(this->_voidButtonHovered);
   this->_buttons.back()->setImage(this->_voidButton);
   this->_buttons.back()->setPressedImage(this->_voidButtonHovered);
-  std::cerr << "Buttons = " << _buttons.size() << std::endl;
+  engine->getDevice()->setEventReceiver(&this->choosePlayerEventReceiver);
+
 }
 
 void is::ChoosePlayerState::Cleanup(void)
 {
-
+  this->eventContext.engine->getDevice()->setEventReceiver(NULL);
 }
 
 void is::ChoosePlayerState::Pause(void)
@@ -153,6 +169,11 @@ void is::ChoosePlayerState::Draw(void)
   irr::u32 		nbrOfAI = 0;
   irr::u32 		i = 0;
 
+  if (this->eventContext.stop == true)
+    {
+      this->eventContext.engine->ChangeState(new GameState);
+      return ;
+    }
   this->_driver->beginScene();
   this->_sceneManager->drawAll();
   for (auto b : this->_buttons)

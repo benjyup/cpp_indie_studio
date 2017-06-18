@@ -28,6 +28,7 @@ class ChoosePlayerEventReceiver : public irr::IEventReceiver
     std::array<std::pair<irr::video::ITexture *, irr::video::ITexture *>, 2>	*gfxPlayer;
     irr::u32					nbrOfPlayers;
     irr::u32					nbrOfAI;
+    bool 					stop;
   };
 
   ChoosePlayerEventReceiver();
