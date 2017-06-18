@@ -56,6 +56,7 @@ namespace  is
     void					die();
     void					pushAnim(irr::scene::ISceneNodeAnimator *, unsigned int);
     irr::scene::ISceneNodeAnimator		*getAnim(unsigned int);
+    int						getId();
 
    private:
     scene::IAnimatedMeshSceneNode 		*_mesh;

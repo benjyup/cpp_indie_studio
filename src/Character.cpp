@@ -177,3 +177,8 @@ irr::scene::ISceneNodeAnimator *is::Character::getAnim(unsigned int _id)
 {
   return _anim[_id];
 }
+
+int is::Character::getId()
+{
+  return _id;
+}

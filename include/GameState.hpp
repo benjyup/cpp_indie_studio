@@ -41,6 +41,7 @@ namespace is
 			     IGameState *state);
    private:
    void          addText();
+    void	checkWinner();
     CHANGE 					_change;
     ParseMap	    				_parserMap;
     GenerateMap					_genMap;

@@ -170,3 +170,13 @@ Sound	&is::GameEngine::getSound()
 {
   return (this->_sound);
 }
+
+void is::GameEngine::setWinner(is::Button::GUI_ID_BOUTON const &win)
+{
+  _winnnerPlayer = win;
+}
+
+const is::Button::GUI_ID_BOUTON &is::GameEngine::getWinner()
+{
+  return _winnnerPlayer;
+}
