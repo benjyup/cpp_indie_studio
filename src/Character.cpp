@@ -178,7 +178,7 @@ irr::scene::ISceneNodeAnimator *is::Character::getAnim(unsigned int _id)
   return _anim[_id];
 }
 
-int                             is::Character::getSpeed() const
+float                             is::Character::getSpeed() const
 {
   return (this->_speed);
 }
