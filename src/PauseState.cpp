@@ -49,7 +49,7 @@ namespace           is // tester le vite !
     if (_change == CHANGE::POP)
       _engine->PopState();
     else if (_change == CHANGE::OPTION)
-	_engine->PushState(new OptionsState);
+    	_engine->PushState(new OptionsState);
       else if (_change == CHANGE::POP2)
 	  {
 	    _engine->PopState();

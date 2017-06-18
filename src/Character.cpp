@@ -137,11 +137,11 @@ void is::Character::update(is::PowerUpManager *pm, is::map *map) {
       if (_mesh->getFrameNr() >= (float)_mesh->getEndFrame() - 1.0f)
 	 _animDie++;
       if (_animDie == 5)
-	_state = STATE::DEAD;
+	  _state = STATE::DEAD;
     }
 }
 
-irr::scene::IAnimatedMeshSceneNode 		*is::Character::getMesh()
+irr::scene::ISceneNode 		*is::Character::getMesh()
 {
   return (_mesh);
 }
@@ -176,4 +176,9 @@ void is::Character::pushAnim(irr::scene::ISceneNodeAnimator *anim	, unsigned int
 irr::scene::ISceneNodeAnimator *is::Character::getAnim(unsigned int _id)
 {
   return _anim[_id];
+}
+
+int is::Character::getId()
+{
+  return _id;
 }

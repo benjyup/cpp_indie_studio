@@ -16,16 +16,18 @@
 
 namespace is
 {
-    class ScoreEnd : public MenuState
-    {
-        public:
-            ScoreEnd();
-            virtual                                 ~ScoreEnd();
-            virtual void                            Init(GameEngine *engine);
-            virtual void                            Resume(void);
-        private:
-            ScoreEndEventReceiver                   _ScoreEndReceiver;
-    };
+  class ScoreEnd : public MenuState
+  {
+   public:
+    ScoreEnd();
+    virtual                                 ~ScoreEnd();
+    virtual void                            Init(GameEngine *engine);
+    virtual void                            Resume(void);
+    virtual void 					HandleEvents(void);
+   private:
+    CHANGE 					_change;
+    ScoreEndEventReceiver                   _ScoreEndReceiver;
+  };
 }
 
 #endif //SCOREEND_HPP

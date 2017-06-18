@@ -58,6 +58,13 @@ namespace is
       GUI_ID_UP_ARROW,
       GUI_ID_DOWN_ARROW,
       GUI_ID_SKIN_APPLY,
+      GUI_ID_PLAYER1_WINNER,
+      GUI_ID_PLAYER2_WINNER,
+      GUI_ID_IA1_WINNER,
+      GUI_ID_IA2_WINNER,
+      GUI_ID_BORDER_LEFT,
+      GUI_ID_BORDER_RIGHT,
+      GUI_ID_TOP,
       GUI_ID_LENGTH,
     };
 

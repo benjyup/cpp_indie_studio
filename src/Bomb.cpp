@@ -22,13 +22,13 @@ is::Bomb::Bomb(is::map &map, irr::video::ITexture *texture, irr::scene::IAnimate
 	_start_clock(std::clock()),
 	_state(BOMB_PLANTED),
 	_fires(),
-    _pm(pm),
+	_pm(pm),
 	_collision(false)
 {
   if (!(this->_node = this->_sceneManager.addOctreeSceneNode(bombMesh, 0, 1)))
     throw is::IndieStudioException("Error on loading bomb.");
   this->_node->setPosition(this->_posSpace);
-  this->_node->setScale({0.5f * SCALE, 0.5f * SCALE, 0.5f * SCALE});
+  this->_node->setScale({0.45f * SCALE, 0.45f * SCALE, 0.45f * SCALE});
   this->_map.addObject(Type::BOMB, {(int)posMap.X, (int)posMap.Y, (int)posMap.Z});
 //  std::cerr << "Bomb() id = " << this->_id << std::endl;
 //  std::cout << "Bomb pos.x = " << posMap.X << " pos.y = " << posMap.Y << " pos.Z = " << posMap.Z << std::endl;
@@ -158,7 +158,14 @@ void is::Bomb::_stopFires()
 
 const irr::core::vector3df &is::Bomb::getPos() const
 {
-  return (this->_posSpace);
+  if (_node)
+	  return (this->_node->getPosition());
+  return (_posSpace);
+}
+
+void			is::Bomb::setPos(irr::core::vector3df const &pos)
+{
+  _posSpace = pos;
 }
 
 void is::Bomb::_explosion(std::list<std::shared_ptr<is::Bomb>> bombs)
@@ -192,4 +199,9 @@ irr::scene::IMeshSceneNode *is::Bomb::getMesh()
 void is::Bomb::setMesh(irr::scene::IMeshSceneNode *mesh)
 {
 _node = mesh;
+}
+
+const irr::core::vector3df &is::Bomb::getPos2() const
+{
+  return _posMap;
 }
