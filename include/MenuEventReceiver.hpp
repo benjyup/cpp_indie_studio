@@ -19,7 +19,7 @@ namespace is
   class MenuEventReceiver : public irr::IEventReceiver
   {
    public:
-    MenuEventReceiver(CHANGE &change);
+    MenuEventReceiver(CHANGE &change, std::vector<is::Button> &_buttons);
 
     virtual ~MenuEventReceiver();
 
@@ -32,6 +32,7 @@ namespace is
     GameEngine					      *_engine;
     std::vector<std::shared_ptr<IGameState>> 	_states;
     CHANGE 				            &_change;
+    std::vector<is::Button> 	&_buttons;
   };
 
 }

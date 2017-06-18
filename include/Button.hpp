@@ -47,6 +47,8 @@ namespace is
       GUI_ID_ADD_AI,
       GUI_ID_ADD_PLAY,
       GUI_ID_WINNER,
+      GUI_ID_LOAD_BUTTON,
+      GUI_ID_SAVE_BUTTON,
       GUI_ID_LENGTH,
     };
 
