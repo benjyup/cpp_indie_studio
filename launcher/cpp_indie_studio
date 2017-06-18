@@ -1,0 +1,5 @@
+#!/bin/bash
+
+echo "launcher BomberMan3d v0.1"
+cd /usr/games/indie_studio
+./cpp_indie_studio
