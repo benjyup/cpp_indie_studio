@@ -7,6 +7,7 @@
 
 
 #include <IGameState.hpp>
+#include "Button.hpp"
 
 namespace is {
   class ChooseSkinState : public IGameState
@@ -32,6 +33,10 @@ namespace is {
     irr::video::IVideoDriver							*_driver;
     irr::scene::ISceneManager   						*_sceneManager;
     std::vector<std::pair<irr::scene::IAnimatedMeshSceneNode *, std::vector<irr::video::ITexture*>>>	_meshes;
+    std::vector<is::Button>							_buttons;
+
+    void 									_drawButtons();
+
   };
 }
 
