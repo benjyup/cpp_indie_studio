@@ -47,6 +47,7 @@ namespace is
     this->_driver = this->_engine->getDriver();
     this->_gui = this->_engine->getGuiEnv();
     this->_engine->getDevice()->getCursorControl()->setVisible(false);
+    this->_engine->getSound().setGameMusic();
     //mapi = _parserMap.getVector();
     mapi = _genMap.getMap();
     _map = std::make_shared<is::map>(_driver, _sceneManager, mapi);
@@ -115,7 +116,7 @@ namespace is
       return !Char->getAlive();
     });
     this->_bombs->checkBombsStatus(_char);
-//    _bombs->addCollision(_char);
+    _bombs->addCollision(_char);
     _powManager->update();
 //      _char[0]->update(_powManager.get(), _map.get());
 //      _char[1]->update(_powManager.get(), _map.get());

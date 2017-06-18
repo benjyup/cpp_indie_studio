@@ -165,3 +165,8 @@ void is::GameEngine::setSceneManager(irr::scene::ISceneManager *sceneManager)
 {
 	_smgr = sceneManager;
 }
+
+Sound	&is::GameEngine::getSound()
+{
+  return (this->_sound);
+}

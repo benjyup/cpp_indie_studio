@@ -22,11 +22,17 @@ namespace is
             switch (idButton)
             {
             case  ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_MENU_BUTTON):
-                this->_engine->PopState();
+	      {
+		this->_engine->getSound().setMenuMusic();
+		this->_engine->PopState();
+	      }
                 break;
             case ((irr::s32)Button::GUI_ID_BOUTON::GUI_ID_REPLAY_BUTTON):
-                this->_engine->ChangeState(new GameState);
-                break;
+	      {
+		this->_engine->getSound().setGameMusic();
+		this->_engine->ChangeState(new GameState);
+	      }
+		break;
             default:
                 break;
             }

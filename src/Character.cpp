@@ -167,3 +167,13 @@ irr::core::vector3df const &is::Character::getPos() const
 {
   return _mesh->getPosition();
 }
+
+void is::Character::pushAnim(irr::scene::ISceneNodeAnimator *anim	, unsigned int id)
+{
+  _anim[id] = anim;
+}
+
+irr::scene::ISceneNodeAnimator *is::Character::getAnim(unsigned int _id)
+{
+  return _anim[_id];
+}
