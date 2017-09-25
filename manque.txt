@@ -1,7 +1,0 @@
-IA hovered
-icone fleche gauche et droite
-add player
-add bot
-Boite pour tout mettre
-delete player
-delete bot
